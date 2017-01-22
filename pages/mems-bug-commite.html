@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mems提交bug</title>
+    <link href="../css/common.css" type="text/css" rel="stylesheet"/>
+    <link href="../css/index.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<!--header-->
+<header id="header" class="header" v-html="datas">
+    <div>{{datas}}</div>
+</header>
+
+<!--menu-->
+<aside class="aside">
+    <div class="logo">
+        运营平台
+    </div>
+    <ul class="menu">
+        <li>
+            <div class="menu-first"><i class="dash"></i>Dashboard<l></l></div>
+        </li>
+        <li>
+            <div class="menu-first"><i class="project"></i>项目管理<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="#">待办事项</a></dd>
+                <dd><a href="projectManage/mems-pro-list.html">项目列表</a></dd>
+            </dl>
+        </li>
+        <li>
+            <div class="menu-first current"><i class="need"></i>需求管理<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="mems-need-list.html" >需求池</a></dd>
+                <dd><a href="mems-bug-list.html" class="current">缺陷池</a></dd>
+            </dl>
+        </li>
+        <li>
+            <div class="menu-first"><i class="system"></i>系统配置<l></l></div>
+        </li>
+    </ul>
+</aside>
+
+<!--content-->
+<div class="content">
+    <div class="page-header">
+        <div class="header-info"><i></i><a href="mems-bug-list.html">返回列表</a></div>
+    </div>
+    <div class="page-inner">
+        <div class="page-content">
+            <div class="table-head"><i></i>提交缺陷</div>
+            <div class="table-cont">
+                <table class="content-table">
+                    <tr>
+                        <td><span class="red-start">*</span>缺陷主题：</td>
+                        <td colspan="3"><input type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td>缺陷来源：</td>
+                        <td><select id="source"><option value="-1">请选择</option><option>安徽省第一人民医院</option></select></td>
+                        <td>紧急程度：</td>
+                        <td><select><option>低</option><option>中</option><option>高</option><option>紧急</option><option>非常紧急</option></select></td>
+                    </tr>
+                    <tr>
+                        <td><span class="red-start">*</span>产品：</td>
+                        <td><select id="product"><option value="-1">请选择</option><option>云服</option></select></td>
+                        <td><span class="red-start">*</span>功能模块：</td>
+                        <td><select ><option value="-1">请选择</option><option>模块一</option><option>模块二</option><option>模块三</option></select></td>
+                    </tr>
+                    <tr>
+                        <td><span class="red-start">*</span>使用平台：</td>
+                        <td><select id="platform"><option value="-1">请选择</option><option>微信</option><option>APP</option><option>WEB</option></select></td>
+                        <td><span class="red-start">*</span>缺陷类型：</td>
+                        <td><select id="lump"><option value="-1">请选择</option><option>功能缺陷</option><option>逻辑缺陷</option><option>安全缺陷</option></select></td>
+                    </tr>
+                    <tr>
+                        <td>使用网络：</td>
+                        <td><select><option>4G</option><option>中</option>有线网络</select></td>
+                        <td>浏览器及版本：</td>
+                        <td><input type="text" id="name"/></td>
+                    </tr>
+                    <tr>
+                        <td>手机及型号：</td>
+                        <td><input type="text"/></td>
+                    </tr>
+                    <tr class="area">
+                        <td><span class="red-start">*</span>缺陷描述：</td>
+                        <td colspan="3">
+                            <textarea id="scence"></textarea>
+                        </td>
+                    </tr>
+                    <tr class="area">
+                        <td>附件：</td>
+                        <td colspan="3">
+                            <a href="#">我是个胖子.png</a><br>
+                            <a style="color: #0ea0eb">添加附件</a>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+            <div class="buttons">
+                <button class="cancel">取消</button>
+                <button onclick="commit()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/vue.js" type="text/javascript"></script>
+<script src="../js/common.js"></script>
+
+<script type="text/javascript">
+    function commit() {
+        var arr = ['source', 'person', 'classify', 'product', 'platform', 'lump', 'scence'];
+        for (var k = 0, kk = arr.length; k < kk; k++) {
+            var v = document.getElementById(arr[k]).value;
+            if(v == '' || v == -1){
+                alert('带有*的为必填项！');
+                break;
+            }
+        }
+        location.href='/innerOpera/pages/mems-bug-list.html'
+    }
+</script>
+</body>
+</html>

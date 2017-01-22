@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>mems-缺陷-列表</title>
+        <link href="../css/mems-index.css" type="text/css" rel="stylesheet"/>
+    </head>
+<body>
+<!--header-->
+<header id="header" class="header" v-html="datas">
+    <div>{{datas}}</div>
+</header>
+
+<!--menu-->
+<!--<aside id="aside" class="aside" v-html="datas">-->
+    <!--<div>{{datas}}</div>-->
+<!--</aside>-->
+<aside class="aside">
+    <div class="logo">
+        运营平台
+    </div>
+    <ul class="menu">
+        <li>
+            <div class="menu-first"><i class="dash"></i>Dashboard<l></l></div>
+        </li>
+        <li>
+            <div class="menu-first"><i class="project"></i>项目管理<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="#">待办事项</a></dd>
+                <dd><a href="projectManage/mems-pro-list.html">项目列表</a></dd>
+            </dl>
+        </li>
+        <li>
+            <div class="menu-first current"><i class="need"></i>需求管理<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="mems-need-list.html">需求池</a></dd>
+                <dd><a href="mems-bug-list.html"  class="current">缺陷池</a></dd>
+            </dl>
+        </li>
+        <li>
+            <div class="menu-first"><i class="system"></i>系统配置<l></l></div>
+        </li>
+    </ul>
+</aside>
+
+
+<!--content-->
+<div class="content">
+    <div class="page-header">
+        <div class="header-info"><i></i><a href="/innerOpera/pages/mems-bug-list.html">缺陷列表</a></div>
+    </div>
+    <div class="page-inner" style="padding-top: 13px">
+        <div class="commit-new-item" style="margin: 0 0 10px 0"><a class="btn" href="mems-bug-commite.html">提缺陷&nbsp;<b>+</b></a></div>
+        <div class="item-content">
+            <div class="table-box">
+                <table>
+                    <thead>
+                        <tr class="odd">
+                        <!--<th>需求来源</th>-->
+                        <!--<th>需求方</th>-->
+                        <th>序号</th>
+                        <th>产品</th>
+                        <th>缺陷主题</th>
+                        <th>紧急程度</th>
+                        <th>提出人</th>
+                        <th>提出时间</th>
+                        <th>缺陷状态</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <!--<td>安徽省立医院</td>-->
+                            <!--<td>路远</td>-->
+                            <td>1</td>
+                            <td>医信云服1.0</td>
+                            <td><a class="link" href="/innerOpera/pages/mems-bug-detail.html">设备勾选了【无铭牌】在二维码替换的时</a></td>
+                            <td>--</td>
+                            <td>刘凯</td>
+                            <td>2012-09-09</td>
+                            <td>处理状态</td>
+                        </tr>
+                        <tr class="even">
+                            <!--<td>安徽省立医院</td>-->
+                            <!--<td>路远</td>-->
+                            <td>2</td>
+                            <td>医信云服1.0</td>
+                            <td><a class="link" href="/innerOpera/pages/mems-bug-detail.html">设备勾选了【无铭牌】在二维码替换的时</a></td>
+                            <td>--</td>
+                            <td>刘凯</td>
+                            <td>2012-09-09</td>
+                            <td>处理状态</td>
+                        </tr>
+                        <tr>
+                            <!--<td>安徽省立医院</td>-->
+                            <!--<td>路远</td>-->
+                            <td>3</td>
+                            <td>医信云服1.0</td>
+                            <td><a class="link" href="/innerOpera/pages/mems-bug-detail.html">设备勾选了【无铭牌】在二维码替换的时</a></td>
+                            <td>--</td>
+                            <td>刘凯</td>
+                            <td>2012-09-09</td>
+                            <td>处理状态</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pages clear">
+                <div class="page-list clear">
+                    <a href="#" class="page-pre">上一页</a>
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">……</a>
+                    <a href="#">9</a>
+                    <a href="#">10</a>
+                    <a href="#" class="page-next">上一页</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="../js/vue.js"></script>
+<script src="../js/common.js"></script>
+</body>
+</html>

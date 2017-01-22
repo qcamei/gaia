@@ -1,0 +1,336 @@
+@import "common.scss";
+
+.p-content{
+  .content-left{
+    background: #ecedf0;
+    width: 65.25%;
+    height: 100%;
+    .p-header{
+      height: 74px;
+      line-height: 74px;
+      color: #6d6d6d;
+      >span{
+        &:nth-child(1){
+          font-size: 20px;
+          color: #555;
+        }
+        &:nth-child(2){
+          //color: #0088cc;
+          display: inline-block;
+          width: auto;
+
+          //background: url("../images/po.png") no-repeat left center;
+          //background-size: 12px 12px;
+          //padding: 0 0 0 15px;
+          //margin: 0 0 0 7px;
+        }
+        &:nth-child(3),&:nth-child(5){
+          color: #555;
+        }
+        &:nth-child(4){
+          color: #6d6d6d;
+        }
+      }
+      >a.look{
+        color:#0ea0eb;
+        font-size: 14px;
+        background: url("../images/look.png") no-repeat left center;
+        background-size: 15px 15px;
+        padding:  0 0 0 15px;
+
+
+      }
+    }
+    .nav{
+      width: 100%;
+      background: #FFF;
+      height: 80px;
+      >li{
+        float: left;
+        line-height: 80px;
+        text-align: center;
+        width: 20%;
+        font-size: 18px;
+        border-bottom: 2px solid #FFF;
+        &:after{
+          content: '';
+          width: 1px;
+          height: 80px;
+          float: right;
+          background: #ecedf0;
+        }
+        &:hover,&.current{
+          cursor: pointer;
+          color: #0088cc;
+          border-bottom: 2px solid #0088cc;
+        }
+      }
+    }
+    .info-module{
+      margin: 20px 3% 0 3%;
+      .module-left{
+        width: 49.5%;
+      }
+
+      .module-table{
+        background: #FFF;
+        .t-head{
+          background: #f7f7f7;
+          border-bottom: 1px solid $color-gray-d;
+          height: 33px;
+          line-height: 33px;
+          >p{
+            padding: 0 0 0 10px;
+            a.add{
+              color: #0088cc;
+            }
+          }
+          a.shut{
+            font-size: 18px;
+            padding:  0 10px 0 0 ;
+            color: #b4b4b4;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+            background: url(../images/pen.png) no-repeat center center;
+            background-size: 18px 18px;
+            margin: 8px 0 0 0;
+          }
+        }
+        .c-body{
+          margin: 15px 15px 0 15px ;
+          .base{
+            width: 100%;
+            >li{
+              width: 100%;
+              height: 39px;
+              line-height: 39px;
+              >div{
+                float: left;
+                &.name{
+                  width: 30%;
+                  text-align: right;
+                }
+                &.text{
+                  width: 70%;
+                  >input{
+                    width: 90%;
+                    height: 23px;
+                    border: 1px solid $color-gray-d;
+                  }
+                  >textarea{
+                    height: 50px;
+                    border: 1px solid $color-gray-d;
+                    width: 90%;
+                  }
+                }
+              }
+            }
+          }
+          .show-list{
+            border-top:1px solid $color-gray-d;
+            >ul{
+              >li{
+                margin: 8px 0;
+                >div:nth-child(1){
+                  line-height: 25px;
+                  font-size: 11px;
+                }
+                .dec{
+                  width: 100%;
+                  height:25px;
+                  border-radius: 3px;
+                  background: #eaeaea;
+                  line-height: 25px;
+                  padding:  0 0 0 5px;
+                }
+              }
+            }
+          }
+        }
+      }
+      .module-person{
+        height: 270px;
+        margin: 15px 0 0 0;
+      }
+      .module-sell{
+
+        height: auto;
+        padding-bottom: 20px;
+      }
+      .module-int{
+        height: auto;
+        padding: 0 0 20px 0;
+        margin: 0 0 15px 0;
+        .state-1{
+          .add_input{
+            height: 24px;
+            width: 90px;
+            border: 1px solid $color-gray-d;
+            border-radius: 3px;
+            margin:  3px 5px 3px 0 ;
+            outline: 0px;
+            color: $color-black;
+            padding: 0 0 0 4px;
+          }
+          .dot{
+            display: inline-block;
+            padding: 3px 5px;
+            border-radius: 3px;
+            background: #47a447;
+            margin: 3px 5px 3px 0;
+            color: #fff;
+            &:nth-child(2){
+              background: #5bc0de;
+            }
+          }
+
+
+          .btns{
+            text-align: right;
+            margin: 5px 0 0 0;
+            >a{
+              color: #007ac7;
+            }
+          }
+        }
+        .state-2{
+          .dec-list{
+            width: 100%;
+            margin: 5px 0 0 0 ;
+
+
+            >li:nth-child(1){
+              position: relative;
+              width: 100%;
+              line-height: 23px;
+              margin: 0 0 5px 0;
+              background: #eaeaea;
+              padding: 3px 0;
+
+              .edit{
+                width: 18px;
+                height: 18px;
+                background: url("../images/pen.png") no-repeat center center;
+                background-size: 18px 18px;
+                position: absolute;
+                right: 3px;
+                top:5px;
+                cursor: pointer;
+              }
+              >textarea{
+                width: 87%;
+                display: block;
+                margin: 2% 0 0 3%;
+                border: 0px;
+                background: #eaeaea;
+                outline: 0px;
+                resize: none;
+                height: 58px;
+              }
+            }
+          }
+        }
+      }
+
+      .module-right{
+        width: 46%;
+        background: #f3f3f3;
+
+      }
+
+    }
+  }
+  .content-right{
+    background: #f3f3f3;
+    width: 34.75%;
+    height: 100%;
+    padding: 0 0 0 0 ;
+    margin: 0 0 0 0 ;
+    .p-header{
+      height: 75px;
+      background: #ecedf0;
+      line-height: 75px;
+      padding-right: 25px;
+      .person,.activity{
+        background: url("../images/person.png") no-repeat left center;
+        background-size: 27px 27px;
+        display: inline-block;
+        width: 27px;
+        height: 27px;
+        margin: 15px 0 0 10px;
+      }
+      .activity{
+        background: url("../images/activity.png") no-repeat left center;
+        background-size: 20px 20px;
+        width: 20px;
+        height: 20px;
+        margin: 20px 0 0 10px;
+      }
+    }
+    .right-inner{
+      width: 90%;
+      margin: 0 auto;
+      .buttons{
+        width: 100%;
+        height: 33px;
+        >a{
+          height: 33px;
+          width: 102px;
+          background: #0088cc;
+          color: #FFF;
+          line-height: 33px;
+          text-align: center;
+          &:nth-child(2){
+            background: #aaaaaa;
+          }
+          &:nth-child(3){
+            height: 27px;
+            line-height: 27px;
+            margin: 3px 0 0 0 ;
+          }
+        }
+      }
+      .visit-table{
+        width: 100%;
+        margin: 20px 0 0 0 ;
+        >tbody{
+          >tr{
+            >td{
+              height: 30px;
+              &:nth-child(2n+1){
+                width: 20%;
+              }
+              &:nth-child(2n){
+                width: 30%;
+              }
+              >input,select{
+                width: 96%;
+                height: 22px;
+                border: 1px solid $color-gray-d;
+                outline: 0px;
+              }
+              >textarea{
+                border: 1px solid $color-gray-d;
+                outline: 0px;
+                width: 98%;
+              }
+              .but{
+                color: #6d6d6d;
+                cursor: pointer;
+                padding: 0 10px 0 0 ;
+              }
+              .con{
+                color: #007ac7;
+              }
+            }
+          }
+        }
+      }
+    }
+
+  .progress{
+    width: 100%;
+  }
+  }
+}

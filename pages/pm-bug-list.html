@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pm-缺陷-列表</title>
+    <link href="../css/mems-index.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+    <link href="../css/foundation-datepicker.css" rel="stylesheet"/>
+   
+</head>
+
+<!--header-->
+<header id="header" class="header" v-html="datas">
+    <div>{{datas}}</div>
+</header>
+
+<!--menu-->
+<!--menu-->
+<aside class="aside">
+    <div class="logo">
+        运营平台
+    </div>
+    <ul class="menu">
+        <li>
+            <div class="menu-first"><i class="dash"></i>Dashboard<l></l></div>
+        </li>
+        <li>
+            <div class="menu-first"><i class="project"></i>项目管理<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="#">待办事项</a></dd>
+                <dd><a href="projectManage/mems-pro-list.html">项目列表</a></dd>
+            </dl>
+        </li>
+        <li>
+            <div class="menu-first current"><i class="need"></i>需求管理<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="pm-need-list.html">需求池</a></dd>
+                <dd><a href="pm-bug-list.html"  class="current">缺陷池</a></dd>
+            </dl>
+        </li>
+        <li>
+            <div class="menu-first"><i class="system"></i>系统配置<l></l></div>
+        </li>
+    </ul>
+</aside>
+
+<!--content-->
+<div class="content">
+    <div class="page-header">
+        <div class="header-info"><i></i><a href="pm-bug-list.html">缺陷列表</a></div>
+    </div>
+    <div class="page-inner" style="padding-top: 13px">
+        <div class="commit-new-item"><a href="pm-bug-commite.html" class="btn">提缺陷&nbsp;<b>+</b></a></div>
+        <table class="mems-search">
+            <tr>
+                <td>缺陷主题：<input id="name" /></td>
+                <td>产品：<select id="productList"></select></td>
+                <td>提出人：<input type="text" id="creater" /></td>
+                <td>提出时间：<input id="dpd1"/>～<input id="dpd2"/></td>
+                <td>缺陷状态：<select id="issueStatusList"></select></td>
+                <td align="right"><button class="btn" id="checkout">查询</button></td>
+            </tr>
+        </table>
+        <div class="item-content">
+            <div class="table-box">
+                <table>
+                    <thead>
+                        <tr class="odd">
+                        
+                            <th>序号</th>
+                            <th>产品</th>
+                            <th>缺陷主题</th>
+                            <th>紧急程度</th>
+                            <th>提出人</th>
+                            <th>提出时间</th>
+                            <th>缺陷状态</th>
+                    </tr>
+                    </thead>
+                    <tbody id="bodyList">
+                    
+                    </tbody>
+                </table>
+            </div>
+            <div class="pages clear">
+                <div class="page-list clear" id="pageList">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="../js/vue.js"></script>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/foundation-datepicker.min.js"></script>
+<script src="../js/common.js"></script>
+<script>
+
+    _API.getProductList('productList').getIssueStatusList('issueStatusList',0,true);
+    function getData(p,checPara){
+        var PerPage = 20;
+        var url  = _ip+'/issue/getIssueList?page='+p+'&size='+PerPage;
+        var data = checPara || {};
+        $.ajax({
+            url:url,
+            type : "POST",
+            dataType: 'json',
+            contentType:'application/json',
+            data:JSON.stringify(data),
+            success:function(json){
+                if(!json.data || json.data.length <= 0){
+                    $('#bodyList').html('<tr><td colspan="7">暂无数据！</td></tr>');
+                    $('#pageList').html('');
+                    return false;
+                }
+                var _data     = [];
+                var _pager    = [];
+                var totalPage = json.totlePage;
+                var prev      = p-1;
+                if(prev < 1)prev = 1;
+                var next = p + 1;
+                if(next > totalPage)next = totalPage;
+                for(var k = 0, kk = json.data.length; k < kk; k++){
+                    var msg = json.data[k];
+
+                    _data.push('<tr>');
+                    _data.push('<td>'+(k+1)+'</td>');
+                    _data.push('<td>'+ msg.product +'</td>');
+                    _data.push('<td><a href="pm-bug-detail.html?id='+msg.id+'" class="link" title="'+msg.name+'">'+(msg.name.length<12?msg.name:msg.name.substring(0,12)+'...' )+'</a></td>');
+                    _data.push('<td>'+msg.level+'</td>');
+                    _data.push('<td>'+msg.creater+'</td>');
+                    _data.push('<td>'+msg.createTime+'</td>');
+                    _data.push('<td>'+msg.status+'</td>');
+                
+                }
+                _pager.push('<span>共：'+ totalPage +'页</span>');
+                _pager.push('<span>您正在第：'+p+'页</span>')
+                _pager.push('<a href="javascript:;" class="page-pre" onclick="getData('+prev+');return !1;">上一页</a>');
+                _pager.push('<a href="javascript:;" class="page-next" onclick="getData('+next+');return !1;">下一页</a>');
+                _pager.push('<span>前往第</span>');
+                _pager.push('<input type="text" id="goToPage"/>');
+                _pager.push('<span>页</span>');
+
+                $('#bodyList').html(_data.join(""));
+                $('#pageList').html(_pager.join(""));
+                $('#goToPage').blur(function () {
+                    var v = $(this).val();
+                    if(!/^[1-9]\d*$/.test(v)){
+                        return false;
+                    }
+                    if(v <= 1){
+                        getData(1);
+                        return false;
+                    }
+                    if(v >= totalPage){
+                        getData(totalPage);
+                        return false;
+                    }
+                })
+            }
+        })
+    }
+    getData(1);
+    $('#checkout').on('click',function(){
+        var para = {
+            name: $('#name').val() || null,
+            product: $('productList').val() || null,
+            creater:$('#creater').val() || null,
+            startTime: $('#dpd1').val()?$('#dpd1').val() + ' 00:00:00' : null,
+            endTime: $('#dpd2').val()?$('#dpd2').val() + ' 00:00:00' : null,
+            status:$('#issueStatusList').val() || null,
+        }
+        getData(1,para);
+    })
+
+
+
+    var nowTemp = new Date();
+    var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+    var checkin = $('#dpd1').fdatepicker({
+        onRender: function (date) {
+            return date.valueOf() < now.valueOf() ? '' : '';
+        },
+        // pickTime: true,
+        format: 'yyyy-mm-dd'
+    }).on('changeDate', function (ev) {
+        if (ev.date.valueOf() > checkout.date.valueOf()) {
+            var newDate = new Date(ev.date)
+            newDate.setDate(newDate.getDate() + 1);
+            checkout.update(newDate);
+        }
+        checkin.hide();
+        $('#dpd2')[0].focus();
+    }).data('datepicker');
+    var checkout = $('#dpd2').fdatepicker({
+        onRender: function (date) {
+            return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+        },
+        // pickTime: true,
+        format: 'yyyy-mm-dd'
+    }).on('changeDate', function (ev) {
+        checkout.hide();
+    }).data('datepicker');
+
+
+</script>
+</body>
+</html>

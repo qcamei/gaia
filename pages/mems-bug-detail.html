@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>me-bug详情</title>
+    <link href="../css/list-detial.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<!--header-->
+<header id="header" class="header" v-html="datas">
+    <div>{{datas}}</div>
+</header>
+
+<!--menu-->
+<aside class="aside">
+    <div class="logo">
+        运营平台
+    </div>
+    <ul class="menu">
+        <li>
+            <div class="menu-first"><i class="dash"></i>Dashboard<l></l></div>
+        </li>
+        <li>
+            <div class="menu-first"><i class="project"></i>项目管理<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="#">待办事项</a></dd>
+                <dd><a href="projectManage/mems-pro-list.html">项目列表</a></dd>
+            </dl>
+        </li>
+        <li>
+            <div class="menu-first current"><i class="need"></i>需求管理<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="mems-need-list.html">需求池</a></dd>
+                <dd><a href="mems-bug-list.html" class="current">缺陷池</a></dd>
+            </dl>
+        </li>
+        <li>
+            <div class="menu-first"><i class="system"></i>系统配置<l></l></div>
+        </li>
+    </ul>
+</aside>
+
+<!--content-->
+<div class="content">
+    <div class="page-header">
+        <div class="header-info"><i></i><a href="mems-bug-list.html">缺陷列表</a>&nbsp;>&nbsp;缺陷详情</div>
+    </div>
+    <div class="page-inner">
+        <div class="page-content">
+            <div class="table-head clear"><div class="left document-name"><i class="bug-i"></i>No.01234</div><div class="right edit"><a href="mems-bug-detail-edit.html">编辑</a></div></div>
+            <div class="table-cont">
+                <table class="content-table">
+                    <tr>
+                        <td>缺陷主题：</td>
+                        <td colspan="2">设备勾选了【无铭牌】在二维码替换的时候，上传了铭牌图片后，会导致死锁</td>
+
+                    </tr>
+                    <tr>
+                        <td>来源：</td>
+                        <td>安微医科大学  刘科长</td>
+                        <td>紧急程度：</td>
+                        <td>中</td>
+                    </tr>
+                    <tr>
+                        <td>产品：</td>
+                        <td>医信云服1.0</td>
+                        <td>功能模块:</td>
+                        <td>设备档案</td>
+                    </tr>
+                    <tr>
+                        <td>使用平台：</td>
+                        <td>后台</td>
+                        <td>缺陷类型：</td>
+                        <td>功能缺陷</td>
+                    </tr>
+
+                    <tr>
+                        <td>使用网络：</td>
+                        <td>4G</td>
+                        <td>浏览器及其版本：</td>
+                        <td>FIRE FOX 49.0</td>
+                    </tr>
+                    <tr>
+                        <td>手机及型号：</td>
+                        <td colspan="3">iphone 6s</td>
+                    </tr>
+
+                    <tr class="area">
+                        <td>缺陷描述：</td>
+                        <td colspan="3">
+                            1、找一个没有铭牌图片的设备，然后在微信端选择[二维码替换]2、扫码后上传铭牌图片
+                        </td>
+                    </tr>
+                    <tr class="area">
+                        <td>附件：</td>
+                        <td colspan="3">
+                            <a style="color: #0ea0eb">合同文件.png</a><br />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="../js/vue.js" type="text/javascript"></script>
+<script src="../js/common.js"></script>
+
+<script type="text/javascript">
+    function commit() {
+        var arr = ['source', 'person', 'classify', 'product', 'platform', 'lump', 'scence'];
+        for (var k = 0, kk = arr.length; k < kk; k++) {
+            var v = document.getElementById(arr[k]).value;
+            if(v == '' || v == -1){
+                alert('带有*的为必填项！');
+                break;
+            }
+        }
+    }
+</script>
+</body>
+</html>
