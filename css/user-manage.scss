@@ -1,6 +1,21 @@
 html{
   body {
+    overflow: hidden;
+    div, table {
+      box-sizing: border-box;
+    }
+    .user-mask {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(255,255,255,.1);
+      display: none;
+    }
     .content {
+      height: 100%;
+      position: relative;
       .page-inner {
         .item-header {
           margin-bottom: 10px;
@@ -82,6 +97,89 @@ html{
                   }
                 }
               }
+            }
+          }
+        }
+      }
+      .add-user-box {
+        position: absolute;
+        top: 30px;
+        width: 25%;
+        bottom: 0;
+        background: #f2f5f6;
+        border:1px solid rgba(150,150,150,0.18);
+        box-shadow:0 10px 20px 0 rgba(0,0,0,0.14);
+        z-index: 9;
+        right: -25%;
+        opacity: 0;
+        .add-user-back {
+          background: #fff;
+          width: 100%;
+          padding: 10px 20px 20px 20px;
+          table {
+            width: 100%;
+            tbody {
+              width: 100%;
+              tr {
+                width: 100%;
+                &.form-name {
+                  font-size:12px;
+                  color:#667788;
+                  letter-spacing:0;
+                  line-height:18px;
+                  text-align:left;
+                  margin-top: 10px;
+                  display: block;
+                }
+                &.form-input {
+                  margin-top: 5px;
+                  input {
+                    padding-left: 15px;
+                  }
+                  input, select {
+                    width: 100%;
+                    background:#ffffff;
+                    border:2px solid #dae4e9;
+                    border-radius:2px;
+                    outline: none;
+                    height: 30px;
+                    box-sizing: border-box;
+                  }
+                  .station-td {
+                    select {
+                      width: 95%;
+                    }
+                    &.right {
+                      text-align: right;
+                      float: none;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        .user-btn-box {
+          .user-btn {
+            border-radius:4px;
+            width:50%;
+            height:26px;
+            display: block;
+            margin: auto;
+            border: 0;
+            outline: none;
+            font-size:12px;
+            cursor: pointer;
+            &.add-btn {
+              background:#03a9f4;
+              color:#ffffff;
+              margin-top: 30px;
+            }
+            &.cancel-user-btn {
+              background:#ffffff;
+              border:1px solid #e6ecef;
+              color:#99aabb;
+              margin-top: 15px;
             }
           }
         }
