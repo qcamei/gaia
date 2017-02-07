@@ -4,6 +4,12 @@ html{
     div, table {
       box-sizing: border-box;
     }
+    header.header{
+      div.t{
+        width: 120px;
+      }
+
+    }
     .user-mask {
       position: absolute;
       top: 0;
@@ -12,6 +18,7 @@ html{
       left: 0;
       background: rgba(255,255,255,.1);
       display: none;
+      z-index: 10;
     }
     .content {
       height: 100%;
@@ -109,7 +116,7 @@ html{
         background: #f2f5f6;
         border:1px solid rgba(150,150,150,0.18);
         box-shadow:0 10px 20px 0 rgba(0,0,0,0.14);
-        z-index: 9;
+        z-index: 11;
         right: -25%;
         opacity: 0;
         .add-user-back {
@@ -133,6 +140,9 @@ html{
                 }
                 &.form-input {
                   margin-top: 5px;
+                  .error-msg {
+                    color: #b74b4b;
+                  }
                   input {
                     padding-left: 15px;
                   }
@@ -144,6 +154,12 @@ html{
                     outline: none;
                     height: 30px;
                     box-sizing: border-box;
+                    &.error-i {
+                      border: 1px solid #b74b4b;
+                      box-shadow: 0px 0px 3px #b74b4b;
+                      -webkit-animation: light .3s ease-in-out;
+                      animation: light .3s ease-in-out;
+                    }
                   }
                   .station-td {
                     select {

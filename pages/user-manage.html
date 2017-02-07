@@ -54,7 +54,7 @@
         <div class="item-header">
             <div class="search-box">
                 <form action="javascript:;" id="search-user-form">
-                    <input type="text" placeholder="用户姓名" id="userName">
+                    <input type="text" placeholder="用户姓名" id="userName-text">
                     <div class="search-icon" id="search-icon"></div>
                     <div class="search-input-border"></div>
                 </form>
@@ -69,6 +69,7 @@
                     <thead>
                         <tr class="">
                             <th>姓名</th>
+                            <th>用户名</th>
                             <th>电话</th>
                             <th>邮箱</th>
                             <th>角色</th>
@@ -98,15 +99,15 @@
                     </tr>
                     <tr class="form-input">
                         <td colspan="2">
-                            <input type="text">
+                            <input type="text" name="name" id="name">
                         </td>
                     </tr>
                     <tr class="form-name">
-                        <td colspan="2">用户名</td>
+                        <td colspan="2" >用户名</td>
                     </tr>
                     <tr class="form-input">
                         <td colspan="2">
-                            <input type="text">
+                            <input type="text" name="userName" id="userName">
                         </td>
                     </tr>
                     <tr class="form-name">
@@ -114,10 +115,8 @@
                     </tr>
                     <tr class="form-input">
                         <td colspan="2">
-                            <select name="" id="Ocp-select">
-                                <option value="1">
-                                    运营部
-                                </option>
+                            <select  id="Dpt-select" name="department" id="department">
+
                             </select>
                         </td>
                     </tr>
@@ -125,15 +124,8 @@
                         <td colspan="2">岗位</td>
                     </tr>
                     <tr class="form-input">
-                        <td >
-                            <select name="" id="2">
-                                <option value="1">
-                                    华北区
-                                </option>
-                            </select>
-                        </td>
-                        <td class="station-td right">
-                            <select name="" id="3">
+                        <td colspan="2">
+                            <select name="occupation"  id="occupation">
                                 <option value="1">
                                     大区经理
                                 </option>
@@ -145,7 +137,17 @@
                     </tr>
                     <tr class="form-input">
                         <td colspan="2">
-                            <input type="text" >
+                            <select name="role"  id="role">
+                                <option value="0">
+                                    超级管理员
+                                </option>
+                                <option value="1">
+                                    管理员
+                                </option>
+                                <option value="2">
+                                    普通用户
+                                </option>
+                            </select>
                         </td>
                     </tr>
                     <tr class="form-name">
@@ -153,7 +155,7 @@
                     </tr>
                     <tr class="form-input">
                         <td colspan="2">
-                            <input type="text" >
+                            <input type="text" name="phone" id="phone">
                         </td>
                     </tr>
                     <tr class="form-name">
@@ -161,14 +163,14 @@
                     </tr>
                     <tr class="form-input">
                         <td colspan="2">
-                            <input type="text" >
+                            <input type="text" name="email" id="email">
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div class="user-btn-box">
-            <button class="add-btn user-btn">
+            <button class="add-btn user-btn" id="add-btn">
                 添加
             </button>
             <button class="cancel-user-btn user-btn">取消</button>
@@ -180,8 +182,7 @@
 <script src="../js/vue.js"></script>
 <script src="../js/common.js"></script>
 <script type="text/javascript">
-    _API.getOcpList('Ocp-select',0,true);
-    var userName= $('#userName').val();
+    var userName= $('#userName-text').val();
     function getData(p,checPara){
         var PerPage = 20;
         var url  = _ip+'/user/getUserList?page='+p+'&size='+PerPage;
@@ -200,7 +201,7 @@
                 }
                 var _data     = [];
                 var _pager    = [];
-                var userName= $('#userName').val();
+                var userName= $('#userName-text').val();
                 var totalPage = json.totlePage;
                 var prev      = p-1;
                 if(prev < 1)prev = 1;
@@ -208,16 +209,26 @@
                 if(next > totalPage)next = totalPage;
                 for(var k = 0, kk = json.data.length; k < kk; k++){
                     var msg = json.data[k];
-
-                    _data.push('<tr>');
+                    var msgData = {
+                        id: msg.id,
+                        name: msg.name,
+                        phone: msg.phone,
+                        email: msg.email,
+                        role: msg.role,
+                        department: msg.department,
+                        occupation: msg.occupation,
+                        userName: msg.userName
+                    };
+                    _data.push("<tr data-edit="+ JSON.stringify(msgData) +">");
                     _data.push('<td>'+msg.name+'</td>');
+                    _data.push('<td>'+(msg.userName || "-")+'</td>');
                     _data.push('<td>'+msg.phone+'</td>');
                     _data.push('<td>'+ msg.email  +'</td>');
                     _data.push('<td>'+msg.role+'</td>');
                     _data.push('<td>'+msg.department+'</td>');
                     _data.push('<td>'+msg.occupation+'</td>');
                     _data.push('<td>' +
-                            '<a href="javascript:;">编辑</a>' +
+                            '<a href="javascript:;" onclick="editUser(this)">编辑</a>' +
                             '<a href="javascript:;" onclick="disableUser(this)" data-id="'+ msg.id +'">'+ (msg.status? "禁用":"启用") +'</a> ' +
                             '<a href="javascript:;" onclick="resetPwd(this)" data-id="'+ msg.id +'">重置密码</a></td>');
                 }
@@ -232,7 +243,7 @@
                 $('#bodyList').html(_data.join("")).data('page', p);
                 $('#pageList').html(_pager.join(""));
                 $('#goToPage').bind('keyup', function(event) {
-                    var userName= $('#userName').val();
+                    var userName= $('#userName-text').val();
                     if (event.keyCode == "13") {
 
                         var v = parseInt($(this).val());
@@ -256,24 +267,30 @@
         })
     }
     getData(1, {name: userName});
-    $('.cancel-user-btn').on('click', function() {
-        console.log('m');
+    $('.cancel-user-btn, .user-mask').on('click', function() {
+        var $addUserBox = $('.add-user-box');
+        $('.add-user-back').find('input').val('').end().find('select option:selected').prop('selected', false);
         $('.user-mask').css('display', 'none');
-        $('.add-user-box').animate({
+        $addUserBox.find('[name="id"]').remove();
+        $addUserBox.animate({
             right: '-25%',
             opacity: 0
         }, 500);
     });
     $('.add-user-btn').on('click', function() {
+        var $addUserBox = $('.add-user-box');
+        _API.getDptList('Dpt-select',0,true);
         $('.user-mask').css('display', 'block');
-        $('.add-user-box').animate({
+        $addUserBox.find('[name="id"]').remove();
+        $addUserBox.find('#add-btn').text('添加').removeClass('edit');
+        $addUserBox.animate({
             right: '0px',
             opacity: 1
         }, 500);
     });
 
     $('#search-user-form').on('submit', function() {
-        var userName= $('#userName').val();
+        var userName= $('#userName-text').val();
         getData(1, {name: userName});
         return false;
     });
@@ -281,6 +298,58 @@
     $('#search-icon').on('click', function() {
         $('#search-user-form').submit();
     });
+
+    $('#add-btn').on('click', function() {
+        var $obj = $(this);
+        var data = {
+            name: $('#name').val(),
+            userName: $('#userName').val(),
+            department: $('#Dpt-select').val(),
+            occupation: $('#occupation').val(),
+            role: $('#role').val(),
+            phone: $('#phone').val(),
+            email: $('#email').val()
+        };
+        $('input, select').removeClass('error-i');
+        $('.form-input').find('.error-msg').remove();
+        for (var key in data) {
+            if(data[key] === '') {
+                var $formLine = $('[name='+ key +']');
+                $formLine.addClass('error-i');
+                $formLine.parent().append('<p class="error-msg">'+
+                        $formLine.closest('.form-input').prev().find('td').text()
+                        +'不能为空</p>');
+                return false;
+            }
+        }
+        var url  = _ip+'/user/insertUser';
+        if ($obj.hasClass('edit')) {
+            url  = _ip+'/user/updateUser';
+            data.id = $('[name="id"]').val();
+        }
+        userAjaxPost(url, data, function(json) {
+            if (json.success) {
+                $('.cancel-user-btn').click();
+                getData(1, {name: userName});
+            }
+        });
+    });
+
+    function editUser(obj) {
+        var data = $(obj).closest('tr').data('edit');
+        var $addUserBox = $('.add-user-box');
+        _API.getDptList('Dpt-select',data.department, true);
+        $addUserBox.append('<input type="hidden" name="id"/>');
+        for (var key in data) {
+            $('[name="' + key + '"]').val(data[key]);
+        }
+        $addUserBox.find('#add-btn').text('编辑').addClass('edit');
+        $('.user-mask').css('display', 'block');
+        $addUserBox.animate({
+            right: '0px',
+            opacity: 1
+        }, 500);
+    }
 
     function disableUser(obj) {
         var data = {};
@@ -307,13 +376,12 @@
         }
         userAjaxGet(url, data, 'resetPwd', function(json) {
             if (json.success) {
-                console.log(json);
+
             }
         })
     }
 
     function userAjaxGet(url, data, jsonpCall, callback) {
-        console.log(data);
         $.ajax({
             url:url,
             type: 'GET',
@@ -324,6 +392,22 @@
             success: function(json) {
                 if(callback) {
                    callback(json);
+                }
+            }
+        })
+    }
+
+
+    function userAjaxPost(url, data, callback) {
+        $.ajax({
+            url:url,
+            type: 'POST',
+            dataType: 'json',
+            contentType:'application/json',
+            data:JSON.stringify(data),
+            success: function(json) {
+                if(callback) {
+                    callback(json);
                 }
             }
         })

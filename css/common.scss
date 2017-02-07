@@ -48,7 +48,8 @@ header.header{
   position: fixed;
   top:0px;
   left: 15%;
-  >div.t{
+  z-index: 9;
+  div.t{
     background: url(../images/Welcome.png) no-repeat 18px center;
     background-size: 10px 11px;
     padding-left: 35px;
@@ -82,7 +83,29 @@ header.header{
       background: #2e363f;
     }
   }
-
+  .head-down {
+    position: absolute;
+    top: 37px;
+    z-index: 9;
+    right: 0;
+    width: 120px;
+    padding: 20px 20px 10px 20px;
+    border: solid 1px #000;
+    border-top: 0;
+    background: $color-black;
+    display: none;
+    li {
+      text-align: center;
+      margin-bottom: 10px;
+      a {
+        display: block;
+        color: $color-white;
+      }
+    }
+  }
+  .right-user:hover .head-down{
+    display: block;
+  }
 }
 //旁边
 aside.aside{
