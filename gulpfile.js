@@ -12,7 +12,6 @@ gulp.task('sass', function(){
 gulp.task('watch', function(){
     gulp.watch('css/!*.scss', ['sass']);
 });*/
-
 var gulp = require('gulp'),
     yargs = require('yargs').argv, //获取gulp命令后传入的参数
     template = require('gulp-template'), // 模板

@@ -2,4 +2,7 @@
 interior_gaia/
 node_modules/
 rev/
-
+README.md
+gulpfile.js
+testurl.json
+url.json
