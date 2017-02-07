@@ -1,4 +1,4 @@
-var _ip = 'http://121.42.187.170';
+var _ip = 'http://192.168.6.12:8080';
 
 /*----------
  * 头部页面头部
@@ -253,6 +253,11 @@ _api.prototype = {
     getNetWorkList: function(id, defaultId,isSelect){ // 12. 获取网络类型
         var url = _ip+'/common/getNetWorkList';
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'network']);
+        return this;
+    },
+    getOcpList: function(id, defaultId,isSelect) { // 13. 获取组织架构
+        var url = _ip+'/user/getOcpList';
+        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'Ocp']);
         return this;
     }
 }

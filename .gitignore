@@ -1,0 +1,8 @@
+README.md
+.idea/
+interior_gaia/
+node_modules/
+rev/
+gulpfile.js
+testurl.json
+url.json

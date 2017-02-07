@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <link href="../css/mems-index.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/user-manage.css">
+</head>
+<body>
+<!--header-->
+<header id="header" class="header" v-html="datas">
+    <div>{{datas}}</div>
+</header>
+
+<!--menu-->
+<aside class="aside">
+    <div class="logo">
+        运营平台
+    </div>
+    <ul class="menu">
+        <li>
+            <div class="menu-first"><i class="dash"></i>Dashboard<l></l></div>
+        </li>
+        <li>
+            <div class="menu-first" ><i class="project"></i>项目管理<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="#">待办事项</a></dd>
+                <dd><a href="projectManage/mems-pro-list.html">项目列表</a></dd>
+            </dl>
+        </li>
+        <li>
+            <div class="menu-first"><i class="need"></i>需求管理<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="pm-need-list.html" >需求池</a></dd>
+                <dd><a href="pm-bug-list.html">缺陷池</a></dd>
+            </dl>
+        </li>
+        <li>
+            <div class="menu-first current"><i class="system"></i>系统配置<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="user-manage.html" class="current">用户管理</a></dd>
+            </dl>
+        </li>
+    </ul>
+</aside>
+
+
+<!--content-->
+<div class="content">
+    <div class="page-header">
+        <div class="header-info"><i></i><a href="user-manage.html">用户管理</a></div>
+    </div>
+    <div class="page-inner">
+        <div class="item-header">
+            <div class="search-box">
+                <form action="javascript:;" id="search-user-form">
+                    <input type="text" placeholder="用户姓名" id="userName">
+                    <div class="search-icon" id="search-icon"></div>
+                    <div class="search-input-border"></div>
+                </form>
+            </div>
+            <div class="item-right">
+                <button class="add-user-btn">添加用户</button>
+            </div>
+        </div>
+        <div class="item-content">
+            <div class="table-box">
+                <table>
+                    <thead>
+                        <tr class="">
+                            <th>姓名</th>
+                            <th>电话</th>
+                            <th>邮箱</th>
+                            <th>角色</th>
+                            <th>组织架构</th>
+                            <th>岗位</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bodyList">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="pages clear">
+                <div class="page-list clear" id="pageList">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="add-user-box">
+        <div class="add-user-back">
+            <table>
+                <tbody>
+                    <tr class="form-name">
+                        <td colspan="2">姓名</td>
+                    </tr>
+                    <tr class="form-input">
+                        <td colspan="2">
+                            <input type="text">
+                        </td>
+                    </tr>
+                    <tr class="form-name">
+                        <td colspan="2">用户名</td>
+                    </tr>
+                    <tr class="form-input">
+                        <td colspan="2">
+                            <input type="text">
+                        </td>
+                    </tr>
+                    <tr class="form-name">
+                        <td colspan="2">组织架构</td>
+                    </tr>
+                    <tr class="form-input">
+                        <td colspan="2">
+                            <select name="" id="Ocp-select">
+                                <option value="1">
+                                    运营部
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class="form-name">
+                        <td colspan="2">岗位</td>
+                    </tr>
+                    <tr class="form-input">
+                        <td >
+                            <select name="" id="2">
+                                <option value="1">
+                                    华北区
+                                </option>
+                            </select>
+                        </td>
+                        <td class="station-td right">
+                            <select name="" id="3">
+                                <option value="1">
+                                    大区经理
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class="form-name">
+                        <td colspan="2">角色</td>
+                    </tr>
+                    <tr class="form-input">
+                        <td colspan="2">
+                            <input type="text" >
+                        </td>
+                    </tr>
+                    <tr class="form-name">
+                        <td colspan="2">电话</td>
+                    </tr>
+                    <tr class="form-input">
+                        <td colspan="2">
+                            <input type="text" >
+                        </td>
+                    </tr>
+                    <tr class="form-name">
+                        <td colspan="2">邮箱</td>
+                    </tr>
+                    <tr class="form-input">
+                        <td colspan="2">
+                            <input type="text" >
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="user-btn-box">
+            <button class="add-btn user-btn">
+                添加
+            </button>
+            <button class="cancel-user-btn user-btn">取消</button>
+        </div>
+    </div>
+</div>
+<div class="user-mask"></div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/common.js"></script>
+<script type="text/javascript">
+    _API.getOcpList('Ocp-select',0,true);
+    var userName= $('#userName').val();
+    function getData(p,checPara){
+        var PerPage = 20;
+        var url  = _ip+'/user/getUserList?page='+p+'&size='+PerPage;
+        var data = checPara || {'name': 'a'};
+        $.ajax({
+            url:url,
+            type : "POST",
+            dataType: 'json',
+            contentType:'application/json',
+            data:JSON.stringify(data),
+            success:function(json){
+                if(!json.data || json.data.length <= 0){
+                    $('#bodyList').html('<tr><td colspan="7" style="text-align: center">暂无数据！</td></tr>');
+                    $('#pageList').html('');
+                    return false;
+                }
+                var _data     = [];
+                var _pager    = [];
+                var userName= $('#userName').val();
+                var totalPage = json.totlePage;
+                var prev      = p-1;
+                if(prev < 1)prev = 1;
+                var next = p + 1;
+                if(next > totalPage)next = totalPage;
+                for(var k = 0, kk = json.data.length; k < kk; k++){
+                    var msg = json.data[k];
+
+                    _data.push('<tr>');
+                    _data.push('<td>'+msg.name+'</td>');
+                    _data.push('<td>'+msg.phone+'</td>');
+                    _data.push('<td>'+ msg.email  +'</td>');
+                    _data.push('<td>'+msg.role+'</td>');
+                    _data.push('<td>'+msg.department+'</td>');
+                    _data.push('<td>'+msg.occupation+'</td>');
+                    _data.push('<td>' +
+                            '<a href="javascript:;">编辑</a>' +
+                            '<a href="javascript:;" onclick="disableUser(this)" data-id="'+ msg.id +'">'+ (msg.status? "禁用":"启用") +'</a> ' +
+                            '<a href="javascript:;" onclick="resetPwd(this)" data-id="'+ msg.id +'">重置密码</a></td>');
+                }
+                _pager.push('<span>共：'+ totalPage +'页</span>');
+                _pager.push('<span>您正在第：'+p+'页</span>');
+                _pager.push('<a href="javascript:;" class="page-pre" onclick="getData('+prev+ ',' + ({name: userName}) + ');return !1;">上一页</a>');
+                _pager.push('<a href="javascript:;" class="page-next" onclick="getData('+next+ ',' + ({name: userName}) +');return !1;">下一页</a>');
+                _pager.push('<span>前往第</span>');
+                _pager.push('<input type="text" id="goToPage"/>');
+                _pager.push('<span>页</span>');
+
+                $('#bodyList').html(_data.join("")).data('page', p);
+                $('#pageList').html(_pager.join(""));
+                $('#goToPage').bind('keyup', function(event) {
+                    var userName= $('#userName').val();
+                    if (event.keyCode == "13") {
+
+                        var v = parseInt($(this).val());
+                        if(!/^[1-9]\d*$/.test(v)){
+                            return false;
+                        }else{
+                            if(v <= 1){
+                                getData(1, {name: userName});
+                            }
+                            else if(v >= totalPage){
+                                getData(totalPage, {name: userName});
+                            }else{
+                                getData(v, {name: userName});
+                            }
+                        }
+
+                    }
+                });
+
+            }
+        })
+    }
+    getData(1, {name: userName});
+    $('.cancel-user-btn').on('click', function() {
+        console.log('m');
+        $('.user-mask').css('display', 'none');
+        $('.add-user-box').animate({
+            right: '-25%',
+            opacity: 0
+        }, 500);
+    });
+    $('.add-user-btn').on('click', function() {
+        $('.user-mask').css('display', 'block');
+        $('.add-user-box').animate({
+            right: '0px',
+            opacity: 1
+        }, 500);
+    });
+
+    $('#search-user-form').on('submit', function() {
+        var userName= $('#userName').val();
+        getData(1, {name: userName});
+        return false;
+    });
+
+    $('#search-icon').on('click', function() {
+        $('#search-user-form').submit();
+    });
+
+    function disableUser(obj) {
+        var data = {};
+        var id =  $(obj).data('id');
+        var url  = _ip+'/user/disableUser';
+        data.id = id;
+        if(!id) {
+            return false;
+        }
+        userAjaxGet(url, data, 'disableUser', function(json) {
+            if (json.success) {
+                getData($('#bodyList').data('page'), {name: userName});
+            }
+        })
+    }
+
+    function resetPwd(obj) {
+        var data = {};
+        var id =  $(obj).data('id');
+        var url  = _ip+'/user/resetPwd';
+        data.id = id;
+        if(!id) {
+            return false;
+        }
+        userAjaxGet(url, data, 'resetPwd', function(json) {
+            if (json.success) {
+                console.log(json);
+            }
+        })
+    }
+
+    function userAjaxGet(url, data, jsonpCall, callback) {
+        console.log(data);
+        $.ajax({
+            url:url,
+            type: 'GET',
+            dataType: 'jsonp',
+            data: data,
+            jsonp: 'callback',
+            jsonpCallback: jsonpCall,
+            success: function(json) {
+                if(callback) {
+                   callback(json);
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>
