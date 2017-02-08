@@ -54,7 +54,7 @@
         <div class="item-header">
             <div class="search-box">
                 <form action="javascript:;" id="search-user-form">
-                    <input type="text" placeholder="用户姓名" id="userName-text">
+                    <input type="text" placeholder="姓名" id="userName-text">
                     <div class="search-icon" id="search-icon"></div>
                     <div class="search-input-border"></div>
                 </form>
@@ -234,8 +234,8 @@
                 }
                 _pager.push('<span>共：'+ totalPage +'页</span>');
                 _pager.push('<span>您正在第：'+p+'页</span>');
-                _pager.push('<a href="javascript:;" class="page-pre" onclick="getData('+prev+ ',' + ({name: userName}) + ');return !1;">上一页</a>');
-                _pager.push('<a href="javascript:;" class="page-next" onclick="getData('+next+ ',' + ({name: userName}) +');return !1;">下一页</a>');
+                _pager.push('<a href="javascript:;" class="page-pre" onclick="pageClick('+prev+ ');return !1;">上一页</a>');
+                _pager.push('<a href="javascript:;" class="page-next" onclick="pageClick('+next+');return !1;">下一页</a>');
                 _pager.push('<span>前往第</span>');
                 _pager.push('<input type="text" id="goToPage"/>');
                 _pager.push('<span>页</span>');
@@ -334,6 +334,11 @@
             }
         });
     });
+
+    function pageClick(page) {
+        var userName= $('#userName-text').val();
+        getData(page, {name: userName});
+    }
 
     function editUser(obj) {
         var data = $(obj).closest('tr').data('edit');

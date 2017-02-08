@@ -35,6 +35,9 @@ html{
                 }
                 &.form-input {
                   margin-top: 5px;
+                  .error-msg {
+                    color: #b74b4b;
+                  }
                   input {
                     padding-left: 15px;
                   }
@@ -46,6 +49,12 @@ html{
                     outline: none;
                     height: 30px;
                     box-sizing: border-box;
+                    &.error-i {
+                      border: 1px solid #b74b4b;
+                      box-shadow: 0px 0px 3px #b74b4b;
+                      -webkit-animation: light .3s ease-in-out;
+                      animation: light .3s ease-in-out;
+                    }
                   }
                 }
                 &.form-button-box {

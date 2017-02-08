@@ -480,6 +480,13 @@ aside.aside{
   padding-bottom: 20px;
   background: #ffffff;
   // border: 1px solid $color-gray-d;
+  .success-text {
+    font-size: 18px;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    color: #5cb85c;
+  }
   .relative-title{
     background: #0088cc;
     height: 46px;

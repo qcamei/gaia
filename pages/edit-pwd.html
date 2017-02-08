@@ -60,7 +60,7 @@
                     </td>
                 </tr>
                 <tr class="form-input">
-                    <td colspan="2"><input type="password"></td>
+                    <td colspan="2"><input type="password" name="originPwd" id="originPwd"></td>
                 </tr>
                 <tr class="form-name">
                     <td colspan="2">
@@ -68,7 +68,7 @@
                     </td>
                 </tr>
                 <tr class="form-input">
-                    <td colspan="2"><input type="password"></td>
+                    <td colspan="2"><input type="password" name="verifyPwd" id="verifyPwd"></td>
                 </tr>
                 <tr class="form-name">
                     <td colspan="2">
@@ -76,7 +76,7 @@
                     </td>
                 </tr>
                 <tr class="form-input">
-                    <td colspan="2"><input type="password"></td>
+                    <td colspan="2"><input type="password" name="sureVerifyPwd" id="sureVerifyPwd"></td>
                 </tr>
                 <tr class="form-button-box">
                     <td>
@@ -98,6 +98,108 @@
     $('.cancel-btn').on('click', function() {
         window.history.back(-1);
     });
+    $('.sure-btn').on('click', function() {
+        var data = {
+            originPwd: $('#originPwd').val(),
+            verifyPwd: $('#verifyPwd').val(),
+            sureVerifyPwd: $('#sureVerifyPwd').val()
+        };
+        var pwdFormat = /^\w{6,12}$/;
+        var numFormat = /^\d{6,12}$/;
+        var letterFormat = /^[a-zA-Z]{6,12}$/;
+        $('input, select').removeClass('error-i');
+        $('.form-input').find('.error-msg').remove();
+        for (var key in data) {
+            var $formLine = $('[name='+ key +']');
+            if(data[key] === '') {
+                $formLine.addClass('error-i');
+                $formLine.parent().append('<p class="error-msg">'+
+                        $formLine.closest('.form-input').prev().find('td').text()
+                        +'不能为空</p>');
+                return false;
+            }
+            else {
+                if(key !== 'originPwd') {
+                    var pwdValidate=pwdFormat.test(data[key]);
+                    var numValidate=numFormat.test(data[key]);
+                    var letterValidate=letterFormat.test(data[key]);
+                    if(!pwdValidate) {
+                        $formLine.addClass('error-i');
+                        $formLine.parent().append('<p class="error-msg">密码格式必须由字母和数字组成,且长度为6-12位</p>');
+                        return false;
+                    }
+                    else {
+                        if(numValidate) {
+                            $formLine.addClass('error-i');
+                            $formLine.parent().append('<p class="error-msg">密码不能为纯数字</p>');
+                            return false;
+                        }
+                        else if(letterValidate) {
+                            $formLine.addClass('error-i');
+                            $formLine.parent().append('<p class="error-msg">密码不能为纯字母</p>');
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        if (data.originPwd === data.verifyPwd) {
+            var $verifyPwd = $('[name="verifyPwd"]');
+            $verifyPwd.addClass('error-i');
+            $verifyPwd.parent().append('<p class="error-msg">新密码不能与原密码相同</p>');
+            return false;
+        }
+
+        if (data.sureVerifyPwd !== data.verifyPwd) {
+            var $sureVerifyPwd = $('[name="sureVerifyPwd"]');
+            $sureVerifyPwd.addClass('error-i');
+            $sureVerifyPwd.parent().append('<p class="error-msg">两次密码不一致</p>');
+            return false;
+        }
+
+        var url  = _ip+'/user/changePwd';
+        data.userId = 1;
+        delete data.sureVerifyPwd;
+        editPwdAjaxPost(url, data, function(json) {
+            if (json.success) {
+                var html ='<div class="share-box">' +
+                        '<div class="success-text">修改密码成功</div><div class="buttons"><a href="javascript:closeAlert();" class="confirm">确定</a></div>' +
+                        '</div>';
+                $$.layer(html, {
+                    isShowMask: true,
+                    fixedBoxTop:'100px',
+                    zIndex:99,
+                    contentBoxWidth: "40%"
+                });
+            }
+            else {
+                var $originPwd = $('[name="originPwd"]');
+                $originPwd.addClass('error-i');
+                $originPwd.parent().append('<p class="error-msg">'+ json.message +'</p>');
+            }
+        });
+    });
+
+    function editPwdAjaxPost(url, data, callback) {
+        $.ajax({
+            url:url,
+            type: 'POST',
+            dataType: 'json',
+            contentType:'application/json',
+            data:JSON.stringify(data),
+            success: function(json) {
+                if(callback) {
+                    callback(json);
+                }
+            }
+        })
+    }
+
+    function closeAlert() {
+        $$.closeLayer();
+        $('input').val('');
+        window.history.back(-1);
+    }
 </script>
 </body>
 </html>
