@@ -1,0 +1,113 @@
+html {
+  body {
+    overflow: hidden;
+    div, table {
+      box-sizing: border-box;
+    }
+    header.header{
+      div.t{
+        width: 120px;
+      }
+
+    }
+    .user-mask {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(255,255,255,.1);
+      display: none;
+      z-index: 10;
+    }
+    .content {
+      position: absolute;
+      margin: 0;
+      top: 37px;
+      left: 15%;
+      overflow: hidden;
+      bottom: 0;
+      .page-inner {
+        .item-header {
+          margin-bottom: 10px;
+          padding-left: 20px;
+          padding-right: 10px;
+          height: 40px;
+          background: #fff;
+          padding-top: 5px;
+          box-sizing: border-box;
+          .search-box {
+            display: inline-block;
+            vertical-align: middle;
+            position: relative;
+            .search-input-border {
+              height: 20px;
+              border-right: solid 1px #dee6ea;
+              position: absolute;
+              top: 5px;
+              right: -15px;
+            }
+            .search-icon {
+              background: url("../images/search-icon.png") no-repeat;
+              width: 16px;
+              height: 16px;
+              position: absolute;
+              top: 7px;
+              right: 0;
+              cursor: pointer;
+            }
+            input {
+              height: 29px;
+              border: 0;
+              outline: none;
+              width: 150px;
+            }
+          }
+          .item-right {
+            float: right;
+            .add-user-btn {
+              background:#03a9f4;
+              border-radius:4px;
+              width:78px;
+              height:29px;
+              border: 0;
+              color: #fff;
+              cursor: pointer;
+              outline: none;
+            }
+          }
+          &:after{
+            clear: both;
+          }
+        }
+        .item-content {
+          border: 0;
+          .table-box {
+            margin: 0;
+            table {
+              thead, tbody {
+                tr {
+                  border-bottom: solid 1px #dee6ea;
+                  th, td {
+                    border: solid 1px #dee6ea;
+                    font-weight: 400;
+                    text-align: left;
+                    padding-left: 30px;
+                    color:#99aabb;
+                  }
+                }
+              }
+              tbody {
+                tr {
+                  td {
+                    color: #667788;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
