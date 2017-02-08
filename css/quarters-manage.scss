@@ -29,13 +29,13 @@ html {
       bottom: 0;
       .page-inner {
         .item-header {
-          margin-bottom: 10px;
           padding-left: 20px;
           padding-right: 10px;
-          height: 40px;
-          background: #fff;
-          padding-top: 5px;
           box-sizing: border-box;
+          background:#eeeeee;
+          border:1px solid #dbdbdb;
+          height:38px;
+          line-height: 38px;
           .search-box {
             display: inline-block;
             vertical-align: middle;
@@ -101,6 +101,12 @@ html {
                 tr {
                   td {
                     color: #667788;
+                    vertical-align: top;
+                    padding-top: 20px;
+                    padding-bottom: 10px;
+                    &.organize {
+                      width: 15%;
+                    }
                   }
                 }
               }

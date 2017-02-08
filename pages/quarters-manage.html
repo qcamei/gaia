@@ -55,26 +55,82 @@
     </div>
     <div class="page-inner">
         <div class="item-header">
-
+            <i class="quarters-icon display-middle"></i>
+            <span class="quarters-text display-middle">岗位管理</span>
         </div>
         <div class="item-content">
             <div class="table-box">
                 <table>
                     <thead>
                         <tr>
-                            <th>组织机构</th>
+                            <th class="organize">组织机构</th>
                             <th >岗位名称</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>运营部</td>
+                            <td class="organize">运营部</td>
                             <td >
-
+                                <div class="add-tag-box">
+                                    <button class="add-tag tag-btn add-btn-click" style="display: none">+ 标签</button>
+                                    <div class="add-tag-line" style="display: block">
+                                        <input type="text" class="add-tag-input display-middle" placeholder="标签名称">
+                                        <button class="tag-btn sure-btn display-middle" >确认</button>
+                                        <button class="tag-btn cancel-btn display-middle cancel-add-edit">取消</button>
+                                    </div>
+                                </div>
+                                <div class="tag-content">
+                                    <div class="display-middle tag-display">
+                                        <div class="display-middle tag-btn text-tag" style="display: none;">资产盘点</div>
+                                        <div class="add-tag-line">
+                                            <input type="text" class="add-tag-input display-middle" placeholder="标签名称">
+                                            <button class="tag-btn sure-btn display-middle" >确认</button>
+                                            <button class="tag-btn cancel-btn display-middle cancel-add-edit">取消</button>
+                                        </div>
+                                    </div>
+                                    <div class="display-middle tag-display">
+                                        <div class="display-middle tag-btn text-tag">
+                                            <div class="tooltip top">
+                                                <div class="tooltip-arrow"></div>
+                                                <div class="tooltip-inner">
+                                                    点击编辑
+                                                </div>
+                                            </div>
+                                            <div class="tooltip bottom delete-alert">
+                                                <div class="tooltip-arrow"></div>
+                                                <div class="tooltip-inner">
+                                                    <div class="tooltip-title">确认要删除该标签吗？</div>
+                                                    <div class="tooltip-describe">删除后已关联项目的标签也将删除。</div>
+                                                    <div class="tooltip-button">
+                                                        <a href="javascript:;" class="sure-delete">确认</a>
+                                                        <a href="javascript:;" class="cancel-delete">取消</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <span class="display-middle">资产盘点</span>
+                                            <span class="delete-btn display-middle">
+                                                <span>×</span>
+                                            </span>
+                                        </div>
+                                        <div class="add-tag-line" style="display: none">
+                                            <input type="text" class="add-tag-input display-middle" placeholder="标签名称">
+                                            <button class="tag-btn sure-btn display-middle" >确认</button>
+                                            <button class="tag-btn cancel-btn display-middle">取消</button>
+                                        </div>
+                                    </div>
+                                    <div class="display-middle tag-display">
+                                        <div class="display-middle tag-btn text-tag">资产盘点</div>
+                                        <div class="add-tag-line" style="display: none">
+                                            <input type="text" class="add-tag-input display-middle" placeholder="标签名称">
+                                            <button class="tag-btn sure-btn display-middle" >确认</button>
+                                            <button class="tag-btn cancel-btn display-middle">取消</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <tr>
-                            <td>实施部</td>
+                            <td class="organize">实施部</td>
                             <td >岗位名称</td>
                         </tr>
                     </tbody>
@@ -88,7 +144,27 @@
 <script src="../js/vue.js"></script>
 <script src="../js/common.js"></script>
 <script type="text/javascript">
+    $('.add-btn-click, .text-tag').on('click', function() {
+        var $obj = $(this);
+        $obj.css('display', 'none').next().css('display','block');
+    });
 
+    $('.cancel-add-edit').on('click', function() {
+        var $obj = $(this);
+        $obj.closest('.add-tag-line').css('display', 'none').find('.add-tag-input').val('')
+                .end().prev().css('display','block');
+    })
+    $('.delete-btn').on('click', function() {
+        var $obj = $(this);
+        $obj.closest('.text-tag').find('.delete-alert').addClass('show-alert');
+        $('.user-mask').css('display','block');
+        return false;
+    })
+    $('.cancel-delete, .user-mask').on('click', function() {
+        $('.delete-alert').removeClass('show-alert');
+        $('.user-mask').css('display','none');
+        return false;
+    })
 </script>
 </body>
 </html>

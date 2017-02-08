@@ -161,6 +161,212 @@ aside.aside{
     color: #555;
     font-size: 24px;
   }
+  .display-middle {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .quarters-text {
+    font-size:14px;
+    color:#112233;
+    line-height:18px;
+    font-weight: 700;
+    margin-left: 8px;
+  }
+  .quarters-icon {
+    background: url("../images/quarters-icon.png") no-repeat;
+    width: 16px;
+    height: 12px;
+  }
+  .tooltip {
+    position: absolute;
+    z-index: 1070;
+    display: block;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: left;
+    text-align: start;
+    text-decoration: none;
+    text-shadow: none;
+    text-transform: none;
+    letter-spacing: normal;
+    word-break: normal;
+    word-spacing: normal;
+    word-wrap: normal;
+    white-space: normal;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    line-break: auto;
+    .tooltip-arrow {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-color: transparent;
+      border-style: solid;
+
+    }
+    .tooltip-inner {
+      max-width: 200px;
+      padding: 8px;
+      color: #fff;
+      text-align: center;
+      background-color: #000;
+      border-radius: 4px;
+    }
+
+    &.top {
+      padding: 5px 0;
+      margin-top: -3px;
+      .tooltip-arrow {
+        bottom: 0;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px 5px 0;
+        border-top-color: #000;
+      }
+    }
+    &.bottom {
+      padding: 5px 0;
+      margin-top: 3px;
+      .tooltip-arrow {
+        top: 0;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 0 5px 5px;
+        border-bottom-color: #000;
+      }
+    }
+  }
+  .tag-btn {
+    border-radius: 4px;
+    width: 60px;
+    height: 28px;
+    display: inline-block;
+    outline: none;
+    font-size: 12px;
+    cursor: pointer;
+    background: #ffffff;
+    border: 1px solid #e6ecef;
+    color: #99aabb;
+    &.sure-btn {
+      background: #03a9f4;
+      color: #ffffff;
+      margin-left: 10px;
+    }
+    &.cancel-btn {
+      background: #ffffff;
+      border: 1px solid #e6ecef;
+      color: #99aabb;
+      margin-left: 10px;
+    }
+  }
+  .add-tag-line {
+    .add-tag-input {
+      height: 28px;
+      border: solid 1px #03a9f4;
+      outline: none;
+      width: 120px;
+      padding-left:15px;
+      border-radius: 4px;
+    }
+  }
+  .tag-content {
+    .tag-display {
+      margin-top: 10px;
+      margin-right: 10px;
+    }
+    .text-tag {
+      line-height: 28px;
+      width: auto;
+      padding: 0 10px;
+      position: relative;
+      .delete-alert {
+        display: none;
+        .tooltip-arrow {
+          border-bottom-color: rgba(150,150,150,0.18);
+          left: 15px;
+          &::after {
+            position: absolute;
+            display: block;
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+            content: "";
+            border-width: 10px;
+            top: 1px;
+            margin-left: -10px;
+            border-top-width: 0;
+            border-bottom-color: #fff;
+          }
+        }
+        .tooltip-inner {
+          padding: 10px 15px;
+          text-align: left;
+          max-width: inherit;
+          background:#ffffff;
+          border:1px solid rgba(150,150,150,0.18);
+          box-shadow:0 10px 20px 0 rgba(0,0,0,0.14);
+          border-radius:2px;
+          width:230px;
+          height:108px;
+          .tooltip-title {
+            color:#334455;
+            letter-spacing:0;
+            line-height:18px;
+            margin-top: 5px;
+            font-weight: 700;
+          }
+          .tooltip-describe {
+            color:#667788;
+            letter-spacing:0;
+            line-height:18px;
+            margin-top: 5px;
+          }
+          .tooltip-button {
+            margin-top: 20px;
+            .sure-delete {
+              color:#03a9f4;
+              letter-spacing:0;
+              line-height:18px;
+              text-align:left;
+            }
+            .cancel-delete {
+              color:#99aabb;
+              letter-spacing:0;
+              line-height:18px;
+              text-align:left;
+              margin-left: 15px;
+            }
+          }
+
+        }
+      }
+      .delete-btn {
+        margin-left: 10px;
+        line-height: 25px;
+        font-size: 20px;
+        font-weight: 700;
+        text-shadow: 0 1px 0 #fff;
+        display: none;
+      }
+      .show-alert{
+        display: block;
+        opacity: 1;
+        bottom:-125px;
+        right: -200px;
+      }
+      &:hover .delete-btn {
+        display: inline-block;
+      }
+      &:hover .tooltip.top {
+        opacity: 1;
+        bottom:33px;
+      }
+    }
+  }
   .page-inner{
     width: 96%;
     margin: 0 auto;
