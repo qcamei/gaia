@@ -177,6 +177,53 @@ aside.aside{
     width: 16px;
     height: 12px;
   }
+  .organize-icon {
+    background: url("../images/organize-icon.png") no-repeat;
+    width: 16px;
+    height: 15px;
+  }
+  .tree-content {
+    ul {
+      li {
+        .tree-title {
+          padding-top: 10px;
+          padding-bottom: 10px;
+          cursor: pointer;
+          &.one {
+            padding-left: 20px;
+          }
+          &.two {
+            padding-left: 40px;
+          }
+          &.three {
+            padding-left: 60px;
+          }
+          &.four {
+            padding-left: 80px;
+          }
+          .tree-arrow {
+            background: url("../images/tree-arrow-right.png") no-repeat;
+            width: 8px;
+            height: 13px;
+          }
+          &.active {
+            background:#e6ecef;
+            box-shadow:inset 1px 0 0 0 #03a9f4;
+            .tree-arrow {
+              background: url("../images/tree-arrow.png") no-repeat;
+              width: 12px;
+              height: 7px;
+            }
+          }
+          &:hover {
+            background:#e6ecef;
+            box-shadow:inset 1px 0 0 0 #03a9f4;
+          }
+        }
+
+      }
+    }
+  }
   .tooltip {
     position: absolute;
     z-index: 1070;
@@ -219,6 +266,12 @@ aside.aside{
     &.top {
       padding: 5px 0;
       margin-top: -3px;
+      left: 50%;
+      margin-left: -32px;
+      .tooltip-inner {
+        max-width: 200px;
+        width: 64px;
+      }
       .tooltip-arrow {
         bottom: 0;
         left: 50%;
@@ -282,6 +335,9 @@ aside.aside{
       width: auto;
       padding: 0 10px;
       position: relative;
+      &:hover {
+        background:#e6ecef;
+      }
       .delete-alert {
         display: none;
         .tooltip-arrow {

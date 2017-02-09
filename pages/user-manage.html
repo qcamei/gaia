@@ -198,7 +198,7 @@
             data:JSON.stringify(data),
             success:function(json){
                 if(!json.data || json.data.length <= 0){
-                    $('#bodyList').html('<tr><td colspan="7" style="text-align: center">暂无数据！</td></tr>');
+                    $('#bodyList').html('<tr><td colspan="8" style="text-align: center">暂无数据！</td></tr>');
                     $('#pageList').html('');
                     return false;
                 }
