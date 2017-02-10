@@ -56,28 +56,29 @@ html {
               .tag-btn {
                 margin-left: 0px;
               }
-              .right {
-                display: none;
-                .edit-organize {
-                  background: url("../images/edit-organize.png") no-repeat;
-                  width: 16px;
-                  height: 16px;
-                  margin-right: 15px;
-                  cursor: pointer;
+              .tree-title {
+                .right {
+                  display: none;
+                  .edit-organize {
+                    background: url("../images/edit-organize.png") no-repeat;
+                    width: 16px;
+                    height: 16px;
+                    margin-right: 15px;
+                    cursor: pointer;
+                  }
+                  .delete-organize {
+                    background: url("../images/delete-organize.png") no-repeat;
+                    width: 16px;
+                    height: 16px;
+                    margin-right: 20px;
+                    cursor: pointer;
+                  }
                 }
-                .delete-organize {
-                  background: url("../images/delete-organize.png") no-repeat;
-                  width: 16px;
-                  height: 16px;
-                  margin-right: 20px;
-                  cursor: pointer;
-                }
-              }
-              li {
-                div:hover .right{
+                &:hover .right{
                   display: block;
                 }
               }
+
             }
           }
         }
