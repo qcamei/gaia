@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mems-项目-详情</title>
+    <link href="../css/pro-detail.css" type="text/css" rel="stylesheet"/>
+    <link href="../css/foundation-datepicker.css" rel="stylesheet"/>
+</head>
+<body>
+<!--header-->
+<header id="header" class="header" v-html="datas">
+    <div>{{datas}}</div>
+</header>
+
+<!--menu-->
+<aside class="aside">
+    <div class="logo">
+        运营平台
+    </div>
+    <ul class="menu">
+        <li>
+            <div class="menu-first"><i class="dash"></i>Dashboard<l></l></div>
+        </li>
+        <li>
+            <div class="menu-first current"><i class="project"></i>项目管理<l></l></div>
+            <dl class="menu-second">
+                <dd><a >待办事项</a></dd>
+                <dd><a href="mems-pro-list.html" class="current">项目列表</a></dd>
+            </dl>
+        </li>
+        <li>
+            <div class="menu-first "><i class="need"></i>需求管理<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="../pm-need-list.html" >需求池</a></dd>
+                <dd><a href="../pm-bug-list.html">缺陷池</a></dd>
+            </dl>
+        </li>
+        <li>
+            <div class="menu-first"><i class="system"></i>系统配置<l></l></div>
+        </li>
+    </ul>
+</aside>
+
+<!--content-->
+<div class="content" style="background: #FFF;">
+    <div class="page-header">
+        <div class="header-info"><i></i><a href="   mems-pro-list.html">项目列表</a> > 项目详情</div>
+    </div>
+    <div class="p-content clear">
+        <div class="left content-left">
+            <div class="p-header clear">
+                <div class="left names"><span>安徽医科大学附属第二医院</span>&nbsp;<span>已签约</span>&nbsp;</div>
+                <div class="right opers">
+                    <a href="" class="activity right"></a>
+                    <a href="" class="person right"></a>
+                </div>
+            </div>
+            <ul class="nav clear">
+                <li >客户资料</li>
+                <li>开户资料(暂不做)</li>
+                <li class="current">客户信息卡</li>
+                <li>项目需求</li>
+                <li>项目合同(暂不做)</li>
+                <li>文档资料(暂不做)</li>
+            </ul>
+
+            <!-- 客户资料 -->
+            <div class="info-module clear" style="display: none;">
+                <div class="left module-left">
+
+                    <!-- 兴趣点 -->
+                    <div class="dot-module">
+                        <div class="dot-head"><i class="dot-1"></i>兴趣点</div>
+                         <textarea placeholder="点击添加描述……"></textarea>
+                         <ul class="clear tag-list">
+                             <li>资产盘点<span>&times;</span></li>
+                         </ul>
+                         <div class="add-tag">+标签</div>
+                         <div class="add-tag-con">
+                             <input type="text" placeholder="标签名" /><input type="button" value="确认"><input type="button" value="取消">
+                         </div>
+                    </div>
+
+                    <!-- 管理方式 -->
+                    <div class="dot-module">
+                        <div class="dot-head"><i class="dot-2"></i>管理方式</div>
+                         <textarea placeholder="点击添加描述……"></textarea>
+                         <ul class="clear tag-list">
+                             <li>资产盘点<span>&times;</span></li>
+                         </ul>
+                         <div class="add-tag">+标签</div>
+                         <div class="add-tag-con">
+                             <input type="text" placeholder="标签名" /><input type="button" value="确认"><input type="button" value="取消">
+                         </div>
+                    </div>
+
+                    <!-- 主要竞争对手 -->
+                    <div class="dot-module">
+                        <div class="dot-head"><i class="dot-3"></i>管理方式</div>
+                        <textarea placeholder="点击添加描述……"></textarea>
+                         <ul class="clear tag-list">
+                             <li>资产盘点<span>&times;</span></li>
+                         </ul>
+                         <div class="add-tag">+标签</div>
+                         <div class="add-tag-con">
+                             <input type="text" placeholder="标签名" /><input type="button" value="确认"><input type="button" value="取消">
+                         </div>
+                    </div>
+
+                    <!-- 风险和挑战 -->
+                    <div class="dot-module">
+                        <div class="dot-head"><i class="dot-4"></i>管理方式</div>
+                         <textarea placeholder="点击添加描述……"></textarea>
+                         <ul class="clear tag-list">
+                             <li>资产盘点<span>&times;</span></li>
+                         </ul>
+                         <div class="add-tag">+标签</div>
+                         <div class="add-tag-con">
+                             <input type="text" placeholder="标签名" /><input type="button" value="确认"><input type="button" value="取消">
+                         </div>
+                    </div>
+                </div>
+                <div class="right module-right">
+
+                    <div class="module-table module-sell">
+                        <div class="t-head ">
+                            销售方式及预算
+                            <a class="edit" id="editeSaleType"></a>
+                        </div>
+                        <div class="c-body">
+                        
+                            <table class="show-list">
+                                <tr>
+                                    <td colspan="2">销售方式：<span class="type">直销</span></td>
+                                </tr>
+                                <tr>
+                                    <td width="40%">
+                                        <div class="name">预算：</div>
+                                        <div class="text"><span class="num-style">30</span>&nbsp;万元</div>
+                                    </td>
+                                    <td>
+                                        <div class="name">采购时间：</div>
+                                        <div class="text"><span class="num-style">2009</span>&nbsp;年&nbsp;<span class="num-style">6</span>&nbsp;月</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">有意愿采购，预计在四月，到时候再跟进</td>
+                                    
+                                </tr>
+                            </table>
+                            <table class="edite-show-list" style="display: none;">
+                                <tr>
+                                    <td>销售方式</td>
+                                    <td><select id="js_type"><option>直销</option><option>代理商</option><option>单家医院</option></select></td>
+                                </tr>
+                                <tr>
+                                    <td>联系人</td>
+                                    <td><input id=""></td>
+                                </tr>
+                                <tr>
+                                    <td>联系电话</td>
+                                    <td><input id=""></td>
+                                </tr>
+                                <tr>
+                                    <td>预算(万元)</td>
+                                    <td><input id="js_money" ／></td>
+                                </tr>
+                                <tr>
+                                    <td>采购时间</td>
+                                    <td><input id="js_time" ／></td>
+                                </tr>
+                                <tr>
+                                    <td>描述</td>
+                                    <td><textarea id="js_dec"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align: center;height: 55px;">
+                                        <a class="btn">取消</a>&emsp;<a class="btn">确认</a>
+                                    </td>
+                                </tr>
+                            </table>
+                           
+                        </div>
+                    </div>
+
+                    <div class="module-table module-person">
+                        <div class="t-head clear">
+                            <p class="left">客户通讯录</p>
+                        </div>
+                        <div class="c-body">
+                            <ul class="base">
+                                <li class="clear">
+                                    <div class="name">设备科负责人：</div>
+                                    <div class="text">李老师 | <tel>13889898989</tel> <span class="fethure">不好沟通</span></div>
+                                </li>
+                                <li class="clear">
+                                    <div class="name">信息科科长：</div>
+                                    <div class="text">医工 | <tel>13889898989</tel></div>
+                                </li>
+                                <li class="clear">
+                                    <div class="name">分院院长：</div>
+                                    <div class="text">张三 | <tel>13889898989</tel></div>
+                                </li>
+                                <li class="clear">
+                                    <div class="name">院长：</div>
+                                    <div class="text">李四 | <tel>13889898989</tel></div>
+                                </li>
+                                <li class="clear">
+                                    <div class="name">设备科：</div>
+                                    <div class="text">王麻子 | <tel>13889898989</tel></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 客户信息卡 -->
+            <div class="client-info-card"  style="display: none;">
+                <ul class="card-list clear">
+                    <li>
+                        <div class="head clear">
+                            <div class="left name">
+                                <span class="left">漆丽君</span>
+                                <span class="left">院长</span>
+                                <div class="left detail">
+                                    <i></i>
+                                    <div class="detail-slide">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <h6>角色</h6>
+                                                    <span>医工</span>
+                                                </td>
+                                                <td>
+                                                    <h6>科室</h6>
+                                                    <span>儿科|骨科</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h6>联系电话</h6>
+                                                    <span>18789898989</span>
+                                                </td>
+                                                <td>
+                                                    <h6>短号</h6>
+                                                    <span>1234</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="right edit">
+                                <i></i>
+                                <div class="edit-slide"><a>编辑</a><a>删除</a></div>
+                            </div>
+                        </div>
+                        <ul class="clear dot-tab">
+                            <li>兴趣点</li>
+                            <li>抵触点</li>
+                            <li>沟通要点</li>
+                            <li>相关需求</li>
+                        </ul>
+                        <div class="intresting" style="display: none;">
+                            <ul class="clear tag-list">
+                                <li>资产盘点<span>×</span></li>
+                             </ul>
+                             <div class="add-tag-" style="display: block;">+标签</div>
+                        </div>
+                        
+                        <div class="contradict">
+                            <ul class="clear tag-list">
+                                <li>资产盘点<span>×</span></li>
+                             </ul>
+                             <div class="tag-con">
+                                 <div class="add-tag-exist" style="display: block;">+标签</div>
+                                 <div class="add-tag-exist-con" >
+                                     <ul class="tag-out-list">
+                                         <li>资产盘点<i></i></li>
+                                         <li>效益分析<i></i></li>
+                                         <li>我是表情<i></i></li>
+                                     </ul>
+                                 </div>
+                             </div>
+                        </div>
+                    </li>
+                    <li class="li-add-card">
+                        <a href="" class="card-btn">添加客户</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 项目需求列表 -->
+            <div class="info-module pro-module" style="display: none;">
+                <table class="pro-list">
+                    <thead>
+                        <tr>
+                            <td>需求名称</td>
+                            <td>需求方</td>
+                            <td>紧急程度</td>
+                            <td>提出人</td>
+                            <td>提出时间</td>
+                            <td>处理状态</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="合同到期提醒" class="link">项目名称</a></td>
+                            <td>李老师</td>
+                            <td>中</td>
+                            <td>刘凯</td>
+                            <td>2010／02/02</td>
+                            <td>待处理</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="pages clear">
+                    <div class="page-list clear" >
+                        <a href="#" class="page-pre">上一页</a>
+                        <a href="#">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">……</a>
+                        <a href="#">9</a>
+                        <a href="#">10</a>
+                        <a href="#" class="page-next">上一页</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 暂未完成 -->
+            <div class="unfinished" >
+                <img src="../images/t-10.png">
+                <p>攻城师正在努力开发中……</p>
+            </div>
+        </div>
+        <div class="right content-right">
+            <div class="buttons clear">
+                <a href="" class="left current">商务进度</a>
+                <a href="" class="left">运营进度(暂不做)</a>
+            </div>
+            <div class="business">
+                <div class="add-cord">
+                    <input type="button" value="添加记录" />
+                    <table class="add-input">
+                        <tr>
+                            <td width="20%">拜访方式</td>
+                            <td><select></select></td>
+                        </tr>
+                        <tr>
+                            <td>拜访阶段</td>
+                            <td><select></select></td>
+                        </tr>
+                        <tr>
+                            <td>拜访结果</td>
+                            <td><select></select></td>
+                        </tr>
+                        <tr>
+                            <td>紧急程度</td>
+                            <td><select></select></td>
+                        </tr>
+                        <tr>
+                            <td>拜访人员</td>
+                            <td><select></select></td>
+                        </tr>
+                        <tr>
+                            <td>下次跟进</td>
+                            <td><input type="" name=""></td>
+                        </tr>
+                        <tr>
+                            <td>下次重点</td>
+                            <td><input type="" name=""></td>
+                        </tr>
+                        <tr>
+                            <td>备注</td>
+                            <td><textarea></textarea></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <button>添加</button><button>取消</button>
+                            </td>
+                        </tr>
+                    </table> 
+                </div>
+                <div class="cord-list">
+                    <table class="cord-table">
+                        <thead>
+                            <tr class="status">
+                                <td width="20"><span class="s-2"></span></td>
+                                <td>
+                                    <div class="status-head clear">
+                                        <p class="left">拜访</p>
+                                        <p class="right">2017/01/08&nbsp;12:34</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="line"></span>
+                                    <span class="circle"></span>
+                                </td>
+                                <td>
+                                    <div class="cord-detail">
+                                        <div class="t">
+                                            <i></i><span>丽君</span><span>晓丽</span><span>2017/01/08&nbsp;12:34</span>
+                                        </div>
+                                        <ul class="clear key-list">
+                                            <li>见面</li>
+                                            <li>已介绍</li>
+                                            <li>无人接待</li>
+                                        </ul>
+                                        <p class="dec">描述描述</p>
+                                        <div class="plan">
+                                            <span class="title">下次计划</span>
+                                            <div class="paper">产品介绍<span>&emsp;&emsp;2017/01/08&nbsp;12:34</span></div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="line"></span>
+                                    <span class="circle"></span>
+                                </td>
+                                <td>
+                                    <div class="cord-detail">
+                                        <div class="t">
+                                            <i></i><span>丽君</span><span>晓丽</span><span>2017/01/08&nbsp;12:34</span>
+                                        </div>
+                                        <ul class="clear key-list">
+                                            <li>见面</li>
+                                            <li>已介绍</li>
+                                            <li>无人接待</li>
+                                        </ul>
+                                        <p class="dec">描述描述</p>
+                                        <div class="plan">
+                                            <span class="title">下次计划</span>
+                                            <div class="paper">产品介绍<span>&emsp;&emsp;2017/01/08&nbsp;12:34</span></div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                        <thead>
+                            <tr class="status">
+                                <td width="20"><span></span></td>
+                                <td>
+                                    <div class="status-head clear">
+                                        <p class="left">拜访</p>
+                                        <p class="right">2017/01/08&nbsp;12:34</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="line"></span>
+                                    <span class="circle"></span>
+                                </td>
+                                <td>
+                                    <div class="cord-detail">
+                                        <div class="t">
+                                            <i></i><span>丽君</span><span>晓丽</span><span>2017/01/08&nbsp;12:34</span>
+                                        </div>
+                                        <ul class="clear key-list">
+                                            <li>见面</li>
+                                            <li>已介绍</li>
+                                            <li>无人接待</li>
+                                        </ul>
+                                        <p class="dec">描述描述</p>
+                                        <div class="plan">
+                                            <span class="title">下次计划</span>
+                                            <div class="paper">产品介绍<span>&emsp;&emsp;2017/01/08&nbsp;12:34</span></div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="line"></span>
+                                    <span class="circle"></span>
+                                </td>
+                                <td>
+                                    <div class="cord-detail">
+                                        <div class="t">
+                                            <i></i><span>丽君</span><span>晓丽</span><span>2017/01/08&nbsp;12:34</span>
+                                        </div>
+                                        <ul class="clear key-list">
+                                            <li>见面</li>
+                                            <li>已介绍</li>
+                                            <li>无人接待</li>
+                                        </ul>
+                                        <p class="dec">描述描述</p>
+                                        <div class="plan">
+                                            <span class="title">下次计划</span>
+                                            <div class="paper">产品介绍<span>&emsp;&emsp;2017/01/08&nbsp;12:34</span></div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="operating">
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- 项目成员 -->
+<div class="item-member">
+    <h3>项目负责人</h3>
+    <div class="leader member clear">
+        <div class="photo left">
+            <i class="img"><img src="../images/logo.png"></i>
+            <div class="info-slide">
+                <table class="slide-table">
+                    <tr>
+                        <td class="td-img">
+                            <div class="img"></div>
+                            <h3>王麻子</h3>
+                            <h6>华北区经理</h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><i class="tel"></i>138 1234 1234</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><i class="email"></i>email@shulianyixin.com</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><i class="dec"></i>管理团队，EMES咨询服务部，数联医信</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="info left">
+            <p>Merray</p>
+            <p>MEMS</p>
+        </div>
+        <div class="opero right">
+            <a>转让</a>
+        </div>
+    </div>
+    <h3>
+        项目成员
+        <a class="add-member">+&nbsp;添加</a>
+        <div class="member-slide">
+            <div class="search-member">
+                <input type="" name="" />
+            </div>
+            <div class="member-box">
+                <ul class="mem-list">
+                    <li class="clear">
+                        <div class="left"></div>
+                        <span class="left">张三</span>
+                        <i class="right"></i>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="btns"><a class="sure">确认</a><a class="cancle">取消</a></div>
+        </div>
+    </h3>
+    <ul>
+        <li>
+            <div class=" member clear">
+                <div class="photo left">
+                    <i class="img"><img src="../images/logo.png"></i>
+                    <div class="info-slide">
+                        <table class="slide-table">
+                            <tr>
+                                <td class="td-img">
+                                    <div class="img"></div>
+                                    <h3>王麻子</h3>
+                                    <h6>华北区经理</h6>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><i class="tel"></i>138 1234 1234</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><i class="email"></i>email@shulianyixin.com</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><i class="dec"></i>管理团队，EMES咨询服务部，数联医信</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="info left">
+                    <p>Merray</p>
+                    <p>MEMS</p>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class=" member clear">
+                <div class="photo left">
+                    <i class="img"><img src="../images/logo.png"></i>
+                    <div class="info-slide">
+                        <table class="slide-table">
+                            <tr>
+                                <td class="td-img">
+                                    <div class="img"></div>
+                                    <h3>王麻子</h3>
+                                    <h6>华北区经理</h6>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><i class="tel"></i>138 1234 1234</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><i class="email"></i>email@shulianyixin.com</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><i class="dec"></i>管理团队，EMES咨询服务部，数联医信</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="info left">
+                    <p>Merray</p>
+                    <p>MEMS</p>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class=" member clear">
+                <div class="photo left">
+                    <i class="img"><img src="../images/logo.png"></i>
+                    <div class="info-slide">
+                        <table class="slide-table">
+                            <tr>
+                                <td class="td-img">
+                                    <div class="img"></div>
+                                    <h3>王麻子</h3>
+                                    <h6>华北区经理</h6>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><i class="tel"></i>138 1234 1234</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><i class="email"></i>email@shulianyixin.com</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><i class="dec"></i>管理团队，EMES咨询服务部，数联医信</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="info left">
+                    <p>Merray</p>
+                    <p>MEMS</p>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<script src="../js/vue.js" type="text/javascript"></script>
+<script src="../js/common.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/foundation-datepicker.min.js"></script>
+
+<script type="text/javascript">
+
+    // 标签管理
+    $('.tag-list').on('click','li>span',function(){
+        $(this).parent('li').remove();
+    })
+    $('.add-tag').on('click',function(){
+        $(this).siblings('.add-tag-con').css({'display':'block'});
+        $(this).css({'display':'none'});
+    })
+    $('.add-tag-con').on('click','input[type=button]',function(){
+        $(this).parent('.add-tag-con').css({'display':'none'});
+        $(this).parent('.add-tag-con').siblings('.add-tag').css({'display':'block'});
+    })
+    $('.add-tag-con').on('click','input[value=确认]',function(){
+        var val = $(this).siblings('input[type=text]').val();
+        if(val != ''){
+            
+            var h = '<li>'+val+'<span>&times;</span></li>'
+            $(this).parent('.add-tag-con').siblings('ul.tag-list').append(h);
+        }
+    })
+
+
+    $('#js_time').fdatepicker({
+        format: 'yyyy年mm月dd日',
+        pickTime: false
+    });
+    $('#time-2').fdatepicker({
+        format: 'yyyy年mm月dd日',
+        pickTime: false
+    });
+    // $('#add_base').click(function () {
+    //     var h = '<li>';
+    //         h += '<div>销售方式： '+( $("#js_type").find("option:selected").text() )+'  预算：'+( $("#js_money").val() )+'万元  采购时间：'+ ( $('#js_time').val() ) + '</div>';
+    //         h += '<div class="dec">'+ ( $('#js_dec').val() ) +'</div>';
+    //         h += '</li>';
+
+    //     $('#js_show_list').html(h);
+    // })
+
+    // $('#add_dot').blur(function () {
+    //     var arr = ['#007ac7','#47a447','#5bc0de'];
+    //     var k = parseInt( Math.random()*3 );
+    //     var h = '<a class="dot" style="background:'+ ( arr[k] ) +' ">'+ ($(this).val() ) +'</a>';
+    //     $('#js_dot_list').append(h);
+    // })
+
+    $('#editeSaleType').click(function(){
+        $('.show-list').css({'display':'none'});
+        $('.edite-show-list').css({'display':'block'});
+    })
+
+
+    // addCard();
+    function addCard(){
+        var html = '';
+        html += '<div class="client-card-box">';
+            html += '<p class="card-title">添加客户<a href="javascript:$$.closeLayer()">&times;</a></p>';
+            html += '<div class="card-box">';
+                html += '<table class="card-input"><tbody>';
+                    html += '<tr><td>职务</td><td><input type="" name="" class="short"></td></tr>';
+                    html += '<tr><td>角色</td><td><input type="" name="" class="short"></td></tr>';
+                    html += '<tr><td>姓名</td><td><input type="" name="" class="short"></td></tr>';
+                    html += '<tr><td>科室</td><td><input type="" name="" class="short"></td></tr>';
+                    html += '<tr><td>联系电话</td><td><input type="" name="" class="short"></td></tr>';
+                    html += '<tr><td>短号</td><td><input type="" name="" class="short"></td></tr></table></tbody></div>';
+            html += '<div class="buttons"><a class="card-btn card-btn-gray" href="javascript:$$.closeLayer()">取消</a>&emsp;<a id="confirmRelative" class="card-btn">确认</a></div>'
+        html += '</div>';
+        $$.layer(html, {
+            isShowMask: true,
+            fixedBoxTop:'100px',
+            zIndex:99,
+            contentBoxWidth: "27%"
+        });
+
+        
+    }
+
+
+</script>
+</body>
+</html>

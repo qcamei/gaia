@@ -528,129 +528,230 @@ aside.aside .menu {
   100% {
     transform: translateX(0px); } }
 
-.ddd {
-  color: red; }
+.red-start {
+  color: #ed8073; }
 
-.apply-t {
-  height: 90px;
-  line-height: 90px;
-  font-size: 21px;
-  width: 96%;
-  margin: 0 auto; }
-  .apply-t > span {
-    font-size: 12px;
-    color: #555; }
-
-.bar {
-  width: 96%;
-  height: 53px;
-  margin: 0px auto 20px auto; }
-  .bar > img {
-    width: 100%; }
-
-.investigate {
-  margin: 0 auto;
-  width: 96%;
-  background: #FFF; }
-  .investigate .title {
-    font-size: 24px;
-    height: 100px;
-    line-height: 100px;
-    color: #0088cc;
-    text-align: center; }
-  .investigate .img {
-    text-align: center; }
-  .investigate .success {
+.search-box {
+  width: 42%;
+  margin: 0 0 0 25%; }
+  .search-box > h3 {
+    color: #053c4b;
+    height: 35px; }
+  .search-box .search-input {
     width: 100%;
-    height: 400px;
-    background: #f7f7f7;
-    text-align: center; }
-    .investigate .success > img {
-      padding: 40px 0 0 0; }
-    .investigate .success > p {
-      color: #686868;
-      font-size: 20px;
-      padding: 10px 0 0 0; }
-  .investigate .input-table {
-    width: 80%;
-    margin: 0 auto; }
-    .investigate .input-table > tbody {
-      width: 100%; }
-      .investigate .input-table > tbody > tr > th {
-        height: 45px;
-        font-size: 17px;
-        background: #f2f2f2;
-        padding: 0 0 0 10px;
-        text-align: left; }
-      .investigate .input-table > tbody > tr > td {
-        padding: 10px 0;
-        font-size: 14px; }
-        .investigate .input-table > tbody > tr > td:nth-child(1) {
-          width: 11%;
-          text-align: right;
-          vertical-align: top; }
-        .investigate .input-table > tbody > tr > td > input {
-          width: 30%;
-          height: 35px;
-          border: 1px solid #dbdbdb; }
-        .investigate .input-table > tbody > tr > td > select {
-          width: 30%;
-          height: 35px; }
-        .investigate .input-table > tbody > tr > td > textarea {
-          width: 80%;
-          height: 45px;
-          outline: 0px; }
-        .investigate .input-table > tbody > tr > td > label {
-          display: inline-block;
-          padding: 3px 0; }
-          .investigate .input-table > tbody > tr > td > label > input {
-            margin: 0 5px 0 0; }
-        .investigate .input-table > tbody > tr > td .add-f {
-          color: #0ea0eb; }
+    height: 27px;
+    background: url("../images/t-2.png") no-repeat 5px center;
+    border: 1px solid #d5e0e6; }
+    .search-box .search-input > input {
+      height: 25px;
+      width: 95%;
+      margin: 0 0 0 25px;
+      border: 0px; }
+  .search-box .show-box {
+    width: 100%;
+    height: 200px;
+    background: #ffffff;
+    border: 1px solid rgba(150, 150, 150, 0.18);
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.14);
+    margin: 5px 0 30px 0;
+    color: #667788; }
+    .search-box .show-box > ul.key-list {
+      font-size: 12px;
+      color: #667788;
+      text-align: left;
+      margin: 15px 0 0 15px;
+      display: none; }
+      .search-box .show-box > ul.key-list > li {
+        line-height: 25px; }
+    .search-box .show-box .select-area {
+      height: 200px;
+      overflow: hidden; }
+      .search-box .show-box .select-area .wap {
+        float: left;
+        width: auto;
+        overflow-y: scroll;
+        height: 200px; }
+        .search-box .show-box .select-area .wap > ul {
+          width: auto; }
+          .search-box .show-box .select-area .wap > ul > li {
+            line-height: 30px;
+            height: 30px;
+            padding: 0 10px;
+            cursor: pointer; }
+            .search-box .show-box .select-area .wap > ul > li > i {
+              display: inline-block;
+              width: 7px;
+              height: 4px;
+              margin: 0 0 0 10px; }
+            .search-box .show-box .select-area .wap > ul > li:hover {
+              background: #e6ecef; }
+  .search-box .btns {
+    margin: 10px 0; }
 
-.step-btn {
-  padding: 30px 0;
-  text-align: center; }
-  .step-btn .btn {
-    display: inline-block;
-    background: #f8f8f8;
-    font-size: 13px;
-    color: #959595; }
-    .step-btn .btn:hover, .step-btn .btn.current {
-      background: #179fe3;
-      color: #FFF; }
-
-.deploy-table {
-  width: 80%;
-  margin: 40px auto 0 auto;
+.creat-pro {
+  width: 96%;
+  margin: 0 auto;
+  margin-top: 30px;
+  padding-bottom: 13px;
+  background: #FFF;
   border: 1px solid #dbdbdb; }
-  .deploy-table > tbody > tr > th {
-    height: 55px;
-    font-size: 18px;
-    background: #f3f3f3;
-    color: #666;
-    border-bottom: 1px solid #dbdbdb; }
-  .deploy-table > tbody > tr > td {
-    text-align: center;
-    height: 45px;
-    border-bottom: 1px solid #dbdbdb; }
-    .deploy-table > tbody > tr > td > input {
-      width: 90px;
-      height: 23px;
-      border: 1px solid #dbdbdb;
-      padding: 0 0 0 10px;
-      border-radius: 10px;
-      outline: 0px; }
-  .deploy-table > tbody > tr.head > td {
-    background: #f5f5f5; }
-  .deploy-table > tbody.table-list > tr > td .delete {
-    display: block;
-    width: 14px;
-    height: 14px;
-    background: url("../images/delete.png") no-repeat center center;
-    background-size: 14px 14px;
-    visibility: hidden; }
-  .deploy-table > tbody.table-list > tr:hover {
-    background: #f1f1f1; }
-  .deploy-table > tbody.table-list > tr:hover .delete {
-    visibility: visible; }
+  .creat-pro .pro-head {
+    background: #eeeeee;
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+    color: #112233; }
+    .creat-pro .pro-head > i {
+      display: inline-block;
+      background: url(../images/icon-3.png) no-repeat center center;
+      background-size: 16px 14px;
+      width: 16px;
+      height: 36px;
+      vertical-align: top;
+      margin: 0 5px 0 20px; }
+  .creat-pro .steps {
+    background: #f5f5f5;
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.07);
+    width: 100%;
+    height: 111px;
+    position: relative; }
+    .creat-pro .steps .line {
+      width: 50%;
+      height: 1px;
+      position: absolute;
+      top: 50px;
+      margin-left: 25%;
+      z-index: 1; }
+      .creat-pro .steps .line > i {
+        width: 50%;
+        background: #91a3b9;
+        height: 1px;
+        display: inline-block;
+        position: absolute; }
+        .creat-pro .steps .line > i:nth-child(2) {
+          left: 50%; }
+        .creat-pro .steps .line > i.done {
+          background: #009ff2; }
+    .creat-pro .steps .circle {
+      width: 50%;
+      margin: 0 auto;
+      position: absolute;
+      height: 22px;
+      margin-top: 38px;
+      z-index: 2;
+      left: 25%; }
+      .creat-pro .steps .circle > p {
+        width: 22px;
+        height: 22px;
+        border-radius: 100%;
+        background: #FFF;
+        border: 1px solid #91a3b9;
+        color: #91a3b9;
+        text-align: center;
+        line-height: 22px;
+        position: absolute; }
+        .creat-pro .steps .circle > p:nth-child(2) {
+          left: 50%;
+          margin-left: -11px; }
+        .creat-pro .steps .circle > p:nth-child(3) {
+          right: 0; }
+        .creat-pro .steps .circle > p.done {
+          background: #FFF;
+          border: 1px solid #16a7f2;
+          color: #16a7f2; }
+    .creat-pro .steps .s-d {
+      width: 50%;
+      margin: 0 auto;
+      position: absolute;
+      height: 22px;
+      margin-top: 64px;
+      z-index: 2;
+      left: 25%; }
+      .creat-pro .steps .s-d > p {
+        color: #91a3b9;
+        position: absolute; }
+        .creat-pro .steps .s-d > p:nth-child(1) {
+          left: 0px; }
+        .creat-pro .steps .s-d > p:nth-child(2) {
+          left: 50%;
+          margin-left: -24px; }
+        .creat-pro .steps .s-d > p:nth-child(3) {
+          right: 0px; }
+        .creat-pro .steps .s-d > p.done {
+          color: #16a7f2; }
+  .creat-pro .pro-table {
+    width: 65%;
+    margin-left: 21%; }
+    .creat-pro .pro-table > thead > tr > th {
+      color: #053c4b;
+      text-align: right;
+      height: 35px; }
+    .creat-pro .pro-table > tbody > tr > td {
+      color: #99aabb;
+      height: 40px; }
+      .creat-pro .pro-table > tbody > tr > td:nth-child(2n+1) {
+        text-align: right;
+        padding: 0 5px 0 0; }
+      .creat-pro .pro-table > tbody > tr > td:nth-child(2n) > input {
+        width: 42%;
+        height: 25px;
+        border: 1px solid #d5e0e6; }
+      .creat-pro .pro-table > tbody > tr > td:nth-child(2n) > select, .creat-pro .pro-table > tbody > tr > td:nth-child(2n) > input.short {
+        width: 28%;
+        height: 25px;
+        border: 1px solid #d5e0e6; }
+      .creat-pro .pro-table > tbody > tr > td .number {
+        width: 105px;
+        height: 25px;
+        border-radius: 5px;
+        border: 1px solid #d9e2e7; }
+        .creat-pro .pro-table > tbody > tr > td .number > input {
+          height: 25px;
+          width: 43px;
+          border: 0px;
+          border-left: 1px solid #d5e0e6;
+          border-right: 1px solid #d5e0e6; }
+        .creat-pro .pro-table > tbody > tr > td .number > a {
+          width: 30px;
+          height: 25px;
+          text-align: center;
+          line-height: 25px;
+          display: block; }
+
+.finish {
+  text-align: center; }
+  .finish > li {
+    margin: 15px 0; }
+    .finish > li p.success {
+      font-size: 16px;
+      height: 24px;
+      line-height: 28px;
+      color: #66bb6a; }
+      .finish > li p.success > i {
+        width: 24px;
+        height: 24px;
+        border-radius: 100%;
+        background: url("../images/t-3.png") no-repeat #66bb6a;
+        background-position: 4px 7px;
+        display: inline-block;
+        vertical-align: top;
+        margin: 0 10px 0 0; }
+    .finish > li:nth-child(2) {
+      font-size: 14px;
+      color: #99aabb; }
+
+.pro-btn {
+  width: 96px;
+  height: 30px;
+  display: inline-block;
+  border: 1px solid #d9e2e7;
+  border-radius: 5px;
+  color: #2e3f51;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer; }
+
+.pro-sure {
+  background: #009ff2;
+  color: #FFF;
+  border: 1px solid #009ff2; }
