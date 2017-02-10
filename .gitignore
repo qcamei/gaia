@@ -6,3 +6,5 @@ rev/
 gulpfile.js
 testurl.json
 url.json
+
+package.json

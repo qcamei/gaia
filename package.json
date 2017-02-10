@@ -2,45 +2,18 @@
   "private": true,
   "scripts": {
     "prod": "gulp --production",
-    "dev": "gulp watch",
-    "test":"gulp --pub test -w -s",
-    "build": "gulp  rev --pub url --w --s"
+    "dev": "gulp watch"
   },
   "devDependencies": {
     "bootstrap-sass": "^3.3.7",
-    "browser-sync": "^2.18.6",
-    "del": "^2.2.2",
     "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.1",
-    "gulp-cache": "^0.4.5",
-    "gulp-ejs": "^2.3.0",
-    "gulp-file-include": "^1.0.0",
-    "gulp-filter": "^5.0.0",
-    "gulp-flatten": "^0.3.1",
-    "gulp-htmlmin": "^3.0.0",
-    "gulp-if": "^2.0.2",
-    "gulp-imagemin": "^3.1.1",
-    "gulp-livereload": "^3.8.1",
-    "gulp-notify": "^2.2.0",
-    "gulp-packages": "^0.2.0",
-    "gulp-plumber": "^1.1.0",
-    "gulp-prettify": "^0.5.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-rev": "^7.1.2",
-    "gulp-rev-replace": "^0.4.3",
     "gulp-sass": "^2.3.2",
     "gulp-save": "^1.2.1",
-    "gulp-sourcemaps": "^2.4.0",
-    "gulp-template": "^4.0.0",
-    "gulp-uglify": "^2.0.0",
-    "imagemin-pngquant": "^5.0.0",
     "laravel-elixir": "^6.0.0-9",
     "laravel-elixir-vue-2": "^0.2.0",
     "laravel-elixir-webpack-official": "^1.0.2",
     "lodash": "^4.16.2",
-    "q": "^1.4.1",
     "vue": "^2.0.1",
-    "vue-resource": "^1.0.3",
-    "yargs": "^6.6.0"
+    "vue-resource": "^1.0.3"
   }
 }

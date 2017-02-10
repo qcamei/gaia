@@ -1,0 +1,120 @@
+*{
+  margin: 0px;
+  padding: 0px;
+}
+body,html{
+  font-family:'Arial', 'Miscrosoft yahei';
+  height: 100%;
+  font-size: 13px;
+  background: url("../images/login-bg.png") no-repeat;
+  background-size: 100% 100%;
+  width: 100%;
+  height:100%;
+}
+ul,li{
+  list-style: none;
+}
+table{
+  border-collapse: collapse;
+}
+a{
+  text-decoration: none;
+}
+.clear:after{
+  content: '.';
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.left{
+  float: left;
+}
+.right{
+  float: right;
+}
+.aa{width:10px;}
+.banner{
+
+  height: 75px;
+  background: #1f262d;
+  border:1px solid #040709;
+  font-size: 22px;
+  font-weight: bold;
+  color: #FFF;
+  >p{
+    background: url("../images/logo.png") no-repeat left center;
+    padding: 0 0 0 30px;
+    span {
+      color: #31aae1;
+      font-weight: normal;
+    }
+    width: 185px;
+    margin: 0 auto;
+    height: 75px;
+    line-height: 75px;
+  }
+}
+
+.login-box{
+  width: 390px;
+  height: 320px;
+  background: #ffffff;
+  margin: 90px auto 0 auto;
+  .head{
+    height: 55px;
+    line-height: 55px;
+    background: #31aae1;
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    margin: 0 0 32px 0;
+  }
+  .user-input{
+    height: 42px;
+    width: 285px;
+    margin: 0 auto 16px auto;
+    >i{
+      width: 42px;
+      height: 42px;
+      &.i-n{
+        background: url("../images/u-name.png") no-repeat #31aae1 center center;
+        background-size: 12px 14px;
+      }
+      &.i-p{
+        background: url("../images/u-pass.png") no-repeat #555 center center;
+        background-size: 12px 14px;
+      }
+    }
+    >input{
+      width: 238px;
+      height: 42px;
+      border: 0px;
+      background: #ececec;
+      outline: 0px;
+      padding:  0 0 0 5px;
+    }
+  }
+  .login-btn{
+    width: 285px;
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+    font-size: 15px;
+    background: #31aae1;
+    color: #FFF;
+    margin: 0 auto;
+    display: block;
+  }
+  .forget{
+    width: 285px;
+    color: #a6a6a6;
+    margin: 15px auto 0 auto;
+    >a{
+      color: #a6a6a6;
+      &:hover{
+        color: #31aae1;
+      }
+    }
+  }
+}
