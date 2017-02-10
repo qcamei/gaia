@@ -61,8 +61,8 @@
         <div class="item-content">
             <div class="organize-box">
                 <div class="organize-head">
-                    <button class="tag-btn">添加同级</button>
-                    <button class="tag-btn">添加下级</button>
+                    <button class="tag-btn add-identical">添加同级</button>
+                    <button class="tag-btn add-next">添加下级</button>
                 </div>
                 <div class="organize-content tree-content">
                     <ul>
@@ -88,11 +88,11 @@
                                                     <div class="active four tree-title">
                                                         <i class="tree-arrow display-middle"></i>
                                                         <span class="display-middle need-none" style="display: none">产品研发部</span>
-                                                        <span class="right need-none" style="display: none">
+                                                        <span class="right need-none" style="display: inline-block">
                                                             <i class="display-middle edit-organize"></i>
                                                             <i class="display-middle delete-organize"></i>
                                                         </span>
-                                                        <div class="add-tag-line" style="display: inline-block">
+                                                        <div class="add-tag-line" style="display: none">
                                                             <input type="text" class="add-tag-input display-middle" placeholder="标签名称">
                                                             <button class="tag-btn sure-btn display-middle" >确认</button>
                                                             <button class="tag-btn cancel-btn display-middle cancel-add-edit">取消</button>
@@ -141,17 +141,80 @@
 <script src="../js/common.js"></script>
 <script type="text/javascript">
 
-    function getFirstOrganize() {
-        var url  = _ip+'/dpt/all';
-        organizeAjaxGet(url, {}, 'dpt_all', function(json) {
+    function getFirstOrganize(level, data, $content) {
+        var url  = _ip+'/dpt/select';
+        var levelClass = '';
+        $content.find('ul').remove();
+        switch (level) {
+            case 1:
+                levelClass = 'one';
+                break;
+            case 2:
+                levelClass = 'two';
+                break;
+            case 3:
+                levelClass = 'three';
+                break;
+            case 4:
+                levelClass = 'four';
+                break;
+        }
+        organizeAjaxPost(url, data, function(json) {
             if (json.success) {
                 var $firstUl = $('<ul></ul>');
-                $('.organize-content').html($firstUl);
+                for (var key in json.data) {
+                    var msg = json.data[key];
+                    var $li = $('<li id="'+ msg.id +'" data-level="'+ level +'" data-pid="'+ msg.pid +'"></li>');
+                    var noneArrow = '';
+                    if (!msg.status) {
+                        noneArrow = 'none-arrow';
+                    }
+                    var $treeTitle = $('<div class="'+ levelClass +' tree-title">' +
+                            '<i onclick="arrowClick(this); event.stopPropagation();" class="tree-arrow ' + noneArrow +' display-middle"></i>' +
+                            '<span class="display-middle need-none" style="display: inline-block">'+ msg.name +'</span>' +
+                            '<span class="right need-none">' +
+                            '<i class="display-middle edit-organize"></i>' +
+                            '<i class="display-middle delete-organize"></i>' +
+                            '</span>' +
+                            '<div class="add-tag-line" style="display: none">' +
+                            '<input type="text" class="add-tag-input display-middle" placeholder="标签名称">' +
+                            '<button class="tag-btn sure-btn display-middle" >确认</button>' +
+                            '<button class="tag-btn cancel-btn display-middle cancel-add-edit">取消</button>' +
+                            '</div>' +
+                            '</div>');
+                    $li.append($treeTitle);
+                    $firstUl.append($li);
+                }
+                $content.append($firstUl);
             }
         });
     }
 
-    getFirstOrganize();
+    getFirstOrganize(1, {}, $('.organize-content'));
+
+    function arrowClick(obj) {
+        var $obj = $(obj);
+        var $li = $obj.closest('li');
+        var id =  $li.attr('id');
+        var pid = $li.data('pid');
+        var level = parseInt($li.data('level')) + 1;
+        $obj.toggleClass('tree-arrow-bottom');
+        $li.toggleClass('tree-block');
+        if($obj.hasClass('none-arrow')) {
+            return false;
+        }
+        if ($li.hasClass('tree-block')) {
+            $li.removeClass('tree-none');
+        }
+        else {
+            $li.addClass('tree-none');
+        }
+        getFirstOrganize(level, { id: id, pid: pid }, $li);
+    }
+
+    function addOrganize() {
+
+    }
 
     function organizeAjaxGet(url, data, jsonpCall, callback) {
         $.ajax({
