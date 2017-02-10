@@ -1,0 +1,106 @@
+html {
+  body {
+    overflow: hidden;
+    div, table {
+      box-sizing: border-box;
+    }
+    header.header{
+      div.t{
+        width: 120px;
+      }
+
+    }
+    .user-mask {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(255,255,255,.1);
+      display: none;
+      z-index: 10;
+    }
+    .content {
+      position: absolute;
+      margin: 0;
+      top: 37px;
+      left: 15%;
+      overflow: hidden;
+      bottom: 0;
+      .page-inner {
+        .item-header {
+          ul {
+            border-bottom: solid 1px #dee6ea;
+            color: #667788;
+            li {
+              display: inline-block;
+              vertical-align: middle;
+              height: 40px;
+              line-height: 40px;
+              width: 100px;
+              text-align: center;
+              cursor: pointer;
+              &.active {
+                color: #03a9f4;
+                border-bottom: solid 2px #03a9f4;
+              }
+            }
+          }
+        }
+        .item-content {
+          min-height: 480px;
+          margin-bottom: 20px;
+          margin-top: 20px;
+          padding: 20px;
+          .search-line {
+            margin-top: 10px;
+            padding-bottom: 20px;
+            border-bottom: solid 1px #dee6ea;
+            margin-bottom: 20px;
+            .search-box {
+              display: inline-block;
+              vertical-align: middle;
+              position: relative;
+              border: solid 1px #dee6ea;
+              padding: 0px 10px 0px 15px;
+              .search-icon {
+                background: url("../images/search-icon.png") no-repeat;
+                width: 16px;
+                height: 16px;
+                position: absolute;
+                top: 7px;
+                right: 10px;
+                cursor: pointer;
+              }
+              input {
+                height: 29px;
+                border: 0;
+                outline: none;
+                width: 150px;
+                padding-right:16px;
+              }
+            }
+            .item-right {
+              float: right;
+              .tag-num {
+                display: inline-block;
+                vertical-align: middle;
+                margin: 0 2px;
+                font-weight: bold;
+              }
+            }
+            &:after{
+              clear: both;
+            }
+          }
+          .add-tag-box {
+            .add-tag {
+              display: block;
+            }
+          }
+
+        }
+      }
+    }
+  }
+}
