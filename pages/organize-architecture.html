@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组织机构</title>
+    <link href="../css/mems-index.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/organize-architecture.css">
+</head>
+<body>
+<!--header-->
+<header id="header" class="header" v-html="datas">
+    <div>{{datas}}</div>
+</header>
+
+<!--menu-->
+<aside class="aside">
+    <div class="logo">
+        运营平台
+    </div>
+    <ul class="menu">
+        <li>
+            <div class="menu-first"><i class="dash"></i>Dashboard<l></l></div>
+        </li>
+        <li>
+            <div class="menu-first" ><i class="project"></i>项目管理<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="#">待办事项</a></dd>
+                <dd><a href="projectManage/mems-pro-list.html">项目列表</a></dd>
+            </dl>
+        </li>
+        <li>
+            <div class="menu-first"><i class="need"></i>需求管理<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="pm-need-list.html" >需求池</a></dd>
+                <dd><a href="pm-bug-list.html">缺陷池</a></dd>
+            </dl>
+        </li>
+        <li>
+            <div class="menu-first current"><i class="system"></i>系统配置<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="user-manage.html" >用户管理</a></dd>
+                <dd><a href="organize-architecture.html" class="current">组织机构</a></dd>
+                <dd><a href="quarters-manage.html">岗位管理</a></dd>
+                <dd><a href="tag-manage.html">标签管理</a></dd>
+            </dl>
+        </li>
+    </ul>
+</aside>
+
+
+<!--content-->
+<div class="content">
+    <div class="page-header">
+        <div class="header-info"><i></i><a href="user-manage.html">系统配置</a>&nbsp;>&nbsp;组织机构</div>
+    </div>
+    <div class="page-inner">
+        <div class="item-header">
+            <i class="organize-icon display-middle"></i>
+            <span class="quarters-text display-middle">组织机构</span>
+        </div>
+        <div class="item-content">
+            <div class="organize-box">
+                <div class="organize-head">
+                    <button class="tag-btn">添加同级</button>
+                    <button class="tag-btn">添加下级</button>
+                </div>
+                <div class="organize-content tree-content">
+                    <ul>
+                        <li>
+                            <div class="one tree-title">
+                                <i class="tree-arrow display-middle "></i>
+                                <span class="display-middle">产品研发部</span>
+                            </div>
+                            <ul>
+                                <li>
+                                    <div class="two tree-title">
+                                        <i class="tree-arrow display-middle"></i>
+                                        <span class="display-middle">产品研发部</span>
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            <div class=" three tree-title">
+                                                <i class="tree-arrow display-middle"></i>
+                                                <span class="display-middle">产品研发部</span>
+                                            </div>
+                                            <ul>
+                                                <li>
+                                                    <div class="active four tree-title">
+                                                        <i class="tree-arrow display-middle"></i>
+                                                        <span class="display-middle need-none" style="display: none">产品研发部</span>
+                                                        <span class="right need-none" style="display: none">
+                                                            <i class="display-middle edit-organize"></i>
+                                                            <i class="display-middle delete-organize"></i>
+                                                        </span>
+                                                        <div class="add-tag-line" style="display: inline-block">
+                                                            <input type="text" class="add-tag-input display-middle" placeholder="标签名称">
+                                                            <button class="tag-btn sure-btn display-middle" >确认</button>
+                                                            <button class="tag-btn cancel-btn display-middle cancel-add-edit">取消</button>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="four tree-title">
+                                                        <i class="tree-arrow display-middle"></i>
+                                                        <span class="display-middle">产品研发部</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <div class="three tree-title">
+                                                <i class="tree-arrow display-middle"></i>
+                                                <span class="display-middle">产品研发部</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="two tree-title">
+                                        <i class="tree-arrow display-middle"></i>
+                                        <span class="display-middle">产品研发部</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="one tree-title">
+                                <i class="tree-arrow display-middle"></i>
+                                <span class="display-middle">产品研发部</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="user-mask"></div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/common.js"></script>
+<script type="text/javascript">
+
+    function getFirstOrganize() {
+        var url  = _ip+'/dpt/all';
+        organizeAjaxGet(url, {}, 'dpt_all', function(json) {
+            if (json.success) {
+                var $firstUl = $('<ul></ul>');
+                $('.organize-content').html($firstUl);
+            }
+        });
+    }
+
+    getFirstOrganize();
+
+    function organizeAjaxGet(url, data, jsonpCall, callback) {
+        $.ajax({
+            url:url,
+            type: 'GET',
+            dataType: 'jsonp',
+            data: data,
+            jsonp: 'callback',
+            jsonpCallback: jsonpCall,
+            success: function(json) {
+                if(callback) {
+                    callback(json);
+                }
+            }
+        })
+    }
+
+    function organizeAjaxPost(url, data, callback) {
+        $.ajax({
+            url:url,
+            type: 'POST',
+            dataType: 'json',
+            contentType:'application/json',
+            data:JSON.stringify(data),
+            success: function(json) {
+                if(callback) {
+                    callback(json);
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

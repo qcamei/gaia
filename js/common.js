@@ -1,4 +1,4 @@
-var _ip = 'http://192.168.6.12:8080';
+var _ip = 'http://192.168.6.23:8080';
 
 /*----------
  * 头部页面头部
@@ -6,7 +6,8 @@ var _ip = 'http://192.168.6.12:8080';
 var header = new Vue({
     el:'#header',
     data:{
-        datas: '<div class="right t">小丽，消息<span>2</span></div>'
+        datas: '<div class="right-user"><div class="right t">小丽，消息<span>2</span></div>' +
+        '<div class="head-down"><ul><li><a href="edit-pwd.html">修改密码</a></li><li><a href="user-login.html">退出系统</a></li></ul></div><div>'
     }
 })
 
@@ -255,8 +256,8 @@ _api.prototype = {
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'network']);
         return this;
     },
-    getOcpList: function(id, defaultId,isSelect) { // 13. 获取组织架构
-        var url = _ip+'/user/getOcpList';
+    getDptList: function(id, defaultId,isSelect) { // 13. 获取组织架构
+        var url = _ip+'/dpt/user';
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'Ocp']);
         return this;
     }
