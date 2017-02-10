@@ -1,0 +1,66 @@
+html body {
+  overflow: hidden; }
+  html body div, html body table {
+    box-sizing: border-box; }
+  html body header.header div.t {
+    width: 120px; }
+  html body .content {
+    height: 100%; }
+    html body .content .page-inner .page-back {
+      padding: 20px;
+      background: #fff; }
+      html body .content .page-inner .page-back table {
+        width: 25%; }
+        html body .content .page-inner .page-back table tbody {
+          width: 100%; }
+          html body .content .page-inner .page-back table tbody tr {
+            width: 100%; }
+            html body .content .page-inner .page-back table tbody tr.form-name {
+              font-size: 12px;
+              color: #667788;
+              letter-spacing: 0;
+              line-height: 18px;
+              text-align: left; }
+              html body .content .page-inner .page-back table tbody tr.form-name .form-text {
+                margin-top: 10px;
+                display: inline-block; }
+            html body .content .page-inner .page-back table tbody tr.form-input {
+              margin-top: 5px; }
+              html body .content .page-inner .page-back table tbody tr.form-input .error-msg {
+                color: #b74b4b; }
+              html body .content .page-inner .page-back table tbody tr.form-input input {
+                padding-left: 15px; }
+              html body .content .page-inner .page-back table tbody tr.form-input input, html body .content .page-inner .page-back table tbody tr.form-input select {
+                width: 100%;
+                background: #ffffff;
+                border: 2px solid #dae4e9;
+                border-radius: 2px;
+                outline: none;
+                height: 30px;
+                box-sizing: border-box; }
+                html body .content .page-inner .page-back table tbody tr.form-input input.error-i, html body .content .page-inner .page-back table tbody tr.form-input select.error-i {
+                  border: 1px solid #b74b4b;
+                  box-shadow: 0px 0px 3px #b74b4b;
+                  -webkit-animation: light .3s ease-in-out;
+                  animation: light .3s ease-in-out; }
+            html body .content .page-inner .page-back table tbody tr.form-button-box {
+              text-align: center; }
+              html body .content .page-inner .page-back table tbody tr.form-button-box .edit-pwd-btn {
+                border-radius: 4px;
+                width: 70%;
+                height: 30px;
+                display: block;
+                margin: auto;
+                border: 0;
+                outline: none;
+                font-size: 12px;
+                cursor: pointer;
+                margin-top: 15px;
+                margin-bottom: 15px; }
+                html body .content .page-inner .page-back table tbody tr.form-button-box .edit-pwd-btn.cancel-btn {
+                  background: #ffffff;
+                  border: 1px solid #e6ecef;
+                  color: #99aabb; }
+                html body .content .page-inner .page-back table tbody tr.form-button-box .edit-pwd-btn.sure-btn {
+                  background: #03a9f4;
+                  color: #ffffff; }

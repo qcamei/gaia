@@ -10,10 +10,6 @@ body, html {
 ul, li {
   list-style: none; }
 
-input, select, textarea {
-  outline: 0px;
-  border: 1px solid #dbdbdb; }
-
 table {
   border-collapse: collapse; }
 
@@ -43,8 +39,9 @@ header.header {
   color: #FFF;
   position: fixed;
   top: 0px;
-  left: 15%; }
-  header.header > div.t {
+  left: 15%;
+  z-index: 9; }
+  header.header div.t {
     background: url(../images/Welcome.png) no-repeat 18px center;
     background-size: 10px 11px;
     padding-left: 35px;
@@ -54,7 +51,7 @@ header.header {
     position: relative;
     height: 37px;
     width: 85px; }
-    header.header > div.t > span {
+    header.header div.t > span {
       position: absolute;
       vertical-align: top;
       width: 14px;
@@ -67,7 +64,7 @@ header.header {
       right: 7px;
       background: #fd6769;
       color: #FFF; }
-    header.header > div.t:after {
+    header.header div.t:after {
       content: '';
       position: absolute;
       width: 1px;
@@ -75,6 +72,25 @@ header.header {
       top: 0px;
       left: 1px;
       background: #2e363f; }
+  header.header .head-down {
+    position: absolute;
+    top: 37px;
+    z-index: 9;
+    right: 0;
+    width: 120px;
+    padding: 20px 20px 10px 20px;
+    border: solid 1px #000;
+    border-top: 0;
+    background: #1f262d;
+    display: none; }
+    header.header .head-down li {
+      text-align: center;
+      margin-bottom: 10px; }
+      header.header .head-down li a {
+        display: block;
+        color: #FFF; }
+  header.header .right-user:hover .head-down {
+    display: block; }
 
 aside.aside {
   position: fixed;
@@ -120,6 +136,220 @@ aside.aside {
     border-bottom: 2px solid #dbdbdb;
     color: #555;
     font-size: 24px; }
+  .content .display-middle {
+    display: inline-block;
+    vertical-align: middle; }
+  .content .quarters-text {
+    font-size: 14px;
+    color: #112233;
+    line-height: 18px;
+    font-weight: 700;
+    margin-left: 8px; }
+  .content .quarters-icon {
+    background: url("../images/quarters-icon.png") no-repeat;
+    width: 16px;
+    height: 12px; }
+  .content .organize-icon {
+    background: url("../images/organize-icon.png") no-repeat;
+    width: 16px;
+    height: 15px; }
+  .content .tree-content ul li .tree-title {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer; }
+    .content .tree-content ul li .tree-title.one {
+      padding-left: 20px; }
+    .content .tree-content ul li .tree-title.two {
+      padding-left: 40px; }
+    .content .tree-content ul li .tree-title.three {
+      padding-left: 60px; }
+    .content .tree-content ul li .tree-title.four {
+      padding-left: 80px; }
+    .content .tree-content ul li .tree-title .tree-arrow {
+      background: url("../images/tree-arrow-right.png") no-repeat;
+      width: 8px;
+      height: 13px;
+      margin-right: 5px; }
+      .content .tree-content ul li .tree-title .tree-arrow.tree-arrow-bottom {
+        background: url("../images/tree-arrow.png") no-repeat;
+        width: 12px;
+        height: 7px; }
+      .content .tree-content ul li .tree-title .tree-arrow.none-arrow {
+        background: transparent; }
+    .content .tree-content ul li .tree-title.active {
+      background: #e6ecef;
+      box-shadow: inset 1px 0 0 0 #03a9f4; }
+    .content .tree-content ul li .tree-title:hover {
+      background: #e6ecef;
+      box-shadow: inset 1px 0 0 0 #03a9f4; }
+  .content .tree-content ul li.tree-none > ul {
+    display: none; }
+  .content .tree-content ul li.tree-block > ul {
+    display: block; }
+  .content .tooltip {
+    position: absolute;
+    z-index: 1070;
+    display: block;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: left;
+    text-align: start;
+    text-decoration: none;
+    text-shadow: none;
+    text-transform: none;
+    letter-spacing: normal;
+    word-break: normal;
+    word-spacing: normal;
+    word-wrap: normal;
+    white-space: normal;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    line-break: auto; }
+    .content .tooltip .tooltip-arrow {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-color: transparent;
+      border-style: solid; }
+    .content .tooltip .tooltip-inner {
+      max-width: 200px;
+      padding: 8px;
+      color: #fff;
+      text-align: center;
+      background-color: #000;
+      border-radius: 4px; }
+    .content .tooltip.top {
+      padding: 5px 0;
+      margin-top: -3px;
+      left: 50%;
+      margin-left: -32px; }
+      .content .tooltip.top .tooltip-inner {
+        max-width: 200px;
+        width: 64px; }
+      .content .tooltip.top .tooltip-arrow {
+        bottom: 0;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px 5px 0;
+        border-top-color: #000; }
+    .content .tooltip.bottom {
+      padding: 5px 0;
+      margin-top: 3px; }
+      .content .tooltip.bottom .tooltip-arrow {
+        top: 0;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 0 5px 5px;
+        border-bottom-color: #000; }
+  .content .tag-btn {
+    border-radius: 4px;
+    width: 60px;
+    height: 28px;
+    display: inline-block;
+    outline: none;
+    font-size: 12px;
+    cursor: pointer;
+    background: #ffffff;
+    border: 1px solid #e6ecef;
+    color: #99aabb; }
+    .content .tag-btn.sure-btn {
+      background: #03a9f4;
+      color: #ffffff;
+      margin-left: 10px; }
+    .content .tag-btn.cancel-btn {
+      background: #ffffff;
+      border: 1px solid #e6ecef;
+      color: #99aabb;
+      margin-left: 10px; }
+  .content .add-tag-line .add-tag-input {
+    height: 28px;
+    border: solid 1px #03a9f4;
+    outline: none;
+    width: 120px;
+    padding-left: 15px;
+    border-radius: 4px; }
+  .content .tag-content .tag-display {
+    margin-top: 10px;
+    margin-right: 10px; }
+  .content .tag-content .text-tag {
+    line-height: 28px;
+    width: auto;
+    padding: 0 10px;
+    position: relative; }
+    .content .tag-content .text-tag:hover {
+      background: #e6ecef; }
+    .content .tag-content .text-tag .delete-alert {
+      display: none; }
+      .content .tag-content .text-tag .delete-alert .tooltip-arrow {
+        border-bottom-color: rgba(150, 150, 150, 0.18);
+        left: 15px; }
+        .content .tag-content .text-tag .delete-alert .tooltip-arrow::after {
+          position: absolute;
+          display: block;
+          width: 0;
+          height: 0;
+          border-color: transparent;
+          border-style: solid;
+          content: "";
+          border-width: 10px;
+          top: 1px;
+          margin-left: -10px;
+          border-top-width: 0;
+          border-bottom-color: #fff; }
+      .content .tag-content .text-tag .delete-alert .tooltip-inner {
+        padding: 10px 15px;
+        text-align: left;
+        max-width: inherit;
+        background: #ffffff;
+        border: 1px solid rgba(150, 150, 150, 0.18);
+        box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.14);
+        border-radius: 2px;
+        width: 230px;
+        height: 108px; }
+        .content .tag-content .text-tag .delete-alert .tooltip-inner .tooltip-title {
+          color: #334455;
+          letter-spacing: 0;
+          line-height: 18px;
+          margin-top: 5px;
+          font-weight: 700; }
+        .content .tag-content .text-tag .delete-alert .tooltip-inner .tooltip-describe {
+          color: #667788;
+          letter-spacing: 0;
+          line-height: 18px;
+          margin-top: 5px; }
+        .content .tag-content .text-tag .delete-alert .tooltip-inner .tooltip-button {
+          margin-top: 20px; }
+          .content .tag-content .text-tag .delete-alert .tooltip-inner .tooltip-button .sure-delete {
+            color: #03a9f4;
+            letter-spacing: 0;
+            line-height: 18px;
+            text-align: left; }
+          .content .tag-content .text-tag .delete-alert .tooltip-inner .tooltip-button .cancel-delete {
+            color: #99aabb;
+            letter-spacing: 0;
+            line-height: 18px;
+            text-align: left;
+            margin-left: 15px; }
+    .content .tag-content .text-tag .delete-btn {
+      margin-left: 10px;
+      line-height: 25px;
+      font-size: 20px;
+      font-weight: 700;
+      text-shadow: 0 1px 0 #fff;
+      display: none; }
+    .content .tag-content .text-tag .show-alert {
+      display: block;
+      opacity: 1;
+      bottom: -125px;
+      right: -200px; }
+    .content .tag-content .text-tag:hover .delete-btn {
+      display: inline-block; }
+    .content .tag-content .text-tag:hover .tooltip.top {
+      opacity: 1;
+      bottom: 33px; }
   .content .page-inner {
     width: 96%;
     margin: 0 auto;
@@ -373,6 +603,12 @@ aside.aside .menu {
   height: auto;
   padding-bottom: 20px;
   background: #ffffff; }
+  .share-box .success-text {
+    font-size: 18px;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    color: #5cb85c; }
   .share-box .relative-title {
     background: #0088cc;
     height: 46px;

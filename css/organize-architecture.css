@@ -1,0 +1,62 @@
+html body {
+  overflow: hidden; }
+  html body div, html body table {
+    box-sizing: border-box; }
+  html body header.header div.t {
+    width: 120px; }
+  html body .content {
+    position: absolute;
+    margin: 0;
+    top: 37px;
+    left: 15%;
+    overflow: hidden;
+    bottom: 0; }
+    html body .content .page-inner .item-header {
+      padding-left: 20px;
+      padding-right: 10px;
+      box-sizing: border-box;
+      background: #eeeeee;
+      border: 1px solid #dbdbdb;
+      height: 38px;
+      line-height: 38px; }
+    html body .content .page-inner .item-content {
+      border: 0;
+      min-height: 480px;
+      margin-bottom: 20px;
+      padding: 20px; }
+      html body .content .page-inner .item-content .organize-box {
+        border: 1px solid #e6ecef;
+        width: 380px;
+        min-height: 392px; }
+        html body .content .page-inner .item-content .organize-box .organize-head {
+          background: #f2f5f6;
+          height: 40px;
+          line-height: 40px;
+          text-align: right; }
+          html body .content .page-inner .item-content .organize-box .organize-head .tag-btn {
+            width: auto;
+            padding: 0px 15px;
+            margin-right: 15px;
+            text-align: center; }
+        html body .content .page-inner .item-content .organize-box .organize-content {
+          padding: 20px 0; }
+          html body .content .page-inner .item-content .organize-box .organize-content .add-tag-input {
+            width: 100px; }
+          html body .content .page-inner .item-content .organize-box .organize-content .tag-btn {
+            margin-left: 0px; }
+          html body .content .page-inner .item-content .organize-box .organize-content .tree-title .right {
+            display: none; }
+            html body .content .page-inner .item-content .organize-box .organize-content .tree-title .right .edit-organize {
+              background: url("../images/edit-organize.png") no-repeat;
+              width: 16px;
+              height: 16px;
+              margin-right: 15px;
+              cursor: pointer; }
+            html body .content .page-inner .item-content .organize-box .organize-content .tree-title .right .delete-organize {
+              background: url("../images/delete-organize.png") no-repeat;
+              width: 16px;
+              height: 16px;
+              margin-right: 20px;
+              cursor: pointer; }
+          html body .content .page-inner .item-content .organize-box .organize-content .tree-title:hover .right {
+            display: block; }

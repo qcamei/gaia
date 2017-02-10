@@ -1,0 +1,77 @@
+html body {
+  overflow: hidden; }
+  html body div, html body table {
+    box-sizing: border-box; }
+  html body header.header div.t {
+    width: 120px; }
+  html body .user-mask {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.1);
+    display: none;
+    z-index: 10; }
+  html body .content {
+    position: absolute;
+    margin: 0;
+    top: 37px;
+    left: 15%;
+    overflow: hidden;
+    bottom: 0; }
+    html body .content .page-inner .item-header ul {
+      border-bottom: solid 1px #dee6ea;
+      color: #667788; }
+      html body .content .page-inner .item-header ul li {
+        display: inline-block;
+        vertical-align: middle;
+        height: 40px;
+        line-height: 40px;
+        width: 100px;
+        text-align: center;
+        cursor: pointer; }
+        html body .content .page-inner .item-header ul li.active {
+          color: #03a9f4;
+          border-bottom: solid 2px #03a9f4; }
+    html body .content .page-inner .item-content {
+      min-height: 480px;
+      margin-bottom: 20px;
+      margin-top: 20px;
+      padding: 20px; }
+      html body .content .page-inner .item-content .search-line {
+        margin-top: 10px;
+        padding-bottom: 20px;
+        border-bottom: solid 1px #dee6ea;
+        margin-bottom: 20px; }
+        html body .content .page-inner .item-content .search-line .search-box {
+          display: inline-block;
+          vertical-align: middle;
+          position: relative;
+          border: solid 1px #dee6ea;
+          padding: 0px 10px 0px 15px; }
+          html body .content .page-inner .item-content .search-line .search-box .search-icon {
+            background: url("../images/search-icon.png") no-repeat;
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            top: 7px;
+            right: 10px;
+            cursor: pointer; }
+          html body .content .page-inner .item-content .search-line .search-box input {
+            height: 29px;
+            border: 0;
+            outline: none;
+            width: 150px;
+            padding-right: 16px; }
+        html body .content .page-inner .item-content .search-line .item-right {
+          float: right; }
+          html body .content .page-inner .item-content .search-line .item-right .tag-num {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 2px;
+            font-weight: bold; }
+        html body .content .page-inner .item-content .search-line:after {
+          clear: both; }
+      html body .content .page-inner .item-content .add-tag-box .add-tag {
+        display: block; }
