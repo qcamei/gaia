@@ -5,6 +5,7 @@
     <title>mems-项目-详情</title>
     <link href="../css/pro-detail.css" type="text/css" rel="stylesheet"/>
     <link href="../css/foundation-datepicker.css" rel="stylesheet"/>
+    <link href="../css/client-card.css" rel="stylesheet"/>
 </head>
 <body>
 <!--header-->
@@ -56,16 +57,16 @@
                 </div>
             </div>
             <ul class="nav clear">
-                <li >客户资料</li>
-                <li>开户资料(暂不做)</li>
-                <li class="current">客户信息卡</li>
-                <li>项目需求</li>
-                <li>项目合同(暂不做)</li>
-                <li>文档资料(暂不做)</li>
+                <li onclick="detailItemTab(this,'clientInfo')" class="current">客户资料</li>
+                <li onclick="detailItemTab(this,'unfinished')">开户资料(暂不做)</li>
+                <li onclick="detailItemTab(this,'clientInfoCard')">客户信息卡</li>
+                <li onclick="detailItemTab(this,'proNeedList')">项目需求</li>
+                <li onclick="detailItemTab(this,'unfinished')">项目合同(暂不做)</li>
+                <li onclick="detailItemTab(this,'unfinished')">文档资料(暂不做)</li>
             </ul>
 
             <!-- 客户资料 -->
-            <div class="info-module clear" style="display: none;">
+            <div class="info-module clear rel" id="clientInfo">
                 <div class="left module-left">
 
                     <!-- 兴趣点 -->
@@ -88,7 +89,7 @@
                          <ul class="clear tag-list">
                              <li>资产盘点<span>&times;</span></li>
                          </ul>
-                         <div class="add-tag">+标签</div>
+                         <div class="add-tag" >+标签</div>
                          <div class="add-tag-con">
                              <input type="text" placeholder="标签名" /><input type="button" value="确认"><input type="button" value="取消">
                          </div>
@@ -216,7 +217,7 @@
             </div>
 
             <!-- 客户信息卡 -->
-            <div class="client-info-card"  style="display: none;">
+            <div class="client-info-card rel" id="clientInfoCard" style="display: none;">
                 <ul class="card-list clear">
                     <li>
                         <div class="head clear">
@@ -275,14 +276,17 @@
                                 <li>资产盘点<span>×</span></li>
                              </ul>
                              <div class="tag-con">
-                                 <div class="add-tag-exist" style="display: block;">+标签</div>
-                                 <div class="add-tag-exist-con" >
+                                <div class="add-tag-exist" style="display: block;">+标签</div>
+                                <div class="add-tag-con">
+                                    <input type="text" placeholder="标签名" /><input type="button" value="确认"><input type="button" value="取消">
+                                </div>
+                                <div class="add-tag-exist-con" >
                                      <ul class="tag-out-list">
-                                         <li>资产盘点<i></i></li>
-                                         <li>效益分析<i></i></li>
-                                         <li>我是表情<i></i></li>
+                                        <li>资产盘点<i></i></li>
+                                        <li>效益分析<i></i></li>
+                                        <li>我是表情<i></i></li>
                                      </ul>
-                                 </div>
+                                </div>
                              </div>
                         </div>
                     </li>
@@ -293,7 +297,7 @@
             </div>
 
             <!-- 项目需求列表 -->
-            <div class="info-module pro-module" style="display: none;">
+            <div class="info-module pro-module rel" id="proNeedList" style="display: none;">
                 <table class="pro-list">
                     <thead>
                         <tr>
@@ -331,7 +335,7 @@
             </div>
 
             <!-- 暂未完成 -->
-            <div class="unfinished" >
+            <div class="unfinished rel" id="unfinished" style="display: none;">
                 <img src="../images/t-10.png">
                 <p>攻城师正在努力开发中……</p>
             </div>
@@ -694,10 +698,11 @@
 </div>
 
 <script src="../js/vue.js" type="text/javascript"></script>
-<script src="../js/common.js"></script>
 <script src="../js/jquery.min.js"></script>
-<script src="../js/foundation-datepicker.min.js"></script>
+<script src="../js/common.js"></script>
 
+<script src="../js/foundation-datepicker.min.js"></script>
+<script src="../js/proDetail.js"></script>
 <script type="text/javascript">
 
     // 标签管理

@@ -13,6 +13,10 @@ ul,li{
 table{
   border-collapse: collapse;
 }
+input,select,textarea{
+  outline: 0px;
+  border:1px solid #dbdbdb;
+}
 a{
   text-decoration: none;
 }

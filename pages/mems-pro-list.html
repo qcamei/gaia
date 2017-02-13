@@ -59,31 +59,19 @@
         <table class="mems-search">
             <tbody>
                 <tr>
-                    <td>&emsp;&emsp;项目名称：<select id="needSource"><option>安徽省立医院</option><option>安徽省立医院</option><option>项目三</option></select></td>
-                    <td>&emsp;&emsp;&emsp;&emsp;segmentation：<select ><option>省级综合领先医院</option></select></td>
-                    <td>&emsp;&emsp;级别：<select><option>三级甲等</option></select></td>
-                    <td>商务阶段：<select><option>回访</option><option>已签约</option><option>3</option></select></td>
+                    <td>&emsp;&emsp;项目名称：<select id="needSource"></select></td>
+                    <td>&emsp;&emsp;&emsp;&emsp;segmentation：<select id="Segmentation"></select></td>
+                    <td>&emsp;&emsp;级别：<select id="level"></select></td>
+                    <td>商务阶段：<select id="bussType"></select></td>
                     <td align="right"><button class="btn">查询</button></td>
                 </tr>
             </tbody>
 
             <tbody id="more-search" >
-                <!-- <tr>
-                    <td>实施运营阶段：<select><option>待开户</option><option>实施筹备</option><option>已安装</option></select></td>
-
-                    <td>跟踪紧急程度：<select><option>没有跟踪必要</option><option>安排试用</option><option>3</option></select></td>
-                    <td>&emsp;&emsp;拜访方式：<select><option>见面</option><option>电话</option></select></td>
-                    <td colspan="3">拜访结果：<select><option>继续跟进</option></select></td>
-                </tr> -->
                 <tr>
                     <td colspan="5">&emsp;&emsp;&emsp;&emsp;区域：<select><option>华中区域</option></select>&emsp;<select style="width: 200px"><option>安徽省</option></select>&emsp;<select><option>合肥市</option></select></td>
                 </tr>
             </tbody>
-            <!-- <tbody >
-            <tr>
-                <td colspan="5" align="center"><a class="out " id="out"><i class="show "></i><span>展开查询条件</span></a></td>
-            </tr>
-            </tbody> -->
         </table>
         <div class="commit-new-item"><a class="btn" href="mems-pro-creat.html">创建项目&nbsp;<b>+</b></a>&emsp;<a class="btn" onclick="exportExcel();">导出&nbsp;</a></div>
         
@@ -108,8 +96,6 @@
                             <td>三级甲等</td>
                             <td>见面</td>
                             <td>签约实施</td>
-                            
-                            <!-- <td><a href="apply-count-1.html" class="link">申请开户</a></td> -->
                         </tr>
                     </tbody>
                 </table>
@@ -138,9 +124,9 @@
 <script src="../js/common.js"></script>
 <script>
     _API.getNeedSource('needSource',0,true)
-        .getLevelList('levelList',0,true)
-        .getStatusList('status',0,true);
-    exportExcel()
+        .getPSegmentationList('Segmentation',0,true)
+        .getPLevelList('level',0,true);
+    // exportExcel()
     function exportExcel(){
         var html = '';
         html += '<div class="share-box">';

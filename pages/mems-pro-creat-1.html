@@ -63,17 +63,15 @@
         <div class="search-box">
             <h3>选择医院</h3>
             <div class="search-input">
-                <input type="text" name="">
+                <input type="text" name="" id="serchkeywords">
             </div>
-            <div class="show-box">
-                <ul class="key-list">
-                    <li>西南区／四川省／成都市／成都市第一人民医院</li>
-                    <li>西南区／四川省／成都市／成都市第一人民医院</li>
-                    <li>西南区／四川省／成都市／成都市第一人民医院</li>
-                    <li>西南区／四川省／成都市／成都市第一人民医院</li>
-                    <li>西南区／四川省／成都市／成都市第一人民医院</li>
-                    <li>西南区／四川省／成都市／成都市第一人民医院</li>
+            <div class="show-box"  style="display: none;overflow-y:scroll;" id="showkeylist">
+                <ul class="key-list" id="keyul">
+                没有匹配到！
                 </ul>
+            </div>
+
+            <div class="show-box" style="display: none;" id="showselect">
                 <div class="select-area clear">
                     <div class="wap">
                         <ul>
@@ -119,17 +117,85 @@
             </div>
 
             <div class="btns">
-                <a class="pro-btn pro-sure">下一步</a>
+                <a class="pro-btn pro-sure" onclick="nextStep()">下一步</a>
             </div>
-            <div>医院未找到？&emsp;<a class="pro-btn">直接创建</a></div>
+            <div>医院未找到？&emsp;<a class="pro-btn" href="mems-pro-creat-2.html">直接创建</a></div>
         </div>
     </div>
 </div>
 <script src="../js/vue.js" type="text/javascript"></script>
+<script src="../js/jquery.min.js"></script>
 <script src="../js/common.js"></script>
-
 <script type="text/javascript">
-    
+
+    var showkeylist = $('#showkeylist');
+    var showselect  = $('#showselect');
+    $('#serchkeywords').on('focus',function(){
+        var s = showkeylist.css('display');
+        if(s == 'block'){
+            showkeylistdo()
+        }else{
+            showselectarea()
+        }
+    })
+    .on('keyup',function(){
+        var v = $(this).val();
+        if(v.length >= 1){
+            showkeylistdo()
+            // keysearch(v);
+            if(v.length >= 5){
+                keysearch(v);
+            }
+            
+        }else{
+            showselectarea()
+        }
+    })
+
+    function showkeylistdo(){
+        showselect.css({'display':'none'});
+        showkeylist.css({'display':'block'});
+    }
+    function showselectarea(){
+        showselect.css({'display':'block'});
+        showkeylist.css({'display':'none'});
+    }
+    function nextStep() {
+        
+    }
+    function keysearch(key){
+        var url  = _ip+'/hospital/getHospitalList';
+        var data = {
+            "chineseName": key
+        }
+        $.ajax({
+            url:url,
+            type : "POST",
+            dataType: 'json',
+            contentType:'application/json',
+            data:JSON.stringify(data),
+            success:function(data){
+                if(data.success){
+                    var h = '';
+                    var data = data.data;
+                    if(data && data.length){
+                        for(var k = 0, kk = data.length; k < kk ;k ++){
+                            h += '<li>西南区／'+data[k].province+'／'+data[k].city+'／'+data[k].chineseName+'</li>';
+                        }
+                        $('#keyul').html(h);
+                    }else{
+                        $('#keyul').html('没有匹配到！');
+                    }
+                    
+                }else{
+                    alert('上传失败, 请稍后重试！');
+                }
+            }
+        })
+   }
+   $('#keyul').on('click','li',function(){
+        $('#serchkeywords').val($(this).text() );
+   })
 </script>
 </body>
 </html>

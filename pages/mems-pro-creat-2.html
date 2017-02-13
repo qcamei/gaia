@@ -70,54 +70,48 @@
             <tbody>
                 <tr>
                     <td><span class="red-start">*</span>医院全称</td>
-                    <td><input type="" name=""></td>
+                    <td><input type="" name="" id="name"></td>
                 </tr>
                 <tr>
                     <td>简称</td>
-                    <td><input type="" name=""></td>
+                    <td><input type="" name="" id="shortName"></td>
                 </tr>
                 <tr>
                     <td>别称</td>
-                    <td><input type="" name=""></td>
-                </tr>
-                <tr>
-                    <td><span class="red-start">*</span>属性</td>
-                    <td><select></select></td>
+                    <td><input type="" name="" id="alias"></td>
                 </tr>
                 <tr>
                     <td><span class="red-start">*</span>Segmentation</td>
-                    <td><select></select></td>
+                    <td><select id="segmentation"></select></td>
                 </tr>
                 <tr>
                     <td><span class="red-start">*</span>级别</td>
-                    <td><select></select></td>
+                    <td><select id="level"></select></td>
                 </tr>
-                <tr>
-                    <td><span class="red-start">*</span>类别</td>
-                    <td><select></select></td>
-                </tr>
+
                 <tr>
                     <td><span class="red-start">*</span>有无高铁</td>
-                    <td><label><input type="radio" name="gt">&nbsp;有</label>&emsp;<label><input type="radio" name="gt" checked="checked">&nbsp;无</label></td>
+                    <td><label><input type="radio" value="1" name="hsrEnable">&nbsp;有</label>&emsp;<label><input type="radio" name="hsrEnable" checked="checked" value="0">&nbsp;无</label></td>
+                </tr>
+                <tr>
+                    <td>邮编</td>
+                    <td><input type="" name="" class="short" id="postcode"></td>
                 </tr>
                 <tr>
                     <td>床位</td>
                     <td>
                         <div class="clearfix number">
                         <a href="javascript:;" class="left sub">-</a>
-                        <input onchange="this.value=(this.value+'').replace(/\D/g,'');"  class="left" value="1" >
+                        <input onchange="this.value=(this.value+'').replace(/\D/g,'');"  class="left" value="1" id="bed">
                         <a class="left add">+</a>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>年诊疗人次</td>
-                    <td><input type="" name="" class="short"></td>
+                    <td><input type="" name="" class="short" id="people"></td>
                 </tr>
-                <tr>
-                    <td>邮编</td>
-                    <td><input type="" name="" class="short"></td>
-                </tr>
+                
             </tbody>
             <thead>
                 <tr>
@@ -128,39 +122,90 @@
             <tbody>
                 <tr>
                     <td><span class="red-start">*</span>所属区域</td>
-                    <td><select></select>&emsp;<select></select>&emsp;<select></select></td>
+                    <td><select id="province"></select>&emsp;<select id="city"></select>&emsp;<select id="area"></select></td>
                 </tr>
                 <tr>
-                    <td>地址</td>
-                    <td><input type="" name="" class="short"></td>
+                    <td><span class="red-start">*</span>地址</td>
+                    <td><input type="" name="" class="short" id=""></td>
                 </tr>
                 <tr>
                     <td>设备科位置</td>
-                    <td><input type="" name="" class="short"></td>
+                    <td><input type="" name="" class="short" id="location"></td>
                 </tr>
                 <tr>
                     <td>维度</td>
-                    <td><input type="" name="" class="short"></td>
+                    <td><input type="" name="" class="short" id="latitude"></td>
                 </tr>
                 <tr>
                     <td>经度</td>
-                    <td><input type="" name="" class="short"></td>
+                    <td><input type="" name="" class="short" id="longitude"></td>
                 </tr>
             </tbody>
             <tbody>
                 <tr>
                     <td></td>
-                    <td><a class="pro-btn">取消</a>&emsp;<a class="pro-btn pro-sure">提交</a></td>
+                    <td><a class="pro-btn" href="mems-pro-list.html">取消</a>&emsp;<a class="pro-btn pro-sure" onclick="creatItem()">提交</a></td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+<script src='../js/jquery.min.js'  type="text/javascript"></script>
 <script src="../js/vue.js" type="text/javascript"></script>
 <script src="../js/common.js"></script>
 
 <script type="text/javascript">
-    
+    _API.getNeedSource('needSource')
+        .getPSegmentationList('segmentation')
+        .getPLevelList('level');
+
+    var arr = ['name','location'];
+    for(var k = 0; k < 2; k ++){
+        $('#'+arr[k]).focus(function(){
+            $(this).removeClass('error-i');
+        })
+    }
+    function creatItem() {
+        for(var k = 0; k < 2; k ++){
+            var v = $('#'+arr[k]).val();
+            if(v == ""){
+               $('#'+arr[k]).addClass('error-i'); 
+               break;
+            }
+        }
+
+        var url  = _ip+'/project/insert';
+        var data = {
+            "name": $('#name').val(),
+            "shortName":$('#shortName').val(),
+            "alias":$('#alias').val(),
+            "segmentation": $('#segmentation').val(), 
+            "level": $('#level').val(), 
+            "hsrEnable":parseInt($('input[name=hsrEnable]').val()),
+            "postcode":parseInt($('#postcode').val()),
+            "bed":parseInt($('#bed').val()),
+            "people":parseInt($('#people').val()),
+            "province": $('#province').val || 'p', 
+            "city": $('#city').val() || 'c', 
+            "area": $('#area').val() || 'a', 
+            "creater": 11
+        }
+
+        $.ajax({
+            url:url,
+            type : "POST",
+            dataType: 'json',
+            contentType:'application/json',
+            data:JSON.stringify(data),
+            success:function(data){
+                if(data.success){
+                    location.href = 'mems-pro-list.html';
+                }else{
+                    alert('创建失败, 请稍后重试！');
+                }
+            }
+        })
+   }
 </script>
 </body>
 </html>

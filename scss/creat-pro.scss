@@ -9,6 +9,7 @@
 	>h3{
 		color: #053c4b;
 	    height: 35px;
+	    margin:  20px 0 0 0;
 	}
 	.search-input{
 		width: 100%;
@@ -35,9 +36,9 @@
 			color:#667788;
 			text-align:left;
 			margin: 15px 0 0 15px;
-			display: none;
 			>li{
 				line-height: 25px;
+				cursor: pointer;
 			}
 		}
 
@@ -286,4 +287,38 @@
 	background:#009ff2;
 	color: #FFF;
 	border:1px solid #009ff2;
+}
+.error-i{
+  border: 1px solid $color-red!important;
+  box-shadow: 0px 0px 3px $color-red;
+  animation: light .3s ease-in-out;
+}
+@keyframes light {
+  0% {
+    transform: translateX(0px);
+  }
+  10% {
+    transform: translateX(1px);
+  }
+  20% {
+    transform: translateX(2px);
+  }
+  30% {
+    transform: translateX(1px);
+  }
+  40% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(-1px);
+  }
+  60% {
+    transform: translateX(-2px);
+  }
+  80% {
+    transform: translateX(-1px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
 }

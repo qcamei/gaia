@@ -190,7 +190,7 @@ var _api = function(){
 }
 _api.prototype = {
     getNeedSource: function(id,defaultId,isSelect){  //1. 获取来源列表
-        var url = _ip+'/project/getProjectList';
+        var url = _ip+'/common/getProjectNameList';
         this.getListFirst.apply(this,[url,id,defaultId,isSelect,'needsource']);
         return this;
     },
@@ -260,7 +260,23 @@ _api.prototype = {
         var url = _ip+'/dpt/user';
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'Ocp']);
         return this;
+    },
+    getPSegmentationList: function(id, defaultId,isSelect) { // 14. 项目管理：获取segmentation
+        var url = _ip+'/common/getPSegmentationList';
+        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'Segmentation']);
+        return this;
+    },
+    getPLevelList: function(id, defaultId,isSelect) { // 15. 项目管理：获取级别
+        var url = _ip+'/common/getPLevelList';
+        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'PLevel']);
+        return this;
+    },
+    getPBussTypeList: function(id, defaultId,isSelect) { // 16. 项目管理：商务阶段
+        var url = _ip+'/common/getPBussTypeList';
+        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'PBuss']);
+        return this;
     }
+
 }
 var _API = new _api();
 
