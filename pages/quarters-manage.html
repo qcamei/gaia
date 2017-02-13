@@ -39,8 +39,7 @@
             <div class="menu-first current"><i class="system"></i>系统配置<l></l></div>
             <dl class="menu-second">
                 <dd><a href="user-manage.html" >用户管理</a></dd>
-                <dd><a href="organize-architecture.html" >组织机构</a></dd>
-                <dd><a href="quarters-manage.html" class="current">岗位管理</a></dd>
+                <dd><a href="organize-architecture.html" >组织架构</a></dd>
                 <dd><a href="tag-manage.html">标签管理</a></dd>
             </dl>
         </li>
@@ -63,7 +62,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th class="organize">组织机构</th>
+                            <th class="organize">组织架构</th>
                             <th >岗位名称</th>
                         </tr>
                     </thead>
@@ -153,13 +152,13 @@
         var $obj = $(this);
         $obj.closest('.add-tag-line').css('display', 'none').find('.add-tag-input').val('')
                 .end().prev().css('display','block');
-    })
+    });
     $('.delete-btn').on('click', function() {
         var $obj = $(this);
         $obj.closest('.text-tag').find('.delete-alert').addClass('show-alert');
         $('.user-mask').css('display','block');
         return false;
-    })
+    });
     $('.cancel-delete, .user-mask').on('click', function() {
         $('.delete-alert').removeClass('show-alert');
         $('.user-mask').css('display','none');

@@ -39,8 +39,7 @@
             <div class="menu-first current"><i class="system"></i>系统配置<l></l></div>
             <dl class="menu-second">
                 <dd><a href="user-manage.html" class="current">用户管理</a></dd>
-                <dd><a href="organize-architecture.html">组织机构</a></dd>
-                <dd><a href="quarters-manage.html">岗位管理</a></dd>
+                <dd><a href="organize-architecture.html">组织架构</a></dd>
                 <dd><a href="tag-manage.html">标签管理</a></dd>
             </dl>
         </li>
@@ -95,82 +94,69 @@
     </div>
     <div class="add-user-box">
         <div class="add-user-back">
-            <table>
-                <tbody>
-                    <tr class="form-name">
-                        <td colspan="2">姓名</td>
-                    </tr>
-                    <tr class="form-input">
-                        <td colspan="2">
-                            <input type="text" name="name" id="name">
-                        </td>
-                    </tr>
-                    <tr class="form-name">
-                        <td colspan="2" >用户名</td>
-                    </tr>
-                    <tr class="form-input">
-                        <td colspan="2">
-                            <input type="text" name="userName" id="userName">
-                        </td>
-                    </tr>
-                    <tr class="form-name">
-                        <td colspan="2">组织架构</td>
-                    </tr>
-                    <tr class="form-input">
-                        <td colspan="2">
-                            <select  id="Dpt-select" name="department" id="department">
+            <div class="add-user-form">
+                <div>
+                    <div class="form-name">姓名</div>
+                    <div class="form-input">
+                        <input type="text" name="name" id="name">
+                    </div>
+                </div>
+                <div>
+                    <div class="form-name">用户名</div>
+                    <div class="form-input">
+                        <input type="text" name="userName" id="userName" >
+                    </div>
+                </div>
+                <div>
+                    <div class="form-name">组织架构</div>
+                    <div class="form-input">
+                        <input type="text" id="Dpt-select" name="department" id="department" readonly >
+                    </div>
+                </div>
+                <div>
+                    <div class="organize-content tree-content">
 
-                            </select>
-                        </td>
-                    </tr>
-                    <tr class="form-name">
-                        <td colspan="2">岗位</td>
-                    </tr>
-                    <tr class="form-input">
-                        <td colspan="2">
-                            <select name="occupation"  id="occupation">
-                                <option value="1">
-                                    大区经理
-                                </option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr class="form-name">
-                        <td colspan="2">角色</td>
-                    </tr>
-                    <tr class="form-input">
-                        <td colspan="2">
-                            <select name="role"  id="role">
-                                <option value="0">
-                                    超级管理员
-                                </option>
-                                <option value="1">
-                                    管理员
-                                </option>
-                                <option value="2">
-                                    普通用户
-                                </option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr class="form-name">
-                        <td colspan="2">电话</td>
-                    </tr>
-                    <tr class="form-input">
-                        <td colspan="2">
-                            <input type="text" name="phone" id="phone">
-                        </td>
-                    </tr>
-                    <tr class="form-name">
-                        <td colspan="2">邮箱</td>
-                    </tr>
-                    <tr class="form-input">
-                        <td colspan="2">
-                            <input type="text" name="email" id="email">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-name">岗位</div>
+                    <div class="form-input">
+                        <select name="occupation"  id="occupation">
+                            <option value="1">
+                                大区经理
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-name">角色</div>
+                    <div class="form-input">
+                        <select name="role"  id="role">
+                            <option value="0">
+                                超级管理员
+                            </option>
+                            <option value="1">
+                                管理员
+                            </option>
+                            <option value="2">
+                                普通用户
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-name">电话</div>
+                    <div class="form-input">
+                        <input type="text" name="phone" id="phone">
+                    </div>
+                </div>
+                <div>
+                    <div class="form-name">邮箱</div>
+                    <div class="form-input">
+                        <input type="text" name="email" id="email">
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="user-btn-box">
             <button class="add-btn user-btn" id="add-btn">
@@ -184,6 +170,7 @@
 <script src="../js/jquery.min.js"></script>
 <script src="../js/vue.js"></script>
 <script src="../js/common.js"></script>
+<script src="../js/user-tree.js"></script>
 <script type="text/javascript">
     var userName= $('#userName-text').val();
     function getData(p,checPara){
@@ -219,7 +206,9 @@
                         email: msg.email,
                         role: msg.role,
                         department: msg.department,
+                        dptName: msg.dptName,
                         occupation: msg.occupation,
+                        ocpName: msg.ocpName,
                         userName: msg.userName
                     };
                     _data.push("<tr data-edit="+ JSON.stringify(msgData) +">");
@@ -228,8 +217,8 @@
                     _data.push('<td>'+msg.phone+'</td>');
                     _data.push('<td>'+ msg.email  +'</td>');
                     _data.push('<td>'+msg.role+'</td>');
-                    _data.push('<td>'+msg.department+'</td>');
-                    _data.push('<td>'+msg.occupation+'</td>');
+                    _data.push('<td>'+msg.dptName+'</td>');
+                    _data.push('<td>'+msg.ocpName+'</td>');
                     _data.push('<td>' +
                             '<a href="javascript:;" onclick="editUser(this)">编辑</a>' +
                             '<a href="javascript:;" onclick="disableUser(this)" data-id="'+ msg.id +'">'+ (msg.status? "禁用":"启用") +'</a> ' +
@@ -275,6 +264,8 @@
         $('.add-user-back').find('input').val('').end().find('select option:selected').prop('selected', false);
         $('.user-mask').css('display', 'none');
         $addUserBox.find('[name="id"]').remove();
+        $addUserBox.find('input,select').removeClass('error-i');
+        $('.error-msg').remove();
         $addUserBox.animate({
             right: '-25%',
             opacity: 0
@@ -282,7 +273,7 @@
     });
     $('.add-user-btn').on('click', function() {
         var $addUserBox = $('.add-user-box');
-        _API.getDptList('Dpt-select',0,true);
+        $('.organize-content').html('');
         $('.user-mask').css('display', 'block');
         $addUserBox.find('[name="id"]').remove();
         $addUserBox.find('#add-btn').text('添加').removeClass('edit');
@@ -290,6 +281,16 @@
             right: '0px',
             opacity: 1
         }, 500);
+    });
+
+    $('#userName').on('blur', function() {
+        verify_user($(this));
+    });
+
+    $('#Dpt-select').on('click', function() {
+        var $obj = $(this);
+        var id = $obj.data('id');
+        getFirstOrganize(1, {}, $('.organize-content'));
     });
 
     $('#search-user-form').on('submit', function() {
@@ -304,10 +305,11 @@
 
     $('#add-btn').on('click', function() {
         var $obj = $(this);
+        var $userName = $('#userName');
         var data = {
             name: $('#name').val(),
-            userName: $('#userName').val(),
-            department: $('#Dpt-select').val(),
+            userName: $userName.val(),
+            department: $('#Dpt-select').data('id'),
             occupation: $('#occupation').val(),
             role: $('#role').val(),
             phone: $('#phone').val(),
@@ -315,12 +317,13 @@
         };
         $('input, select').removeClass('error-i');
         $('.form-input').find('.error-msg').remove();
+        $('.organize-content').html('');
         for (var key in data) {
             if(data[key] === '') {
                 var $formLine = $('[name='+ key +']');
                 $formLine.addClass('error-i');
                 $formLine.parent().append('<p class="error-msg">'+
-                        $formLine.closest('.form-input').prev().find('td').text()
+                        $formLine.closest('.form-input').prev().text()
                         +'不能为空</p>');
                 return false;
             }
@@ -330,13 +333,36 @@
             url  = _ip+'/user/updateUser';
             data.id = $('[name="id"]').val();
         }
-        userAjaxPost(url, data, function(json) {
-            if (json.success) {
-                $('.cancel-user-btn').click();
-                getData(1, {name: userName});
-            }
+        verify_user($userName, function() {
+            userAjaxPost(url, data, function(json) {
+                if (json.success) {
+                    $('.cancel-user-btn').click();
+                    getData(1, {name: userName});
+                }
+            });
         });
     });
+
+    function verify_user($obj, callback) {
+        var userName = $obj.val();
+        var url  = _ip+'/user/verify';
+        var data = {
+            userName: userName
+        };
+        $('.error-msg').remove();
+        $('.success-msg').remove();
+        userAjaxGet(url, data, 'verifyUser', function(json) {
+            if (json.success) {
+                $obj.parent().append('<p class="success-msg">'+ json.message +'</p>');
+                if(callback) {
+                    callback();
+                }
+            }
+            else {
+                $obj.parent().append('<p class="error-msg">'+ json.message +'</p>');
+            }
+        })
+    }
 
     function pageClick(page) {
         var userName= $('#userName-text').val();
@@ -346,7 +372,7 @@
     function editUser(obj) {
         var data = $(obj).closest('tr').data('edit');
         var $addUserBox = $('.add-user-box');
-        _API.getDptList('Dpt-select',data.department, true);
+
         $addUserBox.append('<input type="hidden" name="id"/>');
         for (var key in data) {
             $('[name="' + key + '"]').val(data[key]);
@@ -387,6 +413,35 @@
 
             }
         })
+    }
+
+    function treeTitleClick(obj) {
+        var $obj = $(obj);
+        var $li = $obj.closest('li');
+        var id = $li.attr('id');
+        var text = $li.find('>.tree-title .tree-text').text();
+        $('#Dpt-select').val(text).data('id', id);
+        $('.organize-content').html('');
+        getQuartersSelect();
+    }
+
+    function getQuartersSelect(defaultId) {
+        var id = $('#Dpt-select').data('id');
+        var url  = _ip+'/ocp';
+        var data = {
+            dpt: id
+        };
+        organizeAjaxGet(url, data, 'getQuarters_select', function(json) {
+            if (json.success) {
+                var h = '';
+                var data = json.data;
+                h += '<option value="">请选择</option>';
+                for(var k = 0 , kk = data.length; k < kk; k++){
+                    h += '<option value="'+data[k].id+'" '+  (data[k].id == defaultId?"selected":""  ) +'>'+data[k].occupation+'</option>';
+                }
+                $('#occupation').html(h);
+            }
+        });
     }
 
     function userAjaxGet(url, data, jsonpCall, callback) {

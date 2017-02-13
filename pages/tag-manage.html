@@ -39,8 +39,7 @@
             <div class="menu-first current"><i class="system"></i>系统配置<l></l></div>
             <dl class="menu-second">
                 <dd><a href="user-manage.html" >用户管理</a></dd>
-                <dd><a href="organize-architecture.html" >组织机构</a></dd>
-                <dd><a href="quarters-manage.html">岗位管理</a></dd>
+                <dd><a href="organize-architecture.html" >组织架构</a></dd>
                 <dd><a href="tag-manage.html" class="current">标签管理</a></dd>
             </dl>
         </li>
@@ -266,7 +265,6 @@
                     return false;
                 }
                 for (var key in json.data) {
-                    console.log(key);
                     var $tagDisplay = $('<div class="display-middle tag-display" id='+ json.data[key].id +'></div>');
                     var $tooltipTop = $('<div class="tooltip top">' +
                             '<div class="tooltip-arrow"></div>' +

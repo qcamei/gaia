@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>组织机构</title>
+    <title>组织架构</title>
     <link href="../css/mems-index.css" type="text/css" rel="stylesheet"/>
     <link rel="stylesheet" href="../css/organize-architecture.css">
 </head>
@@ -39,8 +39,7 @@
             <div class="menu-first current"><i class="system"></i>系统配置<l></l></div>
             <dl class="menu-second">
                 <dd><a href="user-manage.html" >用户管理</a></dd>
-                <dd><a href="organize-architecture.html" class="current">组织机构</a></dd>
-                <dd><a href="quarters-manage.html">岗位管理</a></dd>
+                <dd><a href="organize-architecture.html" class="current">组织架构</a></dd>
                 <dd><a href="tag-manage.html">标签管理</a></dd>
             </dl>
         </li>
@@ -51,18 +50,18 @@
 <!--content-->
 <div class="content">
     <div class="page-header">
-        <div class="header-info"><i></i><a href="user-manage.html">系统配置</a>&nbsp;>&nbsp;组织机构</div>
+        <div class="header-info"><i></i><a href="user-manage.html">系统配置</a>&nbsp;>&nbsp;组织架构</div>
     </div>
     <div class="page-inner">
         <div class="item-header">
             <i class="organize-icon display-middle"></i>
-            <span class="quarters-text display-middle">组织机构</span>
+            <span class="quarters-text display-middle">组织架构</span>
         </div>
         <div class="item-content">
             <div class="organize-box">
                 <div class="organize-head">
-                    <button class="tag-btn add-identical">添加同级</button>
-                    <button class="tag-btn add-next">添加下级</button>
+                    <button class="tag-btn add-identical add-organize">添加同级</button>
+                    <button class="tag-btn add-next add-organize">添加下级</button>
                 </div>
                 <div class="organize-content tree-content">
                     <ul>
@@ -132,19 +131,249 @@
                     </ul>
                 </div>
             </div>
+            <div class="quarters-manage">
+                <div class="add-tag-box">
+                    <button class="add-tag tag-btn add-btn-click">+ 岗位</button>
+                    <div class="add-tag-line" style="display: none">
+                        <input type="text" class="add-tag-input display-middle" placeholder="岗位名称">
+                        <button class="tag-btn sure-btn display-middle" onclick="sureAddQuarters(this)">确认</button>
+                        <button class="tag-btn cancel-btn display-middle cancel-add-edit">取消</button>
+                    </div>
+                </div>
+                <div class="tag-content">
+                    <div class="display-middle tag-display">
+                        <div class="display-middle tag-btn text-tag" style="display: none;">资产盘点</div>
+                        <div class="add-tag-line">
+                            <input type="text" class="add-tag-input display-middle" placeholder="岗位名称">
+                            <button class="tag-btn sure-btn display-middle" onclick="sureAddQuarters(this)">确认</button>
+                            <button class="tag-btn cancel-btn display-middle cancel-add-edit">取消</button>
+                        </div>
+                    </div>
+                    <div class="display-middle tag-display">
+                        <div class="display-middle tag-btn text-tag">
+                            <div class="tooltip top">
+                                <div class="tooltip-arrow"></div>
+                                <div class="tooltip-inner">
+                                    点击编辑
+                                </div>
+                            </div>
+                            <div class="tooltip bottom delete-alert">
+                                <div class="tooltip-arrow"></div>
+                                <div class="tooltip-inner">
+                                    <div class="tooltip-title">确认要删除该标签吗？</div>
+                                    <div class="tooltip-describe">删除后已关联项目的标签也将删除。</div>
+                                    <div class="tooltip-button">
+                                        <a href="javascript:;" class="sure-delete">确认</a>
+                                        <a href="javascript:;" class="cancel-delete">取消</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="display-middle">资产盘点</span>
+                                            <span class="delete-btn display-middle">
+                                                <span>×</span>
+                                            </span>
+                        </div>
+                        <div class="add-tag-line" style="display: none">
+                            <input type="text" class="add-tag-input display-middle" placeholder="岗位名称">
+                            <button class="tag-btn sure-btn display-middle" >确认</button>
+                            <button class="tag-btn cancel-btn display-middle">取消</button>
+                        </div>
+                    </div>
+                    <div class="display-middle tag-display">
+                        <div class="display-middle tag-btn text-tag">资产盘点</div>
+                        <div class="add-tag-line" style="display: none">
+                            <input type="text" class="add-tag-input display-middle" placeholder="岗位名称">
+                            <button class="tag-btn sure-btn display-middle" >确认</button>
+                            <button class="tag-btn cancel-btn display-middle">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<div class="user-mask"></div>
+<div class="user-mask" onclick="hideMode();"></div>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/vue.js"></script>
 <script src="../js/common.js"></script>
+<script src="../js/user-tree.js"></script>
 <script type="text/javascript">
+    // 岗位管理
+    $('.add-btn-click, .text-tag').on('click', function() {
+        var $obj = $(this);
+        var $treeActive = $('.tree-title.active');
+        $('.error-msg').remove();
+        if (!$treeActive.length) {
+            $('.item-content').prepend('<p class="error-msg">请先选择部门</p>');
+            return false;
+        }
+        $obj.css('display', 'none').next().css('display','block');
+    });
 
-    function getFirstOrganize(level, data, $content) {
-        var url  = _ip+'/dpt/select';
+    $('.cancel-add-edit').on('click', function() {
+        var $obj = $(this);
+        $obj.closest('.add-tag-line').css('display', 'none').find('.add-tag-input').val('')
+                .end().prev().css('display','block');
+    });
+    $('.delete-btn').on('click', function() {
+        var $obj = $(this);
+        $obj.closest('.text-tag').find('.delete-alert').addClass('show-alert');
+        $('.user-mask').css('display','block');
+        return false;
+    });
+    $('.cancel-delete, .user-mask').on('click', function() {
+        $('.delete-alert').removeClass('show-alert');
+        $('.user-mask').css('display','none');
+        return false;
+    });
+
+    function getQuartersList() {
+        var url  = _ip+'/ocp';
+        var dpt = $('.tree-title.active').closest('li').attr('id');
+        var data = {
+            dpt: dpt
+        };
+        organizeAjaxGet(url, data, 'getQuarters', function(json) {
+            if (json.success) {
+                var $tagContent = $('.tag-content');
+                $tagContent.html('');
+                if (!json.data.length) {
+                    return false;
+                }
+                for (var key in json.data) {
+                    var $tagDisplay = $('<div class="display-middle tag-display" id='+ json.data[key].id +'></div>');
+                    var $tooltipTop = $('<div class="tooltip top">' +
+                            '<div class="tooltip-arrow"></div>' +
+                            '<div class="tooltip-inner">点击编辑</div>' +
+                            '</div>');
+                    var $deleteAlert =  $('<div class="tooltip bottom delete-alert">' +
+                            '<div class="tooltip-arrow"></div>' +
+                            '<div class="tooltip-inner">' +
+                            '<div class="tooltip-title">确认要删除该岗位吗？</div>' +
+                            '<div class="tooltip-describe">删除后已关联项目的岗位也将删除。</div>' +
+                            '<div class="tooltip-button"> ' +
+                            '<a href="javascript:;" class="sure-delete" onclick="sureDelete(this); event.stopPropagation();">确认</a> ' +
+                            '<a href="javascript:;" onclick="hideMode(this); event.stopPropagation();" class="cancel-delete">取消</a> ' +
+                            '</div> ' +
+                            '</div> ' +
+                            '</div>');
+                    var $text = $('<span class="display-middle tag-name">'+ json.data[key].occupation +'</span>');
+                    var $deleteBtn = $('<span class="delete-btn display-middle" onclick="deleteBtn(this); event.stopPropagation();"><span>×</span></span>');
+                    var $textTag = $('<div class="display-middle tag-btn text-tag" onclick="addBtnClick(this, 1)"></div>');
+                    var addTagLine = $('<div class="add-tag-line" style="display: none">' +
+                            '<input type="text" class="add-tag-input display-middle" placeholder="岗位名称">' +
+                            '<button class="tag-btn sure-btn display-middle" onclick="sureAddQuarters(this, 1)">编辑</button>' +
+                            '<button class="tag-btn cancel-btn display-middle cancel-add-edit" onclick="cancelAddEdit(this)">取消</button>' +
+                            '</div>');
+                    $textTag.append($tooltipTop).append($deleteAlert).append($text).append($deleteBtn);
+                    $tagDisplay.append($textTag).append(addTagLine);
+                    $tagContent.append($tagDisplay);
+                }
+            }
+        });
+    }
+
+    function deleteBtn (obj) {
+        var $obj = $(obj);
+        $obj.closest('.text-tag').find('.delete-alert').addClass('show-alert');
+        $('.user-mask').css('display','block');
+        return false;
+    }
+
+    function hideMode() {
+        $('.delete-alert').removeClass('show-alert');
+        $('.user-mask').css('display','none');
+        return false;
+    }
+
+    function sureDelete(obj) {
+        var $obj = $(obj);
+        var url  = _ip+'/ocp/delete';
+        var id = $obj.closest('.tag-display').attr('id');
+        organizeAjaxGet(url, {id: id }, 'quarters_delete', function(json) {
+            if (json.success) {
+                $obj.next().click();
+                getQuartersList();
+            }
+        })
+    }
+
+    function addBtnClick(obj, edit) {
+        var $obj = $(obj);
+        $obj.css('display', 'none').next().css('display','block');
+        if(edit) {
+            $obj.closest('.tag-display').find('.add-tag-input').val($obj.find('.tag-name').text())
+                    .data('id', $obj.closest('.tag-display').attr('id'));
+        }
+    }
+
+    function sureAddQuarters(obj, edit) {
+        var $obj = $(obj);
+        var url  = _ip+'/ocp/insert';
+        var $treeActive = $('.tree-title.active');
+        var $li = $treeActive.closest('li');
+        var id = $li.attr('id');
+        var data = {
+            occupation: $obj.prev().val(),
+            department: id
+        };
+        $('.error-msg').remove();
+        if(!data.occupation) {
+            $('.item-content').prepend('<p class="error-msg">请填写岗位名称</p>');
+            return false;
+        }
+        if (edit) {
+            url  = _ip+'/ocp/update';
+            var id = $li.attr('id');
+            data.id = $obj.prev().data('id');
+            delete data.department;
+        }
+        organizeAjaxPost(url, data, function(json) {
+            if (json.success) {
+                $obj.next().click();
+                getQuartersList();
+            }
+        });
+    }
+
+    // 部门管理
+    $('.add-organize').on('click', function() {
+        var $obj = $(this);
+        var $treeActive = $('.tree-title.active');
+        var $activeLi = $treeActive.closest('li');
+        var level =  $activeLi.data('level');
         var levelClass = '';
-        $content.find('ul').remove();
+        var pid;
+        var ppid;
+        var $parentUl;
+        $('.addTree').closest('li').remove();
+        $('.error-msg').remove();
+        if (!$treeActive.length) {
+            $('.item-content').prepend('<p class="error-msg">请先选择部门</p>');
+            return false;
+        }
+        if($obj.hasClass('add-identical')) {
+            $parentUl = $treeActive.closest('ul');
+            pid = $activeLi.data('pid');
+            ppid = $activeLi.closest('ul').closest('li').data('pid');
+        }
+        else if ($obj.hasClass('add-next')) {
+            var $findUl = $activeLi.find('>ul');
+            pid = $activeLi.attr('id');
+            ppid = $activeLi.data('pid');
+            level += 1;
+            if( level > 4) {
+                $('.item-content').prepend('<p class="error-msg">只支持添加4级部门</p>');
+                return false;
+            }
+            if($findUl.length) {
+                $parentUl = $findUl;
+            }
+            else {
+                $parentUl = $('<ul></ul>');
+                $activeLi.append($parentUl);
+            }
+        }
         switch (level) {
             case 1:
                 levelClass = 'one';
@@ -159,93 +388,113 @@
                 levelClass = 'four';
                 break;
         }
+        treeLi($parentUl, {
+            add: 'addTree',
+            levelClass: levelClass,
+            pid: pid,
+            ppid: ppid,
+            level: level
+        });
+    });
+
+    function treeTitleClick(obj) {
+        var $obj = $(obj);
+        if ($obj.hasClass('addTree')) {
+            return false;
+        }
+        $('.tree-title').removeClass('active');
+        $obj.addClass('active');
+        getQuartersList();
+    }
+
+    function editOrganizeShow(obj) {
+        var $obj = $(obj);
+        var $treeTitle = $obj.closest('.tree-title');
+        $treeTitle.find('.need-none').addClass('import-none').end()
+                .find('.add-tag-line').css('display', 'inline-block')
+                .find('input').val($treeTitle.find('.tree-text').text());
+    }
+
+    function sureAddOrganize(obj) {
+        var $obj = $(obj);
+        var url  = _ip+'/dpt/insert';
+        var $addLi = $obj.closest('li');
+        var pid = $addLi.data('pid') || 0;
+        var ppid = $addLi.data('ppid') || 0;
+        var level = $addLi.data('level');
+        var data = {
+            name: $obj.prev().val(),
+            pid: pid
+        };
+        $('.error-msg').remove();
+        if(!data.name) {
+            $('.item-content').prepend('<p class="error-msg">请填写部门名称</p>');
+            return false;
+        }
+        if ($obj.hasClass('edit')) {
+            url  = _ip+'/dpt/update';
+            var id = $addLi.attr('id');
+            data.id = id;
+        }
         organizeAjaxPost(url, data, function(json) {
             if (json.success) {
-                var $firstUl = $('<ul></ul>');
-                for (var key in json.data) {
-                    var msg = json.data[key];
-                    var $li = $('<li id="'+ msg.id +'" data-level="'+ level +'" data-pid="'+ msg.pid +'"></li>');
-                    var noneArrow = '';
-                    if (!msg.status) {
-                        noneArrow = 'none-arrow';
-                    }
-                    var $treeTitle = $('<div class="'+ levelClass +' tree-title">' +
-                            '<i onclick="arrowClick(this); event.stopPropagation();" class="tree-arrow ' + noneArrow +' display-middle"></i>' +
-                            '<span class="display-middle need-none" style="display: inline-block">'+ msg.name +'</span>' +
-                            '<span class="right need-none">' +
-                            '<i class="display-middle edit-organize"></i>' +
-                            '<i class="display-middle delete-organize"></i>' +
-                            '</span>' +
-                            '<div class="add-tag-line" style="display: none">' +
-                            '<input type="text" class="add-tag-input display-middle" placeholder="标签名称">' +
-                            '<button class="tag-btn sure-btn display-middle" >确认</button>' +
-                            '<button class="tag-btn cancel-btn display-middle cancel-add-edit">取消</button>' +
-                            '</div>' +
-                            '</div>');
-                    $li.append($treeTitle);
-                    $firstUl.append($li);
+                var getData = {};
+                var $content = $addLi.closest('ul').closest('li');
+                if (!$content.length) {
+                    $content = $addLi.closest('.organize-content');
                 }
-                $content.append($firstUl);
+                switch (level) {
+                    case 1:
+                        break;
+                    default :
+                        getData.id= pid;
+                        getData.pid= ppid;
+                        break;
+                }
+                getFirstOrganize(level, getData, $content);
             }
         });
     }
 
-    getFirstOrganize(1, {}, $('.organize-content'));
-
-    function arrowClick(obj) {
+    function deleteOrganize(obj) {
         var $obj = $(obj);
         var $li = $obj.closest('li');
-        var id =  $li.attr('id');
+        var level = $li.data('level');
         var pid = $li.data('pid');
-        var level = parseInt($li.data('level')) + 1;
-        $obj.toggleClass('tree-arrow-bottom');
-        $li.toggleClass('tree-block');
-        if($obj.hasClass('none-arrow')) {
-            return false;
-        }
-        if ($li.hasClass('tree-block')) {
-            $li.removeClass('tree-none');
-        }
-        else {
-            $li.addClass('tree-none');
-        }
-        getFirstOrganize(level, { id: id, pid: pid }, $li);
-    }
+        var ppid = $li.closest('ul').closest('li').data('pid');
+        var id= $li.attr('id');
+        var url  = _ip+'/dpt/delete';
 
-    function addOrganize() {
-
-    }
-
-    function organizeAjaxGet(url, data, jsonpCall, callback) {
-        $.ajax({
-            url:url,
-            type: 'GET',
-            dataType: 'jsonp',
-            data: data,
-            jsonp: 'callback',
-            jsonpCallback: jsonpCall,
-            success: function(json) {
-                if(callback) {
-                    callback(json);
+        organizeAjaxGet(url, {id: id}, 'delete_organize', function(json) {
+            if (json.success) {
+                var getData = {};
+                var $content = $li.closest('ul').closest('li');
+                if (!$content.length) {
+                    $content = $li.closest('.organize-content');
                 }
+                switch (level) {
+                    case 1:
+                        break;
+                    default :
+                        getData.id= pid;
+                        getData.pid= ppid;
+                        break;
+                }
+                getFirstOrganize(level, getData, $content);
             }
-        })
+        });
+
     }
 
-    function organizeAjaxPost(url, data, callback) {
-        $.ajax({
-            url:url,
-            type: 'POST',
-            dataType: 'json',
-            contentType:'application/json',
-            data:JSON.stringify(data),
-            success: function(json) {
-                if(callback) {
-                    callback(json);
-                }
-            }
-        })
+    function cancelAddEdit(obj) {
+        var $obj = $(obj);
+        $obj.closest('.add-tag-line').css('display', 'none').find('.add-tag-input').val('');
+        $obj.closest('li').find('.need-none').removeClass('import-none');
+        if($obj.closest('.tree-title').hasClass('addTree')) {
+            $obj.closest('li').remove();
+        }
     }
+
 </script>
 </body>
 </html>
