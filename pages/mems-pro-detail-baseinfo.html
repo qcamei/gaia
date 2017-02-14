@@ -52,8 +52,8 @@
             <div class="p-header clear">
                 <div class="left names"><span>安徽医科大学附属第二医院</span>&nbsp;<span>已签约</span>&nbsp;</div>
                 <div class="right opers">
-                    <a href="" class="activity right"></a>
-                    <a href="" class="person right"></a>
+                    <!-- <a href="" class="activity right"></a> -->
+                    <a href="" class="person right" title="添加用户"></a>
                 </div>
             </div>
             <ul class="nav clear">
@@ -72,53 +72,53 @@
                     <!-- 兴趣点 -->
                     <div class="dot-module">
                         <div class="dot-head"><i class="dot-1"></i>兴趣点</div>
-                         <textarea placeholder="点击添加描述……"></textarea>
-                         <ul class="clear tag-list">
-                             <li>资产盘点<span>&times;</span></li>
+                         <textarea placeholder="点击添加描述……" id="tag-dec-1"></textarea>
+                         <ul class="clear tag-list" id="tag-list-1">
                          </ul>
-                         <div class="add-tag">+标签</div>
-                         <div class="add-tag-con">
-                             <input type="text" placeholder="标签名" /><input type="button" value="确认"><input type="button" value="取消">
+                         <div style="position: relative;">
+                             <div class="add-tag" id="addtag-1">+标签</div>
+                             <div class="add-tag-exist-con" id="addtag-input-1">
+                                <a href="javascript:" class="close" id="close-exist-tag">关闭</a>
+                                <ul class="tag-out-list" id="addtag-input-ul-1">
+                                </ul>
+                            </div>
                          </div>
                     </div>
 
                     <!-- 管理方式 -->
                     <div class="dot-module">
                         <div class="dot-head"><i class="dot-2"></i>管理方式</div>
-                         <textarea placeholder="点击添加描述……"></textarea>
-                         <ul class="clear tag-list">
-                             <li>资产盘点<span>&times;</span></li>
+                         <textarea placeholder="点击添加描述……" id="tag-dec-2"></textarea>
+                         <ul class="clear tag-list" id="tag-list-2">
                          </ul>
-                         <div class="add-tag" >+标签</div>
-                         <div class="add-tag-con">
+                         <div class="add-tag" id="addtag-2">+标签</div>
+                         <div class="add-tag-con" id="addtag-input-2">
                              <input type="text" placeholder="标签名" /><input type="button" value="确认"><input type="button" value="取消">
                          </div>
                     </div>
 
                     <!-- 主要竞争对手 -->
                     <div class="dot-module">
-                        <div class="dot-head"><i class="dot-3"></i>管理方式</div>
-                        <textarea placeholder="点击添加描述……"></textarea>
-                         <ul class="clear tag-list">
-                             <li>资产盘点<span>&times;</span></li>
+                        <div class="dot-head"><i class="dot-3"></i>主要竞争对手</div>
+                        <textarea placeholder="点击添加描述……" id="tag-dec-3"></textarea>
+                         <ul class="clear tag-list" id="tag-list-3">
                          </ul>
-                         <div class="add-tag">+标签</div>
-                         <div class="add-tag-con">
+                         <div class="add-tag" id="addtag-3">+标签</div>
+                         <div class="add-tag-con"  id="addtag-input-3">
                              <input type="text" placeholder="标签名" /><input type="button" value="确认"><input type="button" value="取消">
                          </div>
                     </div>
 
                     <!-- 风险和挑战 -->
                     <div class="dot-module">
-                        <div class="dot-head"><i class="dot-4"></i>管理方式</div>
-                         <textarea placeholder="点击添加描述……"></textarea>
-                         <ul class="clear tag-list">
-                             <li>资产盘点<span>&times;</span></li>
+                        <div class="dot-head"><i class="dot-4"></i>风险和挑战</div>
+                         <textarea placeholder="点击添加描述……" id="tag-dec-4"></textarea>
+                         <ul class="clear tag-list" id="tag-list-4">
                          </ul>
-                         <div class="add-tag">+标签</div>
-                         <div class="add-tag-con">
+                         <!-- <div class="add-tag" id="addtag-4">+标签</div>
+                         <div class="add-tag-con" id="addtag-input-4">
                              <input type="text" placeholder="标签名" /><input type="button" value="确认"><input type="button" value="取消">
-                         </div>
+                         </div> -->
                     </div>
                 </div>
                 <div class="right module-right">
@@ -176,7 +176,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2" style="text-align: center;height: 55px;">
-                                        <a class="btn">取消</a>&emsp;<a class="btn">确认</a>
+                                        <a class="btn" id="cancleEditSell">取消</a>&emsp;<a id="sureEditSell" class="btn">确认</a>
                                     </td>
                                 </tr>
                             </table>
@@ -189,27 +189,8 @@
                             <p class="left">客户通讯录</p>
                         </div>
                         <div class="c-body">
-                            <ul class="base">
-                                <li class="clear">
-                                    <div class="name">设备科负责人：</div>
-                                    <div class="text">李老师 | <tel>13889898989</tel> <span class="fethure">不好沟通</span></div>
-                                </li>
-                                <li class="clear">
-                                    <div class="name">信息科科长：</div>
-                                    <div class="text">医工 | <tel>13889898989</tel></div>
-                                </li>
-                                <li class="clear">
-                                    <div class="name">分院院长：</div>
-                                    <div class="text">张三 | <tel>13889898989</tel></div>
-                                </li>
-                                <li class="clear">
-                                    <div class="name">院长：</div>
-                                    <div class="text">李四 | <tel>13889898989</tel></div>
-                                </li>
-                                <li class="clear">
-                                    <div class="name">设备科：</div>
-                                    <div class="text">王麻子 | <tel>13889898989</tel></div>
-                                </li>
+                            <ul class="base" id="clientAddressBook">
+                                
                             </ul>
                         </div>
                     </div>
@@ -225,8 +206,8 @@
                                 <span class="left">漆丽君</span>
                                 <span class="left">院长</span>
                                 <div class="left detail">
-                                    <i></i>
-                                    <div class="detail-slide">
+                                    <i onmouseover="showBaseInfo(this);"></i>
+                                    <div class="detail-slide" >
                                         <table>
                                             <tr>
                                                 <td>
@@ -704,29 +685,7 @@
 <script src="../js/foundation-datepicker.min.js"></script>
 <script src="../js/proDetail.js"></script>
 <script type="text/javascript">
-
-    // 标签管理
-    $('.tag-list').on('click','li>span',function(){
-        $(this).parent('li').remove();
-    })
-    $('.add-tag').on('click',function(){
-        $(this).siblings('.add-tag-con').css({'display':'block'});
-        $(this).css({'display':'none'});
-    })
-    $('.add-tag-con').on('click','input[type=button]',function(){
-        $(this).parent('.add-tag-con').css({'display':'none'});
-        $(this).parent('.add-tag-con').siblings('.add-tag').css({'display':'block'});
-    })
-    $('.add-tag-con').on('click','input[value=确认]',function(){
-        var val = $(this).siblings('input[type=text]').val();
-        if(val != ''){
-            
-            var h = '<li>'+val+'<span>&times;</span></li>'
-            $(this).parent('.add-tag-con').siblings('ul.tag-list').append(h);
-        }
-    })
-
-
+    // 时间控件
     $('#js_time').fdatepicker({
         format: 'yyyy年mm月dd日',
         pickTime: false
@@ -735,26 +694,9 @@
         format: 'yyyy年mm月dd日',
         pickTime: false
     });
-    // $('#add_base').click(function () {
-    //     var h = '<li>';
-    //         h += '<div>销售方式： '+( $("#js_type").find("option:selected").text() )+'  预算：'+( $("#js_money").val() )+'万元  采购时间：'+ ( $('#js_time').val() ) + '</div>';
-    //         h += '<div class="dec">'+ ( $('#js_dec').val() ) +'</div>';
-    //         h += '</li>';
 
-    //     $('#js_show_list').html(h);
-    // })
 
-    // $('#add_dot').blur(function () {
-    //     var arr = ['#007ac7','#47a447','#5bc0de'];
-    //     var k = parseInt( Math.random()*3 );
-    //     var h = '<a class="dot" style="background:'+ ( arr[k] ) +' ">'+ ($(this).val() ) +'</a>';
-    //     $('#js_dot_list').append(h);
-    // })
-
-    $('#editeSaleType').click(function(){
-        $('.show-list').css({'display':'none'});
-        $('.edite-show-list').css({'display':'block'});
-    })
+    
 
 
     // addCard();

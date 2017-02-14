@@ -6,6 +6,9 @@ body, html {
   font-family: 'Arial', 'Miscrosoft yahei';
   height: 100%;
   font-size: 13px; }
+  body .error-msg, html .error-msg {
+    color: #b74b4b;
+    margin-bottom: 5px; }
 
 ul, li {
   list-style: none; }

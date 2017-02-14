@@ -1,5 +1,7 @@
 html body {
   overflow: hidden; }
+  html body .success-msg {
+    color: #5cb85c; }
   html body div, html body table {
     box-sizing: border-box; }
   html body header.header div.t {
@@ -98,6 +100,41 @@ html body {
         background: #fff;
         width: 100%;
         padding: 10px 20px 20px 20px; }
+        html body .content .add-user-box .add-user-back .add-user-form .form-name {
+          font-size: 12px;
+          color: #667788;
+          letter-spacing: 0;
+          line-height: 18px;
+          text-align: left;
+          margin-top: 10px;
+          display: block; }
+        html body .content .add-user-box .add-user-back .add-user-form .form-input {
+          margin-top: 5px; }
+          html body .content .add-user-box .add-user-back .add-user-form .form-input #Dpt-select {
+            cursor: pointer; }
+          html body .content .add-user-box .add-user-back .add-user-form .form-input .error-msg {
+            color: #b74b4b;
+            margin-bottom: 0; }
+          html body .content .add-user-box .add-user-back .add-user-form .form-input input {
+            padding-left: 15px; }
+          html body .content .add-user-box .add-user-back .add-user-form .form-input input, html body .content .add-user-box .add-user-back .add-user-form .form-input select {
+            width: 100%;
+            background: #ffffff;
+            border: 2px solid #dae4e9;
+            border-radius: 2px;
+            outline: none;
+            height: 30px;
+            box-sizing: border-box; }
+            html body .content .add-user-box .add-user-back .add-user-form .form-input input.error-i, html body .content .add-user-box .add-user-back .add-user-form .form-input select.error-i {
+              border: 1px solid #b74b4b;
+              box-shadow: 0px 0px 3px #b74b4b;
+              -webkit-animation: light .3s ease-in-out;
+              animation: light .3s ease-in-out; }
+          html body .content .add-user-box .add-user-back .add-user-form .form-input .station-td select {
+            width: 95%; }
+          html body .content .add-user-box .add-user-back .add-user-form .form-input .station-td.right {
+            text-align: right;
+            float: none; }
         html body .content .add-user-box .add-user-back table {
           width: 100%; }
           html body .content .add-user-box .add-user-back table tbody {

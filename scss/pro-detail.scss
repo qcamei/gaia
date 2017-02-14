@@ -99,6 +99,7 @@
             background:url("../images/icon-edite.png") no-repeat;
             width: 14px;
             height: 14px;
+            cursor: pointer;
           }
         }
         .c-body{
@@ -689,7 +690,7 @@
   text-align: center;
   margin: 5px 0 0 5px;
   cursor: pointer; }
-
+,
 .add-tag-con {
   margin: 5px 0 0 5px;
   display: none; }
@@ -714,18 +715,42 @@
 .tag-con {
   position: relative; }
 
+.add-tag-exist-con{
+  display: none;
+  position:absolute;
+  background:#ffffff;
+  border:1px solid rgba(150,150,150,0.18);
+  box-shadow:0 10px 20px 0 rgba(0,0,0,0.14);
+  border-radius:2px;
+  width:152px;
+  height:175px;
+  overflow-y: scroll;
+  top: 0px;
+  left: 72px;
+  .close{
+    color: #99aabb;
+    font-size: 12px;
+        display: block;
+    text-align: right;
+    padding: 3px 5px 0 0;
+  }
+}
 .tag-out-list {
-  margin: 10px 0 0 10px; }
+  margin: 10px 0 0 10px; 
+}
   .tag-out-list > li {
     height: 25px;
     line-height: 25px;
-    color: #99aabb; }
+    color: #99aabb; 
+    cursor: pointer;
+  }
     .tag-out-list > li > i {
       width: 10px;
       height: 7px;
       float: right;
       margin: 9px 10px 0 0;
-      background: url("../images/t-6.png") no-repeat; }
+      background: url("../images/t-6.png") no-repeat;
+      display: none; }
 
 .card-btn {
   width: 96px;

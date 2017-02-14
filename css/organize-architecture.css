@@ -4,6 +4,15 @@ html body {
     box-sizing: border-box; }
   html body header.header div.t {
     width: 120px; }
+  html body .user-mask {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.1);
+    display: none;
+    z-index: 10; }
   html body .content {
     position: absolute;
     margin: 0;
@@ -27,7 +36,8 @@ html body {
       html body .content .page-inner .item-content .organize-box {
         border: 1px solid #e6ecef;
         width: 380px;
-        min-height: 392px; }
+        min-height: 392px;
+        float: left; }
         html body .content .page-inner .item-content .organize-box .organize-head {
           background: #f2f5f6;
           height: 40px;
@@ -43,7 +53,7 @@ html body {
           html body .content .page-inner .item-content .organize-box .organize-content .add-tag-input {
             width: 100px; }
           html body .content .page-inner .item-content .organize-box .organize-content .tag-btn {
-            margin-left: 0px; }
+            margin-left: 5px; }
           html body .content .page-inner .item-content .organize-box .organize-content .tree-title .right {
             display: none; }
             html body .content .page-inner .item-content .organize-box .organize-content .tree-title .right .edit-organize {
@@ -60,3 +70,10 @@ html body {
               cursor: pointer; }
           html body .content .page-inner .item-content .organize-box .organize-content .tree-title:hover .right {
             display: block; }
+          html body .content .page-inner .item-content .organize-box .organize-content .tree-title .import-none {
+            display: none !important; }
+      html body .content .page-inner .item-content .quarters-manage {
+        border: 1px solid #e6ecef;
+        min-height: 392px;
+        margin-left: 400px;
+        padding: 20px; }
