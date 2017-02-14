@@ -10,6 +10,16 @@ html {
       }
 
     }
+    .user-mask {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(255,255,255,.1);
+      display: none;
+      z-index: 10;
+    }
     .content {
       position: absolute;
       margin: 0;
@@ -36,6 +46,7 @@ html {
             border:1px solid #e6ecef;
             width:380px;
             min-height: 392px;
+            float: left;
             .organize-head {
               background:#f2f5f6;
               height:40px;
@@ -54,7 +65,7 @@ html {
                 width: 100px;
               }
               .tag-btn {
-                margin-left: 0px;
+                margin-left: 5px;
               }
               .tree-title {
                 .right {
@@ -77,9 +88,18 @@ html {
                 &:hover .right{
                   display: block;
                 }
+                .import-none {
+                  display: none !important;
+                }
               }
 
             }
+          }
+          .quarters-manage {
+            border:1px solid #e6ecef;
+            min-height: 392px;
+            margin-left: 400px;
+            padding: 20px;
           }
         }
       }

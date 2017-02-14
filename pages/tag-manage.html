@@ -39,8 +39,7 @@
             <div class="menu-first current"><i class="system"></i>系统配置<l></l></div>
             <dl class="menu-second">
                 <dd><a href="user-manage.html" >用户管理</a></dd>
-                <dd><a href="organize-architecture.html" >组织机构</a></dd>
-                <dd><a href="quarters-manage.html">岗位管理</a></dd>
+                <dd><a href="organize-architecture.html" >组织架构</a></dd>
                 <dd><a href="tag-manage.html" class="current">标签管理</a></dd>
             </dl>
         </li>
@@ -82,52 +81,7 @@
                 </div>
             </div>
             <div class="tag-content">
-                <div class="display-middle tag-display">
-                    <div class="display-middle tag-btn text-tag">资产盘点</div>
-                    <div class="add-tag-line" style="display: none">
-                        <input type="text" class="add-tag-input display-middle" placeholder="标签名称">
-                        <button class="tag-btn sure-btn display-middle" >确认</button>
-                        <button class="tag-btn cancel-btn display-middle cancel-add-edit">取消</button>
-                    </div>
-                </div>
-                <div class="display-middle tag-display">
-                    <div class="display-middle tag-btn text-tag">
-                        <div class="tooltip top">
-                            <div class="tooltip-arrow"></div>
-                            <div class="tooltip-inner">
-                                点击编辑
-                            </div>
-                        </div>
-                        <div class="tooltip bottom delete-alert">
-                            <div class="tooltip-arrow"></div>
-                            <div class="tooltip-inner">
-                                <div class="tooltip-title">确认要删除该标签吗？</div>
-                                <div class="tooltip-describe">删除后已关联项目的标签也将删除。</div>
-                                <div class="tooltip-button">
-                                    <a href="javascript:;" class="sure-delete">确认</a>
-                                    <a href="javascript:;" class="cancel-delete">取消</a>
-                                </div>
-                            </div>
-                        </div>
-                        <span class="display-middle">资产盘点</span>
-                        <span class="delete-btn display-middle">
-                            <span>×</span>
-                        </span>
-                    </div>
-                    <div class="add-tag-line" style="display: none">
-                        <input type="text" class="add-tag-input display-middle" placeholder="标签名称">
-                        <button class="tag-btn sure-btn display-middle" >确认</button>
-                        <button class="tag-btn cancel-btn display-middle">取消</button>
-                    </div>
-                </div>
-                <div class="display-middle tag-display">
-                    <div class="display-middle tag-btn text-tag">资产盘点</div>
-                    <div class="add-tag-line" style="display: none">
-                        <input type="text" class="add-tag-input display-middle" placeholder="标签名称">
-                        <button class="tag-btn sure-btn display-middle" >确认</button>
-                        <button class="tag-btn cancel-btn display-middle">取消</button>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -266,7 +220,6 @@
                     return false;
                 }
                 for (var key in json.data) {
-                    console.log(key);
                     var $tagDisplay = $('<div class="display-middle tag-display" id='+ json.data[key].id +'></div>');
                     var $tooltipTop = $('<div class="tooltip top">' +
                             '<div class="tooltip-arrow"></div>' +
