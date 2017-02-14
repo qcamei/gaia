@@ -122,9 +122,6 @@
                     <div class="form-name">岗位</div>
                     <div class="form-input">
                         <select name="occupation"  id="occupation">
-                            <option value="1">
-                                大区经理
-                            </option>
                         </select>
                     </div>
                 </div>
@@ -199,6 +196,7 @@
                 if(next > totalPage)next = totalPage;
                 for(var k = 0, kk = json.data.length; k < kk; k++){
                     var msg = json.data[k];
+                    var roleName = '-';
                     var msgData = {
                         id: msg.id,
                         name: msg.name,
@@ -211,12 +209,23 @@
                         ocpName: msg.ocpName,
                         userName: msg.userName
                     };
+                    switch (msgData.role) {
+                        case 0:
+                            roleName = '超级管理员';
+                            break;
+                        case 1:
+                            roleName = '管理员';
+                            break;
+                        case 2:
+                            roleName = '普通用户';
+                            break;
+                    }
                     _data.push("<tr data-edit="+ JSON.stringify(msgData) +">");
                     _data.push('<td>'+msg.name+'</td>');
                     _data.push('<td>'+(msg.userName || "-")+'</td>');
                     _data.push('<td>'+msg.phone+'</td>');
                     _data.push('<td>'+ msg.email  +'</td>');
-                    _data.push('<td>'+msg.role+'</td>');
+                    _data.push('<td>'+roleName+'</td>');
                     _data.push('<td>'+msg.dptName+'</td>');
                     _data.push('<td>'+msg.ocpName+'</td>');
                     _data.push('<td>' +
@@ -272,8 +281,9 @@
         }, 500);
     });
     $('.add-user-btn').on('click', function() {
-        var $addUserBox = $('.add-user-box');
+        var $addUserBox = $('.add-user-box').data('edit', {});
         $('.organize-content').html('');
+        $('.success-msg').remove();
         $('.user-mask').css('display', 'block');
         $addUserBox.find('[name="id"]').remove();
         $addUserBox.find('#add-btn').text('添加').removeClass('edit');
@@ -349,8 +359,16 @@
         var data = {
             userName: userName
         };
+        var $addUserBox = $obj.closest('.add-user-box');
+        var dataUserName = $addUserBox.data('edit').userName;
         $('.error-msg').remove();
         $('.success-msg').remove();
+        if (data.userName && data.userName === dataUserName) {
+            if(callback) {
+                callback();
+            }
+            return false;
+        }
         userAjaxGet(url, data, 'verifyUser', function(json) {
             if (json.success) {
                 $obj.parent().append('<p class="success-msg">'+ json.message +'</p>');
@@ -372,11 +390,13 @@
     function editUser(obj) {
         var data = $(obj).closest('tr').data('edit');
         var $addUserBox = $('.add-user-box');
-
-        $addUserBox.append('<input type="hidden" name="id"/>');
+        $('.success-msg').remove();
+        $addUserBox.append('<input type="hidden" name="id"/>').data('edit', data);
         for (var key in data) {
             $('[name="' + key + '"]').val(data[key]);
         }
+        $addUserBox.find('#Dpt-select').val(data.dptName).data('id', data.department);
+        getQuartersSelect(data.occupation);
         $addUserBox.find('#add-btn').text('编辑').addClass('edit');
         $('.user-mask').css('display', 'block');
         $addUserBox.animate({

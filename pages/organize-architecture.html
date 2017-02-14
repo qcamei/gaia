@@ -64,71 +64,7 @@
                     <button class="tag-btn add-next add-organize">添加下级</button>
                 </div>
                 <div class="organize-content tree-content">
-                    <ul>
-                        <li>
-                            <div class="one tree-title">
-                                <i class="tree-arrow display-middle "></i>
-                                <span class="display-middle">产品研发部</span>
-                            </div>
-                            <ul>
-                                <li>
-                                    <div class="two tree-title">
-                                        <i class="tree-arrow display-middle"></i>
-                                        <span class="display-middle">产品研发部</span>
-                                    </div>
-                                    <ul>
-                                        <li>
-                                            <div class=" three tree-title">
-                                                <i class="tree-arrow display-middle"></i>
-                                                <span class="display-middle">产品研发部</span>
-                                            </div>
-                                            <ul>
-                                                <li>
-                                                    <div class="active four tree-title">
-                                                        <i class="tree-arrow display-middle"></i>
-                                                        <span class="display-middle need-none" style="display: none">产品研发部</span>
-                                                        <span class="right need-none" style="display: inline-block">
-                                                            <i class="display-middle edit-organize"></i>
-                                                            <i class="display-middle delete-organize"></i>
-                                                        </span>
-                                                        <div class="add-tag-line" style="display: none">
-                                                            <input type="text" class="add-tag-input display-middle" placeholder="标签名称">
-                                                            <button class="tag-btn sure-btn display-middle" >确认</button>
-                                                            <button class="tag-btn cancel-btn display-middle cancel-add-edit">取消</button>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="four tree-title">
-                                                        <i class="tree-arrow display-middle"></i>
-                                                        <span class="display-middle">产品研发部</span>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <div class="three tree-title">
-                                                <i class="tree-arrow display-middle"></i>
-                                                <span class="display-middle">产品研发部</span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <div class="two tree-title">
-                                        <i class="tree-arrow display-middle"></i>
-                                        <span class="display-middle">产品研发部</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <div class="one tree-title">
-                                <i class="tree-arrow display-middle"></i>
-                                <span class="display-middle">产品研发部</span>
-                            </div>
-                        </li>
-                    </ul>
+
                 </div>
             </div>
             <div class="quarters-manage">
@@ -141,52 +77,7 @@
                     </div>
                 </div>
                 <div class="tag-content">
-                    <div class="display-middle tag-display">
-                        <div class="display-middle tag-btn text-tag" style="display: none;">资产盘点</div>
-                        <div class="add-tag-line">
-                            <input type="text" class="add-tag-input display-middle" placeholder="岗位名称">
-                            <button class="tag-btn sure-btn display-middle" onclick="sureAddQuarters(this)">确认</button>
-                            <button class="tag-btn cancel-btn display-middle cancel-add-edit">取消</button>
-                        </div>
-                    </div>
-                    <div class="display-middle tag-display">
-                        <div class="display-middle tag-btn text-tag">
-                            <div class="tooltip top">
-                                <div class="tooltip-arrow"></div>
-                                <div class="tooltip-inner">
-                                    点击编辑
-                                </div>
-                            </div>
-                            <div class="tooltip bottom delete-alert">
-                                <div class="tooltip-arrow"></div>
-                                <div class="tooltip-inner">
-                                    <div class="tooltip-title">确认要删除该标签吗？</div>
-                                    <div class="tooltip-describe">删除后已关联项目的标签也将删除。</div>
-                                    <div class="tooltip-button">
-                                        <a href="javascript:;" class="sure-delete">确认</a>
-                                        <a href="javascript:;" class="cancel-delete">取消</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="display-middle">资产盘点</span>
-                                            <span class="delete-btn display-middle">
-                                                <span>×</span>
-                                            </span>
-                        </div>
-                        <div class="add-tag-line" style="display: none">
-                            <input type="text" class="add-tag-input display-middle" placeholder="岗位名称">
-                            <button class="tag-btn sure-btn display-middle" >确认</button>
-                            <button class="tag-btn cancel-btn display-middle">取消</button>
-                        </div>
-                    </div>
-                    <div class="display-middle tag-display">
-                        <div class="display-middle tag-btn text-tag">资产盘点</div>
-                        <div class="add-tag-line" style="display: none">
-                            <input type="text" class="add-tag-input display-middle" placeholder="岗位名称">
-                            <button class="tag-btn sure-btn display-middle" >确认</button>
-                            <button class="tag-btn cancel-btn display-middle">取消</button>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -337,6 +228,7 @@
     }
 
     // 部门管理
+    getFirstOrganize(1, {}, $('.organize-content'));
     $('.add-organize').on('click', function() {
         var $obj = $(this);
         var $treeActive = $('.tree-title.active');
@@ -464,7 +356,13 @@
         var ppid = $li.closest('ul').closest('li').data('pid');
         var id= $li.attr('id');
         var url  = _ip+'/dpt/delete';
-
+        if(level === 1) {
+            var oneTreeLength = $('.one.tree-title').length;
+            if(oneTreeLength < 2) {
+                $('.item-content').prepend('<p class="error-msg">此级目录禁止删除。</p>');
+                return false;
+            }
+        }
         organizeAjaxGet(url, {id: id}, 'delete_organize', function(json) {
             if (json.success) {
                 var getData = {};

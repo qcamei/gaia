@@ -38,8 +38,6 @@ function getFirstOrganize(level, data, $content) {
     });
 }
 
-getFirstOrganize(1, {}, $('.organize-content'));
-
 function arrowClick(obj) {
     var $obj = $(obj);
     var $li = $obj.closest('li');
