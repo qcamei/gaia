@@ -113,10 +113,6 @@ function organizeAjaxPost(url, data, callback) {
     $.ajax({
         url:url,
         type: 'POST',
-        xhrFields: {
-          withCredentials: true
-        },
-        crossDomain: true,
         dataType: 'json',
         contentType:'application/json',
         data:JSON.stringify(data),
