@@ -43,6 +43,12 @@
                 <dd><a href="tag-manage.html" class="current">标签管理</a></dd>
             </dl>
         </li>
+        <li>
+            <div class="menu-first"><i class="project"></i>文档管理<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="doc-manage.html">文档管理</a></dd>
+            </dl>
+        </li>
     </ul>
 </aside>
 
@@ -120,6 +126,7 @@
 <script src="../js/jquery.min.js"></script>
 <script src="../js/vue.js"></script>
 <script src="../js/common.js"></script>
+<script src="../js/user-tree.js"></script>
 <script type="text/javascript">
     $('.tag-item').on('click', function(event) {
         var $obj = $(this);
@@ -146,7 +153,7 @@
             var id = $obj.prev().data('id');
             var name= $obj.prev().val();
             url = _ip+'/tags/update';
-            tagAjaxPost(url, {id: id, name: name}, function(json) {
+            organizeAjaxPost(url, {id: id, name: name}, function(json) {
                 if (json.success) {
                     $('.cancel-add-edit').click();
                     getTag();
@@ -154,7 +161,7 @@
             })
         }
         else {
-            tagAjaxGet(url, {name: tagValue, type: type }, 'tags_insert', function(json) {
+            organizeAjaxGet(url, {name: tagValue, type: type }, 'tags_insert', function(json) {
                 if (json.success) {
                     $('.cancel-add-edit').click();
                     getTag();
@@ -167,7 +174,7 @@
         var $obj = $(obj);
         var url  = _ip+'/tags/delete';
         var id = $obj.closest('.tag-display').attr('id');
-        tagAjaxGet(url, {id: id }, 'tags_delete', function(json) {
+        organizeAjaxGet(url, {id: id }, 'tags_delete', function(json) {
             if (json.success) {
                 $('.cancel-delete').click();
                 getTag();
@@ -177,9 +184,9 @@
 
     function addBtnClick(obj, edit) {
         var $obj = $(obj);
+        $('.cancel-add-edit').click();
         $obj.css('display', 'none').next().css('display','block');
         if(edit) {
-            console.log(1);
            $obj.closest('.tag-display').find('.add-tag-input').val($obj.find('.tag-name').text())
                    .data('id', $obj.closest('.tag-display').attr('id'));
         }
@@ -208,7 +215,7 @@
         var type = $('.tag-item.active').data('type');
         var search = $('#tagName-text').val();
         var url  = _ip+'/tags/select';
-        tagAjaxPost(url, {
+        organizeAjaxPost(url, {
             name: search ,
             type: type
         }, function(json) {
@@ -241,7 +248,7 @@
                     var $textTag = $('<div class="display-middle tag-btn text-tag" onclick="addBtnClick(this, 1)"></div>');
                     var addTagLine = $('<div class="add-tag-line" style="display: none">' +
                             '<input type="text" class="add-tag-input display-middle" placeholder="标签名称">' +
-                            '<button class="tag-btn sure-btn display-middle" onclick="addSureBtn(this, 1)">编辑</button>' +
+                            '<button class="tag-btn sure-btn display-middle" onclick="addSureBtn(this, 1)">确认</button>' +
                             '<button class="tag-btn cancel-btn display-middle cancel-add-edit" onclick="cancelAddEdit(this)">取消</button>' +
                             '</div>');
                     $textTag.append($tooltipTop).append($deleteAlert).append($text).append($deleteBtn);
@@ -253,38 +260,6 @@
     }
 
     getTag();
-
-    function tagAjaxGet(url, data, jsonpCall, callback) {
-        $.ajax({
-            url:url,
-            type: 'GET',
-            dataType: 'jsonp',
-            data: data,
-            jsonp: 'callback',
-            jsonpCallback: jsonpCall,
-            success: function(json) {
-                if(callback) {
-                    callback(json);
-                }
-            }
-        })
-    }
-
-
-    function tagAjaxPost(url, data, callback) {
-        $.ajax({
-            url:url,
-            type: 'POST',
-            dataType: 'json',
-            contentType:'application/json',
-            data:JSON.stringify(data),
-            success: function(json) {
-                if(callback) {
-                    callback(json);
-                }
-            }
-        })
-    }
 </script>
 </body>
 </html>

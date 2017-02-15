@@ -98,6 +98,10 @@ function organizeAjaxGet(url, data, jsonpCall, callback) {
         jsonp: 'callback',
         jsonpCallback: jsonpCall,
         success: function(json) {
+            if(json.message === 'LOGIN') {
+                window.location.href = '/pages/user-login.html';
+                return false;
+            }
             if(callback) {
                 callback(json);
             }
@@ -109,10 +113,18 @@ function organizeAjaxPost(url, data, callback) {
     $.ajax({
         url:url,
         type: 'POST',
+        xhrFields: {
+          withCredentials: true
+        },
+        crossDomain: true,
         dataType: 'json',
         contentType:'application/json',
         data:JSON.stringify(data),
         success: function(json) {
+/*            if(json.message === 'LOGIN') {
+                window.location.href = '/pages/user-login.html';
+                return false;
+            }*/
             if(callback) {
                 callback(json);
             }
