@@ -1,5 +1,28 @@
 @import "common.scss";
 
+.user-mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(255,255,255,.1);
+  display: none;
+  z-index: 10;
+}
+.item-member .member .opero > a.deletePuserClick {
+  font-size: 20px;
+  font-weight: 700;
+  text-shadow: 0 1px 0 #fff;
+  border: 0;
+  display: none;
+}
+.item-member .member:hover a.deletePuserClick{
+  display: block;
+}
+.item-member .member .photo:hover .info-slide {
+  display: block;
+}
 .p-content{
   .content-left{
     background:#f2f5f6;
@@ -788,7 +811,7 @@
   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.14);
   width: 298px;
   z-index: 100;
-  right: 0px;
+  right: -298px;
   top: 68px;
   overflow-y: scroll; }
   .item-member > h3 {
@@ -817,7 +840,11 @@
         height: 48px;
         border-radius: 100%;
         border: 1px solid #d9e1e5;
-        overflow: hidden; }
+        overflow: hidden;
+        img {
+          max-width: 100%;
+        }
+      }
       .item-member .member .photo .info-slide {
         position: absolute;
         background: #ffffff;

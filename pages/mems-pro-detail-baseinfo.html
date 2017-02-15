@@ -297,48 +297,15 @@
 <!-- 项目成员 -->
 <div class="item-member" style="display: none;">
     <h3>项目负责人</h3>
-    <div class="leader member clear">
-        <div class="photo left">
-            <i class="img"><img src="../images/logo.png"></i>
-            <div class="info-slide">
-                <table class="slide-table">
-                    <tr>
-                        <td class="td-img">
-                            <div class="img"></div>
-                            <h3>王麻子</h3>
-                            <h6>华北区经理</h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p><i class="tel"></i>138 1234 1234</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p><i class="email"></i>email@shulianyixin.com</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p><i class="dec"></i>管理团队，EMES咨询服务部，数联医信</p>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="info left">
-            <p>Merray</p>
-            <p>MEMS</p>
-        </div>
-        <div class="opero right">
-            <a>转让</a>
-        </div>
+    <div >
+        <ul id="owner-line">
+
+        </ul>
     </div>
     <h3>
         项目成员
         <a class="add-member">+&nbsp;添加</a>
-        <div class="member-slide">
+        <div class="member-slide" style="display:none">
             <div class="search-member">
                 <input type="" name="" />
             </div>
@@ -355,7 +322,7 @@
             <div class="btns"><a class="sure">确认</a><a class="cancle">取消</a></div>
         </div>
     </h3>
-    <ul>
+    <ul id="list-line">
         <li>
             <div class=" member clear">
                 <div class="photo left">
@@ -469,15 +436,16 @@
         </li>
     </ul>
 </div>
+<div class="user-mask"></div>
 
 <script src="../js/vue.js" type="text/javascript"></script>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/common.js"></script>
+<script src="../js/user-tree.js"></script>
 
 <script src="../js/foundation-datepicker.min.js"></script>
 <script src="../js/proDetail.js"></script>
 <script type="text/javascript">
-
 _API.getSellType('sellTypeSelect')
     .getPBussTypeList('bussTypeList')
     .getVisitTypeList('visitTypeList')
@@ -485,9 +453,7 @@ _API.getSellType('sellTypeSelect')
     .getVisitResultList('visitResultList')
     .getEmergencyList('emergencyList');
 
-
-    
-
+    var itemId = 6;
     // 时间控件
     $('#proTime').fdatepicker({
         format: 'yyyy-mm-dd',
@@ -524,8 +490,74 @@ _API.getSellType('sellTypeSelect')
     }
 
     function addUserShow() {
-
+        var $itemMember = $('.item-member');
+        $('.user-mask').css('display', 'block');
+        $itemMember.animate({
+            right: '0px',
+            opacity: 1
+        }, 500);
+        getPuser();
     }
+
+    function puserList(owner_data, $content, leader) {
+        var owner_photo = $('' +
+                '<div class="photo left">' +
+                '<i class="img"><img src="../images/portrait'+ getRandom(1, 7)  +'.png"></i>' +
+                '<div class="info-slide">' +
+                '<table class="slide-table">' +
+                '<tr><td class="td-img">' +
+                '<div class="img"></div>' +
+                '<h3>'+ owner_data.name +'</h3>' +
+                '<h6>'+ owner_data.ocpName +'</h6>' +
+                '</td></tr>' +
+                '<tr><td><p><i class="tel"></i>'+ owner_data.phone +'</p></td></tr>' +
+                '<tr><td><p><i class="email"></i>'+ owner_data.email +'</p></td></tr>' +
+                '<tr> <td> <p><i class="dec"></i>管理团队，EMES咨询服务部，数联医信</p></td></tr>' +
+                '</table>' +
+                '</div>' +
+                '</div>');
+        var owner_info = $('<div class="info left"><p>'+ owner_data.name +'</p><p>'+ owner_data.ocpName +'</p></div>');
+        var owner_opero = $('<div class="opero right"><a href="javascript:;">转让</a></div>');
+        var $div = $('<div class="member clear"></div>');
+        var $li = $('<li></li>');
+        if (leader) {
+            $div.addClass('leader');
+        }
+        else {
+            owner_opero = $('<div class="opero right"><a class="deletePuserClick" href="javascript:;" >×</a></div>');
+        }
+        $div.append(owner_photo).append(owner_info).append(owner_opero);
+        $li.append($div);
+        $content.append($li);
+    }
+
+    function getPuser() {
+        var url  = _ip+'/puser/select';
+        var data = {
+            id: itemId
+        };
+        organizeAjaxGet(url, data, 'get_puser', function(json) {
+            if (json.success) {
+                var $ownerLine = $('#owner-line').html('');
+                var $listLine = $('#list-line').html('');
+                var owner_data = json.data.owner;
+                var list = json.data.list;
+                puserList(owner_data, $ownerLine, 'leader');
+                for (var key in list) {
+                    puserList(list[key], $listLine);
+                }
+            }
+        });
+    };
+
+    $('.user-mask').on('click', function() {
+        var $itemMember = $('.item-member');
+        $('.user-mask').css('display', 'none');
+        $itemMember.animate({
+            right: '-298px',
+            opacity: 0
+        }, 500);
+    });
 </script>
 </body>
 </html>

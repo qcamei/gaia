@@ -127,3 +127,11 @@ function organizeAjaxPost(url, data, callback) {
         }
     })
 }
+
+function getRandom(m, n) {
+    var randomNum = 0;
+    while (!randomNum) {
+        randomNum = parseInt(Math.random() * (n - m));
+    }
+    return randomNum;
+}
