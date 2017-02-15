@@ -117,10 +117,10 @@ function organizeAjaxPost(url, data, callback) {
         contentType:'application/json',
         data:JSON.stringify(data),
         success: function(json) {
-/*            if(json.message === 'LOGIN') {
-                window.location.href = '/pages/user-login.html';
-                return false;
-            }*/
+            if(json.message === 'LOGIN') {
+/*                window.location.href = '/pages/user-login.html';
+                return false;*/
+            }
             if(callback) {
                 callback(json);
             }
