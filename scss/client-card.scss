@@ -8,17 +8,18 @@
           width: 45%;
           height: 200px;
           border:1px solid #e6ecef;
+          margin-bottom: 10px;
           &.li-add-card{
             text-align: center;
             line-height: 200px;
           }
           &:nth-child(2n+1){
             float: left;
-            margin: 0 0 0 3%;
+            margin: 0 0 10px 3%;
           }
           &:nth-child(2n){
             float: right;
-            margin: 0 3% 0 0 ;
+            margin: 0 3% 10px 0 ;
           }
           // 选项抬头风格
           .head{
@@ -60,8 +61,10 @@
                   border-radius:2px;
                   width:180px;
                   height:175px;
+                  z-index: 20;
                   >table{
-                    width: 100%;
+                    width: 90%;
+                    margin: 0 auto;
                     > tbody> tr{
                       >td{
                         text-align: left;
@@ -99,9 +102,6 @@
               }
             }
             .edit{
-              width: 12px;
-              height: 9px;
-              margin: 15px 20px 0 0;
               position:relative;
               >i{
                 width: 12px;
@@ -110,6 +110,7 @@
                 display: inline-block;
                 vertical-align: top;
                 cursor: pointer;
+                margin: 15px 20px 0 0;
               }
 
               .edit-slide{
@@ -159,7 +160,7 @@
               line-height: 18px;
               border-bottom:1px solid rgb(217,226,231);
               cursor: pointer;
-              &:hover{
+              &:hover,&.current{
                   color:#667788;
                   border-bottom:1px solid rgb(0,159,242);
               }
@@ -189,7 +190,38 @@
               top: 0px;
               left: 72px;
             }
+
           }
+          .relative-need-list{
+              width: 90%;
+              margin: 10px auto 0 auto;
+              >li{
+                height: 16px;
+                width: 100%;
+                margin: 5px 0;
+                >i{
+                  display: inline-block;
+                  width: 16px;
+                  height: 16px;
+                  background:url(../images/t-12.png) no-repeat center center;
+                  vertical-align: top;
+                  margin: 0 2px 0 0;
+                  cursor: pointer;
+                }
+                >a{
+                  font-size: 12px;
+                  color: #667788;
+                }
+                &:hover{
+                  >i{
+                    background:url(../images/t-11.png) no-repeat center center;
+                  }
+                  >a{
+                    color: #009ff2;
+                  }
+                }
+              }
+            }
           // 选项主体
         }
       }

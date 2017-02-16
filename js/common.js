@@ -1,4 +1,4 @@
-var _ip = 'http://192.168.6.23:8080';
+var _ip = 'http://10.0.1.156:8080';
 
 /*----------
  * 头部页面头部
@@ -7,9 +7,52 @@ var header = new Vue({
     el:'#header',
     data:{
         datas: '<div class="right-user"><div class="right t">小丽，消息<span>2</span></div>' +
-        '<div class="head-down"><ul><li><a href="edit-pwd.html">修改密码</a></li><li><a href="user-login.html">退出系统</a></li></ul></div><div>'
+        '<div class="head-down"><ul><li><a href="edit-pwd.html">修改密码</a></li><li><a onclick="loginOut()">退出系统</a></li></ul></div><div>'
     }
 })
+function loginOut(){
+    var url = _ip + '/loginOut';
+    $.ajax({
+        url:url,
+        type: 'GET',
+        dataType: 'jsonp',
+        contentType:'application/json',
+        jsonpCallback: 'loginOut',
+        success: function(json) {
+            if(json.success){
+                location.href = 'user-login.html';
+            }
+        }
+    })
+}
+
+/*----------
+ * 侧边导航
+ *-----------------------------*/
+var header = new Vue({
+    el:'#aside',
+    data:{
+        datas: '<aside class="aside"> <div class="logo">运营平台</div><ul class="menu">'+
+        '<li><div class="menu-first"><i class="dash"></i>Dashboard<l></l></div></li>'+
+        '<li><div class="menu-first current"><i class="project"></i>项目管理<l></l></div>'+
+            '<dl class="menu-second">'+
+                '<dd><a >待办事项</a></dd>'+
+                '<dd><a href="mems-pro-list.html" class="current">项目列表</a></dd>'+
+            '</dl>'+
+        '</li>'+
+        '<li><div class="menu-first "><i class="need"></i>需求管理<l></l></div>'+
+            '<dl class="menu-second">'+
+                '<dd><a href="pm-need-list.html" >需求池</a></dd>'+
+                '<dd><a href="pm-bug-list.html">缺陷池</a></dd>'+
+            '</dl>'+
+        '</li>'+
+        '<li><div class="menu-first"><i class="system"></i>系统配置<l></l></div>'+
+        '</li>'+
+    '</ul></aside>'
+    }
+})
+
+
 
 
 /*----------
@@ -200,14 +243,14 @@ _api.prototype = {
         return this;
     },
     getPlatformList: function(id, defaultId,isSelect){ // 3. 获取平台列表
-        var url = _ip+'/original/getPlatList';
+        var url = _ip+'/common/getPlatList';
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'platform']);
         return this;
     },
     getFunctionList: function(id, defaultId,isSelect,platformList){ // 4. 获取功能列表 get
         
         var plat = $('#'+platformList).val() || 'APP';
-        var url = _ip+'/original/getFeatureList?key='+plat;
+        var url = _ip+'/common/getFeatureList?key='+plat;
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'fun']);
         return this;
     },
@@ -275,7 +318,61 @@ _api.prototype = {
         var url = _ip+'/common/getPBussTypeList';
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'PBuss']);
         return this;
+    },
+    getSellType: function(id, defaultId,isSelect){   //17. 项目管理：获取销售方式
+        var url = _ip+'/common/getSaleType';
+        this.getListFirst.apply(this,[url,id,defaultId,isSelect,'seltt']);
+        return this;
+    },
+    getVisitTypeList: function(id, defaultId,isSelect) { // 18. 项目管理：拜访方式
+        var url = _ip+'/common/getVisitTypeList';
+        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'ty']);
+        return this;
+    },
+    getVisitStatusList: function(id, defaultId,isSelect) { // 19. 项目管理：拜访状态
+        var url = _ip+'/common/getVisitStatusList';
+        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'sr']);
+        return this;
+    },
+    getVisitResultList: function(id, defaultId,isSelect) { // 20. 项目管理：拜访结果
+        var url = _ip+'/common/getVisitResultList';
+        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'re']);
+        return this;
+    },
+    getEmergencyList: function(id, defaultId,isSelect) { // 21. 项目管理：紧急程度
+        var url = _ip+'/common/getEmergencyList';
+        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'em']);
+        return this;
+    },
+    getDistrict: function(id, defaultId,isSelect){ //获取大区
+        var url = _ip+'/common/getDistrict';
+        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'getDistrict']);
+        return this;
+    },
+    getPrivence: function(id, defaultId,isSelect,areaPra){ //获取省
+        var url = _ip+'/common/getPrivence?area='+areaPra;
+        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'getPrivence']);
+        return this;
+    },
+    getCity: function(id, defaultId,isSelect,areaPra,provicePra){ //获取市
+        var url = _ip+'/common/getCity?area='+areaPra+'&privence='+provicePra;
+        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'getCity']);
+        return this;
+    },
+    dynamicDistrick: function(id1,id2,id3){
+        var _id1 = $('#'+id1),
+            _id2 = $('#'+id2),
+            _id3 = $('#'+id3);
+        _API.getDistrict(id1,0,true);
+        _id1.on('change',function(){
+            _API.getPrivence(id2,0,true,_id1.val());
+            _id3.html('<option>请选择</option>');
+        })
+        _id2.on('change',function(){
+            _API.getCity(id3,0,true,_id1.val(),_id2.val());
+        })
     }
+
 
 }
 var _API = new _api();
@@ -363,6 +460,7 @@ function attachment(config){
           that.config.addAttachmentList.append(h); 
         }
     }
+
 }
 var attachment = new attachment();
 

@@ -122,7 +122,7 @@
             <tbody>
                 <tr>
                     <td><span class="red-start">*</span>所属区域</td>
-                    <td><select id="province"></select>&emsp;<select id="city"></select>&emsp;<select id="area"></select></td>
+                    <td><select id="district"><option>请选择</option></select>&emsp;<select id="province"><option>请选择</option></select>&emsp;<select id="city"><option>请选择</option></select></td>
                 </tr>
                 <tr>
                     <td><span class="red-start">*</span>地址</td>
@@ -157,7 +157,8 @@
 <script type="text/javascript">
     _API.getNeedSource('needSource')
         .getPSegmentationList('segmentation')
-        .getPLevelList('level');
+        .getPLevelList('level')
+        .dynamicDistrick('district','province','city');
 
     var arr = ['name','location'];
     for(var k = 0; k < 2; k ++){

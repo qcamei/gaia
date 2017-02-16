@@ -952,61 +952,6 @@ aside.aside .menu {
           resize: none; }
         .p-content .content-left .info-module .module-left .dot-module .tag-list {
           margin: 0 0 0 5px; }
-          .p-content .content-left .info-module .module-left .dot-module .tag-list > li {
-            color: #03a1f2;
-            height: 20px;
-            line-height: 20px;
-            border: 1px solid #009ff2;
-            float: left;
-            font-size: 11px;
-            padding: 0 5px 0 5px;
-            border-radius: 2px;
-            cursor: pointer;
-            margin: 0 5px 0 0; }
-            .p-content .content-left .info-module .module-left .dot-module .tag-list > li > span {
-              display: none;
-              width: 10px;
-              height: 10px;
-              font-size: 16px;
-              vertical-align: top;
-              margin: 1px 5px 0 5px;
-              color: #7d8ca0; }
-            .p-content .content-left .info-module .module-left .dot-module .tag-list > li:hover {
-              background: #e2e9ed;
-              color: #495766;
-              border: 1px solid #e2e9ed; }
-              .p-content .content-left .info-module .module-left .dot-module .tag-list > li:hover > span {
-                display: inline-block; }
-        .p-content .content-left .info-module .module-left .dot-module .add-tag {
-          width: 60px;
-          height: 23px;
-          line-height: 23px;
-          border: 1px solid #e2e9ed;
-          border-radius: 2px;
-          color: #8ea0ac;
-          text-align: center;
-          margin: 5px 0 0 5px;
-          cursor: pointer; }
-        .p-content .content-left .info-module .module-left .dot-module .add-tag-con {
-          margin: 5px 0 0 5px;
-          display: none; }
-          .p-content .content-left .info-module .module-left .dot-module .add-tag-con > input:nth-child(1) {
-            border: 1px solid #009ff2;
-            width: 120px;
-            height: 23px; }
-          .p-content .content-left .info-module .module-left .dot-module .add-tag-con > input:nth-child(2), .p-content .content-left .info-module .module-left .dot-module .add-tag-con > input:nth-child(3) {
-            border: 1px solid #33a0f1;
-            width: 50px;
-            height: 23px;
-            background: #33a0f1;
-            color: #FFF;
-            border-radius: 2px;
-            margin: 0 0 0 5px;
-            cursor: pointer; }
-          .p-content .content-left .info-module .module-left .dot-module .add-tag-con > input:nth-child(3) {
-            border: 1px solid #f2f2f2;
-            background: #FFF;
-            color: #9da699; }
   .p-content .content-left .pro-module {
     color: red; }
     .p-content .content-left .pro-module .pro-list {
@@ -1090,6 +1035,11 @@ aside.aside .menu {
             color: #99aabb;
             margin: 0 0 0 10px;
             cursor: pointer; }
+      .p-content .content-right .business .add-cord .add-input > tbody > tr > td .visitors > li {
+        float: left;
+        line-height: 40px;
+        color: #99aabb;
+        margin-right: 10px; }
   .p-content .content-right .business .cord-list .cord-table {
     width: 92%;
     margin: 0 auto; }
@@ -1271,6 +1221,38 @@ aside.aside .menu {
 .tag-list > li:hover > span {
   display: inline-block;
   color: #99aabb; }
+
+.add-tag {
+  width: 60px;
+  height: 23px;
+  line-height: 23px;
+  border: 1px solid #e2e9ed;
+  border-radius: 2px;
+  color: #8ea0ac;
+  text-align: center;
+  margin: 5px 0 0 5px;
+  cursor: pointer; }
+
+.add-tag-con {
+  margin: 5px 0 0 5px;
+  display: none; }
+  .add-tag-con > input:nth-child(1) {
+    border: 1px solid #009ff2;
+    width: 120px;
+    height: 23px; }
+  .add-tag-con > input:nth-child(2), .add-tag-con > input:nth-child(3) {
+    border: 1px solid #33a0f1;
+    width: 50px;
+    height: 23px;
+    background: #33a0f1;
+    color: #FFF;
+    border-radius: 2px;
+    margin: 0 0 0 5px;
+    cursor: pointer; }
+  .add-tag-con > input:nth-child(3) {
+    border: 1px solid #f2f2f2;
+    background: #FFF;
+    color: #9da699; }
 
 .add-tag, .add-tag-exist {
   width: 60px;

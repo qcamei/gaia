@@ -247,73 +247,37 @@
           }
           .tag-list{
             margin: 0 0 0 5px;
-            >li{
-              color:rgb(3,161,242);
-              height: 20px;
-              line-height: 20px;
-              border:1px solid rgb(0,159,242);
-              float: left;
-              font-size: 11px;
-              padding:0 5px 0 5px;
-              border-radius:2px;
-              cursor: pointer;
-              margin: 0 5px 0 0;
-              >span{
-                display: none;
-                width: 10px;
-                height: 10px;
-                font-size: 16px;
-                vertical-align: top;
-                margin: 1px 5px 0 5px;
-                color: rgb(125,140,160);
-              }
-              &:hover{
-                background:rgb(226,233,237);
-                color: rgb(73,87,102);
-                border:1px solid rgb(226,233,237);
-                >span{
-                  display: inline-block;
-                }
-              }
-            }
+            // >li{
+            //   color:rgb(3,161,242);
+            //   height: 20px;
+            //   line-height: 20px;
+            //   border:1px solid rgb(0,159,242);
+            //   float: left;
+            //   font-size: 11px;
+            //   padding:0 5px 0 5px;
+            //   border-radius:2px;
+            //   cursor: pointer;
+            //   margin: 0 5px 0 0;
+            //   >span{
+            //     display: none;
+            //     width: 10px;
+            //     height: 10px;
+            //     font-size: 16px;
+            //     vertical-align: top;
+            //     margin: 1px 5px 0 5px;
+            //     color: rgb(125,140,160);
+            //   }
+            //   &:hover{
+            //     background:rgb(226,233,237);
+            //     color: rgb(73,87,102);
+            //     border:1px solid rgb(226,233,237);
+            //     >span{
+            //       display: inline-block;
+            //     }
+            //   }
+            // }
           }
-          .add-tag{
-            width: 60px;
-            height: 23px;
-            line-height: 23px;
-            border:1px solid rgb(226,233,237);
-            border-radius: 2px;
-            color: rgb(142,160,172);
-            text-align: center;
-            margin: 5px 0 0 5px;
-            cursor: pointer;
-          }
-          .add-tag-con{
-            margin: 5px 0 0 5px;
-            display: none;
-            >input{
-              &:nth-child(1){
-                border:1px solid #009ff2;
-                width: 120px;
-                height: 23px;
-              }
-              &:nth-child(2),&:nth-child(3){
-                border:1px solid rgb(51,160,241);
-                width: 50px;
-                height: 23px;
-                background:rgb(51,160,241);
-                color: #FFF;
-                border-radius:2px;
-                margin: 0 0 0 5px;
-                cursor: pointer;
-              }
-              &:nth-child(3){
-                border:1px solid rgb(242,242,242);
-                background:#FFF;
-                color: rgb(157,166,153);
-              }
-            }
-          }
+          
         }
 
       }
@@ -435,6 +399,16 @@
                     }
                   }
                 }
+
+                .visitors{
+                  >li{
+                    float: left;
+                    line-height: 40px;
+                    color: #99aabb;
+                    margin-right: 10px;
+                  }
+                }
+
               }
             }
           }
@@ -680,6 +654,43 @@
         display: inline-block;
         color: #99aabb; }
 
+.add-tag{
+  width: 60px;
+  height: 23px;
+  line-height: 23px;
+  border:1px solid rgb(226,233,237);
+  border-radius: 2px;
+  color: rgb(142,160,172);
+  text-align: center;
+  margin: 5px 0 0 5px;
+  cursor: pointer;
+  }
+  .add-tag-con{
+  margin: 5px 0 0 5px;
+  display: none;
+  >input{
+    &:nth-child(1){
+      border:1px solid #009ff2;
+      width: 120px;
+      height: 23px;
+    }
+    &:nth-child(2),&:nth-child(3){
+      border:1px solid rgb(51,160,241);
+      width: 50px;
+      height: 23px;
+      background:rgb(51,160,241);
+      color: #FFF;
+      border-radius:2px;
+      margin: 0 0 0 5px;
+      cursor: pointer;
+    }
+    &:nth-child(3){
+      border:1px solid rgb(242,242,242);
+      background:#FFF;
+      color: rgb(157,166,153);
+    }
+  }
+}
 .add-tag, .add-tag-exist {
   width: 60px;
   height: 23px;

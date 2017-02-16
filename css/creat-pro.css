@@ -827,7 +827,7 @@ aside.aside .menu {
               width: 7px;
               height: 4px;
               margin: 0 0 0 10px; }
-            .search-box .show-box .select-area .wap > ul > li:hover {
+            .search-box .show-box .select-area .wap > ul > li:hover, .search-box .show-box .select-area .wap > ul > li.current {
               background: #e6ecef; }
   .search-box .btns {
     margin: 10px 0; }

@@ -5,16 +5,17 @@
   .client-info-card .card-list > li {
     width: 45%;
     height: 200px;
-    border: 1px solid #e6ecef; }
+    border: 1px solid #e6ecef;
+    margin-bottom: 10px; }
     .client-info-card .card-list > li.li-add-card {
       text-align: center;
       line-height: 200px; }
     .client-info-card .card-list > li:nth-child(2n+1) {
       float: left;
-      margin: 0 0 0 3%; }
+      margin: 0 0 10px 3%; }
     .client-info-card .card-list > li:nth-child(2n) {
       float: right;
-      margin: 0 3% 0 0; }
+      margin: 0 3% 10px 0; }
     .client-info-card .card-list > li .head {
       background: #edf1f3;
       box-shadow: inset 0 -1px 0 0 #e6ecef;
@@ -49,9 +50,11 @@
             box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.14);
             border-radius: 2px;
             width: 180px;
-            height: 175px; }
+            height: 175px;
+            z-index: 20; }
             .client-info-card .card-list > li .head .name .detail .detail-slide > table {
-              width: 100%; }
+              width: 90%;
+              margin: 0 auto; }
               .client-info-card .card-list > li .head .name .detail .detail-slide > table > tbody > tr > td {
                 text-align: left;
                 height: 50px;
@@ -78,9 +81,6 @@
               top: -6px;
               left: 20px; }
       .client-info-card .card-list > li .head .edit {
-        width: 12px;
-        height: 9px;
-        margin: 15px 20px 0 0;
         position: relative; }
         .client-info-card .card-list > li .head .edit > i {
           width: 12px;
@@ -88,7 +88,8 @@
           background: url(../images/t-5.png) no-repeat center center;
           display: inline-block;
           vertical-align: top;
-          cursor: pointer; }
+          cursor: pointer;
+          margin: 15px 20px 0 0; }
         .client-info-card .card-list > li .head .edit .edit-slide {
           display: none;
           position: absolute;
@@ -124,7 +125,7 @@
         line-height: 18px;
         border-bottom: 1px solid #d9e2e7;
         cursor: pointer; }
-        .client-info-card .card-list > li .dot-tab > li:hover {
+        .client-info-card .card-list > li .dot-tab > li:hover, .client-info-card .card-list > li .dot-tab > li.current {
           color: #667788;
           border-bottom: 1px solid #009ff2; }
     .client-info-card .card-list > li .intresting .tag-list {
@@ -146,3 +147,25 @@
         overflow-y: scroll;
         top: 0px;
         left: 72px; }
+    .client-info-card .card-list > li .relative-need-list {
+      width: 90%;
+      margin: 10px auto 0 auto; }
+      .client-info-card .card-list > li .relative-need-list > li {
+        height: 16px;
+        width: 100%;
+        margin: 5px 0; }
+        .client-info-card .card-list > li .relative-need-list > li > i {
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+          background: url(../images/t-12.png) no-repeat center center;
+          vertical-align: top;
+          margin: 0 2px 0 0;
+          cursor: pointer; }
+        .client-info-card .card-list > li .relative-need-list > li > a {
+          font-size: 12px;
+          color: #667788; }
+        .client-info-card .card-list > li .relative-need-list > li:hover > i {
+          background: url(../images/t-11.png) no-repeat center center; }
+        .client-info-card .card-list > li .relative-need-list > li:hover > a {
+          color: #009ff2; }

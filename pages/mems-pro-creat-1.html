@@ -74,43 +74,21 @@
             <div class="show-box" style="display: none;" id="showselect">
                 <div class="select-area clear">
                     <div class="wap">
-                        <ul>
-                            <li>华中区<i>></i></li>
-                            <li>华南区<i>></i></li>
-                            <li>华东区<i>></i></li>
-                            <li>西南区<i>></i></li>
+                        <ul id="district">
                         </ul>
                     </div>
 
                     <div class="wap">
-                        <ul>
-                            <li>直辖市<i>></i></li>
-                            <li>河北省<i>></i></li>
-                            <li>四川省<i>></i></li>
-                            <li>贵州省<i>></i></li>
-                            <li>安徽省<i>></i></li>
-                            <li>新疆维吾尔族自治区<i>></i></li>
-                            <li>江苏省<i>></i></li>
-                            <li>湖南<i>></i></li>
-                            <li>宁夏回族族自治区<i>></i></li>
+                        <ul id="provice">
                         </ul>
                     </div>
                     <div class="wap">
-                        <ul>
-                            <li>成都市<i>></i></li>
-                            <li>绵阳市<i>></i></li>
-                            <li>自贡市<i>></i></li>
-                            <li>泸州市<i>></i></li>
-                            <li>资阳市<i>></i></li>
+                        <ul id="city">
+                           
                         </ul>
                     </div>
                     <div class="wap">
-                        <ul>
-                            <li>成都华西医院<i>></i></li>
-                            <li>成都市第一人民医院<i>></i></li>
-                            <li>成都市第一人民医院<i>></i></li>
-                            <li>成都市第一人民医院<i>></i></li>
-                            <li>成都市第一人民医院<i>></i></li>
+                        <ul id="hospital">
                         </ul>
                     </div>
                 </div>
@@ -127,6 +105,121 @@
 <script src="../js/jquery.min.js"></script>
 <script src="../js/common.js"></script>
 <script type="text/javascript">
+
+
+function getDistrictdom(id){
+    var _id = $('#'+id);
+    $.ajax({
+        url:_ip+'/common/getDistrict',
+        type: 'GET',
+        dataType: 'jsonp',
+        contentType:'application/json',
+        jsonpCallback: 'getDistrict',
+        success: function(json) {
+            var json = json.data;
+            var h = '';
+            for(var k = 0 , kk = json.length; k < kk; k++){
+                h += '<li>'+json[k]+'<input type="hidden" value="'+json[k]+'"/><i>></i></li>'
+            }            
+            _id.html(h);
+            _id.on('click','li',function(){
+                var d = $(this).find('input').val();
+                $(this).addClass('current');
+                $(this).siblings().removeClass('current');
+                getProvicedom('provice',d);
+                $('#serchkeywords').val(d);
+            })
+        }
+    })
+}
+function getProvicedom(id,area){
+    $.ajax({
+        url:_ip+'/common/getPrivence?area='+area,
+        type: 'GET',
+        dataType: 'jsonp',
+        contentType:'application/json',
+        jsonpCallback: 'getprovice',
+        success: function(json) {
+            var json = json.data;
+            var h = '';
+            for(var k = 0 , kk = json.length; k < kk; k++){
+                h += '<li>'+json[k]+'<input type="hidden" value="'+json[k]+'"/><i>></i></li>'
+            }            
+            $('#'+id).html(h);
+        }
+    })
+}
+function getCity(id,provice,area){
+    $.ajax({
+        url:_ip+'/common/getCity?area='+area+'&privence='+provice,
+        type: 'GET',
+        dataType: 'jsonp',
+        contentType:'application/json',
+        jsonpCallback: 'getcity',
+        success: function(json) {
+            var json = json.data;
+            var h = '';
+            for(var k = 0 , kk = json.length; k < kk; k++){
+                h += '<li>'+json[k]+'<input type="hidden" value="'+json[k]+'"/><i>></i></li>'
+            }           
+            $('#'+id).html(h);
+        }
+    })
+}
+
+function getHospital(id,city){
+    var data= {};
+    data['city'] = city;
+    $.ajax({
+        url:_ip+'/hospital/getHospitalList',
+        type: 'POST',
+            dataType: 'json',
+            contentType:'application/json',
+            data:JSON.stringify(data),
+        success: function(json) {
+            var json = json.data;
+            var h = '';
+            for(var k = 0 , kk = json.length; k < kk; k++){
+                h += '<li>'+json[k]+'<i>></i></li>'
+            }            
+            $('#'+id).html(h);
+        }
+    })
+}
+
+
+getDistrictdom('district');
+$('#provice').on('click','li',function(){
+    $(this).addClass('current');
+    $(this).siblings().removeClass('current');
+    var a,p;
+    $('#district').find('li').each(function(){
+        if($(this).hasClass('current')){
+            a = $(this).find('input').val();
+        }
+    })
+    p = $(this).find('input').val();
+
+    $('#serchkeywords').val( $('#serchkeywords').val() + '/' + p );
+
+    getCity('city',p,a);
+})
+$('#city').on('click','li',function(){
+    var c = $(this).find('input').val();
+    $('#serchkeywords').val( $('#serchkeywords').val() + '/' + c);
+    getHospital('hospital',c);
+})
+
+
+
+
+
+
+
+
+
+
+
 
     var showkeylist = $('#showkeylist');
     var showselect  = $('#showselect');
@@ -161,7 +254,7 @@
         showkeylist.css({'display':'none'});
     }
     function nextStep() {
-        
+        location.href = 'mems-pro-creat-2.html?position='+$('#serchkeywords').val();
     }
     function keysearch(key){
         var url  = _ip+'/hospital/getHospitalList';

@@ -14,10 +14,10 @@
 </header>
 
 <!--menu-->
-<!--<aside id="aside" class="aside" v-html="datas">-->
-    <!--<div>{{datas}}</div>-->
-<!--</aside>-->
-<aside class="aside">
+<aside id="aside" class="aside" v-html="datas">
+    <div>{{datas}}</div>
+</aside>
+<!-- <aside class="aside">
     <div class="logo">
         运营平台
     </div>
@@ -43,7 +43,7 @@
             <div class="menu-first"><i class="system"></i>系统配置<l></l></div>
         </li>
     </ul>
-</aside>
+</aside> -->
 
 <!--content-->
 <div class="content">
@@ -63,17 +63,17 @@
                     <td>&emsp;&emsp;&emsp;&emsp;segmentation：<select id="Segmentation"></select></td>
                     <td>&emsp;&emsp;级别：<select id="level"></select></td>
                     <td>商务阶段：<select id="bussType"></select></td>
-                    <td align="right"><button class="btn">查询</button></td>
+                    <td align="right"><button class="btn" id="checkout">查询</button></td>
                 </tr>
             </tbody>
 
             <tbody id="more-search" >
                 <tr>
-                    <td colspan="5">&emsp;&emsp;&emsp;&emsp;区域：<select><option>华中区域</option></select>&emsp;<select style="width: 200px"><option>安徽省</option></select>&emsp;<select><option>合肥市</option></select></td>
+                    <td colspan="5">&emsp;&emsp;&emsp;&emsp;区域：<select id="district"><option>请选择</option></select>&emsp;<select style="width: 200px" id="privence"><option>请选择</option></select>&emsp;<select id="city"><option>请选择</option></select></td>
                 </tr>
             </tbody>
         </table>
-        <div class="commit-new-item"><a class="btn" href="mems-pro-creat.html">创建项目&nbsp;<b>+</b></a>&emsp;<a class="btn" onclick="exportExcel();">导出&nbsp;</a></div>
+        <div class="commit-new-item"><a class="btn" href="mems-pro-creat-1.html">创建项目&nbsp;<b>+</b></a>&emsp;<a class="btn" onclick="exportExcel();">导出&nbsp;</a></div>
         
         <div class="item-content">
             <div class="table-box">
@@ -88,28 +88,20 @@
                             <th>商务阶段</th>     
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="bodyList">
+                        <!-- <tr>
                             <td><input type="checkbox" name=""></td>
                             <td><a href="mems-pro-detail-baseinfo.html" class="link">安徽省第一人民医院</a></td>
                             <td>省级综合领先医院</td>
                             <td>三级甲等</td>
                             <td>见面</td>
                             <td>签约实施</td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
             <div class="pages clear">
-                <div class="page-list clear">
-                    <a href="#" class="page-pre">上一页</a>
-                    <a href="#">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">……</a>
-                    <a href="#">9</a>
-                    <a href="#">10</a>
-                    <a href="#" class="page-next">上一页</a>
+                <div class="page-list clear" id="pageList">
                 </div>
             </div>
         </div>
@@ -125,7 +117,119 @@
 <script>
     _API.getNeedSource('needSource',0,true)
         .getPSegmentationList('Segmentation',0,true)
-        .getPLevelList('level',0,true);
+        .getPLevelList('level',0,true)
+        .dynamicDistrick('district','privence','city');
+
+
+    function getData(p,checPara){
+        var PerPage = 20;
+        var url  = _ip+'/project/getProjectList?page='+p+'&size='+PerPage;
+        var data = checPara || {};
+        $.ajax({
+            url:url,
+            type : "POST",
+            dataType: 'json',
+            contentType:'application/json',
+            data:JSON.stringify(data),
+            success:function(json){
+                if(!json.data || json.data.length <= 0){
+                    $('#bodyList').html('<tr><td colspan="7">暂无数据！</td></tr>');
+                    $('#pageList').html('');
+                    return false;
+                }
+                var _data     = [];
+                var _pager    = [];
+                var totalPage = json.totlePage;
+                var prev      = p-1;
+                if(prev < 1)prev = 1;
+                var next = p + 1;
+                if(next > totalPage)next = totalPage;
+                for(var k = 0, kk = json.data.length; k < kk; k++){
+                    var msg = json.data[k];
+
+                    _data.push('<tr>');
+                    _data.push('<td><input type="checkbox" name=""></td>');
+                    _data.push('<td>'+msg.area+'</td>');
+                    _data.push('<td><a href="mems-pro-detail-baseinfo.html?id='+msg.id+'" class="link" title="'+msg.name+'">'+(msg.name.length<12?msg.name:msg.name.substring(0,12)+'...' )+'</a></td>');
+                    _data.push('<td>'+msg.segmentation+'</td>');
+                    _data.push('<td>'+msg.level+'</td>');
+                    _data.push('<td>'+msg.businessType+'</td>');
+                
+                }
+                _pager.push('<span>共：'+ totalPage +'页</span>');
+                _pager.push('<span>您正在第：'+p+'页</span>')
+                _pager.push('<a href="javascript:;" class="page-pre" onclick="getData('+prev+');return !1;">上一页</a>');
+                _pager.push('<a href="javascript:;" class="page-next" onclick="getData('+next+');return !1;">下一页</a>');
+                _pager.push('<span>前往第</span>');
+                _pager.push('<input type="text" id="goToPage"/>');
+                _pager.push('<span>页</span>');
+
+                $('#bodyList').html(_data.join(""));
+                $('#pageList').html(_pager.join(""));
+                $('#goToPage').blur(function () {
+                    var v = $(this).val();
+                    if(!/^[1-9]\d*$/.test(v)){
+                        return false;
+                    }
+                    if(v <= 1){
+                        getData(1);
+                        return false;
+                    }
+                    if(v >= totalPage){
+                        getData(totalPage);
+                        return false;
+                    }
+                })
+            }
+        })
+    }
+    getData(1);
+    $('#checkout').on('click',function(){
+        var para = {
+            "name": $('#needSource').val(), 
+            "segmentation": $('#Segmentation').val(), 
+            "level": $('#level').val(), 
+            "businessType": $('#bussType').val(),
+            "area": $('#district').val(), 
+            "province": $('#privence').val(), 
+            "city": $('#city').val()
+        }
+        getData(1,para);
+    })
+
+
+
+    var nowTemp = new Date();
+    var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+    var checkin = $('#dpd1').fdatepicker({
+        onRender: function (date) {
+            return date.valueOf() < now.valueOf() ? '' : '';
+        },
+        // pickTime: true,
+        format: 'yyyy-mm-dd'
+    }).on('changeDate', function (ev) {
+        if (ev.date.valueOf() > checkout.date.valueOf()) {
+            var newDate = new Date(ev.date)
+            newDate.setDate(newDate.getDate() + 1);
+            checkout.update(newDate);
+        }
+        checkin.hide();
+        $('#dpd2')[0].focus();
+    }).data('datepicker');
+    var checkout = $('#dpd2').fdatepicker({
+        onRender: function (date) {
+            return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+        },
+        // pickTime: true,
+        format: 'yyyy-mm-dd'
+    }).on('changeDate', function (ev) {
+        checkout.hide();
+    }).data('datepicker');
+
+
+
+
+
     // exportExcel()
     function exportExcel(){
         var html = '';
@@ -133,22 +237,72 @@
             html += '<p class="relative-title">导出列表</p>';
             html += '<div class="con-box">';
                
-                html += '<table class="exportItem" style="width:92%;height:50px;margin:0 auto"><tr>';
-                    html += '<td>实施运营阶段：<select><option>待开户</option><option>实施筹备</option><option>已安装</option></select></td>';
-                    html += '<td>跟踪紧急程度：<select><option>没有跟踪必要</option><option>安排试用</option><option>3</option></select></td>';
-                    html += '<td>&emsp;&emsp;拜访方式：<select><option>见面</option><option>电话</option></select></td>';
-                    html += '<td>拜访结果：<select><option>继续跟进</option></select></td>';
+                html += '<table class="exportItem" style="width:92%;height:50px;margin:0 auto"><tr height="50">';
+                    html += '<td>项目名称：<input id="exname"/></td>';
+                    html += '<td>segmentation：<select id="exsegmentation"></select></td>';
+                    html += '<td>级别：<select id="exlevel"></select></td>';
+                    html += '<td>商务阶段：<select id="exbussType"><option>见面</option><option>电话</option></select></td>';
+                    html += '<td>紧急程度：<select id="exemergency"><option>继续跟进</option></select></td></tr>';
+                    
+                    html += '<tr>';
+                    html += '<td>拜访阶段：<select id="exvisitResult"><option>继续跟进</option></select></td>';
+
+                    html += '<td colspan="3">区域：区域：<select id="exdistrict"><option>请选择</option></select>&emsp;<select id="exprivence"><option>请选择</option></select>&emsp;<select id="excity"><option>请选择</option></select></td>';
                     html += '<td>预计采购时间：<input id="procurementTime"/></td>';
                 html += '</tr></table>';
             html += '</div>';
             html += '<div class="buttons"><a class="cancel" href="javascript:$$.closeLayer()">取消</a><a id="confirmRelative" class="confirm">确认</a></div>'
         html += '</div>';
+
+
         $$.layer(html, {
             isShowMask: true,
             fixedBoxTop:'100px',
             zIndex:99,
             contentBoxWidth: "55%"
         });
+
+        _API.getPSegmentationList('exsegmentation',0,true)
+        .getPLevelList('exlevel',0,true)
+        .getPBussTypeList('exbussType')
+        .getEmergencyList('exemergency',0,true)
+        .getVisitStatusList('exvisitResult')
+        .dynamicDistrick('exdistrict','exprivence','excity');
+
+        $('#confirmRelative').on('click',function(){
+            var url = _ip + '/customer/exportReport';
+            var data = {
+                "name":$('#exname').val(),
+                "segmentation":$('#exsegmentation').val(),
+                "level":$("#exlevel").val(),
+                "businessType":$("#exbussType").val(),
+                "emergency":$('#exemergency').val(),
+                "visitResult":$('#exvisitResult').val(),
+                "district":$('#exdistrict').val(),
+                "province":$("#exprivence").val(),
+                "city":$('#excity').val(),
+                "date":$('#procurementTime').val()
+            }
+            $.ajax({
+                url:url,
+                type: 'POST',
+                dataType: 'json',
+                contentType:'application/json',
+                data:JSON.stringify(data),
+                success: function(json) {
+                    $$.closeLayer()
+                    // if(json.success){
+                    //     clientDataCard.getAllCard();
+                    //     $$.closeLayer()
+                    // }else{
+                    //     alert('添加失败，稍后重试！')
+                    // }
+                }
+            })
+        })
+
+
+
         var nowTemp = new Date();
         var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
         $('#procurementTime').fdatepicker({
@@ -159,20 +313,6 @@
         });
     }
 
-    // var flag = true;
-    // $('#out').click(function () {
-    //     if(flag){
-    //         $('#more-search').css({'display':''});
-    //         $(this).addClass('show-hide');
-    //         $(this).find('span').html('收起查询条件');
-    //         flag = false
-    //     }else{
-    //         $('#more-search').css({'display':'none'});
-    //         $(this).removeClass('show-hide');
-    //         $(this).find('span').html('展开查询条件');
-    //         flag = true
-    //     }
-    // })
 </script>
 </body>
 </html>
