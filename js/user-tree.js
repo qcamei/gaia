@@ -90,10 +90,11 @@ function treeLi($firstUl, msg) {
 
 
 function organizeAjaxGet(url, data, jsonpCall, callback) {
+    var dataType= jsonpCall ? 'jsonp': 'json'
     $.ajax({
         url:url,
         type: 'GET',
-        dataType: 'jsonp',
+        dataType: dataType,
         data: data,
         jsonp: 'callback',
         jsonpCallback: jsonpCall,

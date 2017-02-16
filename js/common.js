@@ -417,7 +417,7 @@ function attachment(config){
         
         formData.append('file', $('#file')[0].files[0]);
         $.ajax({
-            url: _ip+'/file/upload',
+            url:  that.config.url ||_ip+'/file/upload',
             type: 'POST',       
             cache: false,
             data: formData,
@@ -426,6 +426,10 @@ function attachment(config){
         })
         .done(function(res) {
             if(res.success){
+                if(that.config.success) {
+                    that.config.success(res);
+                    return false;
+                }
                 var name = res.data[0].split('__')[1];
                 var h = '<li rel='+res.data[0] +'><div>'+name+'<span class="delete">删除</span></div></li>';
                 that.config.addAttachmentList.append(h);

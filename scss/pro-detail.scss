@@ -813,7 +813,7 @@
   z-index: 100;
   right: -298px;
   top: 68px;
-  overflow-y: scroll; }
+}
   .item-member > h3 {
     background: #f2f5f6;
     height: 28px;
@@ -854,7 +854,9 @@
         height: 340px;
         top: -14px;
         right: 55px;
-        display: none; }
+        display: none;
+        z-index: 99;
+      }
         .item-member .member .photo .info-slide .slide-table {
           width: 80%;
           margin: 0 auto; }
