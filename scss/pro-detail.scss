@@ -1,5 +1,8 @@
 @import "common.scss";
-
+.member-box {
+  padding-left: 20px;
+  margin-top: 5px;
+}
 .user-mask {
   position: absolute;
   top: 0;
@@ -930,7 +933,12 @@
   height: 325px;
   top: 0px;
   right: 0px;
-  z-index: 20; }
+  z-index: 20;
+  &.assignmentClass {
+    top: -35px;
+    height: 295px;
+  }
+}
   .member-slide .search-member {
     height: 34px;
     border-bottom: 1px solid #d9e1e5;
@@ -943,18 +951,20 @@
       border: 0px; }
   .member-slide .member-box {
     height: 256px;
-    overflow-y: scroll; }
+     }
     .member-slide .member-box .mem-list > li {
       width: 100%;
       padding: 6px 0;
       cursor: pointer; }
-      .member-slide .member-box .mem-list > li > div {
+      .member-slide .member-box .mem-list > li .photo{
+        margin: 0 15px;
+      }
+      .member-slide .member-box .mem-list > li  .img {
         width: 32px;
         height: 32px;
         border-radius: 100%;
         border: 1px solid #d9e1e5;
-        overflow: hidden;
-        margin: 0 0 0 15px; }
+        overflow: hidden;  }
       .member-slide .member-box .mem-list > li > span {
         color: #334455;
         font-size: 12px;
@@ -966,11 +976,22 @@
         float: right;
         margin: 10px 10px 0 0;
         background: url(../images/t-6.png) no-repeat; }
+      .member-slide .member-box .mem-list > li .check {
+        width: 10px;
+        height: 7px;
+        border: 0;
+        background: url(../images/t-6.png) no-repeat;
+        display: none;
+        margin: 10px 0;
+      }
+  .member-slide .member-box .mem-list > li .check.active {
+    display: block;
+  }
   .member-slide .btns {
     height: 34px;
     width: 100%;
     background: #f2f5f6; }
-    .member-slide .btns .cancle {
+    .member-slide .btns .cancel {
       color: #99aabb;
       font-size: 12px;
       float: right;
