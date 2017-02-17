@@ -4,12 +4,14 @@ var _ip = 'http://121.42.187.170';
 /*----------
  * 判断是否登陆
  *-----------------------------*/
+var globleUserId;
 function isLogin(){
     var url = _ip + '/user/getLoginUserInfo';
     $.ajax({
         url:url,
         type: 'GET',
         dataType: 'jsonp',
+        async:false,
         contentType:'application/json',
         jsonpCallback: 'islogin',
         success: function(json) {
@@ -19,22 +21,27 @@ function isLogin(){
         }
     })
 }
-// isLogin()
+
+isLogin();
+globleUserId = parseInt($.cookie('userid'));
 
 
 
 /*----------
  * 头部页面头部
  *-----------------------------*/
+// ，消息<span>2</span>
 if (!$('.login-box').length) {
     var header = new Vue({
         el:'#header',
         data:{
-            datas: '<div class="right-user"><div class="right t">小丽，消息<span>2</span></div>' +
+            datas: '<div class="right-user"><div class="right t" id="headusername">小丽</div>' +
             '<div class="head-down"><ul><li><a href="edit-pwd.html">修改密码</a></li><li><a onclick="loginOut()">退出系统</a></li></ul></div><div>'
         }
     })
 }
+$('#headusername').html($.cookie('username'));
+
 function loginOut(){
     var url = _ip + '/loginOut';
     $.ajax({
@@ -323,7 +330,7 @@ _api.prototype = {
     },
     getFunctionList: function(id, defaultId,isSelect,platformList){ // 4. 获取功能列表 get
         
-        var plat = $('#'+platformList).val() || 'APP';
+        var plat = $('#'+platformList).val() || '运营平台';
         var url = _ip+'/common/getFeatureList?key='+plat;
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'fun']);
         return this;
@@ -418,6 +425,11 @@ _api.prototype = {
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'em']);
         return this;
     },
+    getProNameList: function(id, defaultId,isSelect) { // 21. 项目管理：项目名称列表
+        var url = _ip+'/common/project/name';
+        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'pname']);
+        return this;
+    },
     getDistrict: function(id, defaultId,isSelect){ //获取大区
         var url = _ip+'/common/getDistrict';
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'getDistrict']);
@@ -494,7 +506,11 @@ function attachment(config){
         formData.append('file', $('#file')[0].files[0]);
         $.ajax({
             url:  that.config.url ||_ip+'/file/upload',
-            type: 'POST',       
+            type: 'POST',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             cache: false,
             data: formData,
             processData: false,

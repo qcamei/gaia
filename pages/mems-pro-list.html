@@ -123,13 +123,15 @@
 
 <script src="../js/vue.js"></script>
 <script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.cookie.js"></script>
 <script src="../js/common.js"></script>
 <script src="../js/foundation-datepicker.min.js"></script>
 <script src="../js/common.js"></script>
 <script>
-    _API.getNeedSource('needSource',0,true)
+    _API.getProNameList('needSource',0,true)
         .getPSegmentationList('Segmentation',0,true)
         .getPLevelList('level',0,true)
+        .getPBussTypeList('bussType',0,true)
         .dynamicDistrick('district','privence','city');
 
 
@@ -265,11 +267,11 @@
                     html += '<td>项目名称：<input id="exname"/></td>';
                     html += '<td>segmentation：<select id="exsegmentation"></select></td>';
                     html += '<td>级别：<select id="exlevel"></select></td>';
-                    html += '<td>商务阶段：<select id="exbussType"><option>见面</option><option>电话</option></select></td>';
-                    html += '<td>紧急程度：<select id="exemergency"><option>继续跟进</option></select></td></tr>';
+                    html += '<td>商务阶段：<select id="exbussType"></select></td>';
+                    html += '<td>紧急程度：<select id="exemergency"></select></td></tr>';
                     
                     html += '<tr>';
-                    html += '<td>拜访阶段：<select id="exvisitResult"><option>继续跟进</option></select></td>';
+                    html += '<td>拜访阶段：<select id="exvisitResult"></select></td>';
 
                     html += '<td colspan="3">区域：区域：<select id="exdistrict"><option>请选择</option></select>&emsp;<select id="exprivence"><option>请选择</option></select>&emsp;<select id="excity"><option>请选择</option></select></td>';
                     html += '<td>预计采购时间：<input id="procurementTime"/></td>';

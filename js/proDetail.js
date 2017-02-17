@@ -5,6 +5,9 @@
  * creatTime:2017/01/13
  *-----------------------------*/
 
+// 获取项目id
+var globleProjectId = getUrlId();
+
 
 /*----------
  * 内容切换
@@ -29,17 +32,9 @@ function detailItemTab(that,id){
 function manageTagSelf(){}
 manageTagSelf.prototype = {
 	initApi:function(api){
-		// // if(api){
-
-		// // }
-		// this.upLoadUrl = _ip + api[0];  //更新标签：删除，添加
-		// this.getExistTagUrl = _ip + api[1];     //获取已经存在的标签列表
-		// this.getAll = _ip + api[2];     //获取全部列表
-		// console.log(this.upLoadUrl);
 		var that = this;
 		that.upLoadUrl = _ip + '/pci/update';
 		that.getExistTagUrl = _ip + '/tags/select';
-
 		if(api){
 
 			manageTagSelf.upLoadUrl =  '/cusinfo/update';
@@ -48,7 +43,7 @@ manageTagSelf.prototype = {
 	},
 	deleteTag: function(id,tag,src){
 		var _id = $('#'+id);
-
+		var that = this;
 		_id.on('click','li>span',function(){
 			var data = {};
 			var str  = [];
@@ -59,7 +54,7 @@ manageTagSelf.prototype = {
 					str.push(s);
 				}
 			})
-			var that = this;
+
 			// data['id'] = manageTagSelf.userId;
 			data[tag]  = str.join(',');
 			if(id.indexOf('card') >= 0){
@@ -80,7 +75,7 @@ manageTagSelf.prototype = {
 		        data:JSON.stringify(data),
 	            success: function(data) {
 	            	if(data.message === 'LOGIN') {
-	                    window.location.href = 'user-login.html';
+	                    location.href = 'user-login.html';
 	                    return false;
 	                }
 	                if(data.success){
@@ -110,13 +105,19 @@ manageTagSelf.prototype = {
 			})
 		}
 		
-		_id2.on('click','input[type=button]',function(){
+		_id2.on('click','input[value=取消]',function(){
 		    _id1.css({'display':'block'});
 		    _id2.css({'display':'none'});
 		})
 		var that = this;
 		_id2.on('click','input[value=确认]',function(){
 		    var val = $(this).siblings('input[type=text]').val();
+			if(val.length >= 12){
+				alert('不能超过12个字符');
+				return;
+			}
+			_id1.css({'display':'block'});
+			_id2.css({'display':'none'});
 		    var arr = [];
 		    	_id3.find('li').each(function(){
 		    		arr.push($(this).find('input').val())
@@ -132,7 +133,6 @@ manageTagSelf.prototype = {
 		    	}else{
 		    		data['id'] = that.userId;
 		    	}
-		    	console.log(url);
 		    	$.ajax({
 		            url:url,
 		            type : "POST",
@@ -163,10 +163,11 @@ manageTagSelf.prototype = {
 	},
 	updataDec:function(id,dec,src){
 		var _id = $('#'+id);
+		var that = this;
 		_id.on('blur',function(){
 			var url = _ip + src;
 	    	var data = {};
-	    	data['id'] = manageTagSelf.userId;
+	    	data['id'] = that.userId;
 	    	// parseInt(id.split('-')[2])
 	    	data[dec] = $(this).val();
 	    	$.ajax({
@@ -232,22 +233,38 @@ manageTagSelf.prototype = {
         	var that = this;
         	var i = $(this).find('i');
         	var display = i.css('display');
-        	var that = this;
         	if(display == 'block'){
         		i.css({'display':'none'});
-        		manageTagSelf.deleteTag('tag-list-1');
+
         	}else{
         		i.css({'display':'block'});
-        		var name = $(this).find('input').val()
-        		var url = _ip + src;
-		    	var data = {};
-		    	// data['id'] = manageTagSelf.userId;
-		    	data[tagtype] = name;
+				var name = $(this).find('input').val()
+				var url = _ip + src;
+				var data = {};
+				var str  = [];
+				var isre = false;
+				_id2.find('li').each(function(k){
+					var s = $(this).find('input').val();
+					if(s != name){
+						str.push(s);
+						isre = false;
+					}else{
+						isre = true;
+						// alert('已经存在');
+					}
+				})
+
+				if(!isre){
+					str.push(name);
+				}else{
+					return false;
+				}
+		    	data[tagtype] = str.join(',');
 		    	
 		    	if(id1.indexOf('card') >= 0){
 		    		data['cusId'] = id1.split('-')[4]; 
 		    	}else{
-		    		data['id'] = 5;
+		    		data['id'] = that.userId;
 		    	}
 		    	$.ajax({
 		            url:url,
@@ -276,7 +293,7 @@ manageTagSelf.prototype = {
 		return this;
 	},
 	initTagDec:function(id1,id2,id3,id4,id5,id6,id7){
-		var url  = _ip + '/pci/select?id=10';
+		var url  = _ip + '/pci/select?id='+globleProjectId;
 		var that = this;
 		$.ajax({
             url:url,
@@ -292,6 +309,7 @@ manageTagSelf.prototype = {
                 	$('#'+id3).val(data.competitorDesc || '');
                 	$('#'+id4).val(data.riskDesc || '');
                 	that.userId = data.id;
+					console.log(that.userId);
                 	manageTagSelf.proId  = data.proId;
                 	var obj = {};
                 	obj[id5] = data.interestTag ? data.interestTag.split(','):'';
@@ -321,7 +339,7 @@ manageTagSelf.prototype = {
 		return this;
 	},
 	getClientAddressBook:function(id){
-		var url = _ip + '/cus/selectAll?id=3';
+		var url = _ip + '/cus/selectAll?id='+globleUserId;
 		$.ajax({
             url:url,
             type: 'GET',
@@ -346,9 +364,9 @@ manageTagSelf.prototype = {
 	}
 }
 manageTagSelf = new manageTagSelf();
-var urlarr = ['/pci/update','/tags/select','/pci/select?id=10'];
+var urlarr = ['/pci/update','/tags/select','/pci/select?id='+globleProjectId];
 manageTagSelf.initApi(urlarr)
-			 .deleteTag('tag-list-1','interestTag','/pci/update') //删除标签：{展示兴趣点的ul的id，}
+		     .deleteTag('tag-list-1','interestTag','/pci/update') //删除标签：{展示兴趣点的ul的id，}
 			 .deleteTag('tag-list-2','managementTag','/pci/update')
 			 .deleteTag('tag-list-3','competitorTag','/pci/update') 
 			 .addTag('addtag-1','addtag-input-1','tag-list-1','interestTag',true,'/pci/update')  //添加标签
@@ -370,15 +388,20 @@ manageTagSelf.initApi(urlarr)
 function  clientDataCard(){}
 clientDataCard.prototype = {
  	getAllCard: function(){  //获取所有客户信息卡
- 		var url = _ip + '/cus/select?id=4';
+ 		var url = _ip + '/cus/select?id='+globleProjectId;
 		var that = this;
 		$.ajax({
             url:url,
             type: 'GET',
         	dataType: 'jsonp',
+			xhrFields: {
+				withCredentials: true
+			},
+			crossDomain: true,
         	contentType:'application/json',
         	jsonpCallback: 'iniata',
             success:function(json){
+            	console.log(json);
                 if(json.success && json.data){
                 	
                 	that.creatCardDom(json.data);
@@ -396,7 +419,7 @@ clientDataCard.prototype = {
  			var n = s.id;
  			arr.push(n);
  			h += '<li>';
- 				h += '<div class="head clear"><div class="left name"><span class="left">漆丽君</span><span class="left">院长</span>';
+ 				h += '<div class="head clear"><div class="left name"><span class="left">'+s.name+'</span><span class="left">'+s.role+'</span>';
  					h += '<div class="left detail"><i onmouseover="clientInfoCard.showBaseInfo(this);" onmouseout="clientInfoCard.hideBaseInfo(this)"></i>';
  						h += '<div class="detail-slide"><table><tr><td><h6>角色</h6><span>'+s.role+'</span></td><td><h6>科室</h6><span>'+s.department+'</span></td></tr><tr><td><h6>联系电话</h6><span>'+s.tel+'</span></td><td><h6>短号</h6><span>'+s.shortTel+'</span></td></tr></table></div></div></div>';
  					h += '<div class="right edit" onmouseover="clientInfoCard.showOpero(this);" onmouseout="clientInfoCard.hideOpero(this)"><i></i><div class="edit-slide"><a onclick="clientInfoCard.editeClientCard(4)">编辑</a><a onclick="clientInfoCard.deleteClientCard('+n+')">删除</a></div></div></div>';	
@@ -537,7 +560,7 @@ clientInfoCard.prototype = {
             html += '<p class="card-title">添加客户<a href="javascript:$$.closeLayer()">&times;</a></p>';
             html += '<div class="card-box">';
                 html += '<table class="card-input"><tbody>';
-                    html += '<tr><td>职务</td><td><input id="name" class="short"></td></tr>';
+                    html += '<tr><td>职务</td><td><input id="position" class="short"></td></tr>';
                     html += '<tr><td>角色</td><td><input id="role" class="short"></td></tr>';
                     html += '<tr><td>姓名</td><td><input id="name" class="short"></td></tr>';
                     html += '<tr><td>科室</td><td><input id="department" class="short"></td></tr>';
@@ -557,11 +580,11 @@ clientInfoCard.prototype = {
 		var data = {
 			"name": $('#name').val(),    //必填
 		    "role": $('#role').val(),
-		    "position": "狂拽酷炫 ",     //必填
+		    "position": $('#position').val(),     //必填
 		    "department": $('#department').val(),
 		    "tel": $('#telphone').val(),    //必填
 		    "shortTel": $('#short_tel').val(), 
-		    "projectId": 4    //必填
+		    "projectId": globleProjectId    //必填
 		}
 		if(id){
 			data['id'] = id;
@@ -652,17 +675,22 @@ presell.prototype = {
     	that.edite.css({'display':'block'});
 	},
 	getInfo:function(id){
-		var url = _ip + '/salebgt/select?id=5';
+		var url = _ip + '/salebgt/select?id='+globleProjectId;
 		$.ajax({
             url:url,
             type: 'GET',
+			xhrFields: {
+				withCredentials: true
+			},
+			crossDomain: true,
             dataType: 'jsonp',
             contentType:'application/json',
             jsonpCallback: 'sell',
             success: function(json) {
-
+				if(!json.success) return;
                 var json = json.data;
-                presell.userId = json.id;
+                presell.userId = globleUserId;
+
                 var h = '';
                 	h += '<tr><td colspan="2">销售方式：<span class="type">'+json.type+'</span></td></tr>';
                     h += '<tr><td width="40%"><div class="name">预算：</div><div class="text"><span class="num-style">'+json.budget+'</span>&nbsp;万元</div></td>';
@@ -767,7 +795,7 @@ businessProgress.prototype = {
 		var url = _ip + '/busprogs/insert';
     	var data = {
     		  "id": '',
-		      "proId": 6,
+		      "proId": globleProjectId,
 		      "type": $('#visitTypeList').val(),
 		      "visitResult": $('#visitResultList').val(),
 		      "level": $('#bussTypeList').val(),
@@ -809,7 +837,7 @@ businessProgress.prototype = {
 	},
 
 	getBusCordList: function(id){ 
-		var url = _ip + '/busprogs/selectAll?id=6';
+		var url = _ip + '/busprogs/selectAll?id='+globleProjectId;
 		var that = this;
 		$.ajax({
             url:url,
@@ -861,7 +889,7 @@ businessProgress.init();
  * 获取项目需求列表
  *-----------------------------*/
 function getCardProList(){
-	var url = _ip + '/original/getRequireByCustomer?id=1';
+	var url = _ip + '/original/getRequireByCustomer?id='+globleProjectId;
 	var that = this;
 	$.ajax({
         url:url,
