@@ -1,4 +1,27 @@
-var _ip = 'http://192.168.6.23:8080';
+var _ip = 'http://121.42.187.170';
+
+// var _ip = 'http://192.168.6.23:8080';
+/*----------
+ * 判断是否登陆
+ *-----------------------------*/
+function isLogin(){
+    var url = _ip + '/user/getLoginUserInfo';
+    $.ajax({
+        url:url,
+        type: 'GET',
+        dataType: 'jsonp',
+        contentType:'application/json',
+        jsonpCallback: 'islogin',
+        success: function(json) {
+            if(!json.success){
+                location.href = 'user-manage.html';
+            }
+        }
+    })
+}
+isLogin()
+
+
 
 /*----------
  * 头部页面头部
@@ -30,28 +53,28 @@ function loginOut(){
 /*----------
  * 侧边导航
  *-----------------------------*/
-var header = new Vue({
-    el:'#aside',
-    data:{
-        datas: '<aside class="aside"> <div class="logo">运营平台</div><ul class="menu">'+
-        '<li><div class="menu-first"><i class="dash"></i>Dashboard<l></l></div></li>'+
-        '<li><div class="menu-first current"><i class="project"></i>项目管理<l></l></div>'+
-            '<dl class="menu-second">'+
-                '<dd><a >待办事项</a></dd>'+
-                '<dd><a href="mems-pro-list.html" class="current">项目列表</a></dd>'+
-            '</dl>'+
-        '</li>'+
-        '<li><div class="menu-first "><i class="need"></i>需求管理<l></l></div>'+
-            '<dl class="menu-second">'+
-                '<dd><a href="pm-need-list.html" >需求池</a></dd>'+
-                '<dd><a href="pm-bug-list.html">缺陷池</a></dd>'+
-            '</dl>'+
-        '</li>'+
-        '<li><div class="menu-first"><i class="system"></i>系统配置<l></l></div>'+
-        '</li>'+
-    '</ul></aside>'
-    }
-})
+// var header = new Vue({
+//     el:'#aside',
+//     data:{
+//         datas: '<aside class="aside"> <div class="logo">运营平台</div><ul class="menu">'+
+//         '<li><div class="menu-first"><i class="dash"></i>Dashboard<l></l></div></li>'+
+//         '<li><div class="menu-first current"><i class="project"></i>项目管理<l></l></div>'+
+//             '<dl class="menu-second">'+
+//                 '<dd><a >待办事项</a></dd>'+
+//                 '<dd><a href="mems-pro-list.html" class="current">项目列表</a></dd>'+
+//             '</dl>'+
+//         '</li>'+
+//         '<li><div class="menu-first "><i class="need"></i>需求管理<l></l></div>'+
+//             '<dl class="menu-second">'+
+//                 '<dd><a href="pm-need-list.html" >需求池</a></dd>'+
+//                 '<dd><a href="pm-bug-list.html">缺陷池</a></dd>'+
+//             '</dl>'+
+//         '</li>'+
+//         '<li><div class="menu-first"><i class="system"></i>系统配置<l></l></div>'+
+//         '</li>'+
+//     '</ul></aside>'
+//     }
+// })
 
 /*----------
  * 弹框相关的通用样式

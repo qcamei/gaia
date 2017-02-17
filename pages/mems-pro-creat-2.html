@@ -21,21 +21,32 @@
             <div class="menu-first"><i class="dash"></i>Dashboard<l></l></div>
         </li>
         <li>
-            <div class="menu-first current"><i class="project"></i>项目管理<l></l></div>
+            <div class="menu-first current" ><i class="project"></i>项目管理<l></l></div>
             <dl class="menu-second">
-                <dd><a >待办事项</a></dd>
-                <dd><a href="mems-pro-list.html" class="current">项目列表</a></dd>
+                <dd><a href="#">待办事项</a></dd>
+                <dd><a href="mems-pro-list.html">项目列表</a></dd>
             </dl>
         </li>
         <li>
             <div class="menu-first"><i class="need"></i>需求管理<l></l></div>
             <dl class="menu-second">
-                <dd><a href="../pm-need-list.html">需求池</a></dd>
-                <dd><a href="../pm-bug-list.html">缺陷池</a></dd>
+                <dd><a href="pm-need-list.html" >需求池</a></dd>
+                <dd><a href="pm-bug-list.html">缺陷池</a></dd>
             </dl>
         </li>
         <li>
-            <div class="menu-first"><i class="system"></i>系统配置<l></l></div>
+            <div class="menu-first current"><i class="system"></i>系统配置<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="user-manage.html" >用户管理</a></dd>
+                <dd><a href="organize-architecture.html" >组织架构</a></dd>
+                <dd><a href="tag-manage.html" class="current">标签管理</a></dd>
+            </dl>
+        </li>
+        <li>
+            <div class="menu-first"><i class="project"></i>文档管理<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="doc-manage.html">文档管理</a></dd>
+            </dl>
         </li>
     </ul>
 </aside>
@@ -195,10 +206,20 @@
         $.ajax({
             url:url,
             type : "POST",
+            xhrFields: {
+               withCredentials: true
+            },
+            crossDomain: true,
             dataType: 'json',
             contentType:'application/json',
             data:JSON.stringify(data),
             success:function(data){
+
+                if(json.message === 'LOGIN') {
+                    window.location.href = 'user-login.html';
+                    return false;
+                }
+
                 if(data.success){
                     location.href = 'mems-pro-list.html';
                 }else{

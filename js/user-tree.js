@@ -104,7 +104,7 @@ function organizeAjaxGet(url, data, jsonpCall, callback) {
         jsonpCallback: jsonpCall,
         success: function(json) {
             if(json.message === 'LOGIN') {
-                window.location.href = '/pages/user-login.html';
+                window.location.href = 'user-login.html';
                 return false;
             }
             if(callback) {
@@ -127,7 +127,7 @@ function organizeAjaxPost(url, data, callback) {
         data:JSON.stringify(data),
         success: function(json) {
             if(json.message === 'LOGIN') {
-                window.location.href = '/pages/user-login.html';
+                window.location.href = 'user-login.html';
                 return false;
             }
             if(callback) {

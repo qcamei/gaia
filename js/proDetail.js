@@ -71,10 +71,18 @@ manageTagSelf.prototype = {
 			$.ajax({
 	            url:url,
 	            type : "POST",
+	            xhrFields: {
+               		withCredentials: true
+	            },
+	            crossDomain: true,
 	            dataType: 'json',
-	            contentType:'application/json',
-	            data:JSON.stringify(data),
-	            success:function(data){
+		        contentType:'application/json',
+		        data:JSON.stringify(data),
+	            success: function(data) {
+	            	if(data.message === 'LOGIN') {
+	                    window.location.href = 'user-login.html';
+	                    return false;
+	                }
 	                if(data.success){
 	                }else{
 	                    alert('删除失败, 请稍后重试！');
@@ -128,10 +136,18 @@ manageTagSelf.prototype = {
 		    	$.ajax({
 		            url:url,
 		            type : "POST",
+		            xhrFields: {
+		               withCredentials: true
+		            },
+		            crossDomain: true,
 		            dataType: 'json',
-		            contentType:'application/json',
-		            data:JSON.stringify(data),
-		            success:function(data){
+			        contentType:'application/json',
+			        data:JSON.stringify(data),
+		            success: function(data) {
+		            	if(data.message === 'LOGIN') {
+		                    window.location.href = 'user-login.html';
+		                    return false;
+		                }
 		                if(data.success){
 		                	var h = '<li>'+val+'<input type="hidden" value="'+val+'"/><span>&times;</span></li>';
 		        			_id3.append(h);
@@ -156,10 +172,18 @@ manageTagSelf.prototype = {
 	    	$.ajax({
 	            url: url,
 	            type : "POST",
+	            xhrFields: {
+	               withCredentials: true
+	            },
+	            crossDomain: true,
 	            dataType: 'json',
-	            contentType:'application/json',
-	            data:JSON.stringify(data),
-	            success:function(data){
+		        contentType:'application/json',
+		        data:JSON.stringify(data),
+	            success: function(data) {
+	            	if(data.message === 'LOGIN') {
+	                    window.location.href = 'user-login.html';
+	                    return false;
+	                }
 	                if(data.success){
 	                	
 	                }else{
@@ -180,10 +204,18 @@ manageTagSelf.prototype = {
     	$.ajax({
             url:manageTagSelf.getExistTagUrl,
             type : "POST",
+           xhrFields: {
+               withCredentials: true
+            },
+            crossDomain: true,
             dataType: 'json',
-            contentType:'application/json',
-            data:JSON.stringify(data),
-            success:function(data){
+	        contentType:'application/json',
+	        data:JSON.stringify(data),
+            success: function(data) {
+            	if(data.message === 'LOGIN') {
+                    window.location.href = 'user-login.html';
+                    return false;
+                }
                 if(data.success){
                 	var data = data.data;
                 	var h = '';
@@ -217,15 +249,21 @@ manageTagSelf.prototype = {
 		    	}else{
 		    		data['id'] = 5;
 		    	}
-		    	console.log( data );
-		    	console.log(url);
 		    	$.ajax({
 		            url:url,
 		            type : "POST",
+		            xhrFields: {
+		               withCredentials: true
+		            },
+		            crossDomain: true,
 		            dataType: 'json',
-		            contentType:'application/json',
-		            data:JSON.stringify(data),
-		            success:function(data){
+			        contentType:'application/json',
+			        data:JSON.stringify(data),
+		            success: function(data) {
+		            	if(data.message === 'LOGIN') {
+		                    window.location.href = 'user-login.html';
+		                    return false;
+		                }
 		                if(data.success){
 		                	_id2.append('<li>'+name+'<input type="hidden" value="'+name+'"/><span>&times;</span></li>');
 		                }else{
@@ -531,10 +569,18 @@ clientInfoCard.prototype = {
 		$.ajax({
             url:url,
             type: 'POST',
+            xhrFields: {
+               withCredentials: true
+            },
+            crossDomain: true,
             dataType: 'json',
 	        contentType:'application/json',
 	        data:JSON.stringify(data),
             success: function(json) {
+            	if(json.message === 'LOGIN') {
+                    window.location.href = 'user-login.html';
+                    return false;
+                }
                 if(json.success){
                 	clientDataCard.getAllCard();
                 	$$.closeLayer()
@@ -644,10 +690,18 @@ presell.prototype = {
     	$.ajax({
             url:url,
             type : "POST",
+            xhrFields: {
+               withCredentials: true
+            },
+            crossDomain: true,
             dataType: 'json',
-            contentType:'application/json',
-            data:JSON.stringify(data),
-            success:function(data){
+	        contentType:'application/json',
+	        data:JSON.stringify(data),
+            success: function(data) {
+            	if(data.message === 'LOGIN') {
+                    window.location.href = 'user-login.html';
+                    return false;
+                }
                 if(data.success){
                 	that.getInfo('sellBuget');
                 }else{
@@ -731,10 +785,18 @@ businessProgress.prototype = {
     	$.ajax({
             url:url,
             type : "POST",
+            xhrFields: {
+               withCredentials: true
+            },
+            crossDomain: true,
             dataType: 'json',
-            contentType:'application/json',
-            data:JSON.stringify(data),
-            success:function(data){
+	        contentType:'application/json',
+	        data:JSON.stringify(data),
+            success: function(data) {
+            	if(data.message === 'LOGIN') {
+                    window.location.href = 'user-login.html';
+                    return false;
+                }
                 if(data.success){
                 	that.getBusCordList();
                 	that.showEdite(that);

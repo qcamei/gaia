@@ -771,6 +771,33 @@ aside.aside .menu {
   100% {
     transform: translateX(0px); } }
 
+.member-box {
+  padding-left: 20px;
+  margin-top: 5px; }
+
+.user-mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.1);
+  display: none;
+  z-index: 10; }
+
+.item-member .member .opero > a.deletePuserClick {
+  font-size: 20px;
+  font-weight: 700;
+  text-shadow: 0 1px 0 #fff;
+  border: 0;
+  display: none; }
+
+.item-member .member:hover a.deletePuserClick {
+  display: block; }
+
+.item-member .member .photo:hover .info-slide {
+  display: block; }
+
 .p-content .content-left {
   background: #f2f5f6;
   width: 65.25%;
@@ -1354,9 +1381,8 @@ aside.aside .menu {
   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.14);
   width: 298px;
   z-index: 100;
-  right: 0px;
-  top: 68px;
-  overflow-y: scroll; }
+  right: -298px;
+  top: 68px; }
 
 .item-member > h3 {
   background: #f2f5f6;
@@ -1389,6 +1415,8 @@ aside.aside .menu {
   border-radius: 100%;
   border: 1px solid #d9e1e5;
   overflow: hidden; }
+  .item-member .member .photo .img img {
+    max-width: 100%; }
 
 .item-member .member .photo .info-slide {
   position: absolute;
@@ -1399,7 +1427,8 @@ aside.aside .menu {
   height: 340px;
   top: -14px;
   right: 55px;
-  display: none; }
+  display: none;
+  z-index: 99; }
 
 .item-member .member .photo .info-slide .slide-table {
   width: 80%;
@@ -1490,6 +1519,9 @@ aside.aside .menu {
   top: 0px;
   right: 0px;
   z-index: 20; }
+  .member-slide.assignmentClass {
+    top: -35px;
+    height: 295px; }
 
 .member-slide .search-member {
   height: 34px;
@@ -1504,21 +1536,22 @@ aside.aside .menu {
   border: 0px; }
 
 .member-slide .member-box {
-  height: 256px;
-  overflow-y: scroll; }
+  height: 256px; }
 
 .member-slide .member-box .mem-list > li {
   width: 100%;
   padding: 6px 0;
   cursor: pointer; }
 
-.member-slide .member-box .mem-list > li > div {
+.member-slide .member-box .mem-list > li .photo {
+  margin: 0 15px; }
+
+.member-slide .member-box .mem-list > li .img {
   width: 32px;
   height: 32px;
   border-radius: 100%;
   border: 1px solid #d9e1e5;
-  overflow: hidden;
-  margin: 0 0 0 15px; }
+  overflow: hidden; }
 
 .member-slide .member-box .mem-list > li > span {
   color: #334455;
@@ -1533,12 +1566,23 @@ aside.aside .menu {
   margin: 10px 10px 0 0;
   background: url(../images/t-6.png) no-repeat; }
 
+.member-slide .member-box .mem-list > li .check {
+  width: 10px;
+  height: 7px;
+  border: 0;
+  background: url(../images/t-6.png) no-repeat;
+  display: none;
+  margin: 10px 0; }
+
+.member-slide .member-box .mem-list > li .check.active {
+  display: block; }
+
 .member-slide .btns {
   height: 34px;
   width: 100%;
   background: #f2f5f6; }
 
-.member-slide .btns .cancle {
+.member-slide .btns .cancel {
   color: #99aabb;
   font-size: 12px;
   float: right;
