@@ -144,3 +144,18 @@ function getRandom(m, n) {
     }
     return randomNum;
 }
+
+function successAlert(text) {
+    var html ='<div class="share-box">' +
+        '<div class="success-text">'+ text +'</div>' +
+        '</div>';
+    $$.layer(html, {
+        isShowMask: true,
+        fixedBoxTop:'100px',
+        zIndex:99,
+        contentBoxWidth: "20%"
+    });
+    setTimeout(function() {
+        $$.closeLayer();
+    }, 1500);
+}
