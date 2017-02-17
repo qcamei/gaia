@@ -53,7 +53,7 @@
                 <div class="left names"><span>安徽医科大学附属第二医院</span>&nbsp;<span>已签约</span>&nbsp;</div>
                 <div class="right opers">
                     <!-- <a href="" class="activity right"></a> -->
-                    <a href="" class="person right" title="添加用户"></a>
+                    <a href="javascript:;" class="person right" title="添加用户" onclick="addUserShow()"></a>
                 </div>
             </div>
             <ul class="nav clear">
@@ -297,53 +297,20 @@
 <!-- 项目成员 -->
 <div class="item-member" style="display: none;">
     <h3>项目负责人</h3>
-    <div class="leader member clear">
-        <div class="photo left">
-            <i class="img"><img src="../images/logo.png"></i>
-            <div class="info-slide">
-                <table class="slide-table">
-                    <tr>
-                        <td class="td-img">
-                            <div class="img"></div>
-                            <h3>王麻子</h3>
-                            <h6>华北区经理</h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p><i class="tel"></i>138 1234 1234</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p><i class="email"></i>email@shulianyixin.com</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p><i class="dec"></i>管理团队，EMES咨询服务部，数联医信</p>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="info left">
-            <p>Merray</p>
-            <p>MEMS</p>
-        </div>
-        <div class="opero right">
-            <a>转让</a>
-        </div>
+    <div >
+        <ul id="owner-line">
+
+        </ul>
     </div>
     <h3>
         项目成员
-        <a class="add-member">+&nbsp;添加</a>
-        <div class="member-slide">
+        <a class="add-member add" href="javascript:;" onclick="addMemberShow(this);">+&nbsp;添加</a>
+        <div class="member-slide" style="display:none">
             <div class="search-member">
-                <input type="" name="" />
+                <input type="" name="" id="searchUser" onblur="addMemberShow()"/>
             </div>
             <div class="member-box">
-                <ul class="mem-list">
+                <ul class="mem-list" id="mem-list">
                     <li class="clear">
                         <div class="left"></div>
                         <span class="left">张三</span>
@@ -352,10 +319,10 @@
 
                 </ul>
             </div>
-            <div class="btns"><a class="sure">确认</a><a class="cancle">取消</a></div>
+            <div class="btns"><a class="sure" onclick="sureAddMeber(this)">确认</a><a class="cancel" onclick="addMemberHide()">取消</a></div>
         </div>
     </h3>
-    <ul>
+    <ul id="list-line">
         <li>
             <div class=" member clear">
                 <div class="photo left">
@@ -469,15 +436,16 @@
         </li>
     </ul>
 </div>
+<div class="user-mask"></div>
 
 <script src="../js/vue.js" type="text/javascript"></script>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/common.js"></script>
+<script src="../js/user-tree.js"></script>
 
 <script src="../js/foundation-datepicker.min.js"></script>
 <script src="../js/proDetail.js"></script>
 <script type="text/javascript">
-
 _API.getSellType('sellTypeSelect')
     .getPBussTypeList('bussTypeList')
     .getVisitTypeList('visitTypeList')
@@ -485,9 +453,7 @@ _API.getSellType('sellTypeSelect')
     .getVisitResultList('visitResultList')
     .getEmergencyList('emergencyList');
 
-
-    
-
+    var itemId = 6;
     // 时间控件
     $('#proTime').fdatepicker({
         format: 'yyyy-mm-dd',
@@ -498,6 +464,240 @@ _API.getSellType('sellTypeSelect')
         pickTime: false
     });
 
+    // addCard();
+    function addCard(){
+        var html = '';
+        html += '<div class="client-card-box">';
+            html += '<p class="card-title">添加客户<a href="javascript:$$.closeLayer()">&times;</a></p>';
+            html += '<div class="card-box">';
+                html += '<table class="card-input"><tbody>';
+                    html += '<tr><td>职务</td><td><input type="" name="" class="short"></td></tr>';
+                    html += '<tr><td>角色</td><td><input type="" name="" class="short"></td></tr>';
+                    html += '<tr><td>姓名</td><td><input type="" name="" class="short"></td></tr>';
+                    html += '<tr><td>科室</td><td><input type="" name="" class="short"></td></tr>';
+                    html += '<tr><td>联系电话</td><td><input type="" name="" class="short"></td></tr>';
+                    html += '<tr><td>短号</td><td><input type="" name="" class="short"></td></tr></table></tbody></div>';
+            html += '<div class="buttons"><a class="card-btn card-btn-gray" href="javascript:$$.closeLayer()">取消</a>&emsp;<a id="confirmRelative" class="card-btn">确认</a></div>'
+        html += '</div>';
+        $$.layer(html, {
+            isShowMask: true,
+            fixedBoxTop:'100px',
+            zIndex:99,
+            contentBoxWidth: "27%"
+        });
+
+        
+    }
+
+    function addUserShow() {
+        var $itemMember = $('.item-member');
+        $('.user-mask').css('display', 'block');
+        $itemMember.animate({
+            right: '0px',
+            opacity: 1
+        }, 500);
+        getPuser();
+    }
+
+    function addMemberShow(obj) {
+        var $obj = $(obj);
+        var url  = _ip+'/user/plist';
+        var name = $('#searchUser').val();
+        var data = {
+            pid: itemId,
+            name: name
+        };
+        var $memList = $('#mem-list').html('');
+        $('.error-msg').remove();
+        if ($obj) {
+            if ($obj.hasClass('add')) {
+                $('.member-slide').addClass('addClass').removeClass('assignmentClass');
+            }
+            else if ($obj.hasClass('assignment')) {
+                $('.member-slide').addClass('assignmentClass').removeClass('addClass');
+            }
+        }
+        $('.member-slide').show();
+        if ($('.member-slide').hasClass('assignmentClass')) {
+            $('.search-member').css('display', 'none');
+            url  = _ip+'/puser/select';
+            data = {
+                id: itemId
+            };
+            organizeAjaxGet(url, data, 'assignment_list',  function(json) {
+                if (json.success) {
+                    var allUserData = json.data.list;
+                    for (var key in allUserData) {
+                        allUserData[key].single = 'single';
+                        puserList(allUserData[key], $memList, 'allUser');
+                    }
+                }
+            });
+        }
+        else {
+            $('.search-member').css('display', 'block');
+
+            organizeAjaxPost(url, data, function(json) {
+                if (json.success) {
+                    var allUserData = json.data;
+                    for (var key in allUserData) {
+                        puserList(allUserData[key], $memList, 'allUser');
+                    }
+                }
+            });
+        }
+    }
+
+    function addMemberHide() {
+        $('#mem-list').html('');
+        $('.member-slide').hide();
+        $('#searchUser').val('')
+    }
+
+    function sureAddMeber(obj) {
+        var $obj = $(obj);
+        var url  = _ip+'/puser/insert';
+        var uid_arr = [];
+        var $memberSlide = $obj.closest('.member-slide');
+        var $memList = $memberSlide.find('#mem-list');
+        var $activeCheck = $memList.find('.check.active');
+        var data = {
+            pid: itemId,
+            uid:''
+        };
+        var uid_arr_str;
+        $('.error-msg').remove();
+        $activeCheck.each(function(index, dom) {
+            var $dom = $(dom);
+            var id= $dom.closest('li').attr('id');
+            uid_arr.push(id);
+        });
+        if(!uid_arr.length) {
+            $('.member-box').prepend('<p class="error-msg">请选择成员</p>');
+            return false;
+        }
+        uid_arr_str = uid_arr.join();
+        data.uid = uid_arr_str;
+        if($('.member-slide').hasClass('assignmentClass')) {
+            var ownerId = parseInt(uid_arr_str);
+            url  = _ip+'/project/update';
+            data = {
+                id: itemId,
+                ownerId: ownerId
+            };
+            organizeAjaxPost(url, data, function(json) {
+                if (json.success) {
+                    var $deleteIcon = $('#list-line').find('#'+ownerId).find('.deletePuserClick');
+                    addMemberHide();
+                    deletePuserClick($deleteIcon);
+                }
+            });
+        }
+        else {
+            organizeAjaxPost(url, data, function(json) {
+                if (json.success) {
+                    addMemberHide();
+                    getPuser();
+                }
+            });
+        }
+    }
+
+    function deletePuserClick(obj) {
+        var $obj = $(obj);
+        var id = $obj.closest('li').attr('id');
+        var url  = _ip+'/puser/delete';
+        var data = {
+            pid: itemId,
+            uid: id
+        };
+        organizeAjaxGet(url, data, 'delete_puser', function(json) {
+            if (json.success) {
+                getPuser();
+            }
+        });
+    }
+
+    function puserList(owner_data, $content, leader) {
+        var getRandomNum = getRandom(1, 7);
+        var owner_photo = $('' +
+                '<div class="photo left">' +
+                '<i class="img"><img src="../images/portrait'+ getRandomNum  +'.png"></i>' +
+                '<div class="info-slide">' +
+                '<table class="slide-table">' +
+                '<tr><td class="td-img">' +
+                '<div class="img"><img src="../images/portrait'+ getRandomNum  +'.png"></div>' +
+                '<h3>'+ owner_data.name +'</h3>' +
+                '<h6>'+ owner_data.ocpName +'</h6>' +
+                '</td></tr>' +
+                '<tr><td><p><i class="tel"></i>'+ owner_data.phone +'</p></td></tr>' +
+                '<tr><td><p><i class="email"></i>'+ owner_data.email +'</p></td></tr>' +
+                '<tr> <td> <p><i class="dec"></i>管理团队，EMES咨询服务部，数联医信</p></td></tr>' +
+                '</table>' +
+                '</div>' +
+                '</div>');
+        var owner_info = $('<div class="info left"><p>'+ owner_data.name +'</p><p class="removeOcp">'+ owner_data.ocpName +'</p></div>');
+        var owner_opero = $('<div class="opero right"><a href="javascript:;" class="assignment" onclick="addMemberShow(this);">转让</a></div>');
+        var $div = $('<div class="member clear"></div>');
+        var $li = $('<li id="'+ owner_data.id +'"></li>');
+        if (leader === 'leader') {
+            $div.addClass('leader');
+        }
+        else if (leader === 'allUser') {
+            var single = '';
+            if(owner_data.single) {
+                single = 'single';
+            }
+            $li = $('<li class="'+ single +'" onclick="activeCheck(this)" id="'+ owner_data.id +'"></li>');
+            owner_info.find('.removeOcp').remove();
+            owner_opero = $('<div class="opero right"><a class="check" href="javascript:;" ></a></div>');
+        }
+        else {
+            owner_opero = $('<div class="opero right"><a class="deletePuserClick" href="javascript:;" onclick="deletePuserClick(this)">×</a></div>');
+        }
+        $div.append(owner_photo).append(owner_info).append(owner_opero);
+        $li.append($div);
+        $content.append($li);
+    }
+
+    function activeCheck(obj) {
+        var $obj = $(obj);
+        if ($obj.hasClass('single')) {
+            $obj.find('.check').addClass('active').closest('li').siblings().find('.check').removeClass('active');
+        }
+        else {
+            $obj.find('.check').addClass('active');
+        }
+    }
+
+    function getPuser() {
+        var url  = _ip+'/puser/select';
+        var data = {
+            id: itemId
+        };
+        $('.error-msg').remove();
+        organizeAjaxGet(url, data, 'get_puser', function(json) {
+            if (json.success) {
+                var $ownerLine = $('#owner-line').html('');
+                var $listLine = $('#list-line').html('');
+                var owner_data = json.data.owner;
+                var list = json.data.list;
+                puserList(owner_data, $ownerLine, 'leader');
+                for (var key in list) {
+                    puserList(list[key], $listLine);
+                }
+            }
+        });
+    };
+
+    $('.user-mask').on('click', function() {
+        var $itemMember = $('.item-member');
+        $('.user-mask').css('display', 'none');
+        $itemMember.animate({
+            right: '-298px',
+            opacity: 0
+        }, 500);
+    });
 </script>
 </body>
 </html>

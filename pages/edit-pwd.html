@@ -39,9 +39,14 @@
             <div class="menu-first current"><i class="system"></i>系统配置<l></l></div>
             <dl class="menu-second">
                 <dd><a href="user-manage.html" >用户管理</a></dd>
-                <dd><a href="organize-architecture.html" >组织机构</a></dd>
-                <dd><a href="quarters-manage.html">岗位管理</a></dd>
+                <dd><a href="organize-architecture.html" >组织架构</a></dd>
                 <dd><a href="tag-manage.html">标签管理</a></dd>
+            </dl>
+        </li>
+        <li>
+            <div class="menu-first"><i class="project"></i>文档管理<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="doc-manage.html">文档管理</a></dd>
             </dl>
         </li>
     </ul>
@@ -97,6 +102,7 @@
 <script src="../js/jquery.min.js"></script>
 <script src="../js/vue.js"></script>
 <script src="../js/common.js"></script>
+<script src="../js/user-tree.js"></script>
 <script type="text/javascript">
     $('.cancel-btn').on('click', function() {
         window.history.back(-1);
@@ -163,7 +169,7 @@
         var url  = _ip+'/user/changePwd';
         data.userId = 1;
         delete data.sureVerifyPwd;
-        editPwdAjaxPost(url, data, function(json) {
+        organizeAjaxPost(url, data, function(json) {
             if (json.success) {
                 var html ='<div class="share-box">' +
                         '<div class="success-text">修改密码成功</div><div class="buttons"><a href="javascript:closeAlert();" class="confirm">确定</a></div>' +
@@ -182,21 +188,6 @@
             }
         });
     });
-
-    function editPwdAjaxPost(url, data, callback) {
-        $.ajax({
-            url:url,
-            type: 'POST',
-            dataType: 'json',
-            contentType:'application/json',
-            data:JSON.stringify(data),
-            success: function(json) {
-                if(callback) {
-                    callback(json);
-                }
-            }
-        })
-    }
 
     function closeAlert() {
         $$.closeLayer();

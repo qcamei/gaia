@@ -3,7 +3,7 @@
   "scripts": {
     "prod": "gulp --production",
     "dev": "gulp watch",
-    "test":"gulp --pub test -w -s",
+    "test": "gulp --pub test -w -s",
     "build": "gulp  rev --pub url --w --s"
   },
   "devDependencies": {
@@ -13,6 +13,8 @@
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-cache": "^0.4.5",
+    "gulp-connect": "^5.0.0",
+    "gulp-connect-proxy": "^0.3.1",
     "gulp-ejs": "^2.3.0",
     "gulp-file-include": "^1.0.0",
     "gulp-filter": "^5.0.0",

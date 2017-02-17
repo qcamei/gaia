@@ -1,31 +1,32 @@
-var _ip = 'http://10.0.1.156:8080';
+var _ip = 'http://192.168.6.23:8080';
 
 /*----------
  * 头部页面头部
  *-----------------------------*/
-var header = new Vue({
-    el:'#header',
-    data:{
-        datas: '<div class="right-user"><div class="right t">小丽，消息<span>2</span></div>' +
-        '<div class="head-down"><ul><li><a href="edit-pwd.html">修改密码</a></li><li><a onclick="loginOut()">退出系统</a></li></ul></div><div>'
-    }
-})
+if (!$('.login-box').length) {
+    var header = new Vue({
+        el:'#header',
+        data:{
+            datas: '<div class="right-user"><div class="right t">小丽，消息<span>2</span></div>' +
+            '<div class="head-down"><ul><li><a href="edit-pwd.html">修改密码</a></li><li><a onclick="loginOut()">退出系统</a></li></ul></div><div>'
+        }
+    })
+}
 function loginOut(){
     var url = _ip + '/loginOut';
     $.ajax({
-        url:url,
+        url: url,
         type: 'GET',
         dataType: 'jsonp',
-        contentType:'application/json',
+        contentType: 'application/json',
         jsonpCallback: 'loginOut',
-        success: function(json) {
-            if(json.success){
+        success: function (json) {
+            if (json.success) {
                 location.href = 'user-login.html';
             }
         }
     })
 }
-
 /*----------
  * 侧边导航
  *-----------------------------*/
@@ -51,9 +52,6 @@ var header = new Vue({
     '</ul></aside>'
     }
 })
-
-
-
 
 /*----------
  * 弹框相关的通用样式
@@ -419,7 +417,7 @@ function attachment(config){
         
         formData.append('file', $('#file')[0].files[0]);
         $.ajax({
-            url: _ip+'/file/upload',
+            url:  that.config.url ||_ip+'/file/upload',
             type: 'POST',       
             cache: false,
             data: formData,
@@ -428,6 +426,10 @@ function attachment(config){
         })
         .done(function(res) {
             if(res.success){
+                if(that.config.success) {
+                    that.config.success(res);
+                    return false;
+                }
                 var name = res.data[0].split('__')[1];
                 var h = '<li rel='+res.data[0] +'><div>'+name+'<span class="delete">删除</span></div></li>';
                 that.config.addAttachmentList.append(h);

@@ -90,14 +90,19 @@ function treeLi($firstUl, msg) {
 
 
 function organizeAjaxGet(url, data, jsonpCall, callback) {
+    var dataType= jsonpCall ? 'jsonp': 'json';
     $.ajax({
         url:url,
         type: 'GET',
-        dataType: 'jsonp',
+        dataType: dataType,
         data: data,
         jsonp: 'callback',
         jsonpCallback: jsonpCall,
         success: function(json) {
+            if(json.message === 'LOGIN') {
+                window.location.href = '/pages/user-login.html';
+                return false;
+            }
             if(callback) {
                 callback(json);
             }
@@ -113,9 +118,21 @@ function organizeAjaxPost(url, data, callback) {
         contentType:'application/json',
         data:JSON.stringify(data),
         success: function(json) {
+            if(json.message === 'LOGIN') {
+/*                window.location.href = '/pages/user-login.html';
+                return false;*/
+            }
             if(callback) {
                 callback(json);
             }
         }
     })
+}
+
+function getRandom(m, n) {
+    var randomNum = 0;
+    while (!randomNum) {
+        randomNum = parseInt(Math.random() * (n - m));
+    }
+    return randomNum;
 }

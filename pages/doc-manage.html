@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文档管理</title>
+    <link href="../css/mems-index.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/doc-manage.css">
+</head>
+<body>
+<!--header-->
+<header id="header" class="header" v-html="datas">
+    <div>{{datas}}</div>
+</header>
+
+<!--menu-->
+<aside class="aside">
+    <div class="logo">
+        运营平台
+    </div>
+    <ul class="menu">
+        <li>
+            <div class="menu-first"><i class="dash"></i>Dashboard<l></l></div>
+        </li>
+        <li>
+            <div class="menu-first" ><i class="project"></i>项目管理<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="#">待办事项</a></dd>
+                <dd><a href="projectManage/mems-pro-list.html">项目列表</a></dd>
+            </dl>
+        </li>
+        <li>
+            <div class="menu-first"><i class="need"></i>需求管理<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="pm-need-list.html" >需求池</a></dd>
+                <dd><a href="pm-bug-list.html">缺陷池</a></dd>
+            </dl>
+        </li>
+        <li>
+            <div class="menu-first"><i class="system"></i>系统配置<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="user-manage.html" >用户管理</a></dd>
+                <dd><a href="organize-architecture.html" >组织架构</a></dd>
+                <dd><a href="tag-manage.html">标签管理</a></dd>
+            </dl>
+        </li>
+        <li>
+            <div class="menu-first current"><i class="project"></i>文档管理<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="doc-manage.html" class="current">文档管理</a></dd>
+            </dl>
+        </li>
+    </ul>
+</aside>
+
+
+<!--content-->
+<div class="content">
+    <div class="page-header">
+        <div class="header-info"><i></i><a href="user-manage.html">文档管理</a>&nbsp;>&nbsp;文档管理</div>
+    </div>
+    <div class="page-inner">
+        <div class="item-content">
+            <div class="table-box">
+                <table>
+                    <thead>
+                        <tr>
+                            <td colspan="3">
+                                <a href="javascript:;" class="a-upload" id="fileUpload"><input id="file" value="请选择" type="file"/>上传文件</a>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody id="bodyList">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="pages clear">
+                <div class="page-list clear" id="pageList">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="user-mask"></div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/user-tree.js"></script>
+<script type="text/javascript">
+    var url  = _ip+'/operation-web/file/uploading';
+    attachment.init({
+        url: url,
+        fileUpload:$('#fileUpload'),
+        addAttachmentList:$('#addAttachmentList'),
+        success: function(json) {
+            if (json.success) {
+                getDocList(1);
+            }
+        }
+    });
+
+    function getDocList(p, checPara) {
+        var PerPage = 2;
+        var url  = _ip+'/operation-web/file/fileList?page='+p+'&size='+PerPage;
+        var data = checPara || {};
+        organizeAjaxPost(url, data, function(json) {
+            if(!json.data || json.data.length <= 0){
+                $('#bodyList').html('<tr><td colspan="3" style="text-align: center">暂无数据！</td></tr>');
+                $('#pageList').html('');
+                return false;
+            }
+            var _data     = [];
+            var _pager    = [];
+            var userName= $('#userName-text').val();
+            var totalPage = json.totlePage;
+            var prev      = p-1;
+            if(prev < 1)prev = 1;
+            var next = p + 1;
+            if(next > totalPage)next = totalPage;
+            for(var k = 0, kk = json.data.length; k < kk; k++){
+                var msg = json.data[k];
+                var size_text = '';
+                console.log(typeof msg.size);
+                if (msg.size >= 1024*1024*1024) {
+                    size_text = parseFloat((msg.size / 1024*1024*1024).toFixed(2)) + 'G';
+                }
+                else if(msg.size >= 1024*1024) {
+                    size_text = parseFloat((msg.size / 1024*1024).toFixed(2)) + 'M';
+                }
+                else if(msg.size >= 1024) {
+                    size_text = parseFloat((msg.size / 1024).toFixed(2)) + 'KB';
+                }
+                else {
+                    size_text = parseFloat(msg.size.toFixed(2)) + 'B';
+                }
+                var msgData = {
+                    id: msg.id,
+                    name: msg.name,
+                    size: msg.size,
+                    size_text: size_text,
+                    path: msg.path
+                };
+                _data.push("<tr data-edit="+ JSON.stringify(msgData) +">");
+                _data.push('<td class="organize">' +
+                        '<span>'+ msg.name +'</span>' +
+                        '<span class="right">' +
+                        '<a href="'+_ip +'/operation-web/file/download?path='+ msg.path +'">' +
+                        '<i class="download display-middle" onclick=""></i>' +
+                        '</a>' +
+                        '</span>' +
+                        '</td>');
+                _data.push('<td>'+ msgData.size_text +'</td>');
+                _data.push('<td>上传于 '+ msg.createTime+'</td>');
+            }
+            _pager.push('<span>共：'+ totalPage +'页</span>');
+            _pager.push('<span>您正在第：'+p+'页</span>');
+            _pager.push('<a href="javascript:;" class="page-pre" onclick="pageClick('+prev+ ');return !1;">上一页</a>');
+            _pager.push('<a href="javascript:;" class="page-next" onclick="pageClick('+next+');return !1;">下一页</a>');
+            _pager.push('<span>前往第</span>');
+            _pager.push('<input type="text" id="goToPage"/>');
+            _pager.push('<span>页</span>');
+
+            $('#bodyList').html(_data.join("")).data('page', p);
+            $('#pageList').html(_pager.join(""));
+            $('#goToPage').bind('keyup', function(event) {
+                var userName= $('#userName-text').val();
+                if (event.keyCode == "13") {
+
+                    var v = parseInt($(this).val());
+                    if(!/^[1-9]\d*$/.test(v)){
+                        return false;
+                    }else{
+                        if(v <= 1){
+                            getData(1, {name: userName});
+                        }
+                        else if(v >= totalPage){
+                            getData(totalPage, {name: userName});
+                        }else{
+                            getData(v, {name: userName});
+                        }
+                    }
+
+                }
+            });
+        });
+    }
+
+    getDocList(1);
+
+
+    function pageClick(page) {
+        getDocList(page, {});
+    }
+
+    function downDocClick(obj) {
+        var $obj = $(obj);
+        var path = $obj.closest('tr').data('edit').path;
+        var url  = _ip+'/operation-web/file/download?path='+ path;
+        organizeAjaxGet(url, {  }, '', function(json) {
+
+        })
+    }
+</script>
+</body>
+</html>

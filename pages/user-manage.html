@@ -43,6 +43,12 @@
                 <dd><a href="tag-manage.html">标签管理</a></dd>
             </dl>
         </li>
+        <li>
+            <div class="menu-first"><i class="project"></i>文档管理<l></l></div>
+            <dl class="menu-second">
+                <dd><a href="doc-manage.html">文档管理</a></dd>
+            </dl>
+        </li>
     </ul>
 </aside>
 
@@ -174,98 +180,90 @@
         var PerPage = 20;
         var url  = _ip+'/user/getUserList?page='+p+'&size='+PerPage;
         var data = checPara || {'name': 'a'};
-        $.ajax({
-            url:url,
-            type : "POST",
-            dataType: 'json',
-            contentType:'application/json',
-            data:JSON.stringify(data),
-            success:function(json){
-                if(!json.data || json.data.length <= 0){
-                    $('#bodyList').html('<tr><td colspan="8" style="text-align: center">暂无数据！</td></tr>');
-                    $('#pageList').html('');
-                    return false;
-                }
-                var _data     = [];
-                var _pager    = [];
-                var userName= $('#userName-text').val();
-                var totalPage = json.totlePage;
-                var prev      = p-1;
-                if(prev < 1)prev = 1;
-                var next = p + 1;
-                if(next > totalPage)next = totalPage;
-                for(var k = 0, kk = json.data.length; k < kk; k++){
-                    var msg = json.data[k];
-                    var roleName = '-';
-                    var msgData = {
-                        id: msg.id,
-                        name: msg.name,
-                        phone: msg.phone,
-                        email: msg.email,
-                        role: msg.role,
-                        department: msg.department,
-                        dptName: msg.dptName,
-                        occupation: msg.occupation,
-                        ocpName: msg.ocpName,
-                        userName: msg.userName
-                    };
-                    switch (msgData.role) {
-                        case 0:
-                            roleName = '超级管理员';
-                            break;
-                        case 1:
-                            roleName = '管理员';
-                            break;
-                        case 2:
-                            roleName = '普通用户';
-                            break;
-                    }
-                    _data.push("<tr data-edit="+ JSON.stringify(msgData) +">");
-                    _data.push('<td>'+msg.name+'</td>');
-                    _data.push('<td>'+(msg.userName || "-")+'</td>');
-                    _data.push('<td>'+msg.phone+'</td>');
-                    _data.push('<td>'+ msg.email  +'</td>');
-                    _data.push('<td>'+roleName+'</td>');
-                    _data.push('<td>'+msg.dptName+'</td>');
-                    _data.push('<td>'+msg.ocpName+'</td>');
-                    _data.push('<td>' +
-                            '<a href="javascript:;" onclick="editUser(this)">编辑</a>' +
-                            '<a href="javascript:;" onclick="disableUser(this)" data-id="'+ msg.id +'">'+ (msg.status? "禁用":"启用") +'</a> ' +
-                            '<a href="javascript:;" onclick="resetPwd(this)" data-id="'+ msg.id +'">重置密码</a></td>');
-                }
-                _pager.push('<span>共：'+ totalPage +'页</span>');
-                _pager.push('<span>您正在第：'+p+'页</span>');
-                _pager.push('<a href="javascript:;" class="page-pre" onclick="pageClick('+prev+ ');return !1;">上一页</a>');
-                _pager.push('<a href="javascript:;" class="page-next" onclick="pageClick('+next+');return !1;">下一页</a>');
-                _pager.push('<span>前往第</span>');
-                _pager.push('<input type="text" id="goToPage"/>');
-                _pager.push('<span>页</span>');
-
-                $('#bodyList').html(_data.join("")).data('page', p);
-                $('#pageList').html(_pager.join(""));
-                $('#goToPage').bind('keyup', function(event) {
-                    var userName= $('#userName-text').val();
-                    if (event.keyCode == "13") {
-
-                        var v = parseInt($(this).val());
-                        if(!/^[1-9]\d*$/.test(v)){
-                            return false;
-                        }else{
-                            if(v <= 1){
-                                getData(1, {name: userName});
-                            }
-                            else if(v >= totalPage){
-                                getData(totalPage, {name: userName});
-                            }else{
-                                getData(v, {name: userName});
-                            }
-                        }
-
-                    }
-                });
-
+        organizeAjaxPost(url, data, function(json) {
+            if(!json.data || json.data.length <= 0){
+                $('#bodyList').html('<tr><td colspan="8" style="text-align: center">暂无数据！</td></tr>');
+                $('#pageList').html('');
+                return false;
             }
-        })
+            var _data     = [];
+            var _pager    = [];
+            var userName= $('#userName-text').val();
+            var totalPage = json.totlePage;
+            var prev      = p-1;
+            if(prev < 1)prev = 1;
+            var next = p + 1;
+            if(next > totalPage)next = totalPage;
+            for(var k = 0, kk = json.data.length; k < kk; k++){
+                var msg = json.data[k];
+                var roleName = '-';
+                var msgData = {
+                    id: msg.id,
+                    name: msg.name,
+                    phone: msg.phone,
+                    email: msg.email,
+                    role: msg.role,
+                    department: msg.department,
+                    dptName: msg.dptName,
+                    occupation: msg.occupation,
+                    ocpName: msg.ocpName,
+                    userName: msg.userName
+                };
+                switch (msgData.role) {
+                    case 0:
+                        roleName = '超级管理员';
+                        break;
+                    case 1:
+                        roleName = '管理员';
+                        break;
+                    case 2:
+                        roleName = '普通用户';
+                        break;
+                }
+                _data.push("<tr data-edit="+ JSON.stringify(msgData) +">");
+                _data.push('<td>'+msg.name+'</td>');
+                _data.push('<td>'+(msg.userName || "-")+'</td>');
+                _data.push('<td>'+msg.phone+'</td>');
+                _data.push('<td>'+ msg.email  +'</td>');
+                _data.push('<td>'+roleName+'</td>');
+                _data.push('<td>'+msg.dptName+'</td>');
+                _data.push('<td>'+msg.ocpName+'</td>');
+                _data.push('<td>' +
+                        '<a href="javascript:;" onclick="editUser(this)">编辑</a>' +
+                        '<a href="javascript:;" onclick="disableUser(this)" data-id="'+ msg.id +'">'+ (msg.status? "禁用":"启用") +'</a> ' +
+                        '<a href="javascript:;" onclick="resetPwd(this)" data-id="'+ msg.id +'">重置密码</a></td>');
+            }
+            _pager.push('<span>共：'+ totalPage +'页</span>');
+            _pager.push('<span>您正在第：'+p+'页</span>');
+            _pager.push('<a href="javascript:;" class="page-pre" onclick="pageClick('+prev+ ');return !1;">上一页</a>');
+            _pager.push('<a href="javascript:;" class="page-next" onclick="pageClick('+next+');return !1;">下一页</a>');
+            _pager.push('<span>前往第</span>');
+            _pager.push('<input type="text" id="goToPage"/>');
+            _pager.push('<span>页</span>');
+
+            $('#bodyList').html(_data.join("")).data('page', p);
+            $('#pageList').html(_pager.join(""));
+            $('#goToPage').bind('keyup', function(event) {
+                var userName= $('#userName-text').val();
+                if (event.keyCode == "13") {
+
+                    var v = parseInt($(this).val());
+                    if(!/^[1-9]\d*$/.test(v)){
+                        return false;
+                    }else{
+                        if(v <= 1){
+                            getData(1, {name: userName});
+                        }
+                        else if(v >= totalPage){
+                            getData(totalPage, {name: userName});
+                        }else{
+                            getData(v, {name: userName});
+                        }
+                    }
+
+                }
+            });
+        });
     }
     getData(1, {name: userName});
     $('.cancel-user-btn, .user-mask').on('click', function() {
@@ -344,7 +342,7 @@
             data.id = $('[name="id"]').val();
         }
         verify_user($userName, function() {
-            userAjaxPost(url, data, function(json) {
+            organizeAjaxPost(url, data, function(json) {
                 if (json.success) {
                     $('.cancel-user-btn').click();
                     getData(1, {name: userName});
@@ -369,7 +367,7 @@
             }
             return false;
         }
-        userAjaxGet(url, data, 'verifyUser', function(json) {
+        organizeAjaxGet(url, data, 'verifyUser', function(json) {
             if (json.success) {
                 $obj.parent().append('<p class="success-msg">'+ json.message +'</p>');
                 if(callback) {
@@ -413,7 +411,7 @@
         if(!id) {
             return false;
         }
-        userAjaxGet(url, data, 'disableUser', function(json) {
+        organizeAjaxGet(url, data, 'disableUser', function(json) {
             if (json.success) {
                 getData($('#bodyList').data('page'), {name: userName});
             }
@@ -428,7 +426,7 @@
         if(!id) {
             return false;
         }
-        userAjaxGet(url, data, 'resetPwd', function(json) {
+        organizeAjaxGet(url, data, 'resetPwd', function(json) {
             if (json.success) {
 
             }
@@ -464,37 +462,6 @@
         });
     }
 
-    function userAjaxGet(url, data, jsonpCall, callback) {
-        $.ajax({
-            url:url,
-            type: 'GET',
-            dataType: 'jsonp',
-            data: data,
-            jsonp: 'callback',
-            jsonpCallback: jsonpCall,
-            success: function(json) {
-                if(callback) {
-                   callback(json);
-                }
-            }
-        })
-    }
-
-
-    function userAjaxPost(url, data, callback) {
-        $.ajax({
-            url:url,
-            type: 'POST',
-            dataType: 'json',
-            contentType:'application/json',
-            data:JSON.stringify(data),
-            success: function(json) {
-                if(callback) {
-                    callback(json);
-                }
-            }
-        })
-    }
 </script>
 </body>
 </html>
