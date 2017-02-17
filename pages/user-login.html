@@ -44,8 +44,6 @@
         organizeAjaxPost(url, data, function(json) {
             if (json.success) {
                 window.location.href = 'user-manage.html';
-                $.cookie('username',json.data.userName);
-                $.cookie('userid',json.data.id);
             }
             else {
                 $('.head').after('<p class="error-msg">'+ json.message +'</p>');

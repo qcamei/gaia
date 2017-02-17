@@ -171,7 +171,7 @@
         }
 
         var url  = _ip+'/user/changePwd';
-        data.userId = 1;
+        data.userId = globleUserId;
         delete data.sureVerifyPwd;
         organizeAjaxPost(url, data, function(json) {
             if (json.success) {

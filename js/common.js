@@ -1,31 +1,6 @@
-// var _ip = 'http://121.42.187.170';
+ var _ip = 'http://121.42.187.170';
 
- var _ip = 'http://190.168.6.23:8080';
-/*----------
- * 判断是否登陆
- *-----------------------------*/
-var globleUserId;
-function isLogin(){
-    var url = _ip + '/user/getLoginUserInfo';
-    $.ajax({
-        url:url,
-        type: 'GET',
-        dataType: 'jsonp',
-        async:false,
-        contentType:'application/json',
-        jsonpCallback: 'islogin',
-        success: function(json) {
-            if(!json.success){
-                location.href = 'user-manage.html';
-            }
-        }
-    })
-}
-
-isLogin();
-globleUserId = parseInt($.cookie('userid'));
-
-
+// var _ip = 'http://192.168.6.23:8080';
 
 /*----------
  * 头部页面头部
@@ -38,7 +13,68 @@ if (!$('.login-box').length) {
             datas: '<div class="right-user"><div class="right t" id="headusername">小丽</div>' +
             '<div class="head-down"><ul><li><a href="edit-pwd.html">修改密码</a></li><li><a onclick="loginOut()">退出系统</a></li></ul></div><div>'
         }
-    })
+    });
+    /*----------
+     * 侧边导航
+     *-----------------------------*/
+    var aside = new Vue({
+        el:'#aside',
+        data:{
+            datas: '<aside class="aside"> <div class="logo">运营平台</div><ul class="menu">'+
+
+            '<li id="promanage"><div class="menu-first"><i class="project"></i>项目管理</div>'+
+            '<dl class="menu-second">'+
+            '<dd><a href="mems-pro-list.html" id="prolit">项目列表</a></dd>'+
+            '</dl>'+
+            '</li>'+
+            '<li id="needmange"><div class="menu-first"><i class="need"></i>需求管理</div>'+
+            '<dl class="menu-second">'+
+            '<dd><a href="pm-need-list.html" id="needlist">需求池</a></dd>'+
+            '<dd><a href="pm-bug-list.html" id="buglist">缺陷池</a></dd>'+
+            '</dl>'+
+            '</li>'+
+            '<li id="system"><div class="menu-first"><i class="system"></i>系统配置</div>'+
+            '<dl class="menu-second">'+
+            '<dd><a href="user-manage.html" id="usermanage">用户管理</a></dd>'+
+            '<dd><a href="organize-architecture.html" id="organize">组织架构</a></dd>'+
+            '<dd><a href="tag-manage.html" id="tagmanage">标签管理</a></dd>'+
+            '</dl>'+
+            '</li>'+
+            '<li id="documentmanage"><div class="menu-first"><i class="project"></i>文档管理</div>'+
+            '<dl class="menu-second">'+
+            '<dd><a href="doc-manage.html" id="documentmanage">文档管理</a></dd>'+
+            '</dl>'+
+            '</li>'+
+            '</ul></aside>'
+        }
+    });
+    /*----------
+     * 判断是否登陆
+     *-----------------------------*/
+    var globleUserId;
+    function isLogin(){
+        var url = _ip + '/user/getLoginUserInfo';
+        $.ajax({
+            url:url,
+            type: 'GET',
+            dataType: 'jsonp',
+            async:false,
+            contentType:'application/json',
+            jsonpCallback: 'islogin',
+            success: function(json) {
+                if(!json.success){
+                    location.href = 'user-login.html';
+                }
+                else {
+                    $.cookie('username',json.data.userName);
+                    $.cookie('userid',json.data.id);
+                }
+            }
+        })
+    }
+
+    isLogin();
+    globleUserId = parseInt($.cookie('userid'));
 }
 $('#headusername').html($.cookie('username'));
 
@@ -57,40 +93,7 @@ function loginOut(){
         }
     })
 }
-/*----------
- * 侧边导航
- *-----------------------------*/
-var header = new Vue({
-    el:'#aside',
-    data:{
-        datas: '<aside class="aside"> <div class="logo">运营平台</div><ul class="menu">'+
-        
-        '<li id="promanage"><div class="menu-first"><i class="project"></i>项目管理</div>'+
-            '<dl class="menu-second">'+
-                '<dd><a href="mems-pro-list.html" id="prolit">项目列表</a></dd>'+
-            '</dl>'+
-        '</li>'+
-        '<li id="needmange"><div class="menu-first"><i class="need"></i>需求管理</div>'+
-            '<dl class="menu-second">'+
-                '<dd><a href="pm-need-list.html" id="needlist">需求池</a></dd>'+
-                '<dd><a href="pm-bug-list.html" id="buglist">缺陷池</a></dd>'+
-            '</dl>'+
-        '</li>'+
-        '<li id="system"><div class="menu-first"><i class="system"></i>系统配置</div>'+
-            '<dl class="menu-second">'+
-                '<dd><a href="user-manage.html" id="usermanage">用户管理</a></dd>'+
-                '<dd><a href="organize-architecture.html" id="organize">组织架构</a></dd>'+
-                '<dd><a href="tag-manage.html" id="tagmanage">标签管理</a></dd>'+
-            '</dl>'+
-        '</li>'+
-        '<li id="documentmanage"><div class="menu-first"><i class="project"></i>文档管理</div>'+
-            '<dl class="menu-second">'+
-                '<dd><a href="doc-manage.html" id="documentmanage">文档管理</a></dd>'+
-            '</dl>'+
-        '</li>'+
-    '</ul></aside>'
-    }
-})
+
 
 function modityAsideCurrent(){
     var pathname = location.pathname;

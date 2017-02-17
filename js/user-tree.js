@@ -159,3 +159,13 @@ function successAlert(text) {
         $$.closeLayer();
     }, 1500);
 }
+
+function tooltipOver(obj) {
+    var $obj = $(obj);
+    $obj.prev().css('display', 'none');
+}
+
+function tooltipOut(obj) {
+    var $obj = $(obj);
+    $obj.prev().attr('style', '');
+}

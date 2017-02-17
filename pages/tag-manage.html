@@ -96,36 +96,6 @@
     </div>
 </div>
 <div class="user-mask" onclick="hideMode()"></div>
-<div class="display-middle tag-display">
-    <div class="display-middle tag-btn text-tag">
-        <div class="tooltip top">
-            <div class="tooltip-arrow"></div>
-            <div class="tooltip-inner">
-                点击编辑
-            </div>
-        </div>
-        <div class="tooltip bottom delete-alert">
-            <div class="tooltip-arrow"></div>
-            <div class="tooltip-inner">
-                <div class="tooltip-title">确认要删除该标签吗？</div>
-                <div class="tooltip-describe">删除后已关联项目的标签也将删除。</div>
-                <div class="tooltip-button">
-                    <a href="javascript:;" class="sure-delete">确认</a>
-                    <a href="javascript:;" class="cancel-delete">取消</a>
-                </div>
-            </div>
-        </div>
-        <span class="display-middle">资产盘点</span>
-        <span class="delete-btn display-middle">
-                            <span>×</span>
-                        </span>
-    </div>
-    <div class="add-tag-line" style="display: none">
-        <input type="text" class="add-tag-input display-middle" placeholder="标签名称">
-        <button class="tag-btn sure-btn display-middle" >确认</button>
-        <button class="tag-btn cancel-btn display-middle">取消</button>
-    </div>
-</div>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.cookie.js"></script>
 <script src="../js/vue.js"></script>
@@ -236,7 +206,7 @@
                             '<div class="tooltip-arrow"></div>' +
                             '<div class="tooltip-inner">点击编辑</div>' +
                             '</div>');
-                    var $deleteAlert =  $('<div class="tooltip bottom delete-alert">' +
+                    var $deleteAlert =  $('<div class="tooltip bottom delete-alert" onmouseover="tooltipOver(this)" onmouseout="tooltipOut(this)">' +
                             '<div class="tooltip-arrow"></div>' +
                             '<div class="tooltip-inner">' +
                             '<div class="tooltip-title">确认要删除该标签吗？</div>' +
@@ -251,7 +221,7 @@
                     var $deleteBtn = $('<span class="delete-btn display-middle" onclick="deleteBtn(this); event.stopPropagation();"><span>×</span></span>');
                     var $textTag = $('<div class="display-middle tag-btn text-tag" onclick="addBtnClick(this, 1)"></div>');
                     var addTagLine = $('<div class="add-tag-line" style="display: none">' +
-                            '<input type="text" class="add-tag-input display-middle" placeholder="标签名称">' +
+                            '<input maxlength="12" type="text" class="add-tag-input display-middle" placeholder="标签名称">' +
                             '<button class="tag-btn sure-btn display-middle" onclick="addSureBtn(this, 1)">确认</button>' +
                             '<button class="tag-btn cancel-btn display-middle cancel-add-edit" onclick="cancelAddEdit(this)">取消</button>' +
                             '</div>');
