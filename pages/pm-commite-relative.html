@@ -13,7 +13,10 @@
 </header>
 
 <!--menu-->
-<aside class="aside">
+<aside id="aside" class="aside" v-html="datas">
+    <div>{{datas}}</div>
+</aside>
+<!-- <aside class="aside">
     <div class="logo">
         运营平台
     </div>
@@ -50,7 +53,7 @@
             </dl>
         </li>
     </ul>
-</aside>
+</aside> -->
 
 <!--content-->
 <div class="content">
@@ -119,9 +122,10 @@
         </div>
     </div>
 </div>
+<script src="../js/jquery.min.js"></script>
 <script src="../js/vue.js" type="text/javascript"></script>
 <script src="../js/common.js"></script>
-<script src="../js/jquery.min.js"></script>
+
 <script type="text/javascript">
     _API.getTypeList('typeList')
         .getProductList('productList')

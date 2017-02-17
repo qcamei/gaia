@@ -19,7 +19,7 @@ function isLogin(){
         }
     })
 }
-isLogin()
+// isLogin()
 
 
 
@@ -53,28 +53,81 @@ function loginOut(){
 /*----------
  * 侧边导航
  *-----------------------------*/
-// var header = new Vue({
-//     el:'#aside',
-//     data:{
-//         datas: '<aside class="aside"> <div class="logo">运营平台</div><ul class="menu">'+
-//         '<li><div class="menu-first"><i class="dash"></i>Dashboard<l></l></div></li>'+
-//         '<li><div class="menu-first current"><i class="project"></i>项目管理<l></l></div>'+
-//             '<dl class="menu-second">'+
-//                 '<dd><a >待办事项</a></dd>'+
-//                 '<dd><a href="mems-pro-list.html" class="current">项目列表</a></dd>'+
-//             '</dl>'+
-//         '</li>'+
-//         '<li><div class="menu-first "><i class="need"></i>需求管理<l></l></div>'+
-//             '<dl class="menu-second">'+
-//                 '<dd><a href="pm-need-list.html" >需求池</a></dd>'+
-//                 '<dd><a href="pm-bug-list.html">缺陷池</a></dd>'+
-//             '</dl>'+
-//         '</li>'+
-//         '<li><div class="menu-first"><i class="system"></i>系统配置<l></l></div>'+
-//         '</li>'+
-//     '</ul></aside>'
-//     }
-// })
+var header = new Vue({
+    el:'#aside',
+    data:{
+        datas: '<aside class="aside"> <div class="logo">运营平台</div><ul class="menu">'+
+        
+        '<li id="promanage"><div class="menu-first"><i class="project"></i>项目管理</div>'+
+            '<dl class="menu-second">'+
+                '<dd><a href="mems-pro-list.html" id="prolit">项目列表</a></dd>'+
+            '</dl>'+
+        '</li>'+
+        '<li id="needmange"><div class="menu-first"><i class="need"></i>需求管理</div>'+
+            '<dl class="menu-second">'+
+                '<dd><a href="pm-need-list.html" id="needlist">需求池</a></dd>'+
+                '<dd><a href="pm-bug-list.html" id="buglist">缺陷池</a></dd>'+
+            '</dl>'+
+        '</li>'+
+        '<li id="system"><div class="menu-first"><i class="system"></i>系统配置</div>'+
+            '<dl class="menu-second">'+
+                '<dd><a href="user-manage.html" id="usermanage">用户管理</a></dd>'+
+                '<dd><a href="organize-architecture.html" id="organize">组织架构</a></dd>'+
+                '<dd><a href="tag-manage.html" id="tagmanage">标签管理</a></dd>'+
+            '</dl>'+
+        '</li>'+
+        '<li id="documentmanage"><div class="menu-first"><i class="project"></i>文档管理</div>'+
+            '<dl class="menu-second">'+
+                '<dd><a href="doc-manage.html" id="documentmanage">文档管理</a></dd>'+
+            '</dl>'+
+        '</li>'+
+    '</ul></aside>'
+    }
+})
+
+function modityAsideCurrent(){
+    var pathname = location.pathname;
+
+    var obj = {
+
+        promanage:{
+            prolit:['mems-pro-list','mems-pro-creat-1','mems-pro-detail-baseinfo','mems-pro-creat-1','mems-pro-creat-2','mems-pro-creat-3']
+        }, //项目管理文件列表
+        needmange:{
+            needlist:['pm-need-list','pm-need-commite','pm-need-list-meme','pm-need-commite-pm','pm-need-detail-pm','pm-need-commite','pm-commite-relative'],
+            buglist:['pm-bug-list','pm-bug-commite','pm-bug-detail','pm-bug-detail-edit']
+        },   //需求管理文件列表
+        system:{
+            usermanage:['user-manage'],
+            organize:['organize-architecture'],
+            tagmanage:['tag-manage']
+        },      //系统配置文件列表
+        documentmanage:{
+            docmanage:['doc-manage']
+        }   //文档管理文件列表
+    }
+
+    for(var k in obj){
+        var first = obj[k];
+        for(var i in first){
+            var second = first[i];
+            for(var j = 0, jj = second.length; j < jj; j++){
+                var pagename = second[j];
+                if(pathname.indexOf(pagename) > -1){
+                    $('#'+k).find('div.menu-first').addClass('current');
+                    $('#'+i).addClass('current');
+                    break;
+                }
+
+            }
+        }
+    }
+
+}
+
+modityAsideCurrent();    
+
+
 
 /*----------
  * 弹框相关的通用样式
