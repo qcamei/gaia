@@ -94,6 +94,10 @@ function organizeAjaxGet(url, data, jsonpCall, callback) {
     $.ajax({
         url:url,
         type: 'GET',
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
         dataType: dataType,
         data: data,
         jsonp: 'callback',
@@ -114,13 +118,17 @@ function organizeAjaxPost(url, data, callback) {
     $.ajax({
         url:url,
         type: 'POST',
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
         dataType: 'json',
         contentType:'application/json',
         data:JSON.stringify(data),
         success: function(json) {
             if(json.message === 'LOGIN') {
-/*                window.location.href = '/pages/user-login.html';
-                return false;*/
+                window.location.href = '/pages/user-login.html';
+                return false;
             }
             if(callback) {
                 callback(json);
