@@ -63,7 +63,7 @@ if (!$('.login-box').length) {
             jsonpCallback: 'islogin',
             success: function(json) {
                 if(!json.success){
-                    location.href = 'user-login.html';
+                    // location.href = 'user-login.html';
                 }
                 else {
                     $.cookie('username',json.data.userName);

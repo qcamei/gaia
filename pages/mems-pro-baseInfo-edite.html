@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>mems-编辑项目基本信息</title>
+    <title>mems-创建项目</title>
     <link href="../css/creat-pro.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
@@ -24,18 +24,7 @@
     </div>
     <div class="creat-pro">
         <div class="pro-head"><i></i>创建项目</div>
-        <div class="steps">
-            <div class="line">
-                <i class="done"></i>
-                <i></i>
-            </div>
-            <div class="circle">
-                <p class="done">1</p><p class="done">2</p><p>3</p>
-            </div>
-            <div class="s-d">
-                <p class="done">选择医院</p><p class="done">完善信息</p><p>完成</p>
-            </div>
-        </div>
+
 
         <table class="pro-table">
             <thead>
@@ -68,7 +57,7 @@
 
                 <tr>
                     <td><span class="red-start">*</span>有无高铁</td>
-                    <td><label><input type="radio" value="1" name="hsrEnable">&nbsp;有</label>&emsp;<label><input type="radio" name="hsrEnable" checked="checked" value="0">&nbsp;无</label></td>
+                    <td><label><input type="radio" value="1" name="hsrEnable">&nbsp;有</label>&emsp;<label><input type="radio" name="hsrEnable" value="0">&nbsp;无</label></td>
                 </tr>
                 <tr>
                     <td>邮编</td>
@@ -133,19 +122,72 @@
 <script src="../js/common.js"></script>
 
 <script type="text/javascript">
-    var position = $$.getUrlParaObj('position');
-    if(position){
-        position = position['position'];
-        var parr = position.split('／');
-    _API.getDistrict('district',parr[0],true)
-            .getPrivence('province',parr[1],true,parr[0])
-            .getCity('city',parr[2],true,parr[0],parr[1]);
-    }
+//    var position = $$.getUrlParaObj('position');
+//    if(position){
+//        position = position['position'];
+//        var parr = position.split('／');
+//    _API.getDistrict('district',parr[0],true)
+//            .getPrivence('province',parr[1],true,parr[0])
+//            .getCity('city',parr[2],true,parr[0],parr[1]);
+//    }
 
     _API.getNeedSource('needSource')
         .getPSegmentationList('segmentation')
         .getPLevelList('level')
         .dynamicDistrick('district','province','city');
+
+
+
+    getItem()
+    function getItem() {
+
+        var url = _ip + '/project/select?id=' + getUrlId();
+        var data = {}
+
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'jsonp',
+            async: false,
+            contentType: 'application/json',
+            jsonpCallback: 'info',
+            success: function (data) {
+                if (data.message === 'LOGIN') {
+                    location.href = 'user-login.html';
+                    return false;
+                }
+
+                if (data.success) {
+                    var data = data.data;
+                    $('#name').val(data.name);
+                    $('#shortName').val(data.shortName);
+                    $('#alias').val(data.alias);
+                    $('#segmentation').val(data.segmentation);
+                    $('#level').val(data.level);
+                    if(data.hsrEnable == 1){
+                        $('input[value=1]').prop('checked',true);
+                    }else{
+                        $('input[value=0]').prop('checked',true);
+                    }
+//                    $('#hsrEnable').html((data.hsrEnable == 1 ? '有' : '无'));
+                    $('#postcode').val(data.postcode);
+                    $('#bed').val(data.bed);
+                    $('#people').val(data.people);
+
+                    _API.getDistrict('district',data.area,true)
+                        .getPrivence('province',data.province,true,data.area)
+                        .getCity('city',data.city,true,data.area,data.province);
+                    $('#address').val(data.address);
+                    $('#location').val(data.location);
+                    $('#latitude').val(data.latitude);
+                    $('#longitude').val(data.longitude);
+
+                }
+            }
+        })
+    }
+
+
 
 
     function addNum() {
@@ -198,8 +240,9 @@
         }
 
         if(!flag) return;
-        var url  = _ip+'/project/insert';
+        var url  = _ip+'/project/update';
         var data = {
+            "id":getUrlId(),
             "name": $('#name').val(),
             "shortName":$('#shortName').val(),
             "alias":$('#alias').val(),
@@ -236,7 +279,7 @@
                 }
                 if(data.success){
                     var id = data.data;
-                    location.href = 'mems-pro-creat-3.html?id='+id+'&name='+$('name').val();
+                    location.href = 'mems-pro-baseInfo.html?id='+getUrlId();
                 }else{
                     alert('创建失败, 请稍后重试！');
                 }

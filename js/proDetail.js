@@ -803,7 +803,7 @@ businessProgress.prototype = {
 		      "proId": globleProjectId,
 		      "type": $('#visitTypeList').val(),
 		      "visitResult": $('#visitResultList').val(),
-		      "level": $('#bussTypeList').val(),
+		      "level": $('#bussTypeList').val(), //拜访状态:漏掉了，等会加上
 		      "progress": $('#bussTypeList').val(),
 		      "emergency": $('#emergencyList').val(),
 		      "visitId": 1,

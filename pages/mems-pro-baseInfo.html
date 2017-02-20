@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mems-项目信息</title>
+    <link href="../css/creat-pro.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<!--header-->
+<header id="header" class="header" v-html="datas">
+    <div>{{datas}}</div>
+</header>
+
+<!--menu-->
+<aside id="aside" class="aside" v-html="datas">
+    <div>{{datas}}</div>
+</aside>
+
+
+<!--content-->
+<div class="content">
+    <div class="page-header">
+        <div class="header-info"><i></i><a href="mems-pro-creat.html">项目信息</a></div>
+    </div>
+    <div class="creat-pro">
+        <div class="pro-head"><i></i>项目信息<a style="float:right;margin: 0 20px 0 0;cursor: pointer" onclick="edit()">编辑</a></div>
+
+
+        <table class="pro-table">
+            <thead>
+                <tr>
+                    <th width="100">基本信息</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>医院全称</td>
+                    <td id="name"></td>
+                </tr>
+                <tr>
+                    <td>简称</td>
+                    <td id="shortName"></td>
+                </tr>
+                <tr>
+                    <td>别称</td>
+                    <td id="alias"></td>
+                </tr>
+                <tr>
+                    <td>Segmentation</td>
+                    <td id="segmentation"></td>
+                </tr>
+                <tr>
+                    <td>级别</td>
+                    <td id="level"></td>
+                </tr>
+
+                <tr>
+                    <td>有无高铁</td>
+                    <td id="hsrEnable"></td>
+                </tr>
+                <tr>
+                    <td>邮编</td>
+                    <td id="postcode"></td>
+                </tr>
+                <tr>
+                    <td>床位</td>
+                    <td id="bed"></td>
+                </tr>
+                <tr>
+                    <td>年诊疗人次</td>
+                    <td id="people"></td>
+                </tr>
+                
+            </tbody>
+            <thead>
+                <tr>
+                    <th width="100">地址信息</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="red-start">*</span>所属区域</td>
+                    <td id="dis"></td>
+                </tr>
+                <tr>
+                    <td><span class="red-start">*</span>地址</td>
+                    <td id="address"></td>
+                </tr>
+                <tr>
+                    <td>设备科位置</td>
+                    <td id="location"></td>
+                </tr>
+                <tr>
+                    <td>维度</td>
+                    <td id="latitude"></td>
+                </tr>
+                <tr>
+                    <td>经度</td>
+                    <td id="longitude"></td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <!--<td><a class="pro-btn pro-sure" >提交</a></td>-->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src='../js/jquery.min.js'  type="text/javascript"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/vue.js" type="text/javascript"></script>
+<script src="../js/common.js"></script>
+
+<script type="text/javascript">
+    function  edit() {
+        location.href = 'mems-pro-baseInfo-edite.html?id='+getUrlId();
+    }
+    getItem()
+    function getItem() {
+
+        var url  = _ip+'/project/select?id='+getUrlId();
+        var data = {
+
+        }
+
+        $.ajax({
+            url:url,
+            type: 'GET',
+            dataType: 'jsonp',
+            async:false,
+            contentType:'application/json',
+            jsonpCallback: 'info',
+            success:function(data){
+                if(data.message === 'LOGIN') {
+                    location.href = 'user-login.html';
+                    return false;
+                }
+
+                if(data.success){
+                    var data = data.data;
+                    $('#name').html(data.name);
+                    $('#shortName').html(data.shortName);
+                    $('#alias').html(data.alias);
+                    $('#segmentation').html(data.segmentation);
+                    $('#level').html(data.level);
+                    $('#hsrEnable').html( (data.hsrEnable==1?'有':'无') );
+                    $('#postcode').html(data.postcode);
+                    $('#bed').html(data.bed);
+                    $('#people').html(data.people);
+                    $('#dis').html(data.area+data.province+data.city);
+                    $('#address').html(data.address);
+                    $('#location').html(data.location);
+                    $('#latitude').html(data.latitude);
+                    $('#longitude').html(data.longitude);
+
+                }
+            }
+        })
+   }
+</script>
+</body>
+</html>

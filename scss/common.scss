@@ -765,6 +765,15 @@ aside.aside{
   padding-bottom: 20px;
   background: #ffffff;
   // border: 1px solid $color-gray-d;
+  .exportItem{
+    >tbody>tr>td{
+      >input,>select{width: 60%;
+        height: 25px;
+        border: 1px solid #d5e0e6;
+
+      }
+    }
+  }
   .success-text {
     font-size: 18px;
     text-align: center;
@@ -804,6 +813,9 @@ aside.aside{
         border: 0px;
         outline: 0px;
         padding: 0 0 0 5px;
+        width: 60%;
+        height: 25px;
+        border: 1px solid #d5e0e6;
       }
     }
     .search-box{

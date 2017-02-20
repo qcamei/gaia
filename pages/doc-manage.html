@@ -157,7 +157,7 @@
                 _data.push('<td class="organize">' +
                         '<span>'+ msg.name +'</span>' +
                         '<span class="right">' +
-                        '<a href="'+_ip +'/operation-web/file/download?path='+ msg.path +'">' +
+                        '<a href="'+_ip +'/file/download?path='+ msg.path +'">' +
                         '<i class="download display-middle" onclick=""></i>' +
                         '</a>' +
                         '</span>' +
@@ -208,7 +208,7 @@
     function downDocClick(obj) {
         var $obj = $(obj);
         var path = $obj.closest('tr').data('edit').path;
-        var url  = _ip+'/operation-web/file/download?path='+ path;
+        var url  = _ip+'/file/download?path='+ path;
         organizeAjaxGet(url, {  }, '', function(json) {
 
         })
