@@ -248,11 +248,12 @@ $$.hideMask = function(){
     var search = location.search;
     if(search != "" && search.length >= 1){
         var search = search.split('?')[1];
+
         var param  = {}; 
         var arr = search.split('&');
         for(var k = 0, kk = arr.length; k < kk ; k++){
             var d = arr[k].split('=');
-            param[d[0]] = d[1]
+            param[d[0]] = decodeURI(d[1])
         }
     }
     return param;
@@ -307,6 +308,7 @@ var _api = function(){
                 if (isSelect) {
                     h += '<option value="">请选择</option>';
                 }
+                // console.log(defaultId)
                 for(var k = 0 , kk = json.length; k < kk; k++){
                      h += '<option value="'+json[k]+'" '+  (json[k] == defaultId?"selected":""  ) +'>'+json[k]+'</option>';
                 }            
@@ -429,23 +431,23 @@ _api.prototype = {
         return this;
     },
     getProNameList: function(id, defaultId,isSelect) { // 21. 项目管理：项目名称列表
-        var url = _ip+'/common/project/name';
+        var url = _ip+'/project/name';
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'pname']);
         return this;
     },
     getDistrict: function(id, defaultId,isSelect){ //获取大区
         var url = _ip+'/common/getDistrict';
-        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'getDistrict']);
+        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'getDistrict'+(new Date).getTime()]);
         return this;
     },
     getPrivence: function(id, defaultId,isSelect,areaPra){ //获取省
         var url = _ip+'/common/getPrivence?area='+areaPra;
-        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'getPrivence']);
+        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'getPrivence'+(new Date).getTime()]);
         return this;
     },
     getCity: function(id, defaultId,isSelect,areaPra,provicePra){ //获取市
         var url = _ip+'/common/getCity?area='+areaPra+'&privence='+provicePra;
-        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'getCity']);
+        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'getCity'+(new Date).getTime()]);
         return this;
     },
     dynamicDistrick: function(id1,id2,id3){
@@ -460,6 +462,7 @@ _api.prototype = {
         _id2.on('change',function(){
             _API.getCity(id3,0,true,_id1.val(),_id2.val());
         })
+        return this;
     }
 
 

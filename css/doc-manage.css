@@ -56,6 +56,13 @@ html body {
               text-align: center;
               padding: 0;
               line-height: 29px; }
+            html body .content .page-inner .item-content .table-box table thead tr th .total-right, html body .content .page-inner .item-content .table-box table thead tr td .total-right, html body .content .page-inner .item-content .table-box table tbody tr th .total-right, html body .content .page-inner .item-content .table-box table tbody tr td .total-right {
+              float: right;
+              color: #000; }
+              html body .content .page-inner .item-content .table-box table thead tr th .total-right .total-num, html body .content .page-inner .item-content .table-box table thead tr td .total-right .total-num, html body .content .page-inner .item-content .table-box table tbody tr th .total-right .total-num, html body .content .page-inner .item-content .table-box table tbody tr td .total-right .total-num {
+                display: inline-block;
+                margin: 0 2px;
+                font-weight: bold; }
         html body .content .page-inner .item-content .table-box table tbody tr td {
           color: #667788;
           vertical-align: middle;

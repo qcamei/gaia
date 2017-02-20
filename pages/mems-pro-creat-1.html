@@ -285,7 +285,7 @@ $('#hospital').on('click','li',function () {
     function nextStep() {
         var s = $('#serchkeywords').val();
         if(s != ''){
-            location.href = 'mems-pro-creat-2.html?position='+$('#serchkeywords').val();
+            location.href = 'mems-pro-creat-2.html?position='+encodeURI($('#serchkeywords').val());
         }
     }
     function keysearch(key){

@@ -79,7 +79,7 @@
                 <p class="success"><i></i>恭喜你项目创建成功</p>
             </li>
             <li>你可以到项目详情页完善，项目详细信息</li>
-            <li><a class="pro-btn" href="mems-pro-list.html">返回列表</a>&emsp;<a class="pro-btn pro-sure" href="mems-pro-detail-baseinfo.html">直接查看</a></li>
+            <li><a class="pro-btn" href="mems-pro-list.html">返回列表</a>&emsp;<a class="pro-btn pro-sure" onclick="look()">直接查看</a></li>
         </ul>
     </div>
 </div>
@@ -89,7 +89,10 @@
 <script src="../js/common.js"></script>
 
 <script type="text/javascript">
-    
+
+    function look() {
+        location.href = 'mems-pro-detail-baseinfo.html?id='+getUrlId();
+    }
 </script>
 </body>
 </html>

@@ -131,6 +131,7 @@ manageTagSelf.prototype = {
 		    	if(id1.indexOf('card') >= 0){
 		    		data['cusId'] = id1.split('-')[3]; 
 		    	}else{
+
 		    		data['id'] = that.userId;
 		    	}
 		    	$.ajax({
@@ -198,6 +199,7 @@ manageTagSelf.prototype = {
 	getExitDot:function(id1,id2,tagtype,src){
 		var _id1  = $('#'+id1);
 		var _id2  = $('#'+id2);
+        var that = this;
 		// var url  = _ip + '/tags/select';
     	var data = {};
     	data['type'] = 2;
@@ -260,11 +262,13 @@ manageTagSelf.prototype = {
 					return false;
 				}
 		    	data[tagtype] = str.join(',');
-		    	
+
 		    	if(id1.indexOf('card') >= 0){
 		    		data['cusId'] = id1.split('-')[4]; 
 		    	}else{
-		    		data['id'] = that.userId;
+                    console.log(canuserId);
+
+                    data['id'] = canuserId; //that.userId
 		    	}
 		    	$.ajax({
 		            url:url,
@@ -309,6 +313,7 @@ manageTagSelf.prototype = {
                 	$('#'+id3).val(data.competitorDesc || '');
                 	$('#'+id4).val(data.riskDesc || '');
                 	that.userId = data.id;
+                    window.canuserId = data.id;
 					console.log(that.userId);
                 	manageTagSelf.proId  = data.proId;
                 	var obj = {};

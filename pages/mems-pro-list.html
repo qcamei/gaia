@@ -63,22 +63,7 @@
                         </tr>
                     </thead>
                     <tbody id="bodyList">
-                    <tr>
-                        <td><input type="checkbox" name=""></td>
-                        <td><a href="mems-pro-detail-baseinfo.html" class="link">安徽省第一人民医院</a></td>
-                        <td>省级综合领先医院</td>
-                        <td>三级甲等</td>
-                        <td>见面</td>
-                        <td>签约实施</td>
-                    </tr>
-                    <tr>
-                       <td><input type="checkbox" name=""></td>
-                       <td><a href="mems-pro-detail-baseinfo.html" class="link">安徽省第一人民医院</a></td>
-                       <td>省级综合领先医院</td>
-                       <td>三级甲等</td>
-                       <td>见面</td>
-                       <td>签约实施</td>
-                   </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -99,10 +84,10 @@
 <script src="../js/foundation-datepicker.min.js"></script>
 <script src="../js/common.js"></script>
 <script>
-    _API.getProNameList('needSource',0,true)
-        .getPSegmentationList('Segmentation',0,true)
-        .getPLevelList('level',0,true)
-        .getPBussTypeList('bussType',0,true)
+    _API.getProNameList('needSource')
+        .getPSegmentationList('Segmentation')
+        .getPLevelList('level')
+        .getPBussTypeList('bussType')
         .dynamicDistrick('district','privence','city');
 
     $('#checkAll').on('click',function () {
@@ -246,8 +231,9 @@
             html += '<p class="relative-title">导出列表</p>';
             html += '<div class="con-box">';
                
-                html += '<table class="exportItem" style="width:92%;height:50px;margin:0 auto"><tr height="50">';
-                    html += '<td>项目名称：<input id="exname"/></td>';
+                html += '<table class="exportItem" style="width:92%;height:50px;margin:0 auto">';
+
+                    html += '<tr height="50"><td>项目名称：<input id="exname"/></td>';
                     html += '<td>segmentation：<select id="exsegmentation"></select></td>';
                     html += '<td>级别：<select id="exlevel"></select></td>';
                     html += '<td>商务阶段：<select id="exbussType"></select></td>';
