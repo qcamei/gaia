@@ -80,7 +80,7 @@
                 <div class="add-tag-box">
                     <button class="add-tag tag-btn add-btn-click">+ 岗位</button>
                     <div class="add-tag-line" style="display: none">
-                        <input type="text" class="add-tag-input display-middle" placeholder="岗位名称">
+                        <input maxlength="12" type="text" class="add-tag-input display-middle" placeholder="岗位名称">
                         <button class="tag-btn sure-btn display-middle" onclick="sureAddQuarters(this)">确认</button>
                         <button class="tag-btn cancel-btn display-middle cancel-add-edit">取消</button>
                     </div>
@@ -147,7 +147,7 @@
                             '<div class="tooltip-arrow"></div>' +
                             '<div class="tooltip-inner">点击编辑</div>' +
                             '</div>');
-                    var $deleteAlert =  $('<div class="tooltip bottom delete-alert">' +
+                    var $deleteAlert =  $('<div class="tooltip bottom delete-alert" onmouseover="tooltipOver(this)" onmouseout="tooltipOut(this)">' +
                             '<div class="tooltip-arrow"></div>' +
                             '<div class="tooltip-inner">' +
                             '<div class="tooltip-title">确认要删除该岗位吗？</div>' +
@@ -162,7 +162,7 @@
                     var $deleteBtn = $('<span class="delete-btn display-middle" onclick="deleteBtn(this); event.stopPropagation();"><span>×</span></span>');
                     var $textTag = $('<div class="display-middle tag-btn text-tag" onclick="addBtnClick(this, 1)"></div>');
                     var addTagLine = $('<div class="add-tag-line" style="display: none">' +
-                            '<input type="text" class="add-tag-input display-middle" placeholder="岗位名称">' +
+                            '<input maxlength="12" type="text" class="add-tag-input display-middle" placeholder="岗位名称">' +
                             '<button class="tag-btn sure-btn display-middle" onclick="sureAddQuarters(this, 1)">编辑</button>' +
                             '<button class="tag-btn cancel-btn display-middle cancel-add-edit" onclick="cancelAddEdit(this)">取消</button>' +
                             '</div>');
