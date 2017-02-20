@@ -67,8 +67,13 @@
                 <table>
                     <thead>
                         <tr>
-                            <td colspan="3">
+                            <td colspan="2">
                                 <a href="javascript:;" class="a-upload" id="fileUpload"><input id="file" value="请选择" type="file"/>上传文件</a>
+                            </td>
+                            <td>
+                                <div class="total-right">
+                                    共有 <span class="total-num"></span> 个文件
+                                </div>
                             </td>
                         </tr>
                     </thead>
@@ -92,11 +97,12 @@
 <script src="../js/common.js"></script>
 <script src="../js/user-tree.js"></script>
 <script type="text/javascript">
-    var url  = _ip+'/operation-web/file/uploading';
+    var url  = _ip+'/file/uploading';
     attachment.init({
         url: url,
         fileUpload:$('#fileUpload'),
         addAttachmentList:$('#addAttachmentList'),
+        noFormat: true,
         success: function(json) {
             if (json.success) {
 
@@ -106,10 +112,11 @@
     });
 
     function getDocList(p, checPara) {
-        var PerPage = 2;
-        var url  = _ip+'/operation-web/file/fileList?page='+p+'&size='+PerPage;
+        var PerPage = 20;
+        var url  = _ip+'/file/fileList?page='+p+'&size='+PerPage;
         var data = checPara || {};
         organizeAjaxPost(url, data, function(json) {
+            $('.total-num').text(json.total || 0);
             if(!json.data || json.data.length <= 0){
                 $('#bodyList').html('<tr><td colspan="3" style="text-align: center">暂无数据！</td></tr>');
                 $('#pageList').html('');

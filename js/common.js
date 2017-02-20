@@ -488,16 +488,31 @@ function attachment(config){
         var that = this;
         this.config.fileUpload.on("change","input[type='file']",function(){
             var filePath=$(this).val();
-            if(filePath.indexOf("jpg")!=-1 || filePath.indexOf("png")!=-1 || filePath.indexOf("docx")!=-1 || filePath.indexOf("zip")!=-1){
-                var arr=filePath.split('\\');
-                var fileName=arr[arr.length-1];
-                // that.config.fileName.html(fileName);
-                that.uploadFile();
-                
-            }else{
-                // that.config.fileName.html("");
-                alert("您未上传文件，或者您上传文件类型有误！");
-                return false 
+            if(that.config.noFormat) {
+                if(filePath){
+                    // var arr=filePath.split('\\');
+                    // var fileName=arr[arr.length-1];
+                    // that.config.fileName.html(fileName);
+                    that.uploadFile();
+
+                }else{
+                    // that.config.fileName.html("");
+                    alert("您未上传文件!");
+                    return false;
+                }
+            }
+            else {
+                if(filePath.indexOf("jpg")!=-1 || filePath.indexOf("png")!=-1 || filePath.indexOf("docx")!=-1 || filePath.indexOf("zip")!=-1){
+                    var arr=filePath.split('\\');
+                    var fileName=arr[arr.length-1];
+                    // that.config.fileName.html(fileName);
+                    that.uploadFile();
+
+                }else{
+                    // that.config.fileName.html("");
+                    alert("您未上传文件，或者您上传文件类型有误！");
+                    return false
+                }
             }
         })
     };
