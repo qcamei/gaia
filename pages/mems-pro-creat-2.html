@@ -115,9 +115,9 @@
                     <td>床位</td>
                     <td>
                         <div class="clearfix number">
-                        <a href="javascript:;" class="left sub">-</a>
-                        <input onchange="this.value=(this.value+'').replace(/\D/g,'');"  class="left" value="1" id="bed">
-                        <a class="left add">+</a>
+                        <a href="javascript:;" class="left sub" onclick="subNum()">-</a>
+                        <input onblur="this.value=(this.value+'').replace(/\D/g,'');" class="left" value="1" id="bed">
+                        <a class="left add" onclick="addNum()">+</a>
                         </div>
                     </td>
                 </tr>
@@ -175,6 +175,24 @@
         .getPLevelList('level')
         .dynamicDistrick('district','province','city');
 
+
+    function addNum() {
+        var input = $('#bed');
+        var val = parseInt(input.val());
+        var newVal = val + 1;
+        input.val(newVal );
+    }
+    function subNum() {
+        var input = $('#bed');
+        var val = parseInt(input.val());
+        var newVal = val - 1;
+        if(newVal <= 1){
+            newVal = 1;
+        }
+        input.val( newVal );
+    }
+
+
     var arr = ['name','location'];
     for(var k = 0; k < 2; k ++){
         $('#'+arr[k]).focus(function(){
@@ -185,7 +203,7 @@
         for(var k = 0; k < 2; k ++){
             var v = $('#'+arr[k]).val();
             if(v == ""){
-               $('#'+arr[k]).addClass('error-i'); 
+               $('#'+arr[k]).addClass('error-i');
                break;
             }
         }
@@ -195,14 +213,14 @@
             "name": $('#name').val(),
             "shortName":$('#shortName').val(),
             "alias":$('#alias').val(),
-            "segmentation": $('#segmentation').val(), 
-            "level": $('#level').val(), 
+            "segmentation": $('#segmentation').val(),
+            "level": $('#level').val(),
             "hsrEnable":parseInt($('input[name=hsrEnable]').val()),
             "postcode":parseInt($('#postcode').val()),
             "bed":parseInt($('#bed').val()),
             "people":parseInt($('#people').val()),
             "province": $('#province').val || 'p',
-            "city": $('#city').val() || 'c', 
+            "city": $('#city').val() || 'c',
             "area": $('#district').val() || 'a',
             "creater": 11
         }
@@ -218,12 +236,10 @@
             contentType:'application/json',
             data:JSON.stringify(data),
             success:function(data){
-
-                if(json.message === 'LOGIN') {
-                    window.location.href = 'user-login.html';
+                if(data.message === 'LOGIN') {
+                    location.href = 'user-login.html';
                     return false;
                 }
-
                 if(data.success){
                     location.href = 'mems-pro-list.html';
                 }else{
