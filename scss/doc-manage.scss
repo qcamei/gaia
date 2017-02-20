@@ -68,6 +68,15 @@ html {
                       padding: 0;
                       line-height: 29px;
                     }
+                    .total-right {
+                      float: right;
+                      color: #000;
+                      .total-num {
+                        display: inline-block;
+                        margin: 0 2px;
+                        font-weight: bold;
+                      }
+                    }
                   }
                 }
               }
