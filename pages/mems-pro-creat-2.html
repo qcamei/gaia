@@ -47,7 +47,7 @@
             <tbody>
                 <tr>
                     <td><span class="red-start">*</span>医院全称</td>
-                    <td><input type="" name="" id="name"></td>
+                    <td><input type="" name="" id="name" onblur="veryName(this)"><span class="red-start" style="display: none;">名称已经存在！</span></td>
                 </tr>
                 <tr>
                     <td>简称</td>
@@ -136,20 +136,42 @@
     _API.getNeedSource('needSource')
             .getPSegmentationList('segmentation')
             .getPLevelList('level')
-//            .dynamicDistrick('district','province','city');
+            .dynamicDistrick('district','province','city');
     var position = $$.getUrlParaObj('position');
     if(position){
         position = position['position'];
         var parr = position.split('／');
         $('#name').val(parr[3]);
-        console.log(parr);
     _API.getDistrict('district',parr[0],true)
             .getPrivence('province',parr[1],true,parr[0])
             .getCity('city',parr[2],true,parr[0],parr[1]);
     }
 
 
-
+    var nameflag = true;
+    function veryName(that) {
+        var name = $(that).val();
+        var url = _ip + '/project/verify?name='+name;
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'jsonp',
+            contentType: 'application/json',
+            jsonpCallback: 'very',
+            success: function (json) {
+                if (json.message == '项目名重复，请重新输入') {
+                    nameflag = false;
+                    $(that).addClass('error-i');
+                    $(that).siblings('span').css({'display':'inline-block'});
+//                    location.href = 'user-login.html';
+                }
+            }
+        })
+    }
+    function reInputName(that) {
+        $(that).removeClass('error-i');
+        $(that).sibling('span').css({'display':'none'});
+    }
 
     function addNum() {
         var input = $('#bed');
@@ -175,6 +197,10 @@
         })
     }
     function creatItem() {
+        if(!nameflag){
+            alert('请重新输入项目名称！');
+            return;
+        }
         var flag = true;
         for(var k = 0; k < 2; k ++){
             var v = $('#'+arr[k]).val();

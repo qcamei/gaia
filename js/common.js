@@ -53,7 +53,6 @@ if (!$('.login-box').length) {
      *-----------------------------*/
     var globleUserId;
     function isLogin(){
-        // alert(33)
         var url = _ip + '/user/getLoginUserInfo';
         $.ajax({
             url:url,
@@ -62,7 +61,7 @@ if (!$('.login-box').length) {
                 withCredentials: true
             },
             crossDomain: true,
-            dataType: 'jsonp',
+            dataType: 'json',
             contentType:'application/json',
             jsonpCallback: 'login',
             success: function(json) {
@@ -293,6 +292,7 @@ var _api = function(){
                 if (isSelect) {
                     h += '<option value="">请选择</option>';
                 }
+
                 for(var k = 0 , kk = json.length; k < kk; k++){
                     h += '<option value="'+json[k].id+'" '+  (json[k].id == defaultId?"selected":""  ) +'>'+json[k].name+'</option>'
                 }            
@@ -436,7 +436,7 @@ _api.prototype = {
     },
     getProNameList: function(id, defaultId,isSelect) { // 21. 项目管理：项目名称列表
         var url = _ip+'/project/name';
-        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'pname']);
+        this.getListFirst.apply(this,[url,id,defaultId,isSelect,'pname']);
         return this;
     },
     getDistrict: function(id, defaultId,isSelect){ //获取大区

@@ -345,7 +345,7 @@ manageTagSelf.prototype = {
 		return this;
 	},
 	getClientAddressBook:function(id){
-		var url = _ip + '/cus/selectAll?id='+globleUserId;
+		var url = _ip + '/cus/selectAll?id='+globleProjectId;
 		$.ajax({
             url:url,
             type: 'GET',
@@ -353,7 +353,6 @@ manageTagSelf.prototype = {
             contentType:'application/json',
             jsonpCallback: 'book',
             success: function(json) {
-                var json = json.data;
                 var json = json.data;
                 var h = '';
                 if(!json || json.length <= 0) return;
@@ -364,7 +363,7 @@ manageTagSelf.prototype = {
                         h += '<div class="text">'+json[k].name+' | <tel>'+json[k].tel+'</tel>';
                     // if()
                     h += '</div></li>';           
-                }            
+                }
                 $('#'+id).html(h);
             }
         })
@@ -437,7 +436,7 @@ clientDataCard.prototype = {
  				h += '<div class="head clear"><div class="left name"><span class="left">'+s.name+'</span><span class="left">'+s.position+'</span>';
  					h += '<div class="left detail"><i onmouseover="clientInfoCard.showBaseInfo(this);" onmouseout="clientInfoCard.hideBaseInfo(this)"></i>';
  						h += '<div class="detail-slide"><table><tr><td><h6>角色</h6><span>'+s.role+'</span></td><td><h6>科室</h6><span>'+s.department+'</span></td></tr><tr><td><h6>联系电话</h6><span>'+s.tel+'</span></td><td><h6>短号</h6><span>'+s.shortTel+'</span></td></tr></table></div></div></div>';
- 					h += '<div class="right edit" onmouseover="clientInfoCard.showOpero(this);" onmouseout="clientInfoCard.hideOpero(this)"><i></i><div class="edit-slide"><a onclick="clientInfoCard.editeClientCard(4)">编辑</a><a onclick="clientInfoCard.deleteClientCard('+n+')">删除</a></div></div></div>';	
+ 					h += '<div class="right edit" onmouseover="clientInfoCard.showOpero(this);" onmouseout="clientInfoCard.hideOpero(this)"><i></i><div class="edit-slide"><a onclick="clientInfoCard.editeClientCard('+n+')">编辑</a><a onclick="clientInfoCard.deleteClientCard('+n+')">删除</a></div></div></div>';
  				h += '<ul class="clear dot-tab"><li class="current">兴趣点</li><li>抵触点</li><li>沟通要点</li><li>相关需求</li></ul>';
  				h += '<div class="tabcontener">';
  					// 兴趣点
@@ -570,25 +569,62 @@ clientInfoCard.prototype = {
 		})
 	},
 	clientCardDom: function(url,id){
-		var html = '';
-        html += '<div class="client-card-box">';
-            html += '<p class="card-title">添加客户<a href="javascript:$$.closeLayer()">&times;</a></p>';
+	    if(url && id){
+            $.ajax({
+                url: _ip+'/cus/sel?cusid='+id,
+                type: 'GET',
+                dataType: 'jsonp',
+                contentType: 'application/json',
+                jsonpCallback: 'cusedit',
+                success: function (json) {
+                    if (json.success) {
+
+                        var json = json.data;
+                        var html = '';
+                        html += '<div class="client-card-box">';
+                        html += '<p class="card-title">编辑客户信息卡<a href="javascript:$$.closeLayer()">&times;</a></p>';
+                        html += '<div class="card-box">';
+                        html += '<table class="card-input"><tbody>';
+                        html += '<tr><td>职务</td><td><input id="position" value="'+json.position+'" class="short"></td></tr>';
+                        html += '<tr><td>角色</td><td><input id="role" value="'+json.role+'" class="short"></td></tr>';
+                        html += '<tr><td>姓名</td><td><input id="name" value="'+json.name+'" class="short"></td></tr>';
+                        html += '<tr><td>科室</td><td><input id="department" value="'+json.department+'" class="short"></td></tr>';
+                        html += '<tr><td>联系电话</td><td><input id="telphone" value="'+json.tel+'" class="short"></td></tr>';
+                        html += '<tr><td>短号</td><td><input id="short_tel" value="'+json.shortTel+'" class="short"></td></tr></table></tbody></div>';
+                        html += '<div class="buttons"><a class="card-btn card-btn-gray" href="javascript:$$.closeLayer()">取消</a>&emsp;<a class="card-btn" onclick="clientInfoCard.updateClientCard('+id+')">确认</a></div>'
+                        html += '</div>';
+                        $$.layer(html, {
+                            isShowMask: true,
+                            fixedBoxTop:'100px',
+                            zIndex:99,
+                            contentBoxWidth: "27%"
+                        });
+
+                    }
+                }
+            })
+        }else{
+            var html = '';
+            html += '<div class="client-card-box">';
+            html += '<p class="card-title">编辑客户信息卡<a href="javascript:$$.closeLayer()">&times;</a></p>';
             html += '<div class="card-box">';
-                html += '<table class="card-input"><tbody>';
-                    html += '<tr><td>职务</td><td><input id="position" class="short"></td></tr>';
-                    html += '<tr><td>角色</td><td><input id="role" class="short"></td></tr>';
-                    html += '<tr><td>姓名</td><td><input id="name" class="short"></td></tr>';
-                    html += '<tr><td>科室</td><td><input id="department" class="short"></td></tr>';
-                    html += '<tr><td>联系电话</td><td><input id="telphone" class="short"></td></tr>';
-                    html += '<tr><td>短号</td><td><input id="short_tel" class="short"></td></tr></table></tbody></div>';
+            html += '<table class="card-input"><tbody>';
+            html += '<tr><td>职务</td><td><input id="position" class="short"></td></tr>';
+            html += '<tr><td>角色</td><td><input id="role" class="short"></td></tr>';
+            html += '<tr><td>姓名</td><td><input id="name" class="short"></td></tr>';
+            html += '<tr><td>科室</td><td><input id="department" class="short"></td></tr>';
+            html += '<tr><td>联系电话</td><td><input id="telphone" class="short"></td></tr>';
+            html += '<tr><td>短号</td><td><input id="short_tel" class="short"></td></tr></table></tbody></div>';
             html += '<div class="buttons"><a class="card-btn card-btn-gray" href="javascript:$$.closeLayer()">取消</a>&emsp;<a class="card-btn" onclick="clientInfoCard.addClientCard('+'\''+(url || '')+'\''+(id?','+id+'':'')+')">确认</a></div>'
-        html += '</div>';
-        $$.layer(html, {
-            isShowMask: true,
-            fixedBoxTop:'100px',
-            zIndex:99,
-            contentBoxWidth: "27%"
-        });
+            html += '</div>';
+            $$.layer(html, {
+                isShowMask: true,
+                fixedBoxTop:'100px',
+                zIndex:99,
+                contentBoxWidth: "27%"
+            });
+        }
+
 	},
 	addClientCard: function(url,id){
 		var url = _ip + '/cus/insert';
@@ -628,6 +664,44 @@ clientInfoCard.prototype = {
             }
         })
 	},
+    updateClientCard:function (id) {
+        var url = _ip + '/cus/update';
+        var data = {
+            "name": $('#name').val(),    //必填
+            "role": $('#role').val(),
+            "position": $('#position').val(),     //必填
+            "department": $('#department').val(),
+            "tel": $('#telphone').val(),    //必填
+            "shortTel": $('#short_tel').val(),
+            "projectId": globleProjectId    //必填
+        }
+        if(id){
+            data['id'] = id;
+        }
+        $.ajax({
+            url:url,
+            type: 'POST',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            dataType: 'json',
+            contentType:'application/json',
+            data:JSON.stringify(data),
+            success: function(json) {
+                if(json.message === 'LOGIN') {
+                    window.location.href = 'user-login.html';
+                    return false;
+                }
+                if(json.success){
+                    clientDataCard.getAllCard();
+                    $$.closeLayer()
+                }else{
+                    alert('更新失败，稍后重试！')
+                }
+            }
+        })
+    },
 	deleteClientCard:function(id){
 		var url = _ip + '/cus/delete?id='+id;
 		$.ajax({
@@ -703,19 +777,25 @@ presell.prototype = {
             success: function(json) {
 				if(!json.success) return;
                 var json = json.data;
-                presell.userId = globleUserId;
+                presell.userId = json.id;
 
                 var selltype = {
-                    0:'单家医院经销商',
-                    1:'区域代理商',
-                    2:'直销'
+                    "0":'单家医院经销商',
+                    "1":'区域代理商',
+                    "2":'直销'
                 }
                 var h = '';
                 	h += '<tr><td colspan="2">销售方式：<span class="type">'+selltype[json.type]+'</span></td></tr>';
                     h += '<tr><td width="40%"><div class="name">预算：</div><div class="text"><span class="num-style">'+json.budget+'</span>&nbsp;万元</div></td>';
-                    	h += '<td><div class="name">采购时间：</div><div class="text"><span class="num-style">'+json.year+'</span>&nbsp;年&nbsp;<span class="num-style">'+json.month+'</span>&nbsp;月</div></td></tr>';
+                    	h += '<td><div class="name">采购时间：</div><div class="text"><span class="num-style">'+json.year+'</span>&nbsp;年&nbsp;<span class="num-style">'+json.month+'</span>&nbsp;月年&nbsp;<span class="num-style">'+json.day+'</span>&nbsp;日</div></td></tr>';
                     h += '<tr><td colspan="2">'+json.discribe+'</td></tr>';     
                 $('#'+id).html(h);
+
+                $('#contacts').val(json.contacts);
+                $('#tel').val(json.tel);
+                $('#budget').val(json.budget);
+                $('#proTime').val(json.year+'-'+json.month+'-'+json.day)
+                $('#discribe').val(json.discribe)
             }
         })
         return this;
@@ -751,6 +831,7 @@ presell.prototype = {
                 }
                 if(data.success){
                 	that.getInfo('sellBuget');
+                    _API.getSellType('sellTypeSelect',$('#sellTypeSelect').val(),true);
                 }else{
                     alert('添加失败, 请稍后重试！');
                 }
@@ -849,8 +930,8 @@ businessProgress.prototype = {
             arr.push($(this).find('input').val());
         })
     	var data = {
-    		  "id": parseInt(globleProjectId),
-		      "proId": globleProjectId,
+    		  "id": null,
+		      "proId": parseInt(globleProjectId),
 		      "type": $('#visitTypeList').val(),
 		      "visitResult": $('#visitResultList').val(),
 		      "level": $('#bussTypeList').val(), //拜访状态:漏掉了，等会加上
@@ -876,7 +957,6 @@ businessProgress.prototype = {
 	        contentType:'application/json',
 	        data:JSON.stringify(data),
             success: function(data) {
-	            return;
             	if(data.message === 'LOGIN') {
                     window.location.href = 'user-login.html';
                     return false;
@@ -902,7 +982,9 @@ businessProgress.prototype = {
             contentType:'application/json',
             jsonpCallback: 'busscord',
             success: function(json) {
+
                 var json = json.data;
+                if(!json || json.length <= 0) return;
                 var h = '';
                 for(var k in json){
                 	h += '<thead><tr class="status"><td width="20"><span class="s-2"></span></td><td><div class="status-head clear">';
