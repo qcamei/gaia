@@ -33,7 +33,7 @@
         <table class="mems-search">
             <tbody>
                 <tr>
-                    <td>&emsp;&emsp;项目名称：<select id="needSource"></select></td>
+                    <td>&emsp;&emsp;项目名称：<input id="needSource"/></td>
                     <td>&emsp;&emsp;&emsp;&emsp;segmentation：<select id="Segmentation"></select></td>
                     <td>&emsp;&emsp;级别：<select id="level"></select></td>
                     <td>商务阶段：<select id="bussType"></select></td>
@@ -86,10 +86,10 @@
 <script src="../js/foundation-datepicker.min.js"></script>
 <script src="../js/common.js"></script>
 <script>
-    _API.getProNameList('needSource')
-        .getPSegmentationList('Segmentation')
-        .getPLevelList('level')
-        .getPBussTypeList('bussType')
+    _API.getProNameList('needSource',false,true)
+        .getPSegmentationList('Segmentation',0,true)
+        .getPLevelList('level',0,true)
+        .getPBussTypeList('bussType',0,true)
         .dynamicDistrick('district','privence','city');
 
     $('#checkAll').on('click',function () {
@@ -184,13 +184,13 @@
     getData(1);
     $('#checkout').on('click',function(){
         var para = {
-            "name": $('#needSource').val(), 
-            "segmentation": $('#Segmentation').val(), 
-            "level": $('#level').val(), 
-            "businessType": $('#bussType').val(),
-            "area": $('#district').val(), 
-            "province": $('#privence').val(), 
-            "city": $('#city').val()
+            "name": $('#needSource').val() || null,
+            "segmentation": $('#Segmentation').val() || null,
+            "level": $('#level').val() || null,
+            "businessType": $('#bussType').val() || null,
+            "area": $('#district').val()=='请选择'?'':$('#district').val() || null,
+            "province": $('#privence').val()=='请选择'?'':$('#privence').val() || null,
+            "city": $('#city').val()=='请选择'?'':$('#city').val() || null
         }
         getData(1,para);
     })
@@ -290,7 +290,7 @@
         var nowTemp = new Date();
         var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
         $('#procurementTime').fdatepicker({
-            format: 'yyyy-mm-dd',
+            format: 'yyyy-mm',
             onRender: function (date) {
                 return date.valueOf() < now.valueOf() ? 'disabled' : '';
             }

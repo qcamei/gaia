@@ -53,17 +53,23 @@ if (!$('.login-box').length) {
      *-----------------------------*/
     var globleUserId;
     function isLogin(){
+        // alert(33)
         var url = _ip + '/user/getLoginUserInfo';
         $.ajax({
             url:url,
             type: 'GET',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             dataType: 'jsonp',
-            async:false,
             contentType:'application/json',
-            jsonpCallback: 'islogin',
+            jsonpCallback: 'login',
             success: function(json) {
+                console.log(json)
                 if(!json.success){
-                    // location.href = 'user-login.html';
+                    console.log(json.success);
+                    location.href = 'user-login.html';
                 }
                 else {
                     $.cookie('username',json.data.userName);
@@ -308,7 +314,7 @@ var _api = function(){
                 if (isSelect) {
                     h += '<option value="">请选择</option>';
                 }
-                // console.log(defaultId)
+                console.log(defaultId)
                 for(var k = 0 , kk = json.length; k < kk; k++){
                      h += '<option value="'+json[k]+'" '+  (json[k] == defaultId?"selected":""  ) +'>'+json[k]+'</option>';
                 }            

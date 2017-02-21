@@ -424,7 +424,7 @@ clientDataCard.prototype = {
  			var n = s.id;
  			arr.push(n);
  			h += '<li>';
- 				h += '<div class="head clear"><div class="left name"><span class="left">'+s.name+'</span><span class="left">'+s.role+'</span>';
+ 				h += '<div class="head clear"><div class="left name"><span class="left">'+s.name+'</span><span class="left">'+s.position+'</span>';
  					h += '<div class="left detail"><i onmouseover="clientInfoCard.showBaseInfo(this);" onmouseout="clientInfoCard.hideBaseInfo(this)"></i>';
  						h += '<div class="detail-slide"><table><tr><td><h6>角色</h6><span>'+s.role+'</span></td><td><h6>科室</h6><span>'+s.department+'</span></td></tr><tr><td><h6>联系电话</h6><span>'+s.tel+'</span></td><td><h6>短号</h6><span>'+s.shortTel+'</span></td></tr></table></div></div></div>';
  					h += '<div class="right edit" onmouseover="clientInfoCard.showOpero(this);" onmouseout="clientInfoCard.hideOpero(this)"><i></i><div class="edit-slide"><a onclick="clientInfoCard.editeClientCard(4)">编辑</a><a onclick="clientInfoCard.deleteClientCard('+n+')">删除</a></div></div></div>';	
@@ -619,7 +619,7 @@ clientInfoCard.prototype = {
         })
 	},
 	deleteClientCard:function(id){
-		var url = _ip + '/pci/delete?id='+id;
+		var url = _ip + '/cus/delete?id='+id;
 		$.ajax({
 	        url:url,
 	        type: 'GET',
@@ -627,7 +627,6 @@ clientInfoCard.prototype = {
 	        contentType:'application/json',
 	        jsonpCallback: 'pcide',
 	        success: function(json) {
-	        	return;
 	        	if(json.success){
 	        		clientDataCard.getAllCard()
 	        	}else{
@@ -696,8 +695,13 @@ presell.prototype = {
                 var json = json.data;
                 presell.userId = globleUserId;
 
+                var selltype = {
+                    0:'单家医院经销商',
+                    1:'区域代理商',
+                    2:'直销'
+                }
                 var h = '';
-                	h += '<tr><td colspan="2">销售方式：<span class="type">'+json.type+'</span></td></tr>';
+                	h += '<tr><td colspan="2">销售方式：<span class="type">'+selltype[json.type]+'</span></td></tr>';
                     h += '<tr><td width="40%"><div class="name">预算：</div><div class="text"><span class="num-style">'+json.budget+'</span>&nbsp;万元</div></td>';
                     	h += '<td><div class="name">采购时间：</div><div class="text"><span class="num-style">'+json.year+'</span>&nbsp;年&nbsp;<span class="num-style">'+json.month+'</span>&nbsp;月</div></td></tr>';
                     h += '<tr><td colspan="2">'+json.discribe+'</td></tr>';     

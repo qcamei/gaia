@@ -121,7 +121,7 @@
             <tbody>
                 <tr>
                     <td></td>
-                    <td><a class="pro-btn" href="mems-pro-creat-1.html">取消</a>&emsp;<a class="pro-btn pro-sure" onclick="creatItem()">提交</a></td>
+                    <td><a class="pro-btn" href="mems-pro-creat-1.html">上一步</a>&emsp;<a class="pro-btn pro-sure" onclick="creatItem()">提交</a></td>
                 </tr>
             </tbody>
         </table>
@@ -133,19 +133,22 @@
 <script src="../js/common.js"></script>
 
 <script type="text/javascript">
+    _API.getNeedSource('needSource')
+            .getPSegmentationList('segmentation')
+            .getPLevelList('level')
+//            .dynamicDistrick('district','province','city');
     var position = $$.getUrlParaObj('position');
     if(position){
         position = position['position'];
         var parr = position.split('／');
+        $('#name').val(parr[3]);
+        console.log(parr);
     _API.getDistrict('district',parr[0],true)
             .getPrivence('province',parr[1],true,parr[0])
             .getCity('city',parr[2],true,parr[0],parr[1]);
     }
 
-    _API.getNeedSource('needSource')
-        .getPSegmentationList('segmentation')
-        .getPLevelList('level')
-        .dynamicDistrick('district','province','city');
+
 
 
     function addNum() {

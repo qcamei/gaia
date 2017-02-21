@@ -125,10 +125,18 @@
         $.ajax({
             url:url,
             type : "POST",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             dataType: 'json',
             contentType:'application/json',
             data:JSON.stringify(data),
             success:function(json){
+                if(json.message === 'LOGIN') {
+                    window.location.href = 'user-login.html';
+                    return false;
+                }
                 if(!json.data || json.data.length <= 0){
                     $('#bodyList').html('<tr><td colspan="9">暂无数据！</td></tr>');
                     $('#pageList').html('');

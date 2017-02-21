@@ -72,7 +72,7 @@
                         </ul>
                     </div>
                     <div class="wap">
-                        <ul id="hospital">
+                        <ul id="hospital" style="width: 250px;">
                         </ul>
                     </div>
                 </div>
@@ -107,19 +107,11 @@ function getDistrictdom(id){
                 h += '<li>'+json[k]+'<input type="hidden" value="'+json[k]+'"/><i>></i></li>'
             }            
             _id.html(h);
-            _id.on('click','li',function(){
-                var d = $(this).find('input').val();
-                $(this).addClass('current');
-                $(this).siblings().removeClass('current');
-                getProvicedom('provice',d);
-                $('#serchkeywords').val(d);
-                $('#area-v').val(d);
-                getinputVal('area-v','provice-v','city-v','hospital-v')
-            })
+
         }
     })
 }
-function getProvicedom(id,area){
+function getProvicedom(id,area){  //获取省份列表
     $.ajax({
         url:_ip+'/common/getPrivence?area='+area,
         type: 'GET',
@@ -136,7 +128,7 @@ function getProvicedom(id,area){
         }
     })
 }
-function getCity(id,provice,area){
+function getCity(id,provice,area){ //获取城市列表
     $.ajax({
         url:_ip+'/common/getCity?area='+area+'&privence='+provice,
         type: 'GET',
@@ -154,12 +146,12 @@ function getCity(id,provice,area){
     })
 }
 
-function getHospital(id,city){
+function getHospital(id,city){ //获取医院列表
     var data= {};
     data['city'] = city;
     $.ajax({
         url:_ip+'/hospital/getHospitalList',
-        type: 'POST',
+        type: 'post',
         xhrFields: {
            withCredentials: true
         },
@@ -174,14 +166,13 @@ function getHospital(id,city){
                 return false;
             }
 
-
             var json = json.data;
             var h = '';
-            console.log(json);
+            console.log(json.length);
             for(var k = 0 , kk = json.length; k < kk; k++){
                 h += '<li>'+json[k].chineseName+'<input type="hidden" value="'+json[k].chineseName+'"/><i>></i></li>'
-            }            
-            $('#'+id).html(h);
+            }
+            $('#hospital').html(h);
         }
     })
 }
@@ -208,7 +199,25 @@ function getinputVal(id1,id2,id3,id4) {
     $('#serchkeywords').val(t);
 }
 getDistrictdom('district');
+
+
+$('#district').on('click','li',function(){
+
+    $('#city').html('');
+    $('#hospital').html('');
+
+    var d = $(this).find('input').val();
+    $(this).addClass('current');
+    $(this).siblings().removeClass('current');
+    getProvicedom('provice',d);
+    $('#serchkeywords').val(d);
+    $('#area-v').val(d);
+
+    getinputVal('area-v','provice-v','city-v','hospital-v');
+
+})
 $('#provice').on('click','li',function(){
+    $('#hospital').html('');
     $(this).addClass('current');
     $(this).siblings().removeClass('current');
     var a,p;
@@ -239,17 +248,6 @@ $('#hospital').on('click','li',function () {
     $('#hospital-v').val(h);
     getinputVal('area-v','provice-v','city-v','hospital-v')
 })
-
-
-
-
-
-
-
-
-
-
-
     var showkeylist = $('#showkeylist');
     var showselect  = $('#showselect');
     $('#serchkeywords').on('focus',function(){
@@ -265,7 +263,7 @@ $('#hospital').on('click','li',function () {
         if(v.length >= 1){
             showkeylistdo()
             // keysearch(v);
-            if(v.length >= 5){
+            if(v.length >= 2){
                 keysearch(v);
             }
             
@@ -313,7 +311,7 @@ $('#hospital').on('click','li',function () {
                     }
                     
                 }else{
-                    alert('上传失败, 请稍后重试！');
+//                    alert('搜索失败, 请稍后重试！');
                 }
             }
         })
