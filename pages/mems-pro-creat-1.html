@@ -202,16 +202,17 @@ getDistrictdom('district');
 
 
 $('#district').on('click','li',function(){
-
     $('#city').html('');
     $('#hospital').html('');
-
     var d = $(this).find('input').val();
     $(this).addClass('current');
     $(this).siblings().removeClass('current');
     getProvicedom('provice',d);
     $('#serchkeywords').val(d);
     $('#area-v').val(d);
+    $('#provice-v').val('');
+    $('#city-v').val('');
+    $('#hospital-v').val('');
 
     getinputVal('area-v','provice-v','city-v','hospital-v');
 
@@ -228,6 +229,9 @@ $('#provice').on('click','li',function(){
     })
     p = $(this).find('input').val();
     $('#provice-v').val(p);
+    $('#city-v').val('');
+    $('#hospital-v').val('');
+
     getinputVal('area-v','provice-v','city-v','hospital-v')
 
     getCity('city',p,a);
@@ -238,6 +242,8 @@ $('#city').on('click','li',function(){
 
     var c = $(this).find('input').val();
     $('#city-v').val(c);
+    $('#hospital-v').val('');
+
     getinputVal('area-v','provice-v','city-v','hospital-v')
     getHospital('hospital',c);
 })

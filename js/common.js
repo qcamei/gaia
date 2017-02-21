@@ -66,7 +66,6 @@ if (!$('.login-box').length) {
             jsonpCallback: 'login',
             success: function(json) {
                 if(!json.success){
-                    console.log(json.success);
                     location.href = 'user-login.html';
                 }
                 else {
