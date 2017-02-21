@@ -196,18 +196,20 @@ manageTagSelf.prototype = {
 		})
 		return this;
 	},
-	getExitDot:function(id1,id2,tagtype,src){
+	getExitDot:function(id1,id2,tagtype,src,srcget,typeId){
 		var _id1  = $('#'+id1);
 		var _id2  = $('#'+id2);
         var that = this;
-		// var url  = _ip + '/tags/select';
+		var url  = _ip + src;
+        var urlget = _ip + srcget;
+        // console.log(_ip+ src)
     	var data = {};
-    	data['type'] = 2;
+    	data['type'] = typeId || 1;
     	data['name'] = '';
     	$.ajax({
-            url:manageTagSelf.getExistTagUrl,
+            url:urlget,
             type : "POST",
-           xhrFields: {
+            xhrFields: {
                withCredentials: true
             },
             crossDomain: true,
@@ -241,7 +243,7 @@ manageTagSelf.prototype = {
         	}else{
         		i.css({'display':'block'});
 				var name = $(this).find('input').val()
-				var url = _ip + src;
+				// var url = _ip + '/pci/update';
 				var data = {};
 				var str  = [];
 				var isre = false;
@@ -252,7 +254,7 @@ manageTagSelf.prototype = {
 						isre = false;
 					}else{
 						isre = true;
-						// alert('已经存在');
+
 					}
 				})
 
@@ -266,7 +268,7 @@ manageTagSelf.prototype = {
 		    	if(id1.indexOf('card') >= 0){
 		    		data['cusId'] = id1.split('-')[4]; 
 		    	}else{
-                    console.log(canuserId);
+
 
                     data['id'] = canuserId; //that.userId
 		    	}
@@ -314,7 +316,6 @@ manageTagSelf.prototype = {
                 	$('#'+id4).val(data.riskDesc || '');
                 	that.userId = data.id;
                     window.canuserId = data.id;
-					console.log(that.userId);
                 	manageTagSelf.proId  = data.proId;
                 	var obj = {};
                 	obj[id5] = data.interestTag ? data.interestTag.split(','):'';
@@ -353,7 +354,9 @@ manageTagSelf.prototype = {
             jsonpCallback: 'book',
             success: function(json) {
                 var json = json.data;
+                var json = json.data;
                 var h = '';
+                if(!json || json.length <= 0) return;
                 for(var k = 0 , kk = json.length; k < kk; k++){
                     h += '<li class="clear">';
                     	h += '<div class="name">'+json[k].position+'</div>';
@@ -373,16 +376,24 @@ var urlarr = ['/pci/update','/tags/select','/pci/select?id='+globleProjectId];
 manageTagSelf.initApi(urlarr)
 		     .deleteTag('tag-list-1','interestTag','/pci/update') //删除标签：{展示兴趣点的ul的id，}
 			 .deleteTag('tag-list-2','managementTag','/pci/update')
-			 .deleteTag('tag-list-3','competitorTag','/pci/update') 
+			 .deleteTag('tag-list-3','competitorTag','/pci/update')
+
 			 .addTag('addtag-1','addtag-input-1','tag-list-1','interestTag',true,'/pci/update')  //添加标签
-			 .addTag('addtag-2','addtag-input-2','tag-list-2','managementTag',false,'/pci/update')
-			 .addTag('addtag-3','addtag-input-3','tag-list-3','competitorTag',false,'/pci/update')
+			 .addTag('addtag-2','addtag-input-2','tag-list-2','managementTag',true,'/pci/update')
+			 .addTag('addtag-3','addtag-input-3','tag-list-3','competitorTag',true,'/pci/update')
+
 			 .updataDec('tag-dec-1','interestDesc','/pci/update')  // 更新描述
 			 .updataDec('tag-dec-2','managementDesc','/pci/update')
 			 .updataDec('tag-dec-3','competitorDesc','/pci/update')
-			 .updataDec('tag-dec-4','riskDesc','/pci/update')  
-			 .getExitDot('addtag-input-ul-1','tag-list-1','interestTag','/pci/update')  //获取已经存在的兴趣点：{兴趣点ul的id，展示兴趣点的ul的id}
-			 .closeOutTag('close-exist-tag','addtag-input-1') //关闭已存在的兴趣点点ul
+			 .updataDec('tag-dec-4','riskDesc','/pci/update')
+
+			 .getExitDot('addtag-input-ul-1','tag-list-1','interestTag','/pci/update','/tags/select',1)  //获取已经存在的兴趣点：{兴趣点ul的id，展示兴趣点的ul的id}
+             .getExitDot('addtag-input-ul-2','tag-list-2','managementTag','/pci/update','/tags/select',2)
+             .getExitDot('addtag-input-ul-3','tag-list-3','competitorTag','/pci/update','/tags/select',3)
+
+             .closeOutTag('close-exist-tag','addtag-input-1') //关闭已存在的兴趣点点ul
+             .closeOutTag('close-exist-tag-2','addtag-input-2')
+             .closeOutTag('close-exist-tag-3','addtag-input-3')
 			 .initTagDec('tag-dec-1','tag-dec-2','tag-dec-3','tag-dec-4','tag-list-1','tag-list-2','tag-list-3') //初始化所有标签和描述
 			 .getClientAddressBook('clientAddressBook');
 
@@ -406,7 +417,6 @@ clientDataCard.prototype = {
         	contentType:'application/json',
         	jsonpCallback: 'iniata',
             success:function(json){
-            	console.log(json);
                 if(json.success && json.data){
                 	
                 	that.creatCardDom(json.data);
@@ -485,7 +495,7 @@ clientDataCard.prototype = {
  			manageTagSelf.initApi(urlarr)
  						 .addTag('card-intres-addtagbtn-'+n,'card-intres-taglayer-'+n,'card-intres-showtag-list-'+n,'insterest',true,'/cusinfo/update')  //添加标签
  						 .deleteTag('card-intres-showtag-list-'+n,'insterest','/cusinfo/update')
- 						 .getExitDot('card-intres-taglayer-list-'+n,'card-intres-showtag-list-'+n,'insterest','/cusinfo/update')  //获取已经存在的兴趣点：{兴趣点ul的id，展示兴趣点的ul的id}
+ 						 .getExitDot('card-intres-taglayer-list-'+n,'card-intres-showtag-list-'+n,'insterest','/cusinfo/update','/tags/select',1)  //获取已经存在的兴趣点：{兴趣点ul的id，展示兴趣点的ul的id}
  						 .closeOutTag('card-intres-taglayer-close-'+n,'card-intres-taglayer-'+n)
 
  			// 客户资料卡：抵触点
@@ -763,6 +773,8 @@ businessProgress.prototype = {
 	surecord:$('#surecord'),
 	canclecord:$('#canclecord'),
 	busCordTable:$('#busCordTable'),
+    addPeopleUl:$('#addPeopleUl'),
+    addPeopleList:$('#addPeopleList'),
 	init:function(){
 		this.addPeople();
 		this.getBusCordList();
@@ -776,6 +788,7 @@ businessProgress.prototype = {
 		this.surecord.click(function(){
 			that.insertBusInfo();
 		})
+        that.getExistPeople();
 		return this;
 	},
 	showInfo:function(that){
@@ -787,30 +800,63 @@ businessProgress.prototype = {
     	that.addcordbtn.css({'display':'inline-block'});
 	},
 	addPeople:function(){
+	    var that = this;
 		$('#addPeopleBtn').on('click',function(){
 			$('#addPeopleSelect').css({'display':'block'})
 		})
 		$('#addPeopleClose').on('click',function(){
 			$('#addPeopleSelect').css({'display':'none'})
 		})
-		$('#addPeopleUl').on('click','li',function(){
+		that.addPeopleUl.on('click','li',function(){
+		    // alert(1);
+            var len = that.addPeopleList.find('li').length;
+            if(len >=2){
+                alert('只能添加两个!');
+                return;
+            }
+            var v = $(this).find('input').val();
+            var h = '<li>'+v+'<input type="hidden" value="'+v+'"><span>×</span></li>';
+            that.addPeopleList.append(h);
 
 		})
+        that.addPeopleList.on('click','li>span',function () {
+            $(this).parent('li').remove();
+        })
 	},
 	getExistPeople:function(){
-
+	    var url = _ip + '/user/name';
+        var that = this;
+        $.ajax({
+            url:url,
+            type: 'GET',
+            dataType: 'jsonp',
+            contentType:'application/json',
+            jsonpCallback: 'namename',
+            success: function(json) {
+                var json = json.data;
+                var h = '';
+                for(var k = 0 , kk = json.length; k < kk; k++){
+                    h += '<li>'+json[k]+'<input type="hidden" value="'+json[k]+'"><i></i></li>';
+                }
+                that.addPeopleUl.html(h);
+            }
+        })
 	},
 	insertBusInfo:function(){
 		var url = _ip + '/busprogs/insert';
+        var arr = [];
+        this.addPeopleList.find('li').each(function () {
+            arr.push($(this).find('input').val());
+        })
     	var data = {
-    		  "id": '',
+    		  "id": parseInt(globleProjectId),
 		      "proId": globleProjectId,
 		      "type": $('#visitTypeList').val(),
 		      "visitResult": $('#visitResultList').val(),
 		      "level": $('#bussTypeList').val(), //拜访状态:漏掉了，等会加上
 		      "progress": $('#bussTypeList').val(),
 		      "emergency": $('#emergencyList').val(),
-		      "visitId": 1,
+		      "visitId": arr.join(','),
 		      "nextFocus": $('#nextFocus').val(),
 		      "nextFollow": $('#nextFollow').val(),
 		      "remark": $('#remark').val(),
@@ -830,6 +876,7 @@ businessProgress.prototype = {
 	        contentType:'application/json',
 	        data:JSON.stringify(data),
             success: function(data) {
+	            return;
             	if(data.message === 'LOGIN') {
                     window.location.href = 'user-login.html';
                     return false;

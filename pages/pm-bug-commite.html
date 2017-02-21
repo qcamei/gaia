@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>pm-缺陷-提交</title>
     <link href="../css/common.css" type="text/css" rel="stylesheet"/>
-    <link href="../css/index.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <!--header-->
@@ -193,10 +192,18 @@
         $.ajax({
             url:url,
             type : "POST",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             dataType: 'json',
             contentType:'application/json',
             data:JSON.stringify(data),
-            success:function(data){
+            success: function(data) {
+                if(data.message === 'LOGIN') {
+                    window.location.href = 'user-login.html';
+                    return false;
+                }
                 if(data.success){
                     location.href = 'pm-bug-list.html';
                 }else{

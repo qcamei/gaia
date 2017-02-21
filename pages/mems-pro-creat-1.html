@@ -57,21 +57,21 @@
 
             <div class="show-box" style="display: none;" id="showselect">
                 <div class="select-area clear">
-                    <div class="wap">
-                        <ul id="district">
+                    <div class="wap" style="width: 15%;">
+                        <ul id="district" >
                         </ul>
                     </div>
 
-                    <div class="wap">
+                    <div class="wap" style="width: 20%;">
                         <ul id="provice">
                         </ul>
                     </div>
-                    <div class="wap">
+                    <div class="wap" style="width: 25%;">
                         <ul id="city">
                            
                         </ul>
                     </div>
-                    <div class="wap">
+                    <div class="wap" style="width: 40%;">
                         <ul id="hospital" style="width: 250px;">
                         </ul>
                     </div>
@@ -170,7 +170,7 @@ function getHospital(id,city){ //获取医院列表
             var h = '';
             console.log(json.length);
             for(var k = 0 , kk = json.length; k < kk; k++){
-                h += '<li>'+json[k].chineseName+'<input type="hidden" value="'+json[k].chineseName+'"/><i>></i></li>'
+                h += '<li>'+json[k].chineseName+'<input type="hidden" value="'+json[k].chineseName+'"/></li>'
             }
             $('#hospital').html(h);
         }
@@ -263,7 +263,7 @@ $('#hospital').on('click','li',function () {
         if(v.length >= 1){
             showkeylistdo()
             // keysearch(v);
-            if(v.length >= 2){
+            if(v.length >= 8){
                 keysearch(v);
             }
             
@@ -294,6 +294,10 @@ $('#hospital').on('click','li',function () {
         $.ajax({
             url:url,
             type : "POST",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             dataType: 'json',
             contentType:'application/json',
             data:JSON.stringify(data),

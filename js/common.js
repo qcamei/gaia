@@ -1,6 +1,6 @@
- // var _ip = 'http://121.42.187.170';
-
-var _ip = 'http://192.168.6.23:8080';
+ var _ip = 'http://121.42.187.170';
+ // var _ip = 'http://192.168.6.23:8080';
+ // var _ip = 'http://10.0.1.156:8080';
 
 /*----------
  * 头部页面头部
@@ -66,7 +66,6 @@ if (!$('.login-box').length) {
             contentType:'application/json',
             jsonpCallback: 'login',
             success: function(json) {
-                console.log(json)
                 if(!json.success){
                     console.log(json.success);
                     location.href = 'user-login.html';
@@ -110,7 +109,7 @@ function modityAsideCurrent(){
             prolit:['mems-pro-list','mems-pro-creat-1','mems-pro-detail-baseinfo','mems-pro-creat-1','mems-pro-creat-2','mems-pro-creat-3']
         }, //项目管理文件列表
         needmange:{
-            needlist:['pm-need-list','pm-need-commite','pm-need-list-meme','pm-need-commite-pm','pm-need-detail-pm','pm-need-commite','pm-commite-relative'],
+            needlist:['pm-need-list','pm-need-commite','pm-need-list-meme','pm-need-commite-pm','pm-need-detail-pm','pm-need-commite','pm-commite-relative','pm-need-detail-mems'],
             buglist:['pm-bug-list','pm-bug-commite','pm-bug-detail','pm-bug-detail-edit']
         },   //需求管理文件列表
         system:{
@@ -314,7 +313,6 @@ var _api = function(){
                 if (isSelect) {
                     h += '<option value="">请选择</option>';
                 }
-                console.log(defaultId)
                 for(var k = 0 , kk = json.length; k < kk; k++){
                      h += '<option value="'+json[k]+'" '+  (json[k] == defaultId?"selected":""  ) +'>'+json[k]+'</option>';
                 }            
@@ -339,9 +337,9 @@ _api.prototype = {
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'platform']);
         return this;
     },
-    getFunctionList: function(id, defaultId,isSelect,platformList){ // 4. 获取功能列表 get
+    getFunctionList: function(id, defaultId,isSelect,productList){ // 4. 获取功能列表 get,与产品相关联
         
-        var plat = $('#'+platformList).val() || '运营平台';
+        var plat = $('#'+productList).val() || '运营平台';
         var url = _ip+'/common/getFeatureList?key='+plat;
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'fun']);
         return this;

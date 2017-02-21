@@ -12,38 +12,14 @@
 </header>
 
 <!--menu-->
-<aside class="aside">
-    <div class="logo">
-        运营平台
-    </div>
-    <ul class="menu">
-        <li>
-            <div class="menu-first"><i class="dash"></i>Dashboard<l></l></div>
-        </li>
-        <li>
-            <div class="menu-first"><i class="project"></i>项目管理<l></l></div>
-            <dl class="menu-second">
-                <dd><a href="#">待办事项</a></dd>
-                <dd><a href="projectManage/mems-pro-list.html">项目列表</a></dd>
-            </dl>
-        </li>
-        <li>
-            <div class="menu-first current"><i class="need"></i>需求管理<l></l></div>
-            <dl class="menu-second">
-                <dd><a href="pm-need-list.html">需求池</a></dd>
-                <dd><a href="pm-bug-list.html" class="current">缺陷池</a></dd>
-            </dl>
-        </li>
-        <li>
-            <div class="menu-first"><i class="system"></i>系统配置<l></l></div>
-        </li>
-    </ul>
+<aside id="aside" class="aside" v-html="datas">
+    <div>{{datas}}</div>
 </aside>
 
 <!--content-->
 <div class="content">
     <div class="page-header">
-        <div class="header-info"><i></i><a href="#">pm-需求列表</a>&nbsp;>&nbsp;产品需求详情</div>
+        <div class="header-info"><i></i><a href="pm-need-list-mems.html">pm-需求列表</a>&nbsp;>&nbsp;产品需求详情</div>
     </div>
     <div class="page-inner">
         <div class="page-content">
@@ -59,7 +35,7 @@
                         <td><span class="red-start">*</span>需求类别：</td>
                         <td><select id="typeList"></select></td>
                         <td><span class="red-start">*</span>产品：</td>
-                        <td><select id="productList"></select></td>
+                        <td><select id="productList" onchange="_API.getFunctionList('functionList',false,false,'productList')"></select></td>
                     </tr>
                     <tr>
                         <td><span class="red-start">*</span>使用平台：</td>
@@ -115,6 +91,7 @@
     </div>
 </div>
 <script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.cookie.js"></script>
 <script src="../js/vue.js" type="text/javascript"></script>
 <script src="../js/common.js"></script>
 

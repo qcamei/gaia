@@ -12,32 +12,8 @@
 </header>
 
 <!--menu-->
-<aside class="aside">
-    <div class="logo">
-        运营平台
-    </div>
-    <ul class="menu">
-        <li>
-            <div class="menu-first"><i class="dash"></i>Dashboard<l></l></div>
-        </li>
-        <li>
-            <div class="menu-first"><i class="project"></i>项目管理<l></l></div>
-            <dl class="menu-second">
-                <dd><a href="#">待办事项</a></dd>
-                <dd><a href="projectManage/mems-pro-list.html">项目列表</a></dd>
-            </dl>
-        </li>
-        <li>
-            <div class="menu-first current"><i class="need"></i>需求管理<l></l></div>
-            <dl class="menu-second">
-                <dd><a href="pm-need-list.html" class="current">需求池</a></dd>
-                <dd><a href="pm-bug-list.html" >缺陷池</a></dd>
-            </dl>
-        </li>
-        <li>
-            <div class="menu-first"><i class="system"></i>系统配置<l></l></div>
-        </li>
-    </ul>
+<aside id="aside" class="aside" v-html="datas">
+    <div>{{datas}}</div>
 </aside>
 
 

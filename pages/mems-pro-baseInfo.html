@@ -20,7 +20,7 @@
 <!--content-->
 <div class="content">
     <div class="page-header">
-        <div class="header-info"><i></i><a href="mems-pro-creat.html">项目信息</a></div>
+        <div class="header-info"><i></i><a href="javascript:" onclick="toProDetail()">项目详情</a></div>
     </div>
     <div class="creat-pro">
         <div class="pro-head"><i></i>项目信息<a style="float:right;margin: 0 20px 0 0;cursor: pointer" onclick="edit()">编辑</a></div>
@@ -118,6 +118,9 @@
 <script type="text/javascript">
     function  edit() {
         location.href = 'mems-pro-baseInfo-edite.html?id='+getUrlId();
+    }
+    function toProDetail() {
+        location.href = 'mems-pro-detail-baseinfo.html?id='+getUrlId()+'&name='+$$.getUrlParaObj()['name'];
     }
     getItem()
     function getItem() {

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>pm-需求-创建</title>
     <link href="../css/common.css" type="text/css" rel="stylesheet"/>
-    <link href="../css/index.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <!--header-->
@@ -76,7 +75,7 @@
                         <td><span class="red-start">*</span>需求类别：</td>
                         <td><select id="typeList"></select></td>
                         <td><span class="red-start">*</span>产品：</td>
-                        <td><select id="productList"></select></td>
+                        <td><select id="productList" onchange="_API.getFunctionList('functionList',false,false,'productList')"></select></td>
                     </tr>
                     <tr>
                         <td><span class="red-start">*</span>使用平台：</td>
@@ -184,8 +183,7 @@
             "feature":$('#functionList').val(),
             "name": $('#name').val(),
             "plat":$('#platformList').val(),
-            "product": $('#productList').val(),
-            "discribe":"描述",
+            "product": $('#discribe').val(),
             "type":$('#typeList').val(),
             "priority":$('#priority').val(),
             "status":$('#status').val(),
@@ -199,13 +197,21 @@
         $.ajax({
             url:url,
             type : "POST",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             dataType: 'json',
             contentType:'application/json',
             data:JSON.stringify(data),
-            success:function(data){
+            success: function(data) {
+                if(data.message === 'LOGIN') {
+                    window.location.href = 'user-login.html';
+                    return false;
+                }
                
                 if(data.success){
-                    location.href = 'pm-need-list-mems.html';
+//                    location.href = 'pm-need-list-mems.html';
                 }else{
                     alert('上传失败, 请稍后重试！');
                 }

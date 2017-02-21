@@ -67,10 +67,18 @@
                          <textarea placeholder="点击添加描述……" id="tag-dec-2"></textarea>
                          <ul class="clear tag-list" id="tag-list-2">
                          </ul>
-                         <div class="add-tag" id="addtag-2">+标签</div>
-                         <div class="add-tag-con" id="addtag-input-2">
-                             <input type="text" placeholder="标签名" /><input type="button" value="确认"><input type="button" value="取消">
+                        <div style="position: relative;">
+                             <div class="add-tag" id="addtag-2">+标签</div>
+                             <div class="add-tag-exist-con" id="addtag-input-2">
+                                <a href="javascript:" class="close" id="close-exist-tag-2">关闭</a>
+                                <ul class="tag-out-list" id="addtag-input-ul-2">
+                                </ul>
+                             </div>
                          </div>
+
+                         <!--<div class="add-tag-con" id="addtag-input-2">-->
+                             <!--<input type="text" placeholder="标签名" /><input type="button" value="确认"><input type="button" value="取消">-->
+                         <!--</div>-->
                     </div>
 
                     <!-- 主要竞争对手 -->
@@ -79,10 +87,17 @@
                         <textarea placeholder="点击添加描述……" id="tag-dec-3"></textarea>
                          <ul class="clear tag-list" id="tag-list-3">
                          </ul>
-                         <div class="add-tag" id="addtag-3">+标签</div>
-                         <div class="add-tag-con"  id="addtag-input-3">
-                             <input type="text" placeholder="标签名" /><input type="button" value="确认"><input type="button" value="取消">
-                         </div>
+                        <div style="position: relative;">
+                             <div class="add-tag" id="addtag-3">+标签</div>
+                            <div class="add-tag-exist-con" id="addtag-input-3">
+                                <a href="javascript:" class="close" id="close-exist-tag-3">关闭</a>
+                                <ul class="tag-out-list" id="addtag-input-ul-3">
+                                </ul>
+                            </div>
+                        </div>
+                         <!--<div class="add-tag-con"  id="addtag-input-3">-->
+                             <!--<input type="text" placeholder="标签名" /><input type="button" value="确认"><input type="button" value="取消">-->
+                         <!--</div>-->
                     </div>
 
                     <!-- 风险和挑战 -->
@@ -222,16 +237,19 @@
                         <tr>
                             <td>拜访人员</td>
                             <td>
-                                <ul class="visitors left" id="addPeopleList">
-                                    <li>小花</li>
-                                    <li>小黄</li>
+                                <!--<ul class="visitors left" id="addPeopleList">-->
+                                    <!--<li>小花</li>-->
+                                    <!--<li>小黄</li>-->
+                                <!--</ul>-->
+                                <ul class="clear tag-list" id="addPeopleList">
+                                    <!--<li>白骨精<input type="hidden" value="白骨精"><span>×</span></li>-->
                                 </ul>
                                 <div style="position: relative;float: left;">
                                 <div class="add-tag" id="addPeopleBtn">+标签</div>
                                 <div class="add-tag-exist-con" id="addPeopleSelect">
                                     <a href="javascript:" class="close" id="addPeopleClose">关闭</a>
                                     <ul class="tag-out-list" id="addPeopleUl">
-                                        <li>我是牛逼的小林<input type="hidden" value="我是牛逼的小林"><i></i></li>
+                                        <!--<li>我是牛逼的小林<input type="hidden" value="我是牛逼的小林"><i></i></li>-->
                                     </ul>
                                 </div>
                          </div>
@@ -434,7 +452,7 @@ _API.getSellType('sellTypeSelect')
 var globleproname = $$.getUrlParaObj()['name'];
 $('#getHeadProName').html(globleproname);
 function getHeadProName() {
-    location.href = 'mems-pro-baseInfo.html?id='+getUrlId();
+    location.href = 'mems-pro-baseInfo.html?id='+getUrlId()+'&name='+globleproname;
 }
 
     var itemId = 6;

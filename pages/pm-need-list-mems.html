@@ -49,7 +49,7 @@
 <!--content-->
 <div class="content">
     <div class="page-header">
-        <div class="header-info"><i></i><a href="/innerOpera/pages/pm-need-list.html">需求池</a></div>
+        <div class="header-info"><i></i><a href="pm-need-list-mems.html">需求池</a></div>
     </div>
     <div class="page-inner" style="padding-top: 13px">
         <ul class="item-tab clear">
@@ -136,10 +136,18 @@
         $.ajax({
             url:url,
             type : "POST",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             dataType: 'json',
             contentType:'application/json',
             data:JSON.stringify(data),
-            success:function(json){
+            success: function(json) {
+                if(json.message === 'LOGIN') {
+                    window.location.href = 'user-login.html';
+                    return false;
+                }
                if(!json.data || json.data.length <= 0){
                     $('#bodyList').html('<tr><td colspan="9">暂无数据！</td></tr>');
                     $('#pageList').html('');

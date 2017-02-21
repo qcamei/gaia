@@ -113,7 +113,7 @@
 <script src="../js/common.js"></script>
 <script>
 
-    _API.getProductList('productList').getIssueStatusList('issueStatusList',0,true);
+    _API.getProductList('productList',false,true).getIssueStatusList('issueStatusList',0,true);
     function getData(p,checPara){
         var PerPage = 20;
         var url  = _ip+'/issue/getIssueList?page='+p+'&size='+PerPage;
@@ -121,10 +121,19 @@
         $.ajax({
             url:url,
             type : "POST",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             dataType: 'json',
             contentType:'application/json',
             data:JSON.stringify(data),
-            success:function(json){
+            success: function(json) {
+
+                if(json.message === 'LOGIN') {
+                    window.location.href = 'user-login.html';
+                    return false;
+                }
                 if(!json.data || json.data.length <= 0){
                     $('#bodyList').html('<tr><td colspan="7">暂无数据！</td></tr>');
                     $('#pageList').html('');
@@ -148,7 +157,7 @@
                     _data.push('<td>'+msg.creater+'</td>');
                     _data.push('<td>'+msg.createTime+'</td>');
                     _data.push('<td>'+msg.status+'</td>');
-                
+
                 }
                 _pager.push('<span>共：'+ totalPage +'页</span>');
                 _pager.push('<span>您正在第：'+p+'页</span>')
@@ -181,7 +190,7 @@
     $('#checkout').on('click',function(){
         var para = {
             name: $('#name').val() || null,
-            product: $('productList').val() || null,
+            product: $('#productList').val() || null,
             creater:$('#creater').val() || null,
             startTime: $('#dpd1').val()?$('#dpd1').val() + ' 00:00:00' : null,
             endTime: $('#dpd2').val()?$('#dpd2').val() + ' 00:00:00' : null,
