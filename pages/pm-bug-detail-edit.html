@@ -83,9 +83,9 @@
                     </tr>
                     <tr>
                         <td>使用平台：</td>
-                        <td><select id="plat"></td>
+                        <td><select id="plat"></select></td>
                         <td>缺陷类型：</td>
-                        <td><select id="issueType"><option>功能缺陷</option></select></td>
+                        <td><select id="issueType"></select></td>
                     </tr>
 
                     <tr>
@@ -196,7 +196,6 @@
                         .getNeedSource('source',data.projectId)
                         .getTypeList('typeList',data.type)
                         .getProductList('product',data.product)
-                        .getIssueType('issueType',data.type)
                         .getPlatformList('plat',data.plat)
                         .getFunctionList('functionList',data.feature)
                         .getNetWorkList('networkType',data.networkType)

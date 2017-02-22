@@ -182,7 +182,7 @@
 <script type="text/javascript">
     var userName= $('#userName-text').val();
     function getData(p,checPara){
-        var PerPage = 20;
+        var PerPage = 1;
         var url  = _ip+'/user/getUserList?page='+p+'&size='+PerPage;
         var data = checPara || {'name': 'a'};
         $('#bodyList').html('');
@@ -264,24 +264,20 @@
             _pager.push('<input type="text" id="goToPage"/>');
             _pager.push('<span>页</span>');
             $('#pageList').html(_pager.join(""));
-            $('#goToPage').bind('keyup', function(event) {
+            $('#goToPage').bind('blur', function(event) {
                 var userName= $('#userName-text').val();
-                if (event.keyCode == "13") {
-
-                    var v = parseInt($(this).val());
-                    if(!/^[1-9]\d*$/.test(v)){
-                        return false;
-                    }else{
-                        if(v <= 1){
-                            getData(1, {name: userName});
-                        }
-                        else if(v >= totalPage){
-                            getData(totalPage, {name: userName});
-                        }else{
-                            getData(v, {name: userName});
-                        }
+                var v = parseInt($(this).val());
+                if(!/^[1-9]\d*$/.test(v)){
+                    return false;
+                }else{
+                    if(v <= 1){
+                        getData(1, {name: userName});
                     }
-
+                    else if(v >= totalPage){
+                        getData(totalPage, {name: userName});
+                    }else{
+                        getData(v, {name: userName});
+                    }
                 }
             });
         });

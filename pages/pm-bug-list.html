@@ -174,6 +174,9 @@
                     if(!/^[1-9]\d*$/.test(v)){
                         return false;
                     }
+                    if(v>1 && v<totalPage){
+                        getData(v);
+                    }
                     if(v <= 1){
                         getData(1);
                         return false;

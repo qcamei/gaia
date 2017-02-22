@@ -380,7 +380,7 @@ _api.prototype = {
     },
     getIssueType: function(id, defaultId,isSelect){ // 11. 获取缺陷类型
         var url = _ip+'/common/getIssueTypeList';
-        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'IssueStatus']);
+        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'IssueType']);
         return this;
     },
     getNetWorkList: function(id, defaultId,isSelect){ // 12. 获取网络类型

@@ -32,8 +32,11 @@ function getFirstOrganize(level, data, $content) {
                 msg.level = level;
                 msg.levelClass = levelClass;
                 treeLi($firstUl, msg);
+
             }
             $content.append($firstUl);
+            getQuartersList($('.organize-content').find('li').eq(0).attr('id') );
+            getQuartersList($('.organize-content').find('li').eq(0).find('.tree-title').addClass('active'))
         }
     });
 }

@@ -127,10 +127,11 @@
         $('.user-mask').css('display','none');
         return false;
     });
+//    getQuartersList($('.organize-content').find('li').eq(1).attr('id') );
+    function getQuartersList(dpt) {
 
-    function getQuartersList() {
         var url  = _ip+'/ocp';
-        var dpt = $('.tree-title.active').closest('li').attr('id');
+        var dpt = dpt || $('.tree-title.active').closest('li').attr('id');
         var data = {
             dpt: dpt
         };
@@ -397,6 +398,7 @@
     function cancelAddEdit(obj) {
         var $obj = $(obj);
         $obj.closest('.add-tag-line').css('display', 'none').find('.add-tag-input').val('');
+        $obj.closest('.add-tag-line').siblings('.text-tag').css('display','block')
         $obj.closest('li').find('.need-none').removeClass('import-none');
         if($obj.closest('.tree-title').hasClass('addTree')) {
             $obj.closest('li').remove();
