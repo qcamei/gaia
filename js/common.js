@@ -373,7 +373,7 @@ _api.prototype = {
     },
     getSellType: function(id, defaultId,isSelect){   //17. 项目管理：获取销售方式
         var url = _ip+'/common/getSaleType';
-        this.getListFirst.apply(this,[url,id,defaultId,isSelect,'seltt']);
+        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'seltt']);
         return this;
     },
     getVisitTypeList: function(id, defaultId,isSelect) { // 18. 项目管理：拜访方式

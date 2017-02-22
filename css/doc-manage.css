@@ -59,6 +59,27 @@ html body {
             html body .content .page-inner .item-content .table-box table thead tr th .total-right, html body .content .page-inner .item-content .table-box table thead tr td .total-right, html body .content .page-inner .item-content .table-box table tbody tr th .total-right, html body .content .page-inner .item-content .table-box table tbody tr td .total-right {
               float: right;
               color: #000; }
+              html body .content .page-inner .item-content .table-box table thead tr th .total-right .search-box, html body .content .page-inner .item-content .table-box table thead tr td .total-right .search-box, html body .content .page-inner .item-content .table-box table tbody tr th .total-right .search-box, html body .content .page-inner .item-content .table-box table tbody tr td .total-right .search-box {
+                display: inline-block;
+                vertical-align: middle;
+                position: relative;
+                border: solid 1px #dee6ea;
+                padding: 0px 10px 0px 15px;
+                margin-right: 20px; }
+                html body .content .page-inner .item-content .table-box table thead tr th .total-right .search-box .search-icon, html body .content .page-inner .item-content .table-box table thead tr td .total-right .search-box .search-icon, html body .content .page-inner .item-content .table-box table tbody tr th .total-right .search-box .search-icon, html body .content .page-inner .item-content .table-box table tbody tr td .total-right .search-box .search-icon {
+                  background: url("../images/search-icon.png") no-repeat;
+                  width: 16px;
+                  height: 16px;
+                  position: absolute;
+                  top: 7px;
+                  right: 10px;
+                  cursor: pointer; }
+                html body .content .page-inner .item-content .table-box table thead tr th .total-right .search-box input, html body .content .page-inner .item-content .table-box table thead tr td .total-right .search-box input, html body .content .page-inner .item-content .table-box table tbody tr th .total-right .search-box input, html body .content .page-inner .item-content .table-box table tbody tr td .total-right .search-box input {
+                  height: 29px;
+                  border: 0;
+                  outline: none;
+                  width: 150px;
+                  padding-right: 16px; }
               html body .content .page-inner .item-content .table-box table thead tr th .total-right .total-num, html body .content .page-inner .item-content .table-box table thead tr td .total-right .total-num, html body .content .page-inner .item-content .table-box table tbody tr th .total-right .total-num, html body .content .page-inner .item-content .table-box table tbody tr td .total-right .total-num {
                 display: inline-block;
                 margin: 0 2px;
@@ -70,14 +91,24 @@ html body {
           padding-bottom: 4px; }
           html body .content .page-inner .item-content .table-box table tbody tr td.organize {
             width: 50%; }
+            html body .content .page-inner .item-content .table-box table tbody tr td.organize .right {
+              display: none; }
             html body .content .page-inner .item-content .table-box table tbody tr td.organize .download {
               background: url("../images/download.png") no-repeat;
               width: 16px;
               height: 17px;
               cursor: pointer;
               margin-right: 15px; }
+            html body .content .page-inner .item-content .table-box table tbody tr td.organize .delete-icon {
+              background: url("../images/delete-organize.png") no-repeat;
+              width: 16px;
+              height: 16px;
+              cursor: pointer;
+              margin-right: 15px; }
         html body .content .page-inner .item-content .table-box table tbody tr:hover {
           background: #e6ecef; }
+          html body .content .page-inner .item-content .table-box table tbody tr:hover td.organize .right {
+            display: block; }
         html body .content .page-inner .item-content .table-box table thead tr td {
           padding: 15px 0;
           padding-left: 30px; }
