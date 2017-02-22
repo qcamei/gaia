@@ -537,6 +537,20 @@ aside.aside {
   width: 30px;
   outline: 0px; }
 
+.page-list > button {
+  width: 36px;
+  height: 26px;
+  background: #31aae1;
+  border: 1px solid #31aae1;
+  color: #FFF;
+  outline: 0px;
+  display: inline-block;
+  text-align: center;
+  line-height: 28px;
+  cursor: pointer;
+  float: left;
+  margin: 0 0 0 5px; }
+
 aside.aside .logo {
   height: 76px;
   font-size: 23px;

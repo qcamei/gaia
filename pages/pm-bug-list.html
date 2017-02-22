@@ -166,11 +166,11 @@
                 _pager.push('<span>前往第</span>');
                 _pager.push('<input type="text" id="goToPage"/>');
                 _pager.push('<span>页</span>');
-
+                _pager.push('<button id="goToPageBtn">GO</button>');
                 $('#bodyList').html(_data.join(""));
                 $('#pageList').html(_pager.join(""));
-                $('#goToPage').blur(function () {
-                    var v = $(this).val();
+                $('#goToPageBtn').on('click',function () {
+                    var v = $('#goToPage').val();
                     if(!/^[1-9]\d*$/.test(v)){
                         return false;
                     }
