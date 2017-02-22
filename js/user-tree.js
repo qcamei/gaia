@@ -1,5 +1,5 @@
 
-function getFirstOrganize(level, data, $content) {
+function getFirstOrganize(level, data, $content, callback) {
     var url  = _ip+'/dpt/select';
     var levelClass = '';
     $content.find('ul').remove();
@@ -35,8 +35,9 @@ function getFirstOrganize(level, data, $content) {
 
             }
             $content.append($firstUl);
-            getQuartersList($('.organize-content').find('li').eq(0).attr('id') );
-            getQuartersList($('.organize-content').find('li').eq(0).find('.tree-title').addClass('active'))
+            if(typeof callback === 'function') {
+                callback($content);
+            }
         }
     });
 }

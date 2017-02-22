@@ -131,10 +131,11 @@
     function getQuartersList(dpt) {
 
         var url  = _ip+'/ocp';
-        var dpt = dpt || $('.tree-title.active').closest('li').attr('id');
+         dpt = dpt || $('.tree-title.active').closest('li').attr('id');
         var data = {
             dpt: dpt
         };
+        console.log(dpt);
         organizeAjaxGet(url, data, 'getQuarters', function(json) {
             if (json.success) {
                 var $tagContent = $('.tag-content');
@@ -239,7 +240,10 @@
     }
 
     // 部门管理
-    getFirstOrganize(1, {}, $('.organize-content'));
+    getFirstOrganize(1, {}, $('.organize-content'), function($content) {
+        $content.find('li').eq(0).find('.tree-title').addClass('active');
+        getQuartersList($content.find('li').eq(0).attr('id') );
+    });
     $('.add-organize').on('click', function() {
         var $obj = $(this);
         var $treeActive = $('.tree-title.active');
@@ -390,6 +394,9 @@
                         break;
                 }
                 getFirstOrganize(level, getData, $content);
+            }
+            else {
+                $('.item-content').prepend('<p class="error-msg">'+ json.message  +'</p>');
             }
         });
 
