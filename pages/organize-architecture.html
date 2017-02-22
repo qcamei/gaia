@@ -240,7 +240,10 @@
     }
 
     // 部门管理
-    getFirstOrganize(1, {}, $('.organize-content'));
+    getFirstOrganize(1, {}, $('.organize-content'), function($content) {
+        $content.find('li').eq(0).find('.tree-title').addClass('active');
+        getQuartersList($content.find('li').eq(0).attr('id') );
+    });
     $('.add-organize').on('click', function() {
         var $obj = $(this);
         var $treeActive = $('.tree-title.active');
