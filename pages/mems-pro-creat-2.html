@@ -80,7 +80,7 @@
             <tbody>
                 <tr>
                     <td><span class="red-start">*</span>医院全称</td>
-                    <td><input type="" name="" id="name" onblur="veryName(this)"><span class="red-start" style="display: none;">名称已经存在！</span></td>
+                    <td><input type="" name="" id="name" onblur="veryName(this)"><span style="display: none;"></span></td>
                 </tr>
                 <tr>
                     <td>简称</td>
@@ -195,7 +195,7 @@
     }
 
 
-    var nameflag = true;
+    var nameflag = false;
     function veryName(that) {
         var name = $(that).val();
         var url = _ip + '/project/verify?name='+name;
@@ -206,12 +206,15 @@
             contentType: 'application/json',
             jsonpCallback: 'very',
             success: function (json) {
-                if (json.message == '项目名重复，请重新输入') {
+
+                if(json.success == false){
                     nameflag = false;
-                    $(that).addClass('error-i');
-                    $(that).siblings('span').css({'display':'inline-block'});
-//                    location.href = 'user-login.html';
+                    $(that).siblings('span').css({'display':'inline-block','color':'#ed8073'}).html(json.message);
+                }else{
+                    nameflag = true
+                    $(that).siblings('span').css({'display':'inline-block','color':'#009926'}).html(json.message);
                 }
+
             }
         })
     }

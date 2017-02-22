@@ -280,11 +280,12 @@ var _api = function(){
 }
 _api.prototype = {
     getNeedSource: function(id,defaultId,isSelect){  //1. 获取来源列表
-        var url = _ip+'/common/getProjectNameList';
+        var url = _ip+'/project/select';
         this.getListFirst.apply(this,[url,id,defaultId,isSelect,'needsource']);
         return this;
     },
     getComeSource: function(id, defaultId,isSelect,proId){ // 2. 获取需求方列表
+        console.log(proId)
         var url = _ip+'/cus/selectAll?id='+proId;
         this.getListFirst.apply(this,[url,id,defaultId,isSelect,'sourcec']);
         return this;
@@ -295,7 +296,6 @@ _api.prototype = {
         return this;
     },
     getFunctionList: function(id, defaultId,isSelect,productList,defaltplat){ // 4. 获取功能列表 get,与产品相关联
-        
         var plat = defaltplat || $('#'+productList).val();
         var url = _ip+'/common/getFeatureList?key='+plat;
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'fun']);

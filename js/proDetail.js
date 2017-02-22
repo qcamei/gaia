@@ -810,13 +810,8 @@ presell.prototype = {
                 var json = json.data;
                 presell.userId = json.id;
 
-                var selltype = {
-                    "0":'单家医院经销商',
-                    "1":'区域代理商',
-                    "2":'直销'
-                }
                 var h = '';
-                	h += '<tr><td colspan="2">销售方式：<span class="type">'+selltype[json.type]+'</span></td></tr>';
+                	h += '<tr><td colspan="2">销售方式：'+ (json.type?'<span class="type">'+json.type+'</span>':'') +'</td></tr>';
                     h += '<tr><td width="40%"><div class="name">预算：</div><div class="text"><span class="num-style">'+json.budget+'</span>&nbsp;万元</div></td>';
                     	h += '<td><div class="name">采购时间：</div><div class="text"><span class="num-style">'+json.year+'</span>&nbsp;年&nbsp;<span class="num-style">'+json.month+'</span>&nbsp;月</div></td></tr>';
                     h += '<tr><td colspan="2">'+json.discribe+'</td></tr>';     
@@ -1085,7 +1080,13 @@ businessProgress.prototype = {
                 	}
                 	h += '</tbody>'
                 }
-                $('#bussProNameTile').html(arr[0]).css({'display':'inline-block'});
+                if(arr.length){
+                    $('#bussProNameTile').html(arr[0]).css({'display':'inline-block'});
+
+                }else{
+                    $('#bussProNameTile').css({'display':'none'});
+
+                }
 
 
                 that.busCordTable.html(h);

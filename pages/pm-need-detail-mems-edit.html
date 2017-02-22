@@ -71,7 +71,7 @@
                         <td><span class="red-start">*</span>来源：</td>
                         <td><select id="needSource" onchange="_API.getComeSource('needSide',false,true,$(this).val(),'needSide')"></select></td>
                         <td><span class="red-start">*</span>需求方：</td>
-                        <td><select id="needSide"></select></td>
+                        <td><select id="needSide"></select><span class="red-start" style="color: #4cae4c">先选择来源</span></td>
                     </tr>
                     <tr>
                         <td><span class="red-start">*</span>需求类别：</td>
@@ -83,7 +83,7 @@
                         <td><span class="red-start">*</span>使用平台：</td>
                         <td><select id="platformList"></select></td>
                         <td><span class="red-start">*</span>功能模块：</td>
-                        <td><select id="functionList"></select></td>
+                        <td><select id="functionList"></select><span class="red-start" style="color: #4cae4c">先选择平台</span></td>
                     </tr>
 
                     <tr>
@@ -173,10 +173,10 @@
             success:function(data){
                 if(data.success){
                     var data = data.data;
-                    _API.getNeedSource('needSource',data.projectId)
-                        .getComeSource('needSide',data.customerId)
+                    _API.getProNameList('needSource',data.projectId)
+                        .getComeSource('needSide',data.customerId,false,data.projectId)
                         .getPlatformList('platformList',data.plat)
-                        .getFunctionList('functionList',data.feature,false,'platformList')
+                        .getFunctionList('functionList',data.feature,false,false,data.product)
                         .getTypeList('typeList',data.type)
                         .getLevelList('levelList',data.level)
                         .getProductList('productList',data.product);
@@ -219,7 +219,14 @@
                 attachment.push( $(this).attr('rel') );
             })
         }
-
+        if($('#needSource').find('option:selected').text() == '请选择'){
+            alert('请选择来源');
+            return false
+        }
+        if($('#needSide').find('option:selected').text() == '请选择'){
+            alert('请选择需求方');
+            return false
+        }
         var url  = _ip+'/original/updateRequire';
         var data = {
             "id":_id,
