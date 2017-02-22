@@ -780,7 +780,7 @@ presell.prototype = {
 		})
 		this.sureEditSell.click(function(){
 			that.uploadInfo();
-			that.showInfo(that);
+
 		})
 		
 		return this;
@@ -835,6 +835,24 @@ presell.prototype = {
 		var url = _ip + '/salebgt/update';
 		var time = $('#proTime').val()+' 00:00:00:00';
 		var date = new Date(time).getTime();
+        $('#tel').focus(function(){
+            $('#tel').removeClass('error-i');
+        })
+        $('#budget').focus(function(){
+            $('#budget').removeClass('error-i');
+        })
+
+        var tel = $('#tel').val();
+        if(tel != '' && !/^1(\d){10}$/.test(tel)){
+            $('#tel').addClass('error-i');
+            return false;
+        }
+        var budget = $('#budget').val();
+        if(budget != '' && !/(\d)/.test(budget)){
+            $('#budget').addClass('error-i');
+            return false;
+        }
+
     	var data = {
     		"id": presell.userId,
 		    "type": $('#sellTypeSelect').val(),
@@ -863,6 +881,7 @@ presell.prototype = {
                 if(data.success){
                 	that.getInfo('sellBuget');
                     _API.getSellType('sellTypeSelect',$('#sellTypeSelect').val(),true);
+                    that.showInfo(that);
                 }else{
                     alert('添加失败, 请稍后重试！');
                 }
