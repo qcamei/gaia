@@ -102,7 +102,7 @@ function organizeAjaxGet(url, data, jsonpCall, callback) {
             withCredentials: true
         },
         crossDomain: true,
-        dataType: 'jsonp',
+        dataType: dataType,
         data: data,
         jsonp: 'callback',
         jsonpCallback: jsonpCall,
