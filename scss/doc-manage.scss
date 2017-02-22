@@ -71,6 +71,30 @@ html {
                     .total-right {
                       float: right;
                       color: #000;
+                      .search-box {
+                        display: inline-block;
+                        vertical-align: middle;
+                        position: relative;
+                        border: solid 1px #dee6ea;
+                        padding: 0px 10px 0px 15px;
+                        margin-right: 20px;
+                        .search-icon {
+                          background: url("../images/search-icon.png") no-repeat;
+                          width: 16px;
+                          height: 16px;
+                          position: absolute;
+                          top: 7px;
+                          right: 10px;
+                          cursor: pointer;
+                        }
+                        input {
+                          height: 29px;
+                          border: 0;
+                          outline: none;
+                          width: 150px;
+                          padding-right:16px;
+                        }
+                      }
                       .total-num {
                         display: inline-block;
                         margin: 0 2px;
@@ -88,6 +112,9 @@ html {
                     padding-top: 4px;
                     padding-bottom: 4px;
                     &.organize {
+                      .right {
+                        display: none;
+                      }
                       width: 50%;
                       .download {
                         background: url("../images/download.png") no-repeat;
@@ -96,10 +123,24 @@ html {
                         cursor: pointer;
                         margin-right: 15px;
                       }
+                      .delete-icon {
+                        background: url("../images/delete-organize.png") no-repeat;
+                        width: 16px;
+                        height: 16px;
+                        cursor: pointer;
+                        margin-right: 15px;
+                      }
                     }
                   }
                   &:hover {
                     background: #e6ecef;
+                    td {
+                      &.organize {
+                        .right {
+                          display: block;
+                        }
+                      }
+                    }
                   }
                 }
               }

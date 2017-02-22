@@ -68,7 +68,15 @@
                             </td>
                             <td>
                                 <div class="total-right">
-                                    共有 <span class="total-num"></span> 个文件
+                                    <div class="search-box">
+                                        <form action="javascript:;" id="search-user-form">
+                                            <input type="text" placeholder="搜索文件" id="tagName-text">
+                                            <div class="search-icon" id="search-icon"></div>
+                                        </form>
+                                    </div>
+                                    <span class="display-middle">
+                                        共有 <span class="total-num"></span> 个文件
+                                    </span>
                                 </div>
                             </td>
                         </tr>
@@ -101,7 +109,6 @@
         noFormat: true,
         success: function(json) {
             if (json.success) {
-
                 getDocList(1);
             }
         }
@@ -129,12 +136,11 @@
             for(var k = 0, kk = json.data.length; k < kk; k++){
                 var msg = json.data[k];
                 var size_text = '';
-
                 if (msg.size >= 1024*1024*1024) {
-                    size_text = parseFloat((msg.size / 1024*1024*1024).toFixed(2)) + 'G';
+                    size_text = parseFloat((msg.size / (1024*1024*1024)).toFixed(2)) + 'G';
                 }
                 else if(msg.size >= 1024*1024) {
-                    size_text = parseFloat((msg.size / 1024*1024).toFixed(2)) + 'M';
+                    size_text = parseFloat((msg.size / (1024*1024)).toFixed(2)) + 'M';
                 }
                 else if(msg.size >= 1024) {
                     size_text = parseFloat((msg.size / 1024).toFixed(2)) + 'KB';
@@ -155,7 +161,7 @@
                         '<span class="right">' +
                         '<a href="'+_ip +'/file/download?path='+ msg.path +'">' +
                         '<i class="download display-middle" onclick=""></i>' +
-                        '</a>' +
+                        '</a><i class="delete-icon display-middle" ></i>' +
                         '</span>' +
                         '</td>');
                 _data.push('<td>'+ msgData.size_text +'</td>');
