@@ -81,7 +81,7 @@
             <div class="btns">
                 <a class="pro-btn pro-sure" id="nextstep">下一步</a>
             </div>
-            <div>医院未找到？&emsp;<a class="pro-btn" href="mems-pro-creat-2.html">直接创建</a></div>
+            <div>医院未找到？&emsp;<a class="pro-btn pro-sure pro-sure-can" href="mems-pro-creat-2.html">直接创建</a></div>
         </div>
     </div>
 </div>
@@ -277,11 +277,13 @@ $('#hospital').on('click','li',function () {
     var showkeylist = $('#showkeylist');
     var showselect  = $('#showselect');
     $('#serchkeywords').on('focus',function(){
-        var s = showkeylist.css('display');
+        var s = showkeylist.css('display');'' +
+        console.log(s);
         if(s == 'block'){
             showkeylistdo()
         }else{
-            showselectarea()
+            showselectarea();
+            $('#provice,#city,#hospital').html();
         }
     })
     .on('keyup',function(){
@@ -297,7 +299,6 @@ $('#hospital').on('click','li',function () {
             showselectarea()
         }
     })
-
     function showkeylistdo(){
         showselect.css({'display':'none'});
         showkeylist.css({'display':'block'});
