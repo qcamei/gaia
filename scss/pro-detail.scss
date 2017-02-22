@@ -952,6 +952,8 @@
       border: 0px; }
   .member-slide .member-box {
     height: 256px;
+
+    //overflow-y: scroll;
      }
     .member-slide .member-box .mem-list > li {
       width: 100%;
@@ -1011,3 +1013,9 @@
       background: #FFF;
       float: right;
       margin: 8px 15px 0 15px; }
+
+.error-i{
+  border: 1px solid $color-red!important;
+  box-shadow: 0px 0px 3px $color-red;
+  animation: light .3s ease-in-out;
+}

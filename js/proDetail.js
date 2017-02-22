@@ -585,11 +585,11 @@ clientInfoCard.prototype = {
                         html += '<p class="card-title">编辑客户信息卡<a href="javascript:$$.closeLayer()">&times;</a></p>';
                         html += '<div class="card-box">';
                         html += '<table class="card-input"><tbody>';
-                        html += '<tr><td>职务</td><td><input id="position" value="'+json.position+'" class="short"></td></tr>';
+                        html += '<tr><td><span class="red-start">*</span>职务</td><td><input id="position" placeholder="必填" value="'+json.position+'" class="short"></td></tr>';
                         html += '<tr><td>角色</td><td><input id="role" value="'+json.role+'" class="short"></td></tr>';
-                        html += '<tr><td>姓名</td><td><input id="name" value="'+json.name+'" class="short"></td></tr>';
+                        html += '<tr><td><span class="red-start">*</span>姓名</td><td><input id="name" placeholder="必填" value="'+json.name+'" class="short"></td></tr>';
                         html += '<tr><td>科室</td><td><input id="department" value="'+json.department+'" class="short"></td></tr>';
-                        html += '<tr><td>联系电话</td><td><input id="telphone" value="'+json.tel+'" class="short"></td></tr>';
+                        html += '<tr><td><span class="red-start">*</span>联系电话</td><td><input id="telphone" placeholder="必填" value="'+json.tel+'" class="short"></td></tr>';
                         html += '<tr><td>短号</td><td><input id="short_tel" value="'+json.shortTel+'" class="short"></td></tr></table></tbody></div>';
                         html += '<div class="buttons"><a class="card-btn card-btn-gray" href="javascript:$$.closeLayer()">取消</a>&emsp;<a class="card-btn" onclick="clientInfoCard.updateClientCard('+id+')">确认</a></div>'
                         html += '</div>';
@@ -606,14 +606,14 @@ clientInfoCard.prototype = {
         }else{
             var html = '';
             html += '<div class="client-card-box">';
-            html += '<p class="card-title">编辑客户信息卡<a href="javascript:$$.closeLayer()">&times;</a></p>';
+            html += '<p class="card-title">添加客户信息卡<a href="javascript:$$.closeLayer()">&times;</a></p>';
             html += '<div class="card-box">';
             html += '<table class="card-input"><tbody>';
-            html += '<tr><td>职务</td><td><input id="position" class="short"></td></tr>';
+            html += '<tr><td><span class="red-start">*</span>职务</td><td><input id="position" placeholder="必填" class="short"></td></tr>';
             html += '<tr><td>角色</td><td><input id="role" class="short"></td></tr>';
-            html += '<tr><td>姓名</td><td><input id="name" class="short"></td></tr>';
+            html += '<tr><td><span class="red-start">*</span>姓名</td><td><input id="name" placeholder="必填" class="short"></td></tr>';
             html += '<tr><td>科室</td><td><input id="department" class="short"></td></tr>';
-            html += '<tr><td>联系电话</td><td><input id="telphone" class="short"></td></tr>';
+            html += '<tr><td><span class="red-start">*</span>联系电话</td><td><input id="telphone" placeholder="必填" class="short"></td></tr>';
             html += '<tr><td>短号</td><td><input id="short_tel" class="short"></td></tr></table></tbody></div>';
             html += '<div class="buttons"><a class="card-btn card-btn-gray" href="javascript:$$.closeLayer()">取消</a>&emsp;<a class="card-btn" onclick="clientInfoCard.addClientCard('+'\''+(url || '')+'\''+(id?','+id+'':'')+')">确认</a></div>'
             html += '</div>';
@@ -628,6 +628,21 @@ clientInfoCard.prototype = {
 	},
 	addClientCard: function(url,id){
 		var url = _ip + '/cus/insert';
+        var position = $('#position').val();
+        if(position == ''){
+            $('#position').addClass('error-i');
+            return;
+        }
+        var name = $('#name').val();
+        if(name == ''){
+            $('#name').addClass('error-i');
+            return;
+        }
+        var tel = $('#telphone').val();
+        if(!/^1(\d){10}$/.test(tel)){
+            $('#telphone').addClass('error-i');
+            return;
+        }
 		var data = {
 			"name": $('#name').val(),    //必填
 		    "role": $('#role').val(),
@@ -665,6 +680,22 @@ clientInfoCard.prototype = {
         })
 	},
     updateClientCard:function (id) {
+        var url = _ip + '/cus/insert';
+        var position = $('#position').val();
+        if(position == ''){
+            $('#position').addClass('error-i');
+            return;
+        }
+        var name = $('#name').val();
+        if(name == ''){
+            $('#name').addClass('error-i');
+            return;
+        }
+        var tel = $('#telphone').val();
+        if(!/^1(\d){10}$/.test(tel)){
+            $('#telphone').addClass('error-i');
+            return;
+        }
         var url = _ip + '/cus/update';
         var data = {
             "name": $('#name').val(),    //必填
@@ -697,7 +728,7 @@ clientInfoCard.prototype = {
                     clientDataCard.getAllCard();
                     $$.closeLayer()
                 }else{
-                    alert('更新失败，稍后重试！')
+                    alert('geng失败，稍后重试！')
                 }
             }
         })
@@ -787,7 +818,7 @@ presell.prototype = {
                 var h = '';
                 	h += '<tr><td colspan="2">销售方式：<span class="type">'+selltype[json.type]+'</span></td></tr>';
                     h += '<tr><td width="40%"><div class="name">预算：</div><div class="text"><span class="num-style">'+json.budget+'</span>&nbsp;万元</div></td>';
-                    	h += '<td><div class="name">采购时间：</div><div class="text"><span class="num-style">'+json.year+'</span>&nbsp;年&nbsp;<span class="num-style">'+json.month+'</span>&nbsp;月年&nbsp;<span class="num-style">'+json.day+'</span>&nbsp;日</div></td></tr>';
+                    	h += '<td><div class="name">采购时间：</div><div class="text"><span class="num-style">'+json.year+'</span>&nbsp;年&nbsp;<span class="num-style">'+json.month+'</span>&nbsp;月</div></td></tr>';
                     h += '<tr><td colspan="2">'+json.discribe+'</td></tr>';     
                 $('#'+id).html(h);
 
@@ -889,15 +920,31 @@ businessProgress.prototype = {
 			$('#addPeopleSelect').css({'display':'none'})
 		})
 		that.addPeopleUl.on('click','li',function(){
-		    // alert(1);
-            var len = that.addPeopleList.find('li').length;
-            if(len >=2){
-                alert('只能添加两个!');
-                return;
-            }
+
             var v = $(this).find('input').val();
-            var h = '<li>'+v+'<input type="hidden" value="'+v+'"><span>×</span></li>';
-            that.addPeopleList.append(h);
+            var arr = [];
+            that.addPeopleList.find('li').each(function () {
+                var ev = $(this).find('input').val();
+                arr.push(ev)
+            })
+
+            var str = arr.join(',');
+
+            if(str.indexOf(v) == -1){
+
+                var len = that.addPeopleList.find('li').length;
+                if(len >=2){
+                   alert('只能添加两个!');
+                   return;
+                }
+                var h = '<li>'+v+'<input type="hidden" value="'+v+'"><span>×</span></li>';
+                $(this).find('i').css('display','block')
+                that.addPeopleList.append(h);
+            }else{
+                $(this).find('i').css('display','none')
+            }
+
+
 
 		})
         that.addPeopleList.on('click','li>span',function () {
@@ -986,7 +1033,9 @@ businessProgress.prototype = {
                 var json = json.data;
                 if(!json || json.length <= 0) return;
                 var h = '';
+                var arr = [];
                 for(var k in json){
+                    arr.push(k)
                 	h += '<thead><tr class="status"><td width="20"><span class="s-2"></span></td><td><div class="status-head clear">';
                 		h += '<p class="left">'+k+'</p>';
                 		h += '<p class="right">'+json[k].time+'</p></div></td></tr></thead>';
@@ -995,7 +1044,12 @@ businessProgress.prototype = {
                 		var data = json[k].data[i];
                 		h += '<tr><td><span class="line"></span><span class="circle"></span></td>';
                 			h += '<td><div class="cord-detail">';
-                				h += '<div class="t"><i></i><span>'+'</span><span>晓丽</span><span>'+data.createTime+'</span></div>';
+                				h += '<div class="t"><i></i>';
+                                var v = data.visitId.split(',');
+                                for(var j = 0; j < v.length; j++){
+                                    h += '<span>'+v[j]+'</span>';
+                                }
+                                h += '<span>'+data.createTime+'</span></div>';
                 				h += '<ul class="clear key-list"><li>'+data.type+'</li><li>'+data.level+'</li><li>'+data.visitResult+'</li><li>'+data.emergency+'</li></ul>';
                 				
                 				if(data.nextFocus || data.nextFollow ){
@@ -1012,7 +1066,9 @@ businessProgress.prototype = {
                 	}
                 	h += '</tbody>'
                 }
-                         
+                $('#bussProNameTile').html(arr[0]).css({'display':'inline-block'});
+
+
                 that.busCordTable.html(h);
             }
         })

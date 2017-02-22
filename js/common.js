@@ -5,80 +5,38 @@
 /*----------
  * 头部页面头部
  *-----------------------------*/
-// ，消息<span>2</span>
-if (!$('.login-box').length) {
-    var header = new Vue({
-        el:'#header',
-        data:{
-            datas: '<div class="right-user"><div class="right t" id="headusername">小丽</div>' +
-            '<div class="head-down"><ul><li><a href="edit-pwd.html">修改密码</a></li><li><a onclick="loginOut()">退出系统</a></li></ul></div><div>'
-        }
-    });
-    /*----------
-     * 侧边导航
-     *-----------------------------*/
-    var aside = new Vue({
-        el:'#aside',
-        data:{
-            datas: '<aside class="aside"> <div class="logo">运营平台</div><ul class="menu">'+
 
-            '<li id="promanage"><div class="menu-first"><i class="project"></i>项目管理</div>'+
-            '<dl class="menu-second">'+
-            '<dd><a href="mems-pro-list.html" id="prolit">项目列表</a></dd>'+
-            '</dl>'+
-            '</li>'+
-            '<li id="needmange"><div class="menu-first"><i class="need"></i>需求管理</div>'+
-            '<dl class="menu-second">'+
-            '<dd><a href="pm-need-list.html" id="needlist">需求池</a></dd>'+
-            '<dd><a href="pm-bug-list.html" id="buglist">缺陷池</a></dd>'+
-            '</dl>'+
-            '</li>'+
-            '<li id="system"><div class="menu-first"><i class="system"></i>系统配置</div>'+
-            '<dl class="menu-second">'+
-            '<dd><a href="user-manage.html" id="usermanage">用户管理</a></dd>'+
-            '<dd><a href="organize-architecture.html" id="organize">组织架构</a></dd>'+
-            '<dd><a href="tag-manage.html" id="tagmanage">标签管理</a></dd>'+
-            '</dl>'+
-            '</li>'+
-            '<li id="documentmanage"><div class="menu-first"><i class="project"></i>文档管理</div>'+
-            '<dl class="menu-second">'+
-            '<dd><a href="doc-manage.html" id="documentmanage">文档管理</a></dd>'+
-            '</dl>'+
-            '</li>'+
-            '</ul></aside>'
-        }
-    });
-    /*----------
-     * 判断是否登陆
-     *-----------------------------*/
-    var globleUserId;
-    function isLogin(){
-        var url = _ip + '/user/getLoginUserInfo';
-        $.ajax({
-            url:url,
-            type: 'GET',
-            xhrFields: {
-                withCredentials: true
-            },
-            crossDomain: true,
-            dataType: 'json',
-            contentType:'application/json',
-            jsonpCallback: 'login',
-            success: function(json) {
-                if(!json.success){
-                    location.href = 'user-login.html';
-                }
-                else {
-                    $.cookie('username',json.data.userName);
-                    $.cookie('userid',json.data.id);
-                }
-            }
-        })
-    }
 
-    isLogin();
-    globleUserId = parseInt($.cookie('userid'));
-}
+ /*----------
+  * 判断是否登陆
+  *-----------------------------*/
+ var globleUserId;
+ function isLogin(){
+     var url = _ip + '/user/getLoginUserInfo';
+     $.ajax({
+         url:url,
+         type: 'GET',
+         xhrFields: {
+             withCredentials: true
+         },
+         crossDomain: true,
+         dataType: 'json',
+         contentType:'application/json',
+         jsonpCallback: 'login',
+         success: function(json) {
+             if(!json.success){
+                 location.href = 'user-login.html';
+             }
+             else {
+                 $.cookie('username',json.data.userName);
+                 $.cookie('userid',json.data.id);
+             }
+         }
+     })
+ }
+
+ isLogin();
+ globleUserId = parseInt($.cookie('userid'));
 $('#headusername').html($.cookie('username'));
 
 function loginOut(){
@@ -327,7 +285,7 @@ _api.prototype = {
         return this;
     },
     getComeSource: function(id, defaultId,isSelect,proId){ // 2. 获取需求方列表
-        var url = _ip+'/cus/select?id='+proId;
+        var url = _ip+'/cus/selectAll?id='+proId;
         this.getListFirst.apply(this,[url,id,defaultId,isSelect,'sourcec']);
         return this;
     },
@@ -336,9 +294,9 @@ _api.prototype = {
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'platform']);
         return this;
     },
-    getFunctionList: function(id, defaultId,isSelect,productList){ // 4. 获取功能列表 get,与产品相关联
+    getFunctionList: function(id, defaultId,isSelect,productList,defaltplat){ // 4. 获取功能列表 get,与产品相关联
         
-        var plat = $('#'+productList).val() || '运营平台';
+        var plat = defaltplat || $('#'+productList).val();
         var url = _ip+'/common/getFeatureList?key='+plat;
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'fun']);
         return this;
@@ -393,6 +351,11 @@ _api.prototype = {
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'Ocp']);
         return this;
     },
+    getBussTypeList: function(id, defaultId,isSelect) { // 13. 项目管理：项目列表--商务阶段
+        var url = _ip+'/common/getBussTypeList';
+        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'PBuss']);
+        return this;
+    },
     getPSegmentationList: function(id, defaultId,isSelect) { // 14. 项目管理：获取segmentation
         var url = _ip+'/common/getPSegmentationList';
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'Segmentation']);
@@ -405,7 +368,7 @@ _api.prototype = {
     },
     getPBussTypeList: function(id, defaultId,isSelect) { // 16. 项目管理：商务阶段
         var url = _ip+'/common/getPBussTypeList';
-        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'PBuss']);
+        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'PBusst']);
         return this;
     },
     getSellType: function(id, defaultId,isSelect){   //17. 项目管理：获取销售方式

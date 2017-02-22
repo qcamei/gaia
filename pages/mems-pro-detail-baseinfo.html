@@ -9,13 +9,46 @@
 </head>
 <body>
 <!--header-->
-<header id="header" class="header" v-html="datas">
-    <div>{{datas}}</div>
+<header id="header" class="header">
+    <div class="right-user">
+        <div class="right t" id="headusername">admin</div>
+        <div class="head-down">
+            <ul><li><a href="edit-pwd.html">修改密码</a></li><li><a onclick="loginOut()">退出系统</a></li></ul></div><div>
+        </div>
+    </div>
 </header>
-
 <!--menu-->
-<aside id="aside" class="aside" v-html="datas">
-    <div>{{datas}}</div>
+<aside id="aside" class="aside">
+        <div class="logo">运营平台</div>
+        <ul class="menu">
+            <li id="promanage">
+                <div class="menu-first"><i class="project"></i>项目管理</div>
+                <dl class="menu-second">
+                    <dd><a href="mems-pro-list.html" id="prolit">项目列表</a></dd>
+                </dl>
+            </li>
+            <li id="needmange">
+                <div class="menu-first"><i class="need"></i>需求管理</div>
+                <dl class="menu-second">
+                    <dd><a href="pm-need-list.html" id="needlist">需求池</a></dd>
+                    <dd><a href="pm-bug-list.html" id="buglist">缺陷池</a></dd>
+                </dl>
+            </li>
+            <li id="system">
+                <div class="menu-first"><i class="system"></i>系统配置</div>
+                <dl class="menu-second">
+                    <dd><a href="user-manage.html" id="usermanage">用户管理</a></dd>
+                    <dd><a href="organize-architecture.html" id="organize">组织架构</a></dd>
+                    <dd><a href="tag-manage.html" id="tagmanage">标签管理</a></dd>
+                </dl>
+            </li>
+            <li id="documentmanage">
+                <div class="menu-first"><i class="project"></i>文档管理</div>
+                <dl class="menu-second">
+                    <dd><a href="doc-manage.html" id="doc-manage">文档管理</a></dd>
+                </dl>
+            </li>
+        </ul>
 </aside>
 
 <!--content-->
@@ -26,7 +59,7 @@
     <div class="p-content clear">
         <div class="left content-left">
             <div class="p-header clear">
-                <div class="left names"><span id="getHeadProName" onclick="getHeadProName()"></span>&nbsp;&nbsp;</div>
+                <div class="left names"><span id="getHeadProName" onclick="getHeadProName()"></span>&nbsp;&nbsp;<span id="bussProNameTile" style="display: none"></span></div>
                 <div class="right opers">
                     <!-- <a href="" class="activity right"></a> -->
                     <a href="javascript:;" class="person right" title="添加用户" onclick="addUserShow()"></a>
@@ -245,7 +278,7 @@
                                     <!--<li>白骨精<input type="hidden" value="白骨精"><span>×</span></li>-->
                                 </ul>
                                 <div style="position: relative;float: left;">
-                                <div class="add-tag" id="addPeopleBtn">+标签</div>
+                                <div class="add-tag" id="addPeopleBtn">+成员</div>
                                 <div class="add-tag-exist-con" id="addPeopleSelect">
                                     <a href="javascript:" class="close" id="addPeopleClose">关闭</a>
                                     <ul class="tag-out-list" id="addPeopleUl">
@@ -317,117 +350,117 @@
         </div>
     </h3>
     <ul id="list-line">
-        <li>
-            <div class=" member clear">
-                <div class="photo left">
-                    <i class="img"><img src="../images/logo.png"></i>
-                    <div class="info-slide">
-                        <table class="slide-table">
-                            <tr>
-                                <td class="td-img">
-                                    <div class="img"></div>
-                                    <h3>王麻子</h3>
-                                    <h6>华北区经理</h6>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p><i class="tel"></i>138 1234 1234</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p><i class="email"></i>email@shulianyixin.com</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p><i class="dec"></i>管理团队，EMES咨询服务部，数联医信</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="info left">
-                    <p>Merray</p>
-                    <p>MEMS</p>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class=" member clear">
-                <div class="photo left">
-                    <i class="img"><img src="../images/logo.png"></i>
-                    <div class="info-slide">
-                        <table class="slide-table">
-                            <tr>
-                                <td class="td-img">
-                                    <div class="img"></div>
-                                    <h3>王麻子</h3>
-                                    <h6>华北区经理</h6>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p><i class="tel"></i>138 1234 1234</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p><i class="email"></i>email@shulianyixin.com</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p><i class="dec"></i>管理团队，EMES咨询服务部，数联医信</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="info left">
-                    <p>Merray</p>
-                    <p>MEMS</p>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class=" member clear">
-                <div class="photo left">
-                    <i class="img"><img src="../images/logo.png"></i>
-                    <div class="info-slide">
-                        <table class="slide-table">
-                            <tr>
-                                <td class="td-img">
-                                    <div class="img"></div>
-                                    <h3>王麻子</h3>
-                                    <h6>华北区经理</h6>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p><i class="tel"></i>138 1234 1234</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p><i class="email"></i>email@shulianyixin.com</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p><i class="dec"></i>管理团队，EMES咨询服务部，数联医信</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="info left">
-                    <p>Merray</p>
-                    <p>MEMS</p>
-                </div>
-            </div>
-        </li>
+        <!--<li>-->
+            <!--<div class=" member clear">-->
+                <!--<div class="photo left">-->
+                    <!--<i class="img"><img src="../images/logo.png"></i>-->
+                    <!--<div class="info-slide">-->
+                        <!--<table class="slide-table">-->
+                            <!--<tr>-->
+                                <!--<td class="td-img">-->
+                                    <!--<div class="img"></div>-->
+                                    <!--<h3>王麻子</h3>-->
+                                    <!--<h6>华北区经理</h6>-->
+                                <!--</td>-->
+                            <!--</tr>-->
+                            <!--<tr>-->
+                                <!--<td>-->
+                                    <!--<p><i class="tel"></i>138 1234 1234</p>-->
+                                <!--</td>-->
+                            <!--</tr>-->
+                            <!--<tr>-->
+                                <!--<td>-->
+                                    <!--<p><i class="email"></i>email@shulianyixin.com</p>-->
+                                <!--</td>-->
+                            <!--</tr>-->
+                            <!--<tr>-->
+                                <!--<td>-->
+                                    <!--<p><i class="dec"></i>管理团队，EMES咨询服务部，数联医信</p>-->
+                                <!--</td>-->
+                            <!--</tr>-->
+                        <!--</table>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="info left">-->
+                    <!--<p>Merray</p>-->
+                    <!--<p>MEMS</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<div class=" member clear">-->
+                <!--<div class="photo left">-->
+                    <!--<i class="img"><img src="../images/logo.png"></i>-->
+                    <!--<div class="info-slide">-->
+                        <!--<table class="slide-table">-->
+                            <!--<tr>-->
+                                <!--<td class="td-img">-->
+                                    <!--<div class="img"></div>-->
+                                    <!--<h3>王麻子</h3>-->
+                                    <!--<h6>华北区经理</h6>-->
+                                <!--</td>-->
+                            <!--</tr>-->
+                            <!--<tr>-->
+                                <!--<td>-->
+                                    <!--<p><i class="tel"></i>138 1234 1234</p>-->
+                                <!--</td>-->
+                            <!--</tr>-->
+                            <!--<tr>-->
+                                <!--<td>-->
+                                    <!--<p><i class="email"></i>email@shulianyixin.com</p>-->
+                                <!--</td>-->
+                            <!--</tr>-->
+                            <!--<tr>-->
+                                <!--<td>-->
+                                    <!--<p><i class="dec"></i>管理团队，EMES咨询服务部，数联医信</p>-->
+                                <!--</td>-->
+                            <!--</tr>-->
+                        <!--</table>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="info left">-->
+                    <!--<p>Merray</p>-->
+                    <!--<p>MEMS</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<div class=" member clear">-->
+                <!--<div class="photo left">-->
+                    <!--<i class="img"><img src="../images/logo.png"></i>-->
+                    <!--<div class="info-slide">-->
+                        <!--<table class="slide-table">-->
+                            <!--<tr>-->
+                                <!--<td class="td-img">-->
+                                    <!--<div class="img"></div>-->
+                                    <!--<h3>王麻子</h3>-->
+                                    <!--<h6>华北区经理</h6>-->
+                                <!--</td>-->
+                            <!--</tr>-->
+                            <!--<tr>-->
+                                <!--<td>-->
+                                    <!--<p><i class="tel"></i>138 1234 1234</p>-->
+                                <!--</td>-->
+                            <!--</tr>-->
+                            <!--<tr>-->
+                                <!--<td>-->
+                                    <!--<p><i class="email"></i>email@shulianyixin.com</p>-->
+                                <!--</td>-->
+                            <!--</tr>-->
+                            <!--<tr>-->
+                                <!--<td>-->
+                                    <!--<p><i class="dec"></i>管理团队，EMES咨询服务部，数联医信</p>-->
+                                <!--</td>-->
+                            <!--</tr>-->
+                        <!--</table>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="info left">-->
+                    <!--<p>Merray</p>-->
+                    <!--<p>MEMS</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</li>-->
     </ul>
 </div>
 <div class="user-mask"></div>
@@ -455,12 +488,14 @@ function getHeadProName() {
     location.href = 'mems-pro-baseInfo.html?id='+getUrlId()+'&name='+globleproname;
 }
 
-    var itemId = 6;
+    var itemId = globleProjectId;
     // 时间控件
     $('#proTime').fdatepicker({
-        format: 'yyyy-mm-dd',
+        format: 'yyyy-dd',
         pickTime: false
     });
+
+
     $('#time-2').fdatepicker({
         format: 'yyyy年mm月dd日',
         pickTime: false
@@ -580,6 +615,7 @@ function getHeadProName() {
         }
         uid_arr_str = uid_arr.join();
         data.uid = uid_arr_str;
+//        console.log(data);
         if($('.member-slide').hasClass('assignmentClass')) {
             var ownerId = parseInt(uid_arr_str);
             url  = _ip+'/project/update';
@@ -621,7 +657,7 @@ function getHeadProName() {
     }
 
     function puserList(owner_data, $content, leader) {
-        var getRandomNum = getRandom(1, 7);
+        var getRandomNum = 1;
         var owner_photo = $('' +
                 '<div class="photo left">' +
                 '<i class="img"><img src="../images/portrait'+ getRandomNum  +'.png"></i>' +
@@ -634,7 +670,7 @@ function getHeadProName() {
                 '</td></tr>' +
                 '<tr><td><p><i class="tel"></i>'+ owner_data.phone +'</p></td></tr>' +
                 '<tr><td><p><i class="email"></i>'+ owner_data.email +'</p></td></tr>' +
-                '<tr> <td> <p><i class="dec"></i>管理团队，EMES咨询服务部，数联医信</p></td></tr>' +
+                '<tr> <td> <p><i class="dec"></i>'+owner_data.dptName+'</p></td></tr>' +
                 '</table>' +
                 '</div>' +
                 '</div>');

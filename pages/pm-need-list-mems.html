@@ -9,41 +9,47 @@
     </head>
 <body>
 <!--header-->
-<header id="header" class="header" v-html="datas">
-    <div>{{datas}}</div>
-</header>
-
-<!--menu-->
-<aside id="aside" class="aside" v-html="datas">
-    <div>{{datas}}</div>
-</aside>
-<!-- <aside class="aside">
-    <div class="logo">
-        运营平台
+<header id="header" class="header">
+    <div class="right-user">
+        <div class="right t" id="headusername">admin</div>
+        <div class="head-down">
+            <ul><li><a href="edit-pwd.html">修改密码</a></li><li><a onclick="loginOut()">退出系统</a></li></ul></div><div>
     </div>
+    </div>
+</header>
+<!--menu-->
+<aside id="aside" class="aside">
+    <div class="logo">运营平台</div>
     <ul class="menu">
-        <li>
-            <div class="menu-first"><i class="dash"></i>Dashboard<l></l></div>
-        </li>
-        <li>
-            <div class="menu-first"><i class="project"></i>项目管理<l></l></div>
+        <li id="promanage">
+            <div class="menu-first"><i class="project"></i>项目管理</div>
             <dl class="menu-second">
-                <dd><a href="#">待办事项</a></dd>
-                <dd><a href="projectManage/mems-pro-list.html">项目列表</a></dd>
+                <dd><a href="mems-pro-list.html" id="prolit">项目列表</a></dd>
             </dl>
         </li>
-        <li>
-            <div class="menu-first current"><i class="need"></i>需求管理<l></l></div>
+        <li id="needmange">
+            <div class="menu-first"><i class="need"></i>需求管理</div>
             <dl class="menu-second">
-                <dd><a href="pm-need-list.html" class="current">需求池</a></dd>
-                <dd><a href="pm-bug-list.html">缺陷池</a></dd>
+                <dd><a href="pm-need-list.html" id="needlist">需求池</a></dd>
+                <dd><a href="pm-bug-list.html" id="buglist">缺陷池</a></dd>
             </dl>
         </li>
-        <li>
-            <div class="menu-first"><i class="system"></i>系统配置<l></l></div>
+        <li id="system">
+            <div class="menu-first"><i class="system"></i>系统配置</div>
+            <dl class="menu-second">
+                <dd><a href="user-manage.html" id="usermanage">用户管理</a></dd>
+                <dd><a href="organize-architecture.html" id="organize">组织架构</a></dd>
+                <dd><a href="tag-manage.html" id="tagmanage">标签管理</a></dd>
+            </dl>
+        </li>
+        <li id="documentmanage">
+            <div class="menu-first"><i class="project"></i>文档管理</div>
+            <dl class="menu-second">
+                <dd><a href="doc-manage.html" id="doc-manage">文档管理</a></dd>
+            </dl>
         </li>
     </ul>
-</aside> -->
+</aside>
 
 
 <!--content-->
@@ -61,8 +67,8 @@
         <table class="mems-search">
             <tr>
                 <td>需求名称：<input  id="name" /></td>
-                <td>产品：<select id="productList"></select></td>
-                <td>功能模块：<select id="functionList"></select></td>
+                <td>产品：<select id="productList" onchange="_API.getFunctionList('functionList',false,true,'productList')"></select></td>
+                <td>功能模块：<select id="functionList"><option>请选择</option></select></td>
                 <td>处理状态：<select id="status"></select></td>
                 <!--  -->
                 <td align="right"><button class="btn" id="checkout">查询</button></td>
@@ -124,7 +130,7 @@
 <script src="../js/common.js"></script>
 <script type="text/javascript">
     _API.getProductList('productList',0,true)
-        .getFunctionList('functionList',0,true)
+//        .getFunctionList('functionList',0,true)
         .getLevelList('levelList',0,true)
         .getStatusListPm('status',0,true)
         .getPriorityList('priority',0,true);
@@ -213,9 +219,10 @@
     $('#checkout').on('click',function(){
         var para = {
             product: $('#productList').val() || null,
-            feature: $('#functionList').val() || null,
+            feature: $('#functionList').find('option:selected').text() == '请选择'?null:$('#functionList').val(),
             name:$('#name').val() || null,
             level:$('#levelList').val() || null,
+            priorit:$('#priority').val() || null,
             status:$('#status').val() || null,
             startTime: $('#dpd1').val()?$('#dpd1').val() + ' 00:00:00' : null,
             endTime: $('#dpd2').val()?$('#dpd2').val() + ' 00:00:00' : null
