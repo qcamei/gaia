@@ -61,7 +61,7 @@
                     </tr>
                     <tr>
                         <td><span class="red-start">*</span>来源：</td>
-                        <td><select id="needSource"></select></td>
+                        <td><select id="needSource" onchange="_API.getComeSource('needSide',false,true,$(this).val(),'needSide')"></select></td>
                         <td><span class="red-start">*</span>需求方：</td>
                         <td><select id="needSide"></select></td>
                     </tr>

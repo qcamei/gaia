@@ -1003,9 +1003,12 @@ aside.aside .menu {
   cursor: pointer; }
 
 .pro-sure {
-  background: #009ff2;
+  background: #edf0f1;
   color: #FFF;
-  border: 1px solid #009ff2; }
+  border: 1px solid #edf0f1; }
+
+.pro-sure-can {
+  background: #009ff2; }
 
 .error-i {
   border: 1px solid #b74b4b !important;

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>pm-需求-创建</title>
     <link href="../css/common.css" type="text/css" rel="stylesheet"/>
-    <link href="../css/index.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <!--header-->
@@ -63,9 +62,9 @@
                     </tr>
                     <tr>
                         <td><span class="red-start">*</span>来源：</td>
-                        <td><select id="needSource"></select></td>
+                        <td><select id="needSource" onchange="_API.getComeSource('needSide',false,true,$(this).val(),'needSide')"></select></td>
                         <td><span class="red-start">*</span>需求方：</td>
-                        <td><select id="needSide"></select></td>
+                        <td><select id="needSide"><option>请选择</option></select></td>
                     </tr>
                     <tr>
                         <td><span class="red-start">*</span>需求类别：</td>
@@ -130,8 +129,8 @@
     _API.getTypeList('typeList')
         .getProductList('productList')
         .getPlatformList('platformList')
-        .getNeedSource('needSource')
-        .getComeSource('needSide')
+        .getProNameList('needSource')
+//        .getComeSource('needSide',false,false,1)
         .getFunctionList('functionList')
         .getLevelList('levelList');
 

@@ -104,7 +104,7 @@ function modityAsideCurrent(){
     var obj = {
 
         promanage:{
-            prolit:['mems-pro-list','mems-pro-creat-1','mems-pro-detail-baseinfo','mems-pro-creat-1','mems-pro-creat-2','mems-pro-creat-3']
+            prolit:['mems-pro-list','mems-pro-list-myself','mems-pro-creat-1','mems-pro-detail-baseinfo','mems-pro-creat-1','mems-pro-creat-2','mems-pro-creat-3']
         }, //项目管理文件列表
         needmange:{
             needlist:['pm-need-list','pm-need-commite','pm-need-list-meme','pm-need-commite-pm','pm-need-detail-pm','pm-need-commite','pm-commite-relative','pm-need-detail-mems'],
@@ -326,8 +326,8 @@ _api.prototype = {
         this.getListFirst.apply(this,[url,id,defaultId,isSelect,'needsource']);
         return this;
     },
-    getComeSource: function(id, defaultId,isSelect){ // 2. 获取需求方列表
-        var url = _ip+'/customer/getCustomerList';
+    getComeSource: function(id, defaultId,isSelect,proId){ // 2. 获取需求方列表
+        var url = _ip+'/cus/select?id='+proId;
         this.getListFirst.apply(this,[url,id,defaultId,isSelect,'sourcec']);
         return this;
     },

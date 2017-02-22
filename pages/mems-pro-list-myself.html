@@ -26,8 +26,8 @@
     </div>
     <div class="page-inner" style="padding-top: 13px">
     <ul class="item-tab clear">
-            <li><a href="mems-pro-list-myself.html">我的项目</a></li>
-            <li><a href="mems-pro-list.html" class="current">全部项目</a></li>
+        <li><a href="mems-pro-list-myself.html" class="current">我的项目</a></li>
+        <li><a href="mems-pro-list.html">全部项目</a></li>
         </ul>
         <table class="mems-search">
             <tbody>
@@ -106,7 +106,7 @@
     })
     function getData(p,checPara){
         var PerPage = 20;
-        var url  = _ip+'/project/getProjectList?page='+p+'&size='+PerPage;
+        var url  = _ip+'/project/getProjectList?ownerId='+$.cookie('userid')+'&page='+p+'&size='+PerPage;
         var data = checPara || {};
         $.ajax({
             url:url,

@@ -79,7 +79,7 @@
             </div>
 
             <div class="btns">
-                <a class="pro-btn pro-sure" onclick="nextStep()" >下一步</a>
+                <a class="pro-btn pro-sure" id="nextstep">下一步</a>
             </div>
             <div>医院未找到？&emsp;<a class="pro-btn" href="mems-pro-creat-2.html">直接创建</a></div>
         </div>
@@ -168,9 +168,8 @@ function getHospital(id,city){ //获取医院列表
 
             var json = json.data;
             var h = '';
-            console.log(json.length);
             for(var k = 0 , kk = json.length; k < kk; k++){
-                h += '<li>'+json[k].chineseName+'<input type="hidden" value="'+json[k].chineseName+'"/></li>'
+                h += '<li>'+json[k].chineseName+'<input type="hidden" value="'+json[k].chineseName+'" data-id="'+json[k].id+'"/></li>'
             }
             $('#hospital').html(h);
         }
@@ -197,9 +196,28 @@ function getinputVal(id1,id2,id3,id4) {
 
     }
     $('#serchkeywords').val(t);
+    $('.pro-btn').removeClass('pro-sure-can');
+    $('#nextstep').attr({'href':'javascript:'})
 }
 getDistrictdom('district');
 
+
+//获取医院的详细信息
+function geihospitaldetaildata(id) {
+    $.ajax({
+        url:_ip+'/hospital/select?id='+id,
+        type: 'GET',
+        dataType: 'jsonp',
+        contentType:'application/json',
+        jsonpCallback: 'hisdata',
+        success: function(json) {
+            var json = json.data;
+            window.localStorage.setItem('hospitalData',JSON.stringify(json));
+            $('.pro-btn').addClass('pro-sure-can');
+            $('#nextstep').attr({'href':'mems-pro-creat-2.html?p=1'})
+        }
+    })
+}
 
 $('#district').on('click','li',function(){
     $('#city').html('');
@@ -252,7 +270,9 @@ $('#hospital').on('click','li',function () {
     $(this).siblings().removeClass('current');
     var h = $(this).find('input').val();
     $('#hospital-v').val(h);
-    getinputVal('area-v','provice-v','city-v','hospital-v')
+    getinputVal('area-v','provice-v','city-v','hospital-v');
+    geihospitaldetaildata(parseInt($(this).find('input').attr('data-id')));
+
 })
     var showkeylist = $('#showkeylist');
     var showselect  = $('#showselect');
@@ -286,12 +306,7 @@ $('#hospital').on('click','li',function () {
         showselect.css({'display':'block'});
         showkeylist.css({'display':'none'});
     }
-    function nextStep() {
-        var s = $('#serchkeywords').val();
-        if(s != ''){
-            location.href = 'mems-pro-creat-2.html?position='+encodeURI($('#serchkeywords').val());
-        }
-    }
+
     function keysearch(key){
         var url  = _ip+'/hospital/getHospitalList';
         var data = {

@@ -121,7 +121,7 @@
             <tbody>
                 <tr>
                     <td></td>
-                    <td><a class="pro-btn" href="mems-pro-creat-1.html">上一步</a>&emsp;<a class="pro-btn pro-sure" onclick="creatItem()">提交</a></td>
+                    <td><a class="pro-btn" href="mems-pro-creat-1.html">上一步</a>&emsp;<a class="pro-btn pro-sure pro-sure-can" onclick="creatItem()">提交</a></td>
                 </tr>
             </tbody>
         </table>
@@ -133,18 +133,32 @@
 <script src="../js/common.js"></script>
 
 <script type="text/javascript">
-    _API.getNeedSource('needSource')
-            .getPSegmentationList('segmentation')
-            .getPLevelList('level')
-            .dynamicDistrick('district','province','city');
-    var position = $$.getUrlParaObj('position');
+
+    var position = $$.getUrlParaObj('p');
     if(position){
-        position = position['position'];
-        var parr = position.split('／');
-        $('#name').val(parr[3]);
-    _API.getDistrict('district',parr[0],true)
-            .getPrivence('province',parr[1],true,parr[0])
-            .getCity('city',parr[2],true,parr[0],parr[1]);
+        var hdata =  JSON.parse(localStorage.getItem("hospitalData"));
+        console.log(hdata);
+//        position = position['position'];
+//        var parr = position.split('／');
+        $('#name').val(hdata.chineseName);
+        $('#bed').val(hdata.bedNum);
+        $('#address').val(hdata.address);
+        $('#latitude').val(hdata.latb);
+        $('#longitude').val(hdata.lngb);
+        _API.getDistrict('district',hdata.area,true)
+            .getPrivence('province',hdata.province,true,hdata.area)
+            .getCity('city',hdata.city,true,hdata.area,hdata.province)
+            .getPSegmentationList('segmentation',hdata.segmentation,false)
+            .getPLevelList('level',hdata.grade,false)
+
+
+
+
+    }else{
+        _API.getNeedSource('needSource')
+                .getPSegmentationList('segmentation')
+                .getPLevelList('level')
+                .dynamicDistrick('district','province','city');
     }
 
 
@@ -265,7 +279,7 @@
                 }
                 if(data.success){
                     var id = data.data;
-                    location.href = 'mems-pro-creat-3.html?id='+id+'&name='+$('name').val();
+                    location.href = 'mems-pro-creat-3.html?id='+id+'&name='+$('#name').val();
                 }else{
                     alert('创建失败, 请稍后重试！');
                 }
