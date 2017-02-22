@@ -131,10 +131,11 @@
     function getQuartersList(dpt) {
 
         var url  = _ip+'/ocp';
-        var dpt = dpt || $('.tree-title.active').closest('li').attr('id');
+         dpt = dpt || $('.tree-title.active').closest('li').attr('id');
         var data = {
             dpt: dpt
         };
+        console.log(dpt);
         organizeAjaxGet(url, data, 'getQuarters', function(json) {
             if (json.success) {
                 var $tagContent = $('.tag-content');
@@ -390,6 +391,9 @@
                         break;
                 }
                 getFirstOrganize(level, getData, $content);
+            }
+            else {
+                $('.item-content').prepend('<p class="error-msg">'+ json.message  +'</p>');
             }
         });
 

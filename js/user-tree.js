@@ -35,8 +35,8 @@ function getFirstOrganize(level, data, $content) {
 
             }
             $content.append($firstUl);
-            getQuartersList($('.organize-content').find('li').eq(0).attr('id') );
-            getQuartersList($('.organize-content').find('li').eq(0).find('.tree-title').addClass('active'))
+            $content.find('li').eq(0).find('.tree-title').addClass('active');
+            getQuartersList($content.find('li').eq(0).attr('id') );
         }
     });
 }
@@ -101,7 +101,7 @@ function organizeAjaxGet(url, data, jsonpCall, callback) {
             withCredentials: true
         },
         crossDomain: true,
-        dataType: dataType,
+        dataType: 'jsonp',
         data: data,
         jsonp: 'callback',
         jsonpCallback: jsonpCall,
