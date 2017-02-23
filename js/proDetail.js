@@ -1103,7 +1103,7 @@ businessProgress.init();
  * 获取项目需求列表
  *-----------------------------*/
 function getCardProList(){
-	var url = _ip + '/original/getRequireByCustomer?id='+globleProjectId;
+	var url = _ip + '/original/getRequireByProjectId?id='+globleProjectId;
 	var that = this;
 	$.ajax({
         url:url,
