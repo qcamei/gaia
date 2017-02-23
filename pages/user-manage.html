@@ -238,19 +238,6 @@
                         '</tr>');
                 var $tr = _data[k].data('edit', msgData);
                 $('#bodyList').append($tr).data('page', p);
-/*                _data.push("<tr>");
-                _data.push('<td>'+msg.name+'</td>');
-                _data.push('<td>'+(msg.userName || "-")+'</td>');
-                _data.push('<td>'+msg.phone+'</td>');
-                _data.push('<td>'+ msg.email  +'</td>');
-                _data.push('<td>'+roleName+'</td>');
-                _data.push('<td>'+msg.dptName+'</td>');
-                _data.push('<td>'+msg.ocpName+'</td>');
-                _data.push('<td>' +
-                        '<a href="javascript:;" onclick="editUser(this)">编辑</a>' +
-                        '<a href="javascript:;" onclick="disableUser(this)" data-id="'+ msg.id +'">'+ (msg.status? "禁用":"启用") +'</a> ' +
-                        '<a href="javascript:;" onclick="resetPwd(this)" data-id="'+ msg.id +'">重置密码</a></td>');
-                _data.push('</tr>');*/
             }
             _pager.push('<span>共：'+ totalPage +'页</span>');
             _pager.push('<span>您正在第：'+p+'页</span>');

@@ -124,6 +124,7 @@
         var name = $('#tagName-text').val();
         var url  = _ip+'/file/fileList?page='+p+'&size='+PerPage + '&name='+ name;
         var data = checPara || {};
+        $('#bodyList').html('');
         organizeAjaxPost(url, data, function(json) {
             $('.total-num').text(json.total || 0);
             if(!json.data || json.data.length <= 0){
@@ -161,7 +162,19 @@
                     size_text: size_text,
                     path: msg.path
                 };
-                _data.push("<tr data-edit="+ JSON.stringify(msgData) +">");
+                _data[k] = $('<tr>' +
+                        '<td class="organize">' +
+                        '<span>'+ msg.name +'</span>' +
+                        '<span class="right">' +
+                        '<a href="'+_ip +'/file/download?path='+ msg.path +'">' +
+                        '<i class="download display-middle" onclick=""></i>' +
+                        '</a><i class="delete-icon display-middle" onclick="deleteDoc(this); event.stopPropagation();"></i>' +
+                        '</span>' +
+                        '</td>' +
+                        '<td>'+ msgData.size_text +'</td>' +
+                        '<td>上传于 '+ msg.createTime+'</td>' +
+                        '</tr>');
+/*                _data.push("<tr data-edit="+ JSON.stringify(msgData) +">");
                 _data.push('<td class="organize">' +
                         '<span>'+ msg.name +'</span>' +
                         '<span class="right">' +
@@ -171,7 +184,9 @@
                         '</span>' +
                         '</td>');
                 _data.push('<td>'+ msgData.size_text +'</td>');
-                _data.push('<td>上传于 '+ msg.createTime+'</td>');
+                _data.push('<td>上传于 '+ msg.createTime+'</td>');*/
+                var $tr = _data[k].data('edit', msgData);
+                $('#bodyList').append($tr).data('page', p);
             }
             _pager.push('<span>共：'+ totalPage +'页</span>');
             _pager.push('<span>您正在第：'+p+'页</span>');
@@ -181,7 +196,6 @@
             _pager.push('<input type="text" id="goToPage"/>');
             _pager.push('<span>页</span>');
             _pager.push('<button id="goToPageBtn">GO</button>');
-            $('#bodyList').html(_data.join("")).data('page', p);
             $('#pageList').html(_pager.join(""));
             $('#goToPageBtn').on('click',function () {
                 var v = $('#goToPage').val();
