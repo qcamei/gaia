@@ -371,6 +371,7 @@
         var ppid = $li.closest('ul').closest('li').data('pid');
         var id= $li.attr('id');
         var url  = _ip+'/dpt/delete';
+        $('.error-msg').remove();
         if(level === 1) {
             var oneTreeLength = $('.one.tree-title').length;
             if(oneTreeLength < 2) {
