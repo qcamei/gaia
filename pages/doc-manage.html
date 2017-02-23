@@ -180,29 +180,27 @@
             _pager.push('<span>前往第</span>');
             _pager.push('<input type="text" id="goToPage"/>');
             _pager.push('<span>页</span>');
-
+            _pager.push('<button id="goToPageBtn">GO</button>');
             $('#bodyList').html(_data.join("")).data('page', p);
             $('#pageList').html(_pager.join(""));
-            $('#goToPage').bind('keyup', function(event) {
-                var userName= $('#userName-text').val();
-                if (event.keyCode == "13") {
-
-                    var v = parseInt($(this).val());
-                    if(!/^[1-9]\d*$/.test(v)){
-                        return false;
-                    }else{
-                        if(v <= 1){
-                            getData(1, {name: userName});
-                        }
-                        else if(v >= totalPage){
-                            getData(totalPage, {name: userName});
-                        }else{
-                            getData(v, {name: userName});
-                        }
-                    }
-
+            $('#goToPageBtn').on('click',function () {
+                var v = $('#goToPage').val();
+                if(!/^[1-9]\d*$/.test(v)){
+                    return false;
                 }
-            });
+                if(v>1 && v<totalPage){
+                    getDocList(v,{name: userName});
+                }
+                if(v <= 1){
+                    getDocList(1,{name: userName});
+                    return false;
+                }
+                if(v >= totalPage){
+                    getDocList(totalPage,{name: userName});
+                    return false;
+                }
+            })
+
         });
     }
 

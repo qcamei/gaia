@@ -366,8 +366,8 @@ _api.prototype = {
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'PLevel']);
         return this;
     },
-    getPBussTypeList: function(id, defaultId,isSelect) { // 16. 项目管理：商务阶段
-        var url = _ip+'/common/getPBussTypeList';
+    getPBussTypeList: function(id, defaultId,isSelect,proId) { // 16. 项目管理：商务阶段
+        var url = _ip+'/common/getPBussTypeList?id='+proId;
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'PBusst']);
         return this;
     },
@@ -471,7 +471,7 @@ function attachment(config){
                 }
             }
             else {
-                if(filePath.indexOf("jpg")!=-1 || filePath.indexOf("png")!=-1 || filePath.indexOf("docx")!=-1 || filePath.indexOf("zip")!=-1){
+                if(filePath.indexOf("jpg")!=-1 || filePath.indexOf("pdf")!=-1 || filePath.indexOf("xlsx")!=-1 || filePath.indexOf("png")!=-1 || filePath.indexOf("docx")!=-1 || filePath.indexOf("zip")!=-1){
                     var arr=filePath.split('\\');
                     var fileName=arr[arr.length-1];
                     // that.config.fileName.html(fileName);

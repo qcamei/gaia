@@ -995,7 +995,7 @@ businessProgress.prototype = {
 		      "proId": parseInt(globleProjectId),
 		      "type": $('#visitTypeList').val(),
 		      "visitResult": $('#visitResultList').val(),
-		      "level": $('#bussTypeList').val(), //拜访状态:漏掉了，等会加上
+		      "level": $('#visitStatusList').val(),
 		      "progress": $('#bussTypeList').val(),
 		      "emergency": $('#emergencyList').val(),
 		      "visitId": arr.join(','),
