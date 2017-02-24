@@ -76,7 +76,7 @@
                         <td><span class="red-start">*</span>使用平台：</td>
                         <td><select id="platformList"></select></td>
                         <td><span class="red-start">*</span>功能模块：</td>
-                        <td><select id="functionList"><option>模块三</option></select></td>
+                        <td><select id="functionList"><option>请选择</option></select><span style="color:#4cae4c;">先选择产品</span></td>
                     </tr>
                     <tr>
                         <td>优先级别：</td>
@@ -127,7 +127,7 @@
     _API.getTypeList('typeList')
         .getProductList('productList')
         .getPlatformList('platformList')
-        .getFunctionList('functionList')
+//        .getFunctionList('functionList')
         .getPriorityList('priority')
         .getStatusListPm('status');
      // 上传文件

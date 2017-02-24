@@ -1353,7 +1353,8 @@ aside.aside .menu {
   height: 175px;
   overflow-y: scroll;
   top: 0px;
-  left: 72px; }
+  left: 72px;
+  z-index: 40; }
   .add-tag-exist-con .close {
     color: #99aabb;
     font-size: 12px;
@@ -1394,6 +1395,14 @@ aside.aside .menu {
   color: #2e3f51;
   border: 1px solid #d9e2e7;
   background: #FFF; }
+
+.show-exit-list {
+  position: absolute;
+  top: 144px;
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto; }
 
 .item-member {
   position: fixed;
@@ -1509,6 +1518,8 @@ aside.aside .menu {
   font-size: 14px;
   color: #334455;
   margin: 4px 0 0 0; }
+  .item-member .member .info > p:nth-child(1) > span {
+    color: #99aabb; }
 
 .item-member .member .info > p:nth-child(2) {
   font-size: 12px;
@@ -1558,7 +1569,8 @@ aside.aside .menu {
   border: 0px; }
 
 .member-slide .member-box {
-  height: 256px; }
+  height: 256px;
+  overflow-y: scroll; }
 
 .member-slide .member-box .mem-list > li {
   width: 100%;

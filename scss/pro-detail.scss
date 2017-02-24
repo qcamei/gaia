@@ -765,6 +765,7 @@
   overflow-y: scroll;
   top: 0px;
   left: 72px;
+  z-index: 40;
   .close{
     color: #99aabb;
     font-size: 12px;
@@ -807,6 +808,14 @@
   border: 1px solid #d9e2e7;
   background: #FFF; }
 
+.show-exit-list{
+  position: absolute;
+  top: 144px;
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+}
 .item-member {
   position: fixed;
   height: 100%;
@@ -904,6 +913,11 @@
                   background: url("../images/t-9.png") no-repeat 0px center;
                   margin: 0px 5px 0 4px; }
     .item-member .member .info {
+        >p:nth-child(1) {
+          >span{
+            color: #99aabb;
+          }
+        }
       font-size: 14px;
       color: #334455;
       margin: 4px 0 0 0; }
@@ -953,7 +967,7 @@
   .member-slide .member-box {
     height: 256px;
 
-    //overflow-y: scroll;
+    overflow-y: scroll;
      }
     .member-slide .member-box .mem-list > li {
       width: 100%;

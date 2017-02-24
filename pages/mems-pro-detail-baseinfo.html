@@ -349,118 +349,8 @@
             <div class="btns"><a class="sure" onclick="sureAddMeber(this)">确认</a><a class="cancel" onclick="addMemberHide()">取消</a></div>
         </div>
     </h3>
-    <ul id="list-line">
-        <!--<li>-->
-            <!--<div class=" member clear">-->
-                <!--<div class="photo left">-->
-                    <!--<i class="img"><img src="../images/logo.png"></i>-->
-                    <!--<div class="info-slide">-->
-                        <!--<table class="slide-table">-->
-                            <!--<tr>-->
-                                <!--<td class="td-img">-->
-                                    <!--<div class="img"></div>-->
-                                    <!--<h3>王麻子</h3>-->
-                                    <!--<h6>华北区经理</h6>-->
-                                <!--</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                                <!--<td>-->
-                                    <!--<p><i class="tel"></i>138 1234 1234</p>-->
-                                <!--</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                                <!--<td>-->
-                                    <!--<p><i class="email"></i>email@shulianyixin.com</p>-->
-                                <!--</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                                <!--<td>-->
-                                    <!--<p><i class="dec"></i>管理团队，EMES咨询服务部，数联医信</p>-->
-                                <!--</td>-->
-                            <!--</tr>-->
-                        <!--</table>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="info left">-->
-                    <!--<p>Merray</p>-->
-                    <!--<p>MEMS</p>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</li>-->
-        <!--<li>-->
-            <!--<div class=" member clear">-->
-                <!--<div class="photo left">-->
-                    <!--<i class="img"><img src="../images/logo.png"></i>-->
-                    <!--<div class="info-slide">-->
-                        <!--<table class="slide-table">-->
-                            <!--<tr>-->
-                                <!--<td class="td-img">-->
-                                    <!--<div class="img"></div>-->
-                                    <!--<h3>王麻子</h3>-->
-                                    <!--<h6>华北区经理</h6>-->
-                                <!--</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                                <!--<td>-->
-                                    <!--<p><i class="tel"></i>138 1234 1234</p>-->
-                                <!--</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                                <!--<td>-->
-                                    <!--<p><i class="email"></i>email@shulianyixin.com</p>-->
-                                <!--</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                                <!--<td>-->
-                                    <!--<p><i class="dec"></i>管理团队，EMES咨询服务部，数联医信</p>-->
-                                <!--</td>-->
-                            <!--</tr>-->
-                        <!--</table>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="info left">-->
-                    <!--<p>Merray</p>-->
-                    <!--<p>MEMS</p>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</li>-->
-        <!--<li>-->
-            <!--<div class=" member clear">-->
-                <!--<div class="photo left">-->
-                    <!--<i class="img"><img src="../images/logo.png"></i>-->
-                    <!--<div class="info-slide">-->
-                        <!--<table class="slide-table">-->
-                            <!--<tr>-->
-                                <!--<td class="td-img">-->
-                                    <!--<div class="img"></div>-->
-                                    <!--<h3>王麻子</h3>-->
-                                    <!--<h6>华北区经理</h6>-->
-                                <!--</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                                <!--<td>-->
-                                    <!--<p><i class="tel"></i>138 1234 1234</p>-->
-                                <!--</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                                <!--<td>-->
-                                    <!--<p><i class="email"></i>email@shulianyixin.com</p>-->
-                                <!--</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                                <!--<td>-->
-                                    <!--<p><i class="dec"></i>管理团队，EMES咨询服务部，数联医信</p>-->
-                                <!--</td>-->
-                            <!--</tr>-->
-                        <!--</table>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="info left">-->
-                    <!--<p>Merray</p>-->
-                    <!--<p>MEMS</p>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</li>-->
+    <ul id="list-line" class="show-exit-list">
+
     </ul>
 </div>
 <div class="user-mask"></div>
@@ -487,6 +377,17 @@ $('#getHeadProName').html(globleproname);
 function getHeadProName() {
     location.href = 'mems-pro-baseInfo.html?id='+getUrlId()+'&name='+globleproname;
 }
+
+
+var nowTemp = new Date();
+var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+$('#nextFocus').fdatepicker({
+    format: 'yyyy-mm-dd',
+    onRender: function (date) {
+        return date.valueOf() < now.valueOf() ? 'disabled' : '';
+    }
+});
+
 
     var itemId = globleProjectId;
     // 时间控件
@@ -661,18 +562,18 @@ function getHeadProName() {
         var owner_photo = $('' +
                 '<div class="photo left">' +
                 '<i class="img"><img src="../images/portrait'+ getRandomNum  +'.png"></i>' +
-                '<div class="info-slide">' +
-                '<table class="slide-table">' +
-                '<tr><td class="td-img">' +
-                '<div class="img"><img src="../images/portrait'+ getRandomNum  +'.png"></div>' +
-                '<h3>'+ owner_data.name +'</h3>' +
-                '<h6>'+ owner_data.ocpName +'</h6>' +
-                '</td></tr>' +
-                '<tr><td><p><i class="tel"></i>'+ owner_data.phone +'</p></td></tr>' +
-                '<tr><td><p><i class="email"></i>'+ owner_data.email +'</p></td></tr>' +
-                '<tr> <td> <p><i class="dec"></i>'+owner_data.dptName+'</p></td></tr>' +
-                '</table>' +
-                '</div>' +
+//                '<div class="info-slide">' +
+//                '<table class="slide-table">' +
+//                '<tr><td class="td-img">' +
+//                '<div class="img"><img src="../images/portrait'+ getRandomNum  +'.png"></div>' +
+//                '<h3>'+ owner_data.name +'</h3>' +
+//                '<h6>'+ owner_data.ocpName +'</h6>' +
+//                '</td></tr>' +
+//                '<tr><td><p><i class="tel"></i>'+ owner_data.phone +'</p></td></tr>' +
+//                '<tr><td><p><i class="email"></i>'+ owner_data.email +'</p></td></tr>' +
+//                '<tr> <td> <p><i class="dec"></i>'+owner_data.dptName+'</p></td></tr>' +
+//                '</table>' +
+//                '</div>' +
                 '</div>');
         var owner_info = $('<div class="info left"><p>'+ owner_data.name +'</p><p class="removeOcp">'+ owner_data.ocpName +'</p></div>');
         var owner_opero = $('<div class="opero right"><a href="javascript:;" class="assignment" onclick="addMemberShow(this);">转让</a></div>');
@@ -680,6 +581,7 @@ function getHeadProName() {
         var $li = $('<li id="'+ owner_data.id +'"></li>');
         if (leader === 'leader') {
             $div.addClass('leader');
+
         }
         else if (leader === 'allUser') {
             var single = '';
@@ -687,10 +589,12 @@ function getHeadProName() {
                 single = 'single';
             }
             $li = $('<li class="'+ single +'" onclick="activeCheck(this)" id="'+ owner_data.id +'"></li>');
-            owner_info.find('.removeOcp').remove();
+//            owner_info.find('.removeOcp').remove();
+
             owner_opero = $('<div class="opero right"><a class="check" href="javascript:;" ></a></div>');
         }
         else {
+            var owner_info = $('<div class="info left"><p>'+ owner_data.name+ '&nbsp;&nbsp;<span>'+ owner_data.phone +'</span></p><p class="removeOcp">'+ owner_data.dptName+ '-'+ owner_data.ocpName +'</p></div>');
             owner_opero = $('<div class="opero right"><a class="deletePuserClick" href="javascript:;" onclick="deletePuserClick(this)">×</a></div>');
         }
         $div.append(owner_photo).append(owner_info).append(owner_opero);

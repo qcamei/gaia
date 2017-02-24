@@ -80,7 +80,8 @@
             <tbody>
                 <tr>
                     <td><span class="red-start">*</span>医院全称</td>
-                    <td><input type="" name="" id="name" onblur="veryName(this)"><span style="display: none;"></span></td>
+                    <td><input type="" name="" id="name"></td>
+                    <!---->
                 </tr>
                 <tr>
                     <td>简称</td>
@@ -195,29 +196,29 @@
     }
 
 
-    var nameflag = false;
-    function veryName(that) {
-        var name = $(that).val();
-        var url = _ip + '/project/verify?name='+name;
-        $.ajax({
-            url: url,
-            type: 'GET',
-            dataType: 'jsonp',
-            contentType: 'application/json',
-            jsonpCallback: 'very',
-            success: function (json) {
+    <!--var nameflag = false;-->
+    <!--function veryName(that) {-->
+        <!--var name = $(that).val();-->
+        <!--var url = _ip + '/project/verify?name='+name;-->
+        <!--$.ajax({-->
+            <!--url: url,-->
+            <!--type: 'GET',-->
+            <!--dataType: 'jsonp',-->
+            <!--contentType: 'application/json',-->
+            <!--jsonpCallback: 'very',-->
+            <!--success: function (json) {-->
 
-                if(json.success == false){
-                    nameflag = false;
-                    $(that).siblings('span').css({'display':'inline-block','color':'#ed8073'}).html(json.message);
-                }else{
-                    nameflag = true
-                    $(that).siblings('span').css({'display':'inline-block','color':'#009926'}).html(json.message);
-                }
+                <!--if(json.success == false){-->
+                    <!--nameflag = false;-->
+                    <!--$(that).siblings('span').css({'display':'inline-block','color':'#ed8073'}).html(json.message);-->
+                <!--}else{-->
+                    <!--nameflag = true-->
+                    <!--$(that).siblings('span').css({'display':'inline-block','color':'#009926'}).html(json.message);-->
+                <!--}-->
 
-            }
-        })
-    }
+            <!--}-->
+        <!--})-->
+    <!--}-->
     function reInputName(that) {
         $(that).removeClass('error-i');
         $(that).sibling('span').css({'display':'none'});
@@ -247,10 +248,10 @@
         })
     }
     function creatItem() {
-        if(!nameflag){
-            alert('请重新输入项目名称！');
-            return;
-        }
+//        if(!nameflag){
+//            alert('请重新输入项目名称！');
+//            return;
+//        }
         var flag = true;
         for(var k = 0; k < 2; k ++){
             var v = $('#'+arr[k]).val();
@@ -295,7 +296,7 @@
             "location":$('#location').val(),
             "latitude":$('#latitude').val(),
             "longitude":$('#longitude').val(),
-            "creater": 11
+            "creater": $.cookie('userid')
         }
 
         $.ajax({
@@ -317,7 +318,11 @@
                     var id = data.data;
                     location.href = 'mems-pro-creat-3.html?id='+id+'&name='+$('#name').val();
                 }else{
-                    alert('创建失败, 请稍后重试！');
+                    if(data.message == '项目名重复，请重新输入'){
+                        $('#name').addClass('error-i')
+
+                    }
+                    alert(data.message);
                 }
             }
         })

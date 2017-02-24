@@ -88,11 +88,11 @@ manageTagSelf.prototype = {
 		})
 		return this;
 	},
-	addTag: function(id1,id2,id3,tagtype,showBtn,src){
+	addTag: function(id1,id2,id3,id4,tagtype,showBtn,src,srcget,typeId,cid){
 		var _id1 = $('#'+id1);
 		var _id2 = $('#'+id2);
 		var _id3 = $('#'+id3);
-
+		var that = this;
 		if (!showBtn) {
 			_id1.on('click',function(){
 			    _id1.css({'display':'none'});
@@ -102,6 +102,7 @@ manageTagSelf.prototype = {
 		}else{
 			_id1.on('click',function(){
 			    _id2.css({'display':'block'});
+				that.getTagsBank(id4,srcget,typeId,cid);
 			})
 		}
 		
@@ -153,7 +154,7 @@ manageTagSelf.prototype = {
 		                	var h = '<li>'+val+'<input type="hidden" value="'+val+'"/><span>&times;</span></li>';
 		        			_id3.append(h);
 		                }else{
-		                    alert('添加失败, 请稍后重试！');
+		                    alert(data.message);
 		                }
 		            }
 		        })
@@ -186,53 +187,60 @@ manageTagSelf.prototype = {
 	                    window.location.href = 'user-login.html';
 	                    return false;
 	                }
-	                if(data.success){
-	                	
-	                }else{
-	                    alert('添加失败, 请稍后重试！');
+	                if(!data.success){
+						alert(data.message);
 	                }
 	            }
 	        })
 		})
 		return this;
 	},
-	getExitDot:function(id1,id2,tagtype,src,srcget,typeId){
+	getTagsBank:function (id1,src,typeId,cid) {
+		var _id1  = $('#'+id1);
+		var url  = _ip + src;
+		var data = {};
+		data['type'] = typeId || 1;
+		if(cid){
+			data['cid'] = cid;
+		}else{
+			data['pid'] = parseInt(globleProjectId);
+		}
+		data['name'] = '';
+		$.ajax({
+			url:url,
+			type : "POST",
+			xhrFields: {
+				withCredentials: true
+			},
+			crossDomain: true,
+			dataType: 'json',
+			contentType:'application/json',
+			data:JSON.stringify(data),
+			success: function(data) {
+				if(data.message === 'LOGIN') {
+					window.location.href = 'user-login.html';
+					return false;
+				}
+				if(data.success){
+					var data = data.data;
+					var h = '';
+					for(var k = 0, kk = data.length; k < kk ; k++){
+						h += '<li>'+data[k].name+'<input type="hidden" value="'+data[k].name+'"/><i></i></li>';
+					}
+					_id1.html(h);
+				}else{
+					alert(data.message);
+				}
+			}
+		})
+	},
+	getExitDot:function(id1,id2,tagtype,src,srcget,typeId,cid){
+		this.getTagsBank(id1,srcget,typeId,cid);
 		var _id1  = $('#'+id1);
 		var _id2  = $('#'+id2);
         var that = this;
 		var url  = _ip + src;
-        var urlget = _ip + srcget;
-        // console.log(_ip+ src)
-    	var data = {};
-    	data['type'] = typeId || 1;
-    	data['name'] = '';
-    	$.ajax({
-            url:urlget,
-            type : "POST",
-            xhrFields: {
-               withCredentials: true
-            },
-            crossDomain: true,
-            dataType: 'json',
-	        contentType:'application/json',
-	        data:JSON.stringify(data),
-            success: function(data) {
-            	if(data.message === 'LOGIN') {
-                    window.location.href = 'user-login.html';
-                    return false;
-                }
-                if(data.success){
-                	var data = data.data;
-                	var h = '';
-                	for(var k = 0, kk = data.length; k < kk ; k++){
-                		h += '<li>'+data[k].name+'<input type="hidden" value="'+data[k].name+'"/><i></i></li>';
-                	}
-                	_id1.html(h);
-                }else{
-                    alert('获取已存在标签失败, 请稍后重试！');
-                }
-            }
-        })
+
         _id1.on('click','li',function(){
         	var that = this;
         	var i = $(this).find('i');
@@ -377,9 +385,9 @@ manageTagSelf.initApi(urlarr)
 			 .deleteTag('tag-list-2','managementTag','/pci/update')
 			 .deleteTag('tag-list-3','competitorTag','/pci/update')
 
-			 .addTag('addtag-1','addtag-input-1','tag-list-1','interestTag',true,'/pci/update')  //添加标签
-			 .addTag('addtag-2','addtag-input-2','tag-list-2','managementTag',true,'/pci/update')
-			 .addTag('addtag-3','addtag-input-3','tag-list-3','competitorTag',true,'/pci/update')
+			 .addTag('addtag-1','addtag-input-1','tag-list-1','addtag-input-ul-1','interestTag',true,'/pci/update','/tags/select',1)  //添加标签
+			 .addTag('addtag-2','addtag-input-2','tag-list-2','addtag-input-ul-2','managementTag',true,'/pci/update','/tags/select',3)
+			 .addTag('addtag-3','addtag-input-3','tag-list-3','addtag-input-ul-3','competitorTag',true,'/pci/update','/tags/select',3)
 
 			 .updataDec('tag-dec-1','interestDesc','/pci/update')  // 更新描述
 			 .updataDec('tag-dec-2','managementDesc','/pci/update')
@@ -492,9 +500,9 @@ clientDataCard.prototype = {
 			
  			// 客户资料卡：兴趣点
  			manageTagSelf.initApi(urlarr)
- 						 .addTag('card-intres-addtagbtn-'+n,'card-intres-taglayer-'+n,'card-intres-showtag-list-'+n,'insterest',true,'/cusinfo/update')  //添加标签
+ 						 .addTag('card-intres-addtagbtn-'+n,'card-intres-taglayer-'+n,'card-intres-showtag-list-'+n,'card-intres-taglayer-list-'+n,'insterest',true,'/cusinfo/update','/tags/select',1,n)  //添加标签
  						 .deleteTag('card-intres-showtag-list-'+n,'insterest','/cusinfo/update')
- 						 .getExitDot('card-intres-taglayer-list-'+n,'card-intres-showtag-list-'+n,'insterest','/cusinfo/update','/tags/select',1)  //获取已经存在的兴趣点：{兴趣点ul的id，展示兴趣点的ul的id}
+ 						 .getExitDot('card-intres-taglayer-list-'+n,'card-intres-showtag-list-'+n,'insterest','/cusinfo/update','/tags/select',1,n)  //获取已经存在的兴趣点：{兴趣点ul的id，展示兴趣点的ul的id}
  						 .closeOutTag('card-intres-taglayer-close-'+n,'card-intres-taglayer-'+n)
 
  			// 客户资料卡：抵触点
@@ -514,7 +522,7 @@ clientDataCard.prototype = {
  		clientInfoCard.contennerTab('dot-tab','tabcontener');
  	},
  	getClientRelativePro:function(id,callback){   //获取客户相关需求列表
- 		var url = _ip + '/original/getRequireByProjectId?id='+id.split('-')[3];
+ 		var url = _ip + '/original/getRequireByCustomer?id='+id.split('-')[3];
 		var that = this;
 		$.ajax({
 	        url:url,
@@ -524,9 +532,10 @@ clientDataCard.prototype = {
             jsonpCallback: callback,
 	        success: function(json) {
 	        	var data = json.data;
+				if(data.length == 0) return;
 	        	var h = '';
 	        	for(var k = 0, kk = data.length; k < kk; k++){
-	        		h += '<li><i></i><a>'+data[k].name+'</a></li>';
+	        		h += '<li><i></i><a href="pm-need-detail-mems.html?id='+data[k].id+'">'+data[k].name+'</a></li>';
 	        	}
 	        	$('#'+id).html(h);
 	        }
@@ -728,7 +737,7 @@ clientInfoCard.prototype = {
                     clientDataCard.getAllCard();
                     $$.closeLayer()
                 }else{
-                    alert('geng失败，稍后重试！')
+                    alert(json.message);
                 }
             }
         })
@@ -745,7 +754,7 @@ clientInfoCard.prototype = {
 	        	if(json.success){
 	        		clientDataCard.getAllCard()
 	        	}else{
-	        		alert('删除失败，稍后重试！')
+	        		alert(json.message)
 	        	}
 	        }
 	    })
@@ -929,12 +938,13 @@ businessProgress.prototype = {
 	    var that = this;
 		$('#addPeopleBtn').on('click',function(){
 			$('#addPeopleSelect').css({'display':'block'})
+			that.getExistPeople()
+
 		})
 		$('#addPeopleClose').on('click',function(){
 			$('#addPeopleSelect').css({'display':'none'})
 		})
 		that.addPeopleUl.on('click','li',function(){
-
             var v = $(this).find('input').val();
             var arr = [];
             that.addPeopleList.find('li').each(function () {
@@ -966,9 +976,17 @@ businessProgress.prototype = {
         })
 	},
 	getExistPeople:function(){
-	    var url = _ip + '/user/name';
         var that = this;
-        $.ajax({
+		var len = that.addPeopleList.find('li').length;
+		if(len >= 1){
+			var first = that.addPeopleList.find('li').eq(0).find('input').val();
+		}
+		if(len >= 2){
+			var second = that.addPeopleList.find('li').eq(1).find('input').val();
+
+		}
+		var url = _ip + '/user/name?first='+first+'&second='+second;
+		$.ajax({
             url:url,
             type: 'GET',
             dataType: 'jsonp',
@@ -1002,7 +1020,7 @@ businessProgress.prototype = {
 		      "nextFocus": $('#nextFocus').val(),
 		      "nextFollow": $('#nextFollow').val(),
 		      "remark": $('#remark').val(),
-		      "creater": 2,
+		      "creater": $.cookie(userId),
 		      "createTime": null,
 		      "modifyTime": null
     	};

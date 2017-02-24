@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>pm-创建相关需求</title>
     <link href="../css/common.css" type="text/css" rel="stylesheet"/>
-    <link href="../css/index.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 
@@ -67,26 +66,30 @@
                         <td id="relativeNeed"></td>
                     </tr>
                     <tr>
+                        <td><span class="red-start">*</span>需求名称：</td>
+                        <td><input type="text" id="name" placeholder="不超过15个字符" /><i class="error-icon"></i></td>
+
+                    </tr>
+                    <tr>
                         <td><span class="red-start">*</span>需求类别：</td>
                         <td><select id="typeList"></select></td>
                         <td><span class="red-start">*</span>产品：</td>
-                        <td><select id="productList"></select></td>
+                        <td><select id="productList" onchange="_API.getFunctionList('functionList',false,false,'productList')"></select></td>
                     </tr>
                     <tr>
                         <td><span class="red-start">*</span>使用平台：</td>
                         <td><select id="platformList"></select></td>
                         <td><span class="red-start">*</span>功能模块：</td>
-                        <td><select id="functionList"><option>模块三</option></select></td>
+                        <td><select id="functionList"><option>请选择</option></select><span style="color:#4cae4c;">先选择产品</span></td>
                     </tr>
                     <tr>
-                        <td><span class="red-start">*</span>需求名称：</td>
-                        <td><input type="text" id="name" placeholder="不超过15个字符" /><i class="error-icon"></i></td>
                         <td>优先级别：</td>
                         <td><select id="priority"></select></td>
-                    </tr>
-                    <tr>
                         <td><span class="red-start">*</span>计划版本：</td>
                         <td><input type="text" id="version" placeholder="如：1.0版本"/></td>
+                    </tr>
+                    <tr>
+
                         <td>处理状态：</td>
                         <td><select id="status"></select></td>
                     </tr>
@@ -128,9 +131,9 @@
     _API.getTypeList('typeList')
         .getProductList('productList')
         .getPlatformList('platformList')
-        .getFunctionList('functionList')
+//        .getFunctionList('functionList')
         .getPriorityList('priority')
-        .getStatusList('status');
+        .getStatusListPm('status');
 
 
     var _id = getUrlId();

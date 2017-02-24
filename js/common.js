@@ -1,4 +1,8 @@
- var _ip = 'http://121.42.187.170';
+
+ var _ip = location.origin;
+ if(_ip.indexOf('http://localhost/') == -1){
+     var _ip = 'http://121.42.187.170';
+ }
  // var _ip = 'http://192.168.6.23:8080';
  // var _ip = 'http://10.0.1.156:8080';
 
@@ -471,12 +475,11 @@ function attachment(config){
                 }
             }
             else {
-                if(filePath.indexOf("jpg")!=-1 || filePath.indexOf("pdf")!=-1 || filePath.indexOf("xlsx")!=-1 || filePath.indexOf("png")!=-1 || filePath.indexOf("docx")!=-1 || filePath.indexOf("zip")!=-1){
+                if(filePath.indexOf("jpg")!=-1 || filePath.indexOf("pdf")!=-1 || filePath.indexOf("xlsx")!=-1 || filePath.indexOf("xls")!=-1 || filePath.indexOf("csv")!=-1 || filePath.indexOf("png")!=-1 || filePath.indexOf("docx")!=-1 || filePath.indexOf("doc")!=-1 || filePath.indexOf("zip")!=-1 || filePath.indexOf("ppt")!=-1){
                     var arr=filePath.split('\\');
                     var fileName=arr[arr.length-1];
                     // that.config.fileName.html(fileName);
                     that.uploadFile();
-
                 }else{
                     // that.config.fileName.html("");
                     alert("您未上传文件，或者您上传文件类型有误！");

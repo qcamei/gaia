@@ -153,7 +153,8 @@
       .client-info-card .card-list > li .relative-need-list > li {
         height: 16px;
         width: 100%;
-        margin: 5px 0; }
+        margin: 5px 0;
+        cursor: pointer; }
         .client-info-card .card-list > li .relative-need-list > li > i {
           display: inline-block;
           width: 16px;
