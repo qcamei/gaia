@@ -468,20 +468,22 @@ aside.aside {
           width: 86px;
           height: 28px;
           line-height: 28px;
-          background: #31aae1;
-          border: 1px solid #dbdbdb;
+          border-radius: 5px;
           color: #FFF;
+          background: #009ff2;
           display: inline-block;
           cursor: pointer; }
           .content .page-inner .page-content .buttons > button.cancel, .content .page-inner .page-content .buttons a.cancel {
-            background: #e2e2e2;
-            color: #666; }
+            background: #FFF;
+            border: 1px solid #d9e2e7;
+            color: #2e3f51; }
 
 .btn {
   width: 86px;
   height: 28px;
-  background: #31aae1;
-  border: 1px solid #dbdbdb;
+  background: #03a9f4;
+  border-radius: 4px;
+  border: 1px solid #03a9f4;
   color: #FFF;
   outline: 0px;
   display: inline-block;
@@ -540,8 +542,8 @@ aside.aside {
 .page-list > button {
   width: 36px;
   height: 26px;
-  background: #31aae1;
-  border: 1px solid #31aae1;
+  background: #03a9f4;
+  border: 1px solid #03a9f4;
   color: #FFF;
   outline: 0px;
   display: inline-block;

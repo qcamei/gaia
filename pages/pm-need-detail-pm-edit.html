@@ -199,7 +199,7 @@
         var url  = _ip+'/product/updateRequire';
         var data = {
             "id":_id,
-            "creater":"测试账号",
+            "creater":$.cookie('username'),
             "type": $('#typeList').val(),
             "product": $('#productList').val(),
             "plat": $('#platformList').val(),
@@ -214,10 +214,18 @@
         $.ajax({
             url:url,
             type : "POST",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             dataType: 'json',
             contentType:'application/json',
             data:JSON.stringify(data),
             success:function(data){
+                if(data.message === 'LOGIN') {
+                    window.location.href = 'user-login.html';
+                    return false;
+                }
                 if(data.success){
                     location.href = 'pm-need-detail-pm.html?id='+_id;
                 }else{

@@ -81,9 +81,9 @@
                     <thead>
                         <tr class="odd">
                             <th>序号</th>
+                            <th>需求名称</th>
                             <th>需求来源</th>
                             <th>需求方</th>
-                            <th>需求名称</th>
                             <th>紧急程度</th>
                            <!--  <th>附件</th> -->
                             <th>提出人</th>
@@ -152,9 +152,9 @@
 
                     _data.push('<tr>');
                     _data.push('<td>'+(k+1)+'</td>');
+                    _data.push('<td><a href="pm-need-detail-mems.html?id='+msg.id+'" title="'+msg.name+'" class="link">'+(msg.name.length<12?msg.name:msg.name.substring(0,12)+'...' )+'</a></td>');
                     _data.push('<td>'+msg.projectName+'</td>');
                     _data.push('<td>'+msg.customerName+'</td>');
-                    _data.push('<td><a href="pm-need-detail-mems.html?id='+msg.id+'" title="'+msg.name+'" class="link">'+(msg.name.length<12?msg.name:msg.name.substring(0,12)+'...' )+'</a></td>');
                     _data.push('<td>'+msg.level+'</td>');
                     _data.push('<td>'+msg.creater+'</td>');
                     _data.push('<td>'+msg.createTime+'</td>');

@@ -188,7 +188,7 @@
         var url  = _ip+'/product/addRequire';
         var data = {
                 "oid":_id,
-                "creater":"测试账号",
+                "creater":$.cookie('username'),
                 "feature":$('#functionList').val(),
                 "name":$('#name').val(),
                 "plat":$('#platformList').val(),

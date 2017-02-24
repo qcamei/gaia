@@ -83,7 +83,7 @@
                         <td><span class="red-start">*</span>使用平台：</td>
                         <td><select id="platformList"></select></td>
                         <td><span class="red-start">*</span>功能模块：</td>
-                        <td><select id="functionList"></select><span class="red-start" style="color: #4cae4c">先选择平台</span></td>
+                        <td><select id="functionList"></select><span class="red-start" style="color: #4cae4c">先选择产品</span></td>
                     </tr>
 
                     <tr>
@@ -230,7 +230,7 @@
         var url  = _ip+'/original/updateRequire';
         var data = {
             "id":_id,
-            "creater":"测试账号",
+            "creater":$.cookie('username'),
             "customerId":$('#needSide').val(),
             "feature":$('#functionList').val(),
             "name":$('#needName').val(),
@@ -248,10 +248,18 @@
         $.ajax({
             url:url,
             type : "POST",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             dataType: 'json',
             contentType:'application/json',
             data:JSON.stringify(data),
             success:function(data){
+                if(data.message === 'LOGIN') {
+                    window.location.href = 'user-login.html';
+                    return false;
+                }
                 if(data.success){
                     location.href = 'pm-need-detail-mems.html?id='+_id;
                 }else{

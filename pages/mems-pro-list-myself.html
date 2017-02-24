@@ -88,9 +88,9 @@
                         <tr class="odd">
                             <!--<th><input type="checkbox" name="" id="checkAll">全选</th>-->
                             <th>序号</th>
+                            <th>项目</th>
                             <th>负责人</th>
                             <th>区域</th>
-                            <th>项目</th>
                             <th>segmentation</th>
                             <th>级别</th>
                             <th>商务阶段</th>     
@@ -121,7 +121,7 @@
     _API.getProNameList('needSource',false,true)
         .getPSegmentationList('Segmentation',0,true)
         .getPLevelList('level',0,true)
-        .getPBussTypeList('bussType',0,true)
+        .getBussTypeList('bussType',0,true)
         .dynamicDistrick('district','privence','city');
 
     $('#checkAll').on('click',function () {
@@ -178,9 +178,9 @@
                     _data.push('<tr>');
 //                    _data.push('<td><input type="checkbox" name=""></td>');
                     _data.push('<td>'+ (k+1) +'</td>');
+                    _data.push('<td><a href="mems-pro-detail-baseinfo.html?id='+msg.id+'&name='+msg.name+'" class="link" title="'+msg.name+'">'+(msg.name.length<12?msg.name:msg.name.substring(0,12)+'...' )+'</a></td>');
                     _data.push('<td>'+msg.ownerName+'</td>')
                     _data.push('<td>'+msg.area+msg.province+msg.city+'</td>');
-                    _data.push('<td><a href="mems-pro-detail-baseinfo.html?id='+msg.id+'&name='+msg.name+'" class="link" title="'+msg.name+'">'+(msg.name.length<12?msg.name:msg.name.substring(0,12)+'...' )+'</a></td>');
                     _data.push('<td>'+msg.segmentation+'</td>');
                     _data.push('<td>'+msg.level+'</td>');
                     _data.push('<td>'+msg.businessType+'</td>');

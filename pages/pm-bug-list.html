@@ -78,8 +78,8 @@
                         <tr class="odd">
                         
                             <th>序号</th>
-                            <th>产品</th>
                             <th>缺陷主题</th>
+                            <th>产品</th>
                             <th>紧急程度</th>
                             <th>提出人</th>
                             <th>提出时间</th>
@@ -148,8 +148,8 @@
 
                     _data.push('<tr>');
                     _data.push('<td>'+(k+1)+'</td>');
-                    _data.push('<td>'+ msg.product +'</td>');
                     _data.push('<td><a href="pm-bug-detail.html?id='+msg.id+'" class="link" title="'+msg.name+'">'+(msg.name.length<12?msg.name:msg.name.substring(0,12)+'...' )+'</a></td>');
+                    _data.push('<td>'+ msg.product +'</td>');
                     _data.push('<td>'+msg.level+'</td>');
                     _data.push('<td>'+msg.creater+'</td>');
                     _data.push('<td>'+msg.createTime+'</td>');

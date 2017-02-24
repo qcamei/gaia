@@ -74,9 +74,9 @@
                     </tr>
                     <tr>
                         <td>产品：</td>
-                        <td><select id="product"></select></td>
+                        <td><select id="product" onchange="_API.getFunctionList('functionList',false,false,'product')"></select></td>
                         <td>功能模块:</td>
-                        <td><select id="functionList"></select></td>
+                        <td><select id="functionList"></select><span class="red-start" style="color: #4cae4c">先选择产品</span></td>
                     </tr>
                     <tr>
                         <td>使用平台：</td>
@@ -125,32 +125,7 @@
                     </tr>
                 </table>
 
-                <!-- <table class="table-log">
-                    <thead>
-                    <tr>
-                        <th><span class="left">操作日志</span><span class="right" id="log">隐藏日志</span></th>
-                    </tr>
-                    </thead>
 
-                    <tbody id="log-body">
-                        <tr>
-                            <td>
-                                <span class="name">小丽</span><span class="opera">将状态由 <b>新建</b> 变更为 <b>开发中</b></span><span class="time">2016.12.26  13：28</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="name">小丽</span><span class="opera">将状态由 <b>新建</b> 变更为 <b>开发中</b></span><span class="time">2016.12.26  13：28</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="name">小丽</span><span class="opera">将状态由 <b>新建</b> 变更为 <b>开发中</b></span><span class="time">2016.12.26  13：28</span>
-                            </td>
-                        </tr>
-                    </tbody>
-
-                </table> -->
             </div>
 
         </div>
@@ -195,7 +170,7 @@
                         .getTypeList('typeList',data.type)
                         .getProductList('product',data.product)
                         .getPlatformList('plat',data.plat)
-                        .getFunctionList('functionList',data.feature)
+                            .getFunctionList('functionList',data.feature,false,false,data.product)
                         .getNetWorkList('networkType',data.networkType)
                         .getLevelList('level',data.level)
                         .getIssueStatusList('status',data.status)
@@ -261,7 +236,7 @@
             "browser":$('#browser').val(),
             "discribe":$('#discribe').val(),
             "remark":$('#remark').val(),
-            "creater":"测试账号",
+            "creater":$.cookie('username'),
             "attachment":attachment.join(','),
             "status":$('#status').val(),
             "level":$('#level').val(),
@@ -271,10 +246,18 @@
         $.ajax({
             url:url,
             type : "post",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             dataType: 'json',
             contentType:'application/json',
             data:JSON.stringify(data),
             success:function(data){
+                if(data.message === 'LOGIN') {
+                    window.location.href = 'user-login.html';
+                    return false;
+                }
                 if(data.success){
 
                     location.href = 'pm-bug-detail.html?id='+_id;
