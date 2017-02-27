@@ -331,7 +331,10 @@
                         getData.pid= ppid;
                         break;
                 }
-                getFirstOrganize(level, getData, $content);
+                getFirstOrganize(level, getData, $content, function($content) {
+                    $content.find('li').eq(0).find('.tree-title').addClass('active');
+                    getQuartersList($content.find('li').eq(0).attr('id') );
+                });
             }
         });
     }
@@ -367,7 +370,10 @@
                         getData.pid= ppid;
                         break;
                 }
-                getFirstOrganize(level, getData, $content);
+                getFirstOrganize(level, getData, $content, function($content) {
+                    $content.find('li').eq(0).find('.tree-title').addClass('active');
+                    getQuartersList($content.find('li').eq(0).attr('id') );
+                });
             }
             else {
                 $('.item-content').prepend('<p class="error-msg">'+ json.message  +'</p>');
