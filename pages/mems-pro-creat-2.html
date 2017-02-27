@@ -285,6 +285,7 @@
         if(!flag) return;
         var url  = _ip+'/project/insert';
         var data = {
+            "hosId":hdata.id,
             "name": $('#name').val(),
             "shortName":$('#shortName').val(),
             "alias":$('#alias').val(),

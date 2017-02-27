@@ -157,7 +157,7 @@
 <script type="text/javascript">
     var userName= $('#userName-text').val();
     function getData(p,checPara){
-        var PerPage = 20;
+        var PerPage = 10;
         var url  = _ip+'/user/getUserList?page='+p+'&size='+PerPage;
         var data = checPara || {'name': 'a'};
         $('#bodyList').html('');

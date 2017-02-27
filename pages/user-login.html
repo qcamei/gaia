@@ -50,7 +50,7 @@
             if (json.success) {
                 $.cookie('userid',json.data.id);
                 $.cookie('userrole',json.data.role);
-                window.location.href = 'user-manage.html';
+                window.location.href = 'mems-pro-list.html';
             }
             else {
                 $('.head').after('<p class="error-msg">'+ json.message +'</p>');

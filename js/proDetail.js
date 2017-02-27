@@ -856,18 +856,20 @@ presell.prototype = {
 				if(!json.success) return;
                 var json = json.data;
                 presell.userId = json.id;
-
+				// console.log(json.proYear)
                 var h = '';
                 	h += '<tr><td colspan="2">销售方式：'+ (json.type?'<span class="type">'+json.type+'</span>':'') +'</td></tr>';
                     h += '<tr><td width="40%"><div class="name">预算：</div><div class="text"><span class="num-style">'+json.budget+'</span>&nbsp;万元</div></td>';
-                    	h += '<td><div class="name">采购时间：</div><div class="text"><span class="num-style">'+json.year+'</span>&nbsp;年&nbsp;<span class="num-style">'+json.month+'</span>&nbsp;月</div></td></tr>';
-                    h += '<tr><td colspan="2">'+json.discribe+'</td></tr>';     
+                    	h += '<td><div class="name">采购时间：</div><div class="text"><span class="num-style">'+(json.proYear || 0)+'</span>&nbsp;年&nbsp;<span class="num-style">'+(json.proMonth || 0)+'</span>&nbsp;月</div></td></tr>';
+					h += '<tr><td><div class="name">预计收款时间：</div><div class="text"><span class="num-style">'+(json.payYear || 0)+'</span>&nbsp;年&nbsp;<span class="num-style">'+(json.payMonth || 0) +'</span>&nbsp;月</div></td></tr>';
+				h += '<tr><td colspan="2">'+json.discribe+'</td></tr>';
                 $('#'+id).html(h);
 
                 $('#contacts').val(json.contacts);
                 $('#tel').val(json.tel);
                 $('#budget').val(json.budget);
-                $('#proTime').val(json.year+'-'+json.month+'-'+json.day)
+                // $('#proTime').val(json.proYear+'-'+json.proMonth);
+				// $('#getMoneyTime').val(json.payYear+'-'+json.payMonth)
                 $('#discribe').val(json.discribe)
             }
         })
@@ -875,8 +877,9 @@ presell.prototype = {
 	},
 	uploadInfo:function(){
 		var url = _ip + '/salebgt/update';
-		var time = $('#proTime').val()+' 00:00:00:00';
-		var date = new Date(time).getTime();
+		var time = $('#proTime').val()+'-01 00:00:00:00';
+		var time2 = $('#getMoneyTime').val()+'-01 00:00:00:00';
+		// var date = new Date(time).getTime();
         $('#tel').focus(function(){
             $('#tel').removeClass('error-i');
         })
@@ -899,7 +902,8 @@ presell.prototype = {
     		"id": presell.userId,
 		    "type": $('#sellTypeSelect').val(),
 		    "budget": parseInt($('#budget').val()),
-		    "proTime": date,
+		    "proTime": time,
+			"payTime":time2,
 		    "discribe": $('#discribe').val(),
 		    "contacts": $('#contacts').val(),
 		    "tel": parseInt($('#tel').val())
@@ -1085,6 +1089,8 @@ businessProgress.prototype = {
                 if(data.success){
                 	that.getBusCordList();
                 	that.showEdite(that);
+					_API.getPBussTypeList('bussTypeList',false,false,globleProjectId)
+						.getVisitStatusList('visitStatusList',false,false,globleProjectId);
                 }else{
                     alert('添加失败, 请稍后重试！');
                 }

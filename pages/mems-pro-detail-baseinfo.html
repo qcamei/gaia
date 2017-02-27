@@ -154,6 +154,10 @@
                                     <td><input id="proTime" ／></td>
                                 </tr>
                                 <tr>
+                                    <td>预计收款时间</td>
+                                    <td><input id="getMoneyTime" ／></td>
+                                </tr>
+                                <tr>
                                     <td>描述</td>
                                     <td><textarea id="discribe"></textarea></td>
                                 </tr>
@@ -340,7 +344,7 @@
 _API.getSellType('sellTypeSelect')
     .getPBussTypeList('bussTypeList',false,false,globleProjectId)
     .getVisitTypeList('visitTypeList')
-    .getVisitStatusList('visitStatusList')
+    .getVisitStatusList('visitStatusList',false,false,globleProjectId)
     .getVisitResultList('visitResultList')
     .getEmergencyList('emergencyList');
 
@@ -366,14 +370,14 @@ $('#nextFocus').fdatepicker({
     // 时间控件
     $('#proTime').fdatepicker({
         format: 'yyyy-dd',
-        pickTime: false
+//        pickTime: false
     });
 
-
-    $('#time-2').fdatepicker({
-        format: 'yyyy年mm月dd日',
-        pickTime: false
+    $('#getMoneyTime').fdatepicker({
+        format: 'yyyy-dd',
+//        pickTime: false
     });
+
 
     // addCard();
     function addCard(){

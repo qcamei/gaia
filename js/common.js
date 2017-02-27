@@ -2,6 +2,7 @@
  var _ip = location.origin;
  if(_ip.indexOf('http://localhost/') == -1){
      var _ip = 'http://121.42.187.170';
+     // var _ip = 'http://192.168.6.19:8080';
  }
  // var _ip = 'http://192.168.6.23:8080';
  // var _ip = 'http://10.0.1.156:8080';
@@ -109,7 +110,7 @@ function creatAsideDom() {
                     },
                     {
                         id:'tagmanage',
-                        name:'组织架构',
+                        name:'标签管理',
                         src:'tag-manage'
                     }
                 ]
@@ -473,8 +474,8 @@ _api.prototype = {
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'ty']);
         return this;
     },
-    getVisitStatusList: function(id, defaultId,isSelect) { // 19. 项目管理：拜访状态
-        var url = _ip+'/common/getVisitStatusList';
+    getVisitStatusList: function(id, defaultId,isSelect,proId) { // 19. 项目管理：拜访状态
+        var url = _ip+'/common/getVisitStatusList?id='+proId;
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'sr']);
         return this;
     },
