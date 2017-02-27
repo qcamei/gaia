@@ -28,20 +28,22 @@
          contentType:'application/json',
          jsonpCallback: 'login',
          success: function(json) {
+             console.log(json)
              if(!json.success){
                  location.href = 'user-login.html';
              }
              else {
                  $.cookie('username',json.data.userName);
                  $.cookie('userid',json.data.id);
+                 globleUserId = parseInt(json.data.id);
+                 $('#headusername').html(json.data.userName);
              }
          }
      })
  }
 
  isLogin();
- globleUserId = parseInt($.cookie('userid'));
-$('#headusername').html($.cookie('username'));
+
 
 function loginOut(){
     var url = _ip + '/loginOut';
