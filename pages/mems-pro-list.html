@@ -20,34 +20,7 @@
 <!--menu-->
 <aside id="aside" class="aside">
     <div class="logo">运营平台</div>
-    <ul class="menu">
-        <li id="promanage">
-            <div class="menu-first"><i class="project"></i>项目管理</div>
-            <dl class="menu-second">
-                <dd><a href="mems-pro-list.html" id="prolit">项目列表</a></dd>
-            </dl>
-        </li>
-        <li id="needmange">
-            <div class="menu-first"><i class="need"></i>需求管理</div>
-            <dl class="menu-second">
-                <dd><a href="pm-need-list.html" id="needlist">需求池</a></dd>
-                <dd><a href="pm-bug-list.html" id="buglist">缺陷池</a></dd>
-            </dl>
-        </li>
-        <li id="system">
-            <div class="menu-first"><i class="system"></i>系统配置</div>
-            <dl class="menu-second">
-                <dd><a href="user-manage.html" id="usermanage">用户管理</a></dd>
-                <dd><a href="organize-architecture.html" id="organize">组织架构</a></dd>
-                <dd><a href="tag-manage.html" id="tagmanage">标签管理</a></dd>
-            </dl>
-        </li>
-        <li id="documentmanage">
-            <div class="menu-first"><i class="project"></i>文档管理</div>
-            <dl class="menu-second">
-                <dd><a href="doc-manage.html" id="doc-manage">文档管理</a></dd>
-            </dl>
-        </li>
+    <ul class="menu" id="asidemenu">
     </ul>
 </aside>
 
@@ -79,7 +52,7 @@
                 </tr>
             </tbody>
         </table>
-        <div class="commit-new-item"><a class="btn" href="mems-pro-creat-1.html">创建项目&nbsp;<b>+</b></a>&emsp;<a class="btn" onclick="exportExcel();">导出&nbsp;</a></div>
+        <div class="commit-new-item"><a class="btn" href="mems-pro-creat-1.html" id="creatProId">创建项目&nbsp;<b>+</b></a>&emsp;<a class="btn" onclick="exportExcel();" id="exportExcelId">导出&nbsp;</a></div>
         
         <div class="item-content">
             <div class="table-box">
@@ -123,7 +96,7 @@
         .getPLevelList('level',0,true)
         .getBussTypeList('bussType',0,true)
         .dynamicDistrick('district','privence','city');
-
+    var roleid = $.cookie('userrole');
     $('#checkAll').on('click',function () {
         var checked = $(this).prop('checked');
         var checkbox = $('#bodyList').find('input[type=checkbox]');
@@ -340,7 +313,19 @@
             }
         });
     }
+    function cannotcreatpro(){
+        if(roleid == 0){
+            $('#creatProId').remove()
+        }
+    }
+    cannotcreatpro()
 
+    function cannotexportExcel(){
+        if(roleid == 0 || roleid == 1 || roleid == 2){
+            $('#exportExcelId').remove()
+        }
+    }
+    cannotexportExcel()
 </script>
 </body>
 </html>

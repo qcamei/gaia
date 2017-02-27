@@ -413,6 +413,7 @@ clientDataCard.prototype = {
  	getAllCard: function(){  //获取所有客户信息卡
  		var url = _ip + '/cus/select?id='+globleProjectId;
 		var that = this;
+		that.mark = false;
 		$.ajax({
             url:url,
             type: 'GET',
@@ -425,14 +426,42 @@ clientDataCard.prototype = {
         	jsonpCallback: 'iniata',
             success:function(json){
                 if(json.success && json.data){
-                	
-                	that.creatCardDom(json.data);
+					// that.creatCardDom(json.data,that.mark);
+					var url  = _ip+'/puser/select';
+					var data = {
+						id: getUrlId()
+					};
+
+					var arrn = [];
+					organizeAjaxGet(url, data, 'gg', function(data) {
+
+						if (data.success) {
+							arrn.push(data.data.owner.id);
+							for(var k = 0; k < data.data.list.length; k++){
+								arrn.push(data.data.list[k].id);
+							}
+
+							for(var n = 0; n < arrn.length; n++){
+								if(globleUserId == arrn[n]){
+									that.mark = true;
+									break;
+								}
+							}
+							// console.log(that.mark);
+
+							that.creatCardDom(json.data,that.mark);
+						}
+
+
+					})
+
             	}
             }
         })
         return this;
  	},
- 	creatCardDom: function(json){
+ 	creatCardDom: function(json,mark){
+	console.log(mark)
  		var h   = '';
  		var arr = [];
  		for(var i = 0, ii = json.length; i < ii ; i++){
@@ -456,9 +485,12 @@ clientDataCard.prototype = {
 	 						}
  						}
  						h += '</ul>';
- 						h += '<div style="position: relative;"><div class="add-tag" id="card-intres-addtagbtn-'+n+'">+标签</div>';
- 						h += '<div class="add-tag-exist-con" id="card-intres-taglayer-'+n+'"><a href="javascript:" class="close" id="card-intres-taglayer-close-'+n+'">关闭</a><ul class="tag-out-list" id="card-intres-taglayer-list-'+n+'"></ul></div></div></div>';
- 					
+						if(mark){
+							h += '<div style="position: relative;"><div class="add-tag" id="card-intres-addtagbtn-'+n+'">+标签</div>';
+							h += '<div class="add-tag-exist-con" id="card-intres-taglayer-'+n+'"><a href="javascript:" class="close" id="card-intres-taglayer-close-'+n+'">关闭</a><ul class="tag-out-list" id="card-intres-taglayer-list-'+n+'"></ul></div></div></div>';
+
+						}
+
  					// 抵触点
  					h += '<div class="contradict contentchild" style="display: none;"><ul class="clear tag-list" id="card-tradict-showtag-list-'+n+'">';
  						if(b.conflict){
@@ -469,9 +501,11 @@ clientDataCard.prototype = {
  						}
  						
  						h += '</ul>';
- 						h += '<div class="add-tag" id="card-tradict-addtagbtn-'+n+'">+标签</div>';
- 						h += '<div class="add-tag-con" id="card-intres-taginputbox-'+n+'"><input type="text" placeholder="标签名" /><input type="button" value="确认"><input type="button" value="取消"></div></div>';
- 					
+						if(mark){
+							h += '<div class="add-tag" id="card-tradict-addtagbtn-'+n+'">+标签</div>';
+							h += '<div class="add-tag-con" id="card-intres-taginputbox-'+n+'"><input type="text" placeholder="标签名" /><input type="button" value="确认"><input type="button" value="取消"></div></div>';
+						}
+
  					// 沟通要点
  					h += '<div class="contradict contentchild" style="display: none;"><ul class="clear tag-list" id="card-chat-showtag-list-'+n+'">';
  						if(b.communication){
@@ -482,9 +516,12 @@ clientDataCard.prototype = {
  						}
  						
  						h += '</ul>';
- 						h += '<div class="add-tag" id="card-chat-addtagbtn-'+n+'">+标签</div>';
- 						h += '<div class="add-tag-con" id="card-chat-taginputbox-'+n+'"><input type="text" placeholder="标签名" /><input type="button" value="确认"><input type="button" value="取消"></div></div>';
- 					
+						if(mark){
+							h += '<div class="add-tag" id="card-chat-addtagbtn-'+n+'">+标签</div>';
+							h += '<div class="add-tag-con" id="card-chat-taginputbox-'+n+'"><input type="text" placeholder="标签名" /><input type="button" value="确认"><input type="button" value="取消"></div></div>';
+
+						}
+
  					// 相关需求
  					h += '<div class="relativeNeed contentchild" style="display: none;"><ul class="relative-need-list" id="relative-need-list-'+n+'">';
  						// h += '<li><i></i><a>合同到期体系</a></li><li><i></i><a>合同到期体系</a></li>';
@@ -493,6 +530,7 @@ clientDataCard.prototype = {
  				h += '</div></li>';
  		}
  		h += '<li class="li-add-card"><a class="card-btn" onclick="clientInfoCard.clientCardDom()">添加客户</a></li>';
+		console.log(h);
  		$('#all-card-list').html(h);
 
  		for(var k = 0, kk = arr.length; k < kk; k++){
@@ -1149,5 +1187,6 @@ function getCardProList(){
     })
 }
 getCardProList();
+
 
 

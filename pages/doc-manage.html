@@ -20,34 +20,34 @@
 <!--menu-->
 <aside id="aside" class="aside">
     <div class="logo">运营平台</div>
-    <ul class="menu">
-        <li id="promanage">
-            <div class="menu-first"><i class="project"></i>项目管理</div>
-            <dl class="menu-second">
-                <dd><a href="mems-pro-list.html" id="prolit">项目列表</a></dd>
-            </dl>
-        </li>
-        <li id="needmange">
-            <div class="menu-first"><i class="need"></i>需求管理</div>
-            <dl class="menu-second">
-                <dd><a href="pm-need-list.html" id="needlist">需求池</a></dd>
-                <dd><a href="pm-bug-list.html" id="buglist">缺陷池</a></dd>
-            </dl>
-        </li>
-        <li id="system">
-            <div class="menu-first"><i class="system"></i>系统配置</div>
-            <dl class="menu-second">
-                <dd><a href="user-manage.html" id="usermanage">用户管理</a></dd>
-                <dd><a href="organize-architecture.html" id="organize">组织架构</a></dd>
-                <dd><a href="tag-manage.html" id="tagmanage">标签管理</a></dd>
-            </dl>
-        </li>
-        <li id="documentmanage">
-            <div class="menu-first"><i class="project"></i>文档管理</div>
-            <dl class="menu-second">
-                <dd><a href="doc-manage.html" id="doc-manage">文档管理</a></dd>
-            </dl>
-        </li>
+    <ul class="menu" id="asidemenu">
+        <!--<li id="promanage">-->
+            <!--<div class="menu-first"><i class="project"></i>项目管理</div>-->
+            <!--<dl class="menu-second">-->
+                <!--<dd><a href="mems-pro-list.html" id="prolit">项目列表</a></dd>-->
+            <!--</dl>-->
+        <!--</li>-->
+        <!--<li id="needmange">-->
+            <!--<div class="menu-first"><i class="need"></i>需求管理</div>-->
+            <!--<dl class="menu-second">-->
+                <!--<dd><a href="pm-need-list.html" id="needlist">需求池</a></dd>-->
+                <!--<dd><a href="pm-bug-list.html" id="buglist">缺陷池</a></dd>-->
+            <!--</dl>-->
+        <!--</li>-->
+        <!--<li id="system">-->
+            <!--<div class="menu-first"><i class="system"></i>系统配置</div>-->
+            <!--<dl class="menu-second">-->
+                <!--<dd><a href="user-manage.html" id="usermanage">用户管理</a></dd>-->
+                <!--<dd><a href="organize-architecture.html" id="organize">组织架构</a></dd>-->
+                <!--<dd><a href="tag-manage.html" id="tagmanage">标签管理</a></dd>-->
+            <!--</dl>-->
+        <!--</li>-->
+        <!--<li id="documentmanage">-->
+            <!--<div class="menu-first"><i class="project"></i>文档管理</div>-->
+            <!--<dl class="menu-second">-->
+                <!--<dd><a href="doc-manage.html" id="doc-manage">文档管理</a></dd>-->
+            <!--</dl>-->
+        <!--</li>-->
     </ul>
 </aside>
 
@@ -235,6 +235,10 @@
     }
 
     function deleteDoc(obj) {
+        if(globleRoleId == 0 || globleRoleId == 2){
+            alert('您没有权限删除文件！');
+            return;
+        }
         var $obj = $(obj);
         var path = $obj.closest('tr').data('edit').path;
         var id = $obj.closest('tr').data('edit').id;
@@ -246,6 +250,14 @@
             }
         })
     }
+
+//    普通用户不能上传文件
+    function unUploadFile() {
+        if($.cookie('userrole') == 2){
+            $('#fileUpload').remove()
+        }
+    }
+    unUploadFile()
 </script>
 </body>
 </html>

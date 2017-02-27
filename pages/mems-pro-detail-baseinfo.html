@@ -19,36 +19,9 @@
 </header>
 <!--menu-->
 <aside id="aside" class="aside">
-        <div class="logo">运营平台</div>
-        <ul class="menu">
-            <li id="promanage">
-                <div class="menu-first"><i class="project"></i>项目管理</div>
-                <dl class="menu-second">
-                    <dd><a href="mems-pro-list.html" id="prolit">项目列表</a></dd>
-                </dl>
-            </li>
-            <li id="needmange">
-                <div class="menu-first"><i class="need"></i>需求管理</div>
-                <dl class="menu-second">
-                    <dd><a href="pm-need-list.html" id="needlist">需求池</a></dd>
-                    <dd><a href="pm-bug-list.html" id="buglist">缺陷池</a></dd>
-                </dl>
-            </li>
-            <li id="system">
-                <div class="menu-first"><i class="system"></i>系统配置</div>
-                <dl class="menu-second">
-                    <dd><a href="user-manage.html" id="usermanage">用户管理</a></dd>
-                    <dd><a href="organize-architecture.html" id="organize">组织架构</a></dd>
-                    <dd><a href="tag-manage.html" id="tagmanage">标签管理</a></dd>
-                </dl>
-            </li>
-            <li id="documentmanage">
-                <div class="menu-first"><i class="project"></i>文档管理</div>
-                <dl class="menu-second">
-                    <dd><a href="doc-manage.html" id="doc-manage">文档管理</a></dd>
-                </dl>
-            </li>
-        </ul>
+    <div class="logo">运营平台</div>
+    <ul class="menu" id="asidemenu">
+    </ul>
 </aside>
 
 <!--content-->
@@ -331,7 +304,7 @@
     </div>
     <h3>
         项目成员
-        <a class="add-member add" href="javascript:;" onclick="addMemberShow(this);">+&nbsp;添加</a>
+        <a class="add-member add" href="javascript:;" onclick="addMemberShow(this);" id="addMemberShowId">+&nbsp;添加</a>
         <div class="member-slide" style="display:none">
             <div class="search-member">
                 <input type="" name="" id="searchUser" onblur="addMemberShow()"/>
@@ -576,7 +549,10 @@ $('#nextFocus').fdatepicker({
 //                '</div>' +
                 '</div>');
         var owner_info = $('<div class="info left"><p>'+ owner_data.name +'</p><p class="removeOcp">'+ owner_data.ocpName +'</p></div>');
-        var owner_opero = $('<div class="opero right"><a href="javascript:;" class="assignment" onclick="addMemberShow(this);">转让</a></div>');
+//        if( (owner_data.id == globleUserId && data.role == 2)  ){
+//
+//        }
+        var owner_opero = $('<div class="opero right">'+(owner_data.id == globleUserId || owner_data.role != 2?'':'<a href="javascript:;" class="assignment" id="transferMember" onclick="addMemberShow(this);">转让</a>' )+'</div>');
         var $div = $('<div class="member clear"></div>');
         var $li = $('<li id="'+ owner_data.id +'"></li>');
         if (leader === 'leader') {
@@ -640,6 +616,60 @@ $('#nextFocus').fdatepicker({
             opacity: 0
         }, 500);
     });
+
+
+
+function forbidenOpe() {}
+forbidenOpe.prototype = {
+
+    init:function(){
+        this.mark = false;
+        this.userId = $.cookie('userid');
+        this.ismember()
+    },
+    ismember:function() {
+        var that = this;
+        var url  = _ip+'/puser/select';
+
+        var data = {
+            id: getUrlId()
+        };
+
+        var arr = [];
+        organizeAjaxGet(url, data, 'dd', function(json) {
+            if (json.success) {
+                arr.push(json.data.owner.id);
+                for(var k = 0; k < json.data.list.length; k++){
+                    arr.push(json.data.list[k].id);
+                }
+                for(var n = 0; n < arr.length; n++){
+                    if(that.userId == arr[n]){
+                        that.mark = true;
+                        break;
+                    }
+                }
+                if(!that.mark){
+                    $('#addMemberShowId').remove();
+                    $('#addtag-1').remove();
+                    $('#addtag-2').remove();
+                    $('#addtag-3').remove();
+                    $('#tag-dec-1').prop({'disabled':true});
+                    $('#tag-dec-2').prop({'disabled':true});
+                    $('#tag-dec-3').prop({'disabled':true});
+                    $('#tag-dec-4').prop({'disabled':true});
+                    $('#addcordbtn').remove();
+                    $('#editeSaleType').remove();
+//                    $('#transferMember').remove();
+                }
+
+            }
+
+        })
+    }
+}
+
+forbidenOpe =  new forbidenOpe()
+forbidenOpe.init();
 </script>
 </body>
 </html>

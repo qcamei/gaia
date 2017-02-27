@@ -46,7 +46,10 @@
             password: $('#password').val()
         };
         organizeAjaxPost(url, data, function(json) {
+
             if (json.success) {
+                $.cookie('userid',json.data.id);
+                $.cookie('userrole',json.data.role);
                 window.location.href = 'user-manage.html';
             }
             else {
