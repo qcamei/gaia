@@ -192,13 +192,19 @@
                 };
                 switch (msgData.role) {
                     case 0:
-                        roleName = '超级管理员';
+                        roleName = '产品管理员';
                         break;
                     case 1:
-                        roleName = '管理员';
+                        roleName = '区域管理员';
                         break;
                     case 2:
                         roleName = '普通用户';
+                        break;
+                    case 3:
+                        roleName = '全域管理员';
+                        break;
+                    case 9:
+                        roleName = '超级管理员';
                         break;
                 }
                 _data[k] = $('<tr>' +
