@@ -125,6 +125,10 @@
 <script type="text/javascript">
 
 
+//function hospitalStepFirst(){
+//
+//}
+
 function getDistrictdom(id){
     var _id = $('#'+id);
     $.ajax({
@@ -210,11 +214,14 @@ function getHospital(id,city){ //获取医院列表
 }
 
 function getinputVal(id1,id2,id3,id4) {
-    var v1 = $('#'+id1).val();
-    var v2 = $('#'+id2).val();
-    var v3 = $('#'+id3).val();
-    var v4 = $('#'+id4).val();
+    var v1 = $('#'+id1).val() || null;
+    var v2 = $('#'+id2).val() || null;
+    var v3 = $('#'+id3).val() || null;
+    var v4 = $('#'+id4).val() || null;
     var t = '';
+    if(!v1){
+        t = '';
+    }
     if(v1){
         t = v1;
     }
@@ -229,7 +236,7 @@ function getinputVal(id1,id2,id3,id4) {
 
     }
     $('#serchkeywords').val(t);
-    $('.pro-btn').removeClass('pro-sure-can');
+    $('#nextstep').removeClass('pro-sure-can');
     $('#nextstep').attr({'href':'javascript:'})
 }
 getDistrictdom('district');
@@ -307,11 +314,34 @@ $('#hospital').on('click','li',function () {
     geihospitaldetaildata(parseInt($(this).find('input').attr('data-id')));
 
 })
+
+
+document.onkeydown=function(e) {
+
+    e = e || event;
+//   console.log(e.keyCode)
+    if (e.keyCode == 8) {
+        $('#area-v').val('');
+        $('#provice-v').val('');
+        $('#city-v').val('');
+        $('#hospital-v').val('');
+        getinputVal('area-v','provice-v','city-v','hospital-v');
+        $('#hospital').html('');
+        $('#city').html('');
+        $('#provice').html('');
+        $('#district').html('');
+        getDistrictdom('district');
+    }
+}
+
     var showkeylist = $('#showkeylist');
     var showselect  = $('#showselect');
-    $('#serchkeywords').on('focus',function(){
-        var s = showkeylist.css('display');'' +
-        console.log(s);
+    $('#serchkeywords').on('focus',function(e){
+
+
+
+
+        var s = showkeylist.css('display');
         if(s == 'block'){
             showkeylistdo()
         }else{
@@ -319,12 +349,12 @@ $('#hospital').on('click','li',function () {
             $('#provice,#city,#hospital').html();
         }
     })
-    .on('keyup',function(){
+    .on('blur',function(){
+
         var v = $(this).val();
         if(v.length >= 1){
             showkeylistdo()
-            // keysearch(v);
-            if(v.length >= 8){
+            if(v.length >= 5){
                 keysearch(v);
             }
             
@@ -362,7 +392,7 @@ $('#hospital').on('click','li',function () {
                     var data = data.data;
                     if(data && data.length){
                         for(var k = 0, kk = data.length; k < kk ;k ++){
-                            h += '<li>西南区／'+data[k].province+'／'+data[k].city+'／'+data[k].chineseName+'</li>';
+                            h += '<li>西南区／'+data[k].province+'／'+data[k].city+'／'+data[k].chineseName+'<input value="'+data[k].id+'" type="hidden" /></li>';
                         }
                         $('#keyul').html(h);
                     }else{
@@ -370,13 +400,15 @@ $('#hospital').on('click','li',function () {
                     }
                     
                 }else{
-//                    alert('搜索失败, 请稍后重试！');
+                    alert(data.message);
                 }
             }
         })
    }
    $('#keyul').on('click','li',function(){
-        $('#serchkeywords').val($(this).text() );
+       var id = $(this).find('input').val();
+       geihospitaldetaildata(id)
+       $('#serchkeywords').val($(this).text() );
    })
 </script>
 </body>

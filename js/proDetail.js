@@ -1008,6 +1008,10 @@ businessProgress.prototype = {
         this.addPeopleList.find('li').each(function () {
             arr.push($(this).find('input').val());
         })
+		if(arr.length <= 0){
+        	alert('请添加拜访人员！');
+			return;
+		}
     	var data = {
     		  "id": null,
 		      "proId": parseInt(globleProjectId),
@@ -1020,7 +1024,7 @@ businessProgress.prototype = {
 		      "nextFocus": $('#nextFocus').val(),
 		      "nextFollow": $('#nextFollow').val(),
 		      "remark": $('#remark').val(),
-		      "creater": $.cookie(userId),
+		      "creater": $.cookie('userid'),
 		      "createTime": null,
 		      "modifyTime": null
     	};

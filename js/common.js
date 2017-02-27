@@ -249,6 +249,7 @@ var _api = function(){
             jsonpCallback: callback,
             success: function(json) {
                 var json = json.data;
+
                 var h = '';
                 if (isSelect) {
                     h += '<option value="">请选择</option>';
