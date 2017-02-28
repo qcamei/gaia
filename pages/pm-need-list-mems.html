@@ -130,7 +130,7 @@
                     return false;
                 }
                if(!json.data || json.data.length <= 0){
-                    $('#bodyList').html('<tr><td colspan="9">暂无数据！</td></tr>');
+                    $('#bodyList').html('<tr><td colspan="10">暂无数据！</td></tr>');
                     $('#pageList').html('');
                     return false;
                 }
@@ -157,9 +157,11 @@
                     _data.push('<td>'+msg.status+'</td>');
                     _data.push('<td>'+msg.originalCount+'</td>');
 
-                    if(roleid==0){
+                    if(roleid==0 || roleid== 9){
                         _data.push('<td><a class="link" href="javascript:" onclick="deleteList('+msg.id+')">删除</a></td>');
 
+                    }else{
+                        _data.push('<td></td>');
                     }
                 }
                 _pager.push('<span>共：'+ totalPage +'页</span>');

@@ -177,6 +177,10 @@
         $.ajax({
             url:url,
             type: 'post',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             dataType: 'json',
             contentType:'application/json',
             data:JSON.stringify(data),

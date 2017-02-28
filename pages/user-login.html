@@ -35,7 +35,8 @@
 
 <script type="text/javascript">
 
-     var _ip = 'http://121.42.187.170/oper';
+//     var _ip = 'http://121.42.187.170/oper';
+     var _ip = 'http://121.42.187.170';
 //    var _ip = 'http://192.168.6.23:8080';
 //var _ip = 'http://10.0.1.156:8080';
     function Login() {
@@ -45,8 +46,8 @@
             userName: $('#userName').val(),
             password: $('#password').val()
         };
-        organizeAjaxPost(url, data, function(json) {
 
+        organizeAjaxPost(url, data, function(json) {
             if (json.success) {
                 $.cookie('userid',json.data.id);
                 $.cookie('userrole',json.data.role);

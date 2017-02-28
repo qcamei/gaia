@@ -97,7 +97,6 @@
 <div class="user-mask"></div>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.cookie.js"></script>
-<script src="../js/vue.js"></script>
 <script src="../js/common.js"></script>
 <script src="../js/user-tree.js"></script>
 <script type="text/javascript">
@@ -162,13 +161,14 @@
                     size_text: size_text,
                     path: msg.path
                 };
+                var roleid = $.cookie('userrole')
                 _data[k] = $('<tr>' +
                         '<td class="organize">' +
                         '<span>'+ msg.name +'</span>' +
                         '<span class="right">' +
                         '<a href="'+_ip +'/file/download?path='+ msg.path +'">' +
                         '<i class="download display-middle" onclick=""></i>' +
-                        '</a><i class="delete-icon display-middle" onclick="deleteDoc(this); event.stopPropagation();"></i>' +
+                        '</a>'+(roleid==9 || roleid== 2?'<i class="delete-icon display-middle" onclick="deleteDoc(this); event.stopPropagation();"></i>':'') +
                         '</span>' +
                         '</td>' +
                         '<td>'+ msgData.size_text +'</td>' +

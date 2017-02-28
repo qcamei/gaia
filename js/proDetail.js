@@ -386,7 +386,7 @@ manageTagSelf.initApi(urlarr)
 			 .deleteTag('tag-list-3','competitorTag','/pci/update')
 
 			 .addTag('addtag-1','addtag-input-1','tag-list-1','addtag-input-ul-1','interestTag',true,'/pci/update','/tags/select',1)  //添加标签
-			 .addTag('addtag-2','addtag-input-2','tag-list-2','addtag-input-ul-2','managementTag',true,'/pci/update','/tags/select',3)
+			 .addTag('addtag-2','addtag-input-2','tag-list-2','addtag-input-ul-2','managementTag',true,'/pci/update','/tags/select',2)
 			 .addTag('addtag-3','addtag-input-3','tag-list-3','addtag-input-ul-3','competitorTag',true,'/pci/update','/tags/select',3)
 
 			 .updataDec('tag-dec-1','interestDesc','/pci/update')  // 更新描述
