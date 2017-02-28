@@ -99,10 +99,16 @@
         var tagValue = $obj.prev().val();
         var type = $('.tag-item.active').data('type');
         var url  = _ip+'/tags/insert';
+        var $addTagbox = $('.add-tag-box');
+        $('.error-msg').remove();
         if(edit) {
             var id = $obj.prev().data('id');
             var name= $obj.prev().val();
             url = _ip+'/tags/update';
+            if(!name) {
+                $addTagbox.prepend('<p class="error-msg">标签名字不能为空</p>');
+                return false;
+            }
             organizeAjaxPost(url, {id: id, name: name}, function(json) {
                 if (json.success) {
                     $('.cancel-add-edit').click();
@@ -111,6 +117,10 @@
             })
         }
         else {
+            if(!name) {
+                $addTagbox.prepend('<p class="error-msg">标签名字不能为空</p>');
+                return false;
+            }
             organizeAjaxGet(url, {name: tagValue, type: type }, 'tags_insert', function(json) {
                 if (json.success) {
                     $('.cancel-add-edit').click();
@@ -144,6 +154,7 @@
 
     function cancelAddEdit(obj) {
         var $obj = $(obj);
+        $('.error-msg').remove();
         $obj.closest('.add-tag-line').css('display', 'none').find('.add-tag-input').val('')
                 .end().prev().css('display','block');
     }
