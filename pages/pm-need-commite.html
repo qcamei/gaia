@@ -152,6 +152,14 @@
             alert('请选择来源');
             return false
         }
+        if($('#productList').find('option:selected').text() == '请选择'){
+            alert('请选择产品！');
+            return false
+        }
+        if($('#functionList').find('option:selected').text() == '请选择'){
+            alert('功能模块！');
+            return false
+        }
         if($('#needSide').find('option:selected').text() == '请选择'){
             alert('请选择需求方');
             return false

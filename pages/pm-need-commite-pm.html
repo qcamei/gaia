@@ -98,7 +98,7 @@
 
 <script type="text/javascript">
     _API.getTypeList('typeList')
-        .getProductList('productList')
+        .getProductList('productList',false,true)
         .getPlatformList('platformList')
 //        .getFunctionList('functionList')
         .getPriorityList('priority')
@@ -137,9 +137,17 @@
                 attachment.push( $(this).attr('rel') );
             })
         }
+
+        if($('#productList').find('option:selected').text() == '请选择'){
+            alert('请选择产品！');
+            return false
+        }
+        if($('#functionList').find('option:selected').text() == '请选择'){
+            alert('功能模块！');
+            return false
+        }
         var url  = _ip+'/product/addRequire';
         var data = {
-            
             "creater":$.cookie('username'),
             "feature":$('#functionList').val(),
             "name": $('#name').val(),
