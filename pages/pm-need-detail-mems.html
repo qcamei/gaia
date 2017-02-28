@@ -275,8 +275,13 @@
             contentType:'application/json',
             jsonpCallback: 'off',
             success:function(data){
+                console.log(data);
                 var data = data.data;
                 var h = '';
+                if(!data || data.length) {
+                    $('#relativeList').html('<tr><td colspan="6" style="text-align: center">暂无数据！</td></tr>');
+                    return false;
+                }
                 for(var k = 0; k < data.length; k++){
                     h += '<tr><td>'+data[k].productName+'</td>';
                         h += '<td>'+data[k].feature+'</td>';

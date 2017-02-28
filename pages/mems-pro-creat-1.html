@@ -46,7 +46,9 @@
         <div class="search-box">
             <h3>选择医院</h3>
             <div class="search-input">
-                <input type="text" name="" id="serchkeywords">
+                <form action="javascript:;" id="serchkeywords_form">
+                    <input type="text" name="" id="serchkeywords">
+                </form>
                 <div style="display: none;">
                     <input type="hidden" id="area-v"/>
                     <input type="hidden" id="provice-v">
@@ -330,7 +332,12 @@ document.onkeydown=function(e) {
         }else{
             showselectarea()
         }
-    })
+    });
+
+    $('#serchkeywords_form').on('submit', function() {
+        $('#serchkeywords').blur();
+        return false;
+    });
     function showkeylistdo(){
         showselect.css({'display':'none'});
         showkeylist.css({'display':'block'});
@@ -361,7 +368,7 @@ document.onkeydown=function(e) {
                     var data = data.data;
                     if(data && data.length){
                         for(var k = 0, kk = data.length; k < kk ;k ++){
-                            h += '<li>西南区／'+data[k].province+'／'+data[k].city+'／'+data[k].chineseName+'<input value="'+data[k].id+'" type="hidden" /></li>';
+                            h += '<li>'+ data[k].area +'／'+data[k].province+'／'+data[k].city+'／'+data[k].chineseName+'<input value="'+data[k].id+'" type="hidden" /></li>';
                         }
                         $('#keyul').html(h);
                     }else{

@@ -348,8 +348,8 @@ manageTagSelf.prototype = {
 	},
 	closeOutTag:function(id1,id2){
 		$('#'+id1).on('click',function(){
-			$('#'+id2).css({'display':'none'})
-		})
+			$('#'+id2).css({'display':'none'}).find('.tag-out-list').html('');
+		});
 		return this;
 	},
 	getClientAddressBook:function(id){
