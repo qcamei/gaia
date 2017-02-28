@@ -173,3 +173,4 @@ function tooltipOut(obj) {
     var $obj = $(obj);
     $obj.prev().attr('style', '');
 }
+

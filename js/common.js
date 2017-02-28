@@ -548,6 +548,9 @@ function attachment(config){
     };
     this.analysisName = function(){
         var that = this;
+        this.config.fileUpload.on('click', "input[type='file']", function() {
+            $(this).val('');
+        });
         this.config.fileUpload.on("change","input[type='file']",function(){
             var filePath=$(this).val();
             if(that.config.noFormat) {
