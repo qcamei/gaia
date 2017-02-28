@@ -32,7 +32,7 @@
     </div>
     <div class="page-inner" style="padding-top: 13px">
     <ul class="item-tab clear">
-            <li><a href="mems-pro-list-myself.html">我的项目</a></li>
+            <li id="myprolist"><a href="mems-pro-list-myself.html">我的项目</a></li>
             <li><a href="mems-pro-list.html" class="current">全部项目</a></li>
         </ul>
         <table class="mems-search">
@@ -97,6 +97,9 @@
         .getBussTypeList('bussType',0,true)
         .dynamicDistrick('district','privence','city');
     var roleid = $.cookie('userrole');
+    if(roleid == 0){
+        $('#myprolist').remove();
+    }
     $('#checkAll').on('click',function () {
         var checked = $(this).prop('checked');
         var checkbox = $('#bodyList').find('input[type=checkbox]');
@@ -266,7 +269,7 @@
 
         _API.getVisitTypeList('visitType',0,true)
         .getEmergencyList('exemergency',0,true)
-        .getVisitStatusList('exvisitResult',0,true)
+        .getVisitResultList('exvisitResult',0,true)
 
         $('#confirmRelative').on('click',function(){
 //            var url = _ip + '/customer/exportReport';

@@ -105,7 +105,7 @@
         .getProductList('product')
         .getPlatformList('platform')
         .getIssueType('issueType')
-        .getFunctionList('functionList',false,false,false,'运营平台')
+        .getFunctionList('functionList',false,false,false,'MDISP')
         .getNetWorkList('networkType');
 
     // 上传文件
@@ -175,6 +175,7 @@
                     return false;
                 }
                 if(data.success){
+
                     location.href = 'pm-bug-list.html';
                 }else{
                     alert('上传失败, 请稍后重试！');

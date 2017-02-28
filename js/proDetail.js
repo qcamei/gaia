@@ -530,7 +530,6 @@ clientDataCard.prototype = {
  				h += '</div></li>';
  		}
  		h += '<li class="li-add-card"><a class="card-btn" onclick="clientInfoCard.clientCardDom()">添加客户</a></li>';
-		console.log(h);
  		$('#all-card-list').html(h);
 
  		for(var k = 0, kk = arr.length; k < kk; k++){

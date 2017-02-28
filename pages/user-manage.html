@@ -115,7 +115,7 @@
                                 产品管理员
                             </option>
                             <option value="1">
-                                项目管理员
+                                区域管理员
                             </option>
                             <option value="2">
                                 普通用户
@@ -155,6 +155,13 @@
 <script src="../js/common.js"></script>
 <script src="../js/user-tree.js"></script>
 <script type="text/javascript">
+    //角色限制
+    var roleid = $.cookie('userrole');
+    if(roleid == 0 || roleid ==2){
+        alert('您无权查看！');
+        location.href= 'mems-pro-list.html';
+    }
+
     var userName= $('#userName-text').val();
     function getData(p,checPara){
         var PerPage = 10;
@@ -203,9 +210,9 @@
                     case 3:
                         roleName = '全域管理员';
                         break;
-                    case 9:
-                        roleName = '超级管理员';
-                        break;
+//                    case 9:
+//                        roleName = '超级管理员';
+//                        break;
                 }
                 _data[k] = $('<tr>' +
                         '<td>'+msg.name+'</td>' +

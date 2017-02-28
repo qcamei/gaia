@@ -72,6 +72,13 @@
 <script src="../js/common.js"></script>
 <script src="../js/user-tree.js"></script>
 <script type="text/javascript">
+
+    //角色限制
+    var roleid = $.cookie('userrole');
+    if(roleid == 0 || roleid ==2){
+        alert('您无权查看！');
+        location.href= 'mems-pro-list.html';
+    }
     // 岗位管理
     $('.add-btn-click, .text-tag').on('click', function() {
         var $obj = $(this);

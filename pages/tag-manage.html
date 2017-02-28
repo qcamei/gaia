@@ -72,6 +72,12 @@
 <script src="../js/common.js"></script>
 <script src="../js/user-tree.js"></script>
 <script type="text/javascript">
+    //角色限制
+    var roleid = $.cookie('userrole');
+    if(roleid == 0 || roleid ==2){
+        alert('您无权查看！');
+        location.href= 'mems-pro-list.html';
+    }
     $('.tag-item').on('click', function(event) {
         var $obj = $(this);
         $obj.addClass('active').siblings().removeClass('active');

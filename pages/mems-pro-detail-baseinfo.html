@@ -552,11 +552,14 @@ $('#nextFocus').fdatepicker({
 //                '</table>' +
 //                '</div>' +
                 '</div>');
+        console.log(owner_data);
         var owner_info = $('<div class="info left"><p>'+ owner_data.name +'</p><p class="removeOcp">'+ owner_data.ocpName +'</p></div>');
-//        if( (owner_data.id == globleUserId && data.role == 2)  ){
-//
-//        }
-        var owner_opero = $('<div class="opero right">'+(owner_data.id == globleUserId || owner_data.role != 2?'':'<a href="javascript:;" class="assignment" id="transferMember" onclick="addMemberShow(this);">转让</a>' )+'</div>');
+        if( (owner_data.id != globleUserId && globleRoleId == 2)  || globleRoleId == 0 ){
+            var owner_opero = $('<div class="opero right"></div>');
+        }else{
+            var owner_opero = $('<div class="opero right"><a href="javascript:;" class="assignment" id="transferMember" onclick="addMemberShow(this);">转让</a></div>');
+
+        }
         var $div = $('<div class="member clear"></div>');
         var $li = $('<li id="'+ owner_data.id +'"></li>');
         if (leader === 'leader') {

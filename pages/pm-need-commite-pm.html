@@ -54,7 +54,7 @@
                     <tr>
                         <td>优先级别：</td>
                         <td><select id="priority"></select></td>
-                        <td><span class="red-start">*</span>计划版本：</td>
+                        <td>计划版本：</td>
                         <td><input type="text" id="version"/></td>
                         </tr>
                     <tr>
@@ -111,12 +111,8 @@
 
 
     var named = $('#name');
-        version = $('#version');
     named.focus(function(){
         named.removeClass('error-i');
-    })
-    version.focus(function(){
-        version.removeClass('error-i');
     })
 
     function commit() {
@@ -124,10 +120,7 @@
             named.addClass('error-i');
             return
         } 
-        if( version.val() == ''){
-            version.addClass('error-i');
-            return;
-        }
+
 
         var attachment = [];
         var li = $('#addAttachmentList').find('li');

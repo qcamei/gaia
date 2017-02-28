@@ -113,8 +113,9 @@
 
     function getData(p,checPara){
         var PerPage = 20;
-        var url  = _ip+'/project/getProjectList?ownerId='+$.cookie('userid')+'&page='+p+'&size='+PerPage;
+        var url  = _ip+'/project/getProjectList?page='+p+'&size='+PerPage;
         var data = checPara || {};
+        data['ownerId'] = $.cookie('userid');
         $.ajax({
             url:url,
             type : "POST",
