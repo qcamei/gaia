@@ -30,7 +30,7 @@
     </div>
     <div class="page-inner">
         <div class="page-content">
-            <div class="table-head clear"><div class="left document-name"><i class="bug-i"></i>No.01234</div><div class="right edit"><a onclick="edit()" class="sure">编辑</a></div></div>
+            <div class="table-head clear"><div class="left document-name"><i class="bug-i"></i>No.01234</div><div class="right edit" id="goToEdit"><a onclick="edit()" class="sure">编辑</a></div></div>
             <!-- pm-bug-detail-edit.html -->
             <div class="table-cont">
                 <table class="content-table">
@@ -114,6 +114,12 @@
 <script src="../js/common.js"></script>
 <script type="text/javascript">
     var _id = getUrlId();
+
+    //编辑权限控制
+    var roleid = $.cookie('userrole');
+    if(roleid==1 || roleid==2 || roleid==3){
+        $('#goToEdit').remove()
+    }
     function edit(){
         location.href = 'pm-bug-detail-edit.html?id='+_id;
     }

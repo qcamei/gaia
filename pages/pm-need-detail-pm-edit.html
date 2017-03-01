@@ -185,7 +185,7 @@
             "priority":$('#priority').val(),
             "version":$('#version').val(),
             "status":$('#status').val(),
-            "attachment":attachment.join(''),
+            "attachment":attachment.join(','),
             "discribe":$('#discribe').val(),
             "solution":$('#solution').val()
         }
@@ -207,7 +207,7 @@
                 if(data.success){
                     location.href = 'pm-need-detail-pm.html?id='+_id;
                 }else{
-                    alert('跟新失败, 请稍后重试！');
+                    alert(data.message);
                 }
             }
         })

@@ -135,14 +135,11 @@
                     _data.push('<td>'+msg.status+'</td>');
                     _data.push('<td>'+msg.downRelationCount+'/'+msg.relationCount+'</td>');
 
-                    if(roleid==0 && msg.status == '待处理'){
+                    if( ((roleid==1 || roleid==2 || roleid==3) && msg.creater == $.cookie('name') && msg.status=='待处理') || roleid==9 || roleid== 0){
                         _data.push('<td><a class="link" href="javascript:" onclick="deleteList('+msg.id+')">删除</a></td>');
-
-                    }else if( (roleid == 1 || roleid == 2 || roleid ==3 || roleid == 9)  && msg.status == '待处理' && msg.creater == $.cookie('username')){
-                        _data.push('<td><a class="link" href="javascript:" onclick="deleteList('+msg.id+')">删除</a></td>');
-
                     }else{
                         _data.push('<td></td>');
+
                     }
                 }
                 _pager.push('<span>共：'+ totalPage +'页</span>');
@@ -190,7 +187,7 @@
 
 
     function  deleteList(id) {
-        if(confirm("确认删除吗？")){
+        if(confirm("原始需求删除后，与之相关的产品需求自动解绑！确认删除吗？")){
             var url = _ip + '/original/deleteRequireById?id='+id;
             $.ajax({
                 url:url,

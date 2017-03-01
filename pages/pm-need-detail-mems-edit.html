@@ -159,7 +159,7 @@
                     $('#sugSolution').html(data.sugSolution);
                     data.attachment && attachment.getAttachmentList(data.attachment.split(','));  
                 }else{
-                    alert('上传失败, 请稍后重试！');
+                    alert(data.message);
                 }
             }
         })
@@ -216,9 +216,10 @@
             "product": $('#productList').val(),
             "projectId":$('#needSource').val(),
             "scenario": $('#scenario').val(),
+            "customerId":$('#needSide').val(),
             "sugSolution": $('#sugSolution').val(),
             "type": $('#typeList').val(),
-            "attachment":attachment.join(''),
+            "attachment":attachment.join(','),
             "level":$('#levelList').val()
         }
         $.ajax({
@@ -239,7 +240,7 @@
                 if(data.success){
                     location.href = 'pm-need-detail-mems.html?id='+_id;
                 }else{
-                    alert('上传失败, 请稍后重试！');
+                    alert(data.message);
                 }
             }
         })

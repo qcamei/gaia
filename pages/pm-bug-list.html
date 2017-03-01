@@ -57,6 +57,7 @@
                             <th>提出人</th>
                             <th>提出时间</th>
                             <th>缺陷状态</th>
+                            <th>操作</th>
                     </tr>
                     </thead>
                     <tbody id="bodyList">
@@ -84,6 +85,7 @@
 <script>
 
     _API.getProductList('productList',false,true).getIssueStatusList('issueStatusList',0,true);
+    var roleid = $.cookie('userrole');
     function getData(p,checPara){
         var PerPage = 20;
         var url  = _ip+'/issue/getIssueList?page='+p+'&size='+PerPage;
@@ -105,7 +107,7 @@
                     return false;
                 }
                 if(!json.data || json.data.length <= 0){
-                    $('#bodyList').html('<tr><td colspan="7">暂无数据！</td></tr>');
+                    $('#bodyList').html('<tr><td colspan="8">暂无数据！</td></tr>');
                     $('#pageList').html('');
                     return false;
                 }
@@ -127,6 +129,14 @@
                     _data.push('<td>'+msg.creater+'</td>');
                     _data.push('<td>'+msg.createTime+'</td>');
                     _data.push('<td>'+msg.status+'</td>');
+                    if( ((roleid==1 || roleid==2 || roleid==3) && msg.creater == $.cookie('name') && msg.status=='新建') || roleid==9 || roleid== 0){
+                        _data.push('<td><a class="link" href="javascript:" onclick="deleteList('+msg.id+')">删除</a></td>');
+
+
+                    }else{
+                        _data.push('<td></td>');
+
+                    }
 
                 }
                 _pager.push('<span>共：'+ totalPage +'页</span>');
@@ -172,7 +182,29 @@
         getData(1,para);
     })
 
-
+    function  deleteList(id) {
+        if(confirm("确认删除吗？")){
+            var url = _ip + '/issue/deleteIssueById?id='+id;
+            $.ajax({
+                url:url,
+                type: 'GET',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                dataType: 'json',
+                contentType:'application/json',
+                jsonpCallback: 'login',
+                success: function(json) {
+                    if(!json.success){
+                        alert(json.message);
+                    }else{
+                        getData(1)
+                    }
+                }
+            })
+        }
+    }
 
     var nowTemp = new Date();
     var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);

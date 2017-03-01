@@ -26,19 +26,36 @@ if(_ip.indexOf('localhost') >= 0){
          contentType:'application/json',
          jsonpCallback: 'login',
          success: function(json) {
-             // console.log(json)
              if(!json.success){
                  location.href = 'user-login.html';
              }
              else {
                  $.cookie('username',json.data.userName);
+                 $.cookie('name',json.data.name);
                  $.cookie('userid',json.data.id);
                  $.cookie('userrole',json.data.role);
                  globleUserId = parseInt(json.data.id);
                  globleRoleId = parseInt(json.data.role);
                  creatAsideDom();
-
-                 $('#headusername').html(json.data.userName);
+                 var roleName = '';
+                 switch (json.data.role) {
+                     case 0:
+                         roleName = '产品经理';
+                         break;
+                     case 1:
+                         roleName = '区域负责人';
+                         break;
+                     case 2:
+                         roleName = '普通用户';
+                         break;
+                     case 3:
+                         roleName = '全域管理员';
+                         break;
+                     case 9:
+                       roleName = '超级管理员';
+                       break;
+                 }
+                 $('#headusername').html(json.data.userName+'&nbsp;'+ roleName);
                  modityAsideCurrent();
 
              }
@@ -116,7 +133,7 @@ function creatAsideDom() {
             name:'文档管理',
             data:[
                     {
-                        id:'tagmanage',
+                        id:'docmanage',
                         name:'文档管理',
                         src:'doc-manage'
                     }
@@ -126,15 +143,17 @@ function creatAsideDom() {
     var h = ''
     for(var k in obj){
         var first = obj[k];
-        if(k == 'system' && (globleRoleId == 0 || globleRoleId == 2) ){
+        if(k == 'system' && (globleRoleId == 0 || globleRoleId == 1 || globleRoleId == 2) ){
             continue;
         }
+
         h += '<li id="'+k+'">';
             h += '<div class="menu-first"><i class="project"></i>'+first.name+'</div>';
             var second = first.data;
             h += '<dl class="menu-second">';
             for(var n = 0; n < second.length; n ++){
                 var item = second[n];
+                if(globleRoleId==3 && (item.name == '用户管理' || item.name == '组织架构')) continue;
                 h += '<dd><a href="'+item.src+'.html" id="'+item.id+'">'+item.name+'</a></dd>';
             }
             h += '</dl>';

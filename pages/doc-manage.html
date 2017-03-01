@@ -117,7 +117,7 @@
         getDocList(1);
        return false;
     });
-
+    var roleid = $.cookie('userrole')
     function getDocList(p, checPara) {
         var PerPage = 20;
         var name = $('#tagName-text').val();
@@ -161,14 +161,13 @@
                     size_text: size_text,
                     path: msg.path
                 };
-                var roleid = $.cookie('userrole')
                 _data[k] = $('<tr>' +
                         '<td class="organize">' +
                         '<span>'+ msg.name +'</span>' +
                         '<span class="right">' +
                         '<a href="'+_ip +'/file/download?path='+ msg.path +'">' +
                         '<i class="download display-middle" onclick=""></i>' +
-                        '</a>'+(roleid==9 || roleid== 2?'<i class="delete-icon display-middle" onclick="deleteDoc(this); event.stopPropagation();"></i>':'') +
+                        '</a>'+(roleid==9 || roleid==3?'<i class="delete-icon display-middle" onclick="deleteDoc(this); event.stopPropagation();"></i>':'') +
                         '</span>' +
                         '</td>' +
                         '<td>'+ msgData.size_text +'</td>' +
@@ -253,7 +252,7 @@
 
 //    普通用户不能上传文件
     function unUploadFile() {
-        if($.cookie('userrole') == 2){
+        if(roleid == 2 || roleid == 1){
             $('#fileUpload').remove()
         }
     }
