@@ -65,10 +65,10 @@
                     <td>有无高铁</td>
                     <td id="hsrEnable"></td>
                 </tr>
-                <tr>
-                    <td>邮编</td>
-                    <td id="postcode"></td>
-                </tr>
+                <!--<tr>-->
+                    <!--<td>邮编</td>-->
+                    <!--<td id="postcode"></td>-->
+                <!--</tr>-->
                 <tr>
                     <td>床位</td>
                     <td id="bed"></td>
@@ -98,14 +98,14 @@
                     <td>设备科位置</td>
                     <td id="location"></td>
                 </tr>
-                <tr>
-                    <td>维度</td>
-                    <td id="latitude"></td>
-                </tr>
-                <tr>
-                    <td>经度</td>
-                    <td id="longitude"></td>
-                </tr>
+                <!--<tr>-->
+                    <!--<td>维度</td>-->
+                    <!--<td id="latitude"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>经度</td>-->
+                    <!--<td id="longitude"></td>-->
+                <!--</tr>-->
             </tbody>
             <tbody>
                 <tr>
@@ -156,14 +156,14 @@
                     $('#segmentation').html(data.segmentation);
                     $('#level').html(data.level);
                     $('#hsrEnable').html( (data.hsrEnable==1?'有':'无') );
-                    $('#postcode').html(data.postcode);
+//                    $('#postcode').html(data.postcode);
                     $('#bed').html(data.bed);
                     $('#people').html(data.people);
                     $('#dis').html(data.area+data.province+data.city);
                     $('#address').html(data.address);
                     $('#location').html(data.location);
-                    $('#latitude').html(data.latitude);
-                    $('#longitude').html(data.longitude);
+//                    $('#latitude').html(data.latitude);
+//                    $('#longitude').html(data.longitude);
 
 
                 }

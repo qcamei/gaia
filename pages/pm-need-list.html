@@ -89,7 +89,7 @@
     _API.getProNameList('needSource',0,true)
         .getLevelList('levelList',0,true)
         .getStatusList('status',0,true);
-
+    var roleid = $.cookie('userrole');
     function getData(p,checPara){
         var PerPage = 20;
         var url  = _ip+'/original/getRequireList?page='+p+'&size='+PerPage;
@@ -114,7 +114,6 @@
                     $('#pageList').html('');
                     return false;
                 }
-                var roleid = $.cookie('userrole');
                 var _data     = [];
                 var _pager    = [];
                 var totalPage = json.totlePage;
@@ -212,7 +211,6 @@
                 }
             })
         }
-
     }
 
 </script>

@@ -900,6 +900,9 @@ aside.aside{
   vertical-align: top;
   margin: 6px 0 0 0;
 }
+.format{
+  color: #ddd;
+}
 .addAttachment{
   color: $color-blue;
   padding: 0 0 0 2%;
@@ -913,13 +916,15 @@ aside.aside{
     height: 30px;
     line-height: 30px;
     width: 100%;
+    //background: url("../images/t-12.png") no-repeat 5px center;
+
     >div{
       color:#666;
       display: inline-block;
       line-height: 30px;
       height: 30px;
       width: 98%;
-      padding: 0 0 0 2%;
+      padding: 0 0 0 0%;
       
       >.delete{
         line-height: 30px;
@@ -930,6 +935,8 @@ aside.aside{
       &:hover{
         background:#f2f2f2;
         color:#666;
+        //background: url("../images/t-12.png") no-repeat 5px center #f2f2f2;
+        cursor: pointer;
         >span,>a{
           visibility: visible;
           cursor: pointer;

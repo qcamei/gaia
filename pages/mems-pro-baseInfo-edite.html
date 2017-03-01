@@ -65,10 +65,10 @@
                     <td><span class="red-start">*</span>有无高铁</td>
                     <td><label><input type="radio" value="1" name="hsrEnable">&nbsp;有</label>&emsp;<label><input type="radio" name="hsrEnable" value="0">&nbsp;无</label></td>
                 </tr>
-                <tr>
-                    <td>邮编</td>
-                    <td><input type="" name="" class="short" id="postcode"></td>
-                </tr>
+                <!--<tr>-->
+                    <!--<td>邮编</td>-->
+                    <!--<td><input type="" name="" class="short" id="postcode"></td>-->
+                <!--</tr>-->
                 <tr>
                     <td>床位</td>
                     <td>
@@ -104,14 +104,14 @@
                     <td>设备科位置</td>
                     <td><input type="" name="" class="short" id="location"></td>
                 </tr>
-                <tr>
-                    <td>维度</td>
-                    <td><input type="" name="" class="short" id="latitude"></td>
-                </tr>
-                <tr>
-                    <td>经度</td>
-                    <td><input type="" name="" class="short" id="longitude"></td>
-                </tr>
+                <!--<tr>-->
+                    <!--<td>维度</td>-->
+                    <!--<td><input type="" name="" class="short" id="latitude"></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>经度</td>-->
+                    <!--<td><input type="" name="" class="short" id="longitude"></td>-->
+                <!--</tr>-->
             </tbody>
             <tbody>
                 <tr>
@@ -259,7 +259,7 @@
             "segmentation": $('#segmentation').val(),
             "level": $('#level').val(),
             "hsrEnable":parseInt($('input[name=hsrEnable]').val()),
-            "postcode":parseInt($('#postcode').val()),
+//            "postcode":parseInt($('#postcode').val()),
             "bed":parseInt($('#bed').val()),
             "people":parseInt($('#people').val()),
             "province": $('#province').val() || '',
@@ -267,8 +267,8 @@
             "area": $('#district').val() || '',
             "address":$('#address').val() || '',
             "location":$('#location').val(),
-            "latitude":$('#latitude').val(),
-            "longitude":$('#longitude').val(),
+//            "latitude":$('#latitude').val(),
+//            "longitude":$('#longitude').val(),
             "creater": $.cookie('userid')
         }
 

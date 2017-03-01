@@ -135,6 +135,7 @@ manageTagSelf.prototype = {
 
 		    		data['id'] = that.userId;
 		    	}
+
 		    	$.ajax({
 		            url:url,
 		            type : "POST",
@@ -447,7 +448,7 @@ clientDataCard.prototype = {
 									break;
 								}
 							}
-							// console.log(that.mark);
+							if(globleRoleId == 9) that.mark = true;
 
 							that.creatCardDom(json.data,that.mark);
 						}
@@ -461,7 +462,7 @@ clientDataCard.prototype = {
         return this;
  	},
  	creatCardDom: function(json,mark){
-	console.log(mark)
+
  		var h   = '';
  		var arr = [];
  		for(var i = 0, ii = json.length; i < ii ; i++){
@@ -902,7 +903,7 @@ presell.prototype = {
 		    "type": $('#sellTypeSelect').val(),
 		    "budget": parseInt($('#budget').val()),
 		    "proTime": time,
-			"payTime":time2,
+			"expectPaymentTime":time2,
 		    "discribe": $('#discribe').val(),
 		    "contacts": $('#contacts').val(),
 		    "tel": parseInt($('#tel').val())

@@ -66,7 +66,8 @@
                             <th>区域</th>
                             <th>segmentation</th>
                             <th>级别</th>
-                            <th>商务阶段</th>     
+                            <th>商务阶段</th>
+                            <th>操作</th>
                         </tr>
                     </thead>
                     <tbody id="bodyList">
@@ -137,7 +138,7 @@
                 }
 
                 if(!json.data || json.data.length <= 0){
-                    $('#bodyList').html('<tr><td colspan="7">暂无数据！</td></tr>');
+                    $('#bodyList').html('<tr><td colspan="8">暂无数据！</td></tr>');
                     $('#pageList').html('');
                     return false;
                 }
@@ -160,7 +161,12 @@
                     _data.push('<td>'+msg.segmentation+'</td>');
                     _data.push('<td>'+msg.level+'</td>');
                     _data.push('<td>'+msg.businessType+'</td>');
-                
+
+                    if(roleid==9 || roleid==3){
+                        _data.push('<td><a class="link" href="javascript:" onclick="deleteList('+msg.id+')">删除</a></td>');
+                    }else{
+                        _data.push('<td></td>');
+                    }
                 }
                 _pager.push('<span>共：'+ totalPage +'页</span>');
                 _pager.push('<span>您正在第：'+p+'页</span>')
@@ -207,7 +213,29 @@
         getData(1,para);
     })
 
-
+    function  deleteList(id) {
+        if(confirm("该项目下所有相关的内容将被删除！是否删除？")){
+            var url = _ip + '/project/delete?id='+id;
+            $.ajax({
+                url:url,
+                type: 'GET',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                dataType: 'json',
+                contentType:'application/json',
+                jsonpCallback: 'login',
+                success: function(json) {
+                    if(!json.success){
+                        alert(json.message);
+                    }else{
+                        getData(1)
+                    }
+                }
+            })
+        }
+    }
 
     var nowTemp = new Date();
     var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
