@@ -123,7 +123,7 @@
                     _API.getTypeList('typeList',data.type)
                         .getProductList('productList',data.product)
                         .getPlatformList('platformList',data.plat)
-                        .getFunctionList('functionList',data.feature)
+                        .getFunctionList('functionList',data.feature, true, 'productList', data.product)
                         .getPriorityList('priority',data.priority)
                         .getStatusListPm('status',data.status);
                     $('#name').val(data.name);

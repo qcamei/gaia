@@ -80,7 +80,7 @@
                         <input type="text" name="name" id="name">
                     </div>
                 </div>
-                <div>
+                <div class="user-hidden">
                     <div class="form-name">用户名</div>
                     <div class="form-input">
                         <input type="text" name="userName" id="userName" >
@@ -297,6 +297,7 @@
         $('.success-msg').remove();
         $('.user-mask').css('display', 'block');
         $addUserBox.find('[name="id"]').remove();
+        $addUserBox.find('.user-hidden').show();
         $addUserBox.find('#add-btn').text('添加').removeClass('edit');
         $addUserBox.animate({
             right: '0px',
@@ -428,6 +429,7 @@
         var data = $(obj).closest('tr').data('edit');
         var $addUserBox = $('.add-user-box');
         $('.success-msg').remove();
+        $addUserBox.find('.user-hidden').hide();
         $addUserBox.append('<input type="hidden" name="id"/>').data('edit', data);
         for (var key in data) {
             $('[name="' + key + '"]').val(data[key]);
