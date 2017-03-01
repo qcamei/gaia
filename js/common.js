@@ -1,9 +1,8 @@
 
- var _ip = location.origin+'/oper';
- if(_ip.indexOf('http://localhost/') == -1){
-     _ip = 'http://121.42.187.170';
- //     // var _ip = 'http://192.168.6.19:8080';
- }
+var _ip = location.origin;
+if(_ip.indexOf('localhost') >= 0){
+    _ip = 'http://121.42.187.170';
+}
 
 /*----------
  * 头部页面头部

@@ -35,10 +35,9 @@
 
 <script type="text/javascript">
 
-    var _ip = location.origin+'/oper';
-    if(_ip.indexOf('http://localhost/') == -1){
+    var _ip = location.origin;
+    if(_ip.indexOf('localhost') >= 0){
         _ip = 'http://121.42.187.170';
-
     }
     function Login() {
         $('.error-msg').remove();
