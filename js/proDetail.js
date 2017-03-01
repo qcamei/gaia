@@ -112,7 +112,8 @@ manageTagSelf.prototype = {
 		})
 		var that = this;
 		_id2.on('click','input[value=确认]',function(){
-		    var val = $(this).siblings('input[type=text]').val();
+			var _input = $(this).siblings('input[type=text]');
+		    var val = _input.val();
 			if(val.length >= 12){
 				alert('不能超过12个字符');
 				return;
@@ -153,6 +154,7 @@ manageTagSelf.prototype = {
 		                }
 		                if(data.success){
 		                	var h = '<li>'+val+'<input type="hidden" value="'+val+'"/><span>&times;</span></li>';
+							_input.val('');
 		        			_id3.append(h);
 		                }else{
 		                    alert(data.message);
@@ -546,12 +548,12 @@ clientDataCard.prototype = {
  			// 客户资料卡：抵触点
 			manageTagSelf.initApi(true)
 						 .deleteTag("card-tradict-showtag-list-"+n,'conflict','/cusinfo/update')
-					     .addTag('card-tradict-addtagbtn-'+n,'card-intres-taginputbox-'+n,'card-tradict-showtag-list-'+n,'conflict',false,'/cusinfo/update');
+					     .addTag('card-tradict-addtagbtn-'+n,'card-intres-taginputbox-'+n,'card-tradict-showtag-list-'+n,'card-tradict-showtag-list-'+n,'conflict',false,'/cusinfo/update');
 
 			// 客户资料卡：沟通要点
 			manageTagSelf.initApi(true)
 						 .deleteTag("card-chat-showtag-list-"+n,'communication','/cusinfo/update')
-					     .addTag('card-chat-addtagbtn-'+n,'card-chat-taginputbox-'+n,'card-chat-showtag-list-'+n,'communication',false,'/cusinfo/update');
+					     .addTag('card-chat-addtagbtn-'+n,'card-chat-taginputbox-'+n,'card-chat-showtag-list-'+n,'card-chat-showtag-list-'+n,'communication',false,'/cusinfo/update');
 
 			//  客户资料卡：客户相关需求
 			clientDataCard.getClientRelativePro('relative-need-list-'+n,'relative'+n);

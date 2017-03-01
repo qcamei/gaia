@@ -62,7 +62,7 @@
                 </tr>
                 <tr>
                     <td>别称</td>
-                    <td><input type="" name="" id="alias"></td>
+                    <td><input type="" name="" id="alias"><span style="color: #009926;padding: 0 0 0 5px">多个别称，用英文","隔开</span></td>
                 </tr>
                 <tr>
                     <td><span class="red-start">*</span>Segmentation</td>
@@ -176,28 +176,21 @@
     var position = $$.getUrlParaObj('p');
     if(position){
         var hdata =  JSON.parse(localStorage.getItem("hospitalData"));
-        console.log(hdata);
-//        position = position['position'];
-//        var parr = position.split('／');
         $('#name').val(hdata.chineseName);
         $('#bed').val(hdata.bedNum);
         $('#address').val(hdata.address);
-        $('#latitude').val(hdata.latb);
-        $('#longitude').val(hdata.lngb);
+
         _API.getDistrict('district',hdata.area,true)
             .getPrivence('province',hdata.province,true,hdata.area)
             .getCity('city',hdata.city,true,hdata.area,hdata.province)
             .getPSegmentationList('segmentation',hdata.segmentation,false)
             .getPLevelList('level',hdata.grade,false)
 
-
-
-
     }else{
-        _API.getNeedSource('needSource')
-                .getPSegmentationList('segmentation')
-                .getPLevelList('level')
-                .dynamicDistrick('district','province','city');
+
+        _API.getPSegmentationList('segmentation')
+            .getPLevelList('level')
+            .dynamicDistrick('district','province','city');
     }
 
 
