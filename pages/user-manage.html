@@ -168,6 +168,7 @@
         var url  = _ip+'/user/getUserList?page='+p+'&size='+PerPage;
         var data = checPara || {'name': 'a'};
         $('#bodyList').html('');
+        
         organizeAjaxPost(url, data, function(json) {
             if(!json.data || json.data.length <= 0){
                 $('#bodyList').html('<tr><td colspan="8" style="text-align: center">暂无数据！</td></tr>');
