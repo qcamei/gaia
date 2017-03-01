@@ -375,7 +375,6 @@ _api.prototype = {
         return this;
     },
     getComeSource: function(id, defaultId,isSelect,proId){ // 2. 获取需求方列表
-        console.log(proId)
         var url = _ip+'/cus/selectAll?id='+proId;
         this.getListFirst.apply(this,[url,id,defaultId,isSelect,'sourcec']);
         return this;

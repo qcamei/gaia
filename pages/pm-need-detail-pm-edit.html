@@ -52,7 +52,7 @@
                     <tr>
                         <td>优先级别：</td>
                         <td><select id="priority"></select></td>
-                        <td><span class="red-start">*</span>计划版本：</td>
+                        <td>计划版本：</td>
                         <td><input type="text" id="version"/></td>
                         </tr>
                     <tr>
@@ -71,7 +71,15 @@
                             <textarea id="solution"></textarea>
                         </td>
                     </tr>
-                    
+                    <tr class="area">
+                        <td>附件：</td>
+                        <td colspan="3">
+                            <a href="javascript:;" class="a-upload" id="fileUpload"><input id="file" value="请选择" type="file"/>点击这里上传</a>
+                            <p class="format">支持的格式有：JPG，PNG，PDF，PPT，XLSX，XLS，CSV，DOCX，DOC，ZIP</p>
+                            <ul class="addAttachmentList" id="addAttachmentList">
+                            </ul>
+                        </td>
+                    </tr>
                 </table>
             </div>
 
@@ -106,7 +114,11 @@
     function returnList(){
         location.href = 'pm-need-detail-pm.html?id='+_id;
     }
-
+    // 上传文件
+    attachment.init({
+        fileUpload:$('#fileUpload'),
+        addAttachmentList:$('#addAttachmentList')
+    }).deleteFile();
     //获取
     updata();
     function updata(){
@@ -131,7 +143,7 @@
                     $('#discribe').val(data.discribe);
                     $('#solution').val(data.solution);
 
-
+                    data.attachment && attachment.getAttachmentList(data.attachment.split(','));
                 }else{
                     alert('更新失败, 请稍后重试！');
                 }
@@ -145,9 +157,6 @@
     needName.focus(function(){
         needName.removeClass('error-i');
     })
-    version.focus(function(){
-        version.removeClass('error-i');
-    })
 
     // 提交编辑
     function commitEdit() {
@@ -155,11 +164,6 @@
             needName.addClass('error-i');
             return
         } 
-
-        if( version.val() == ''){
-            version.addClass('error-i');
-            return;
-        }
 
         var attachment = [];
         var li = $('#addAttachmentList').find('li');
@@ -181,6 +185,7 @@
             "priority":$('#priority').val(),
             "version":$('#version').val(),
             "status":$('#status').val(),
+            "attachment":attachment.join(''),
             "discribe":$('#discribe').val(),
             "solution":$('#solution').val()
         }

@@ -44,7 +44,7 @@
                         <td><span class="red-start">*</span>来源：</td>
                         <td><select id="needSource" onchange="_API.getComeSource('needSide',false,true,$(this).val(),'needSide')"></select></td>
                         <td><span class="red-start">*</span>需求方：</td>
-                        <td><select id="needSide"></select><span class="red-start" style="color: #4cae4c">先选择来源</span></td>
+                        <td><select id="needSide"><option>请选择</option></select><span class="red-start" style="color: #4cae4c">先选择来源</span></td>
                     </tr>
                     <tr>
                         <td><span class="red-start">*</span>需求类别：</td>
@@ -208,7 +208,7 @@
         var data = {
             "id":_id,
             "creater":$.cookie('username'),
-            "customerId":$('#needSide').val(),
+            "customerId":$('#needSource').val(),
             "feature":$('#functionList').val(),
             "name":$('#needName').val(),
             "nowSolution":$('#nowSolution').val(),
