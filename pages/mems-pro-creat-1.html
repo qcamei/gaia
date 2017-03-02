@@ -163,17 +163,15 @@ function getCity(id,provice,area){ //获取城市列表
 
 function getHospital(id,city){ //获取医院列表
     var data= {};
-    data['city'] = city;
     $.ajax({
-        url:_ip+'/hospital/getHospitalList',
-        type: 'post',
+        url:_ip+'/project/searchProject?city='+city,
+        type: 'GET',
         xhrFields: {
            withCredentials: true
         },
         crossDomain: true,
         dataType: 'json',
         contentType:'application/json',
-        data:JSON.stringify(data),
         success: function(json) {
 
             if(json.message === 'LOGIN') {
@@ -184,7 +182,7 @@ function getHospital(id,city){ //获取医院列表
             var json = json.data;
             var h = '';
             for(var k = 0 , kk = json.length; k < kk; k++){
-                h += '<li>'+json[k].chineseName+'<input type="hidden" value="'+json[k].chineseName+'" data-id="'+json[k].id+'"/></li>'
+                h += '<li>'+json[k].name+'<input type="hidden" value="'+json[k].name+'" data-id="'+json[k].id+'"/></li>'
             }
             $('#hospital').html(h);
         }
@@ -332,7 +330,7 @@ document.onkeydown=function(e) {
         var v = $(this).val();
         if(v.length >= 1){
             showkeylistdo()
-            if(v.length >= 5){
+            if(v.length >= 2){
                 keysearch(v);
             }
             
@@ -355,27 +353,23 @@ document.onkeydown=function(e) {
     }
 
     function keysearch(key){
-        var url  = _ip+'/hospital/getHospitalList';
-        var data = {
-            "chineseName": key
-        }
+        var url  = _ip+'/project/searchProject?chineseName='+ key;
         $.ajax({
             url:url,
-            type : "POST",
+            type : "GET",
             xhrFields: {
                 withCredentials: true
             },
             crossDomain: true,
             dataType: 'json',
             contentType:'application/json',
-            data:JSON.stringify(data),
             success:function(data){
                 if(data.success){
                     var h = '';
                     var data = data.data;
                     if(data && data.length){
                         for(var k = 0, kk = data.length; k < kk ;k ++){
-                            h += '<li>'+ data[k].area +'／'+data[k].province+'／'+data[k].city+'／'+data[k].chineseName+'<input value="'+data[k].id+'" type="hidden" /></li>';
+                            h += '<li>'+ data[k].area +'／'+data[k].province+'／'+data[k].city+'／'+data[k].name+'<input value="'+data[k].id+'" type="hidden" /></li>';
                         }
                         $('#keyul').html(h);
                     }else{
