@@ -36,7 +36,6 @@ manageTagSelf.prototype = {
 		that.upLoadUrl = _ip + '/pci/update';
 		that.getExistTagUrl = _ip + '/tags/select';
 		if(api){
-
 			manageTagSelf.upLoadUrl =  '/cusinfo/update';
 		}
 		return this;
@@ -1067,6 +1066,7 @@ businessProgress.prototype = {
 		      "visitId": arr.join(','),
 		      "nextFocus": $('#nextFocus').val(),
 		      "nextFollow": $('#nextFollow').val(),
+			  "support": $('#support').val(),
 		      "remark": $('#remark').val(),
 		      "creater": $.cookie('userid'),
 		      "createTime": null,
@@ -1116,37 +1116,41 @@ businessProgress.prototype = {
                 if(!json || json.length <= 0) return;
                 var h = '';
                 var arr = [];
-                for(var k in json){
-                    arr.push(k)
-                	h += '<thead><tr class="status"><td width="20"><span class="s-2"></span></td><td><div class="status-head clear">';
-                		h += '<p class="left">'+k+'</p>';
-                		h += '<p class="right">'+json[k].time+'</p></div></td></tr></thead>';
-                	h += '<tbody>';
-                	for(var i = 0, ii = json[k].data.length; i < ii; i++){
-                		var data = json[k].data[i];
-                		h += '<tr><td><span class="line"></span><span class="circle"></span></td>';
-                			h += '<td><div class="cord-detail">';
-                				h += '<div class="t"><i></i>';
-                                var v = data.visitId.split(',');
-                                for(var j = 0; j < v.length; j++){
-                                    h += '<span>'+v[j]+'</span>';
-                                }
-                                h += '<span>'+data.createTime+'</span></div>';
-                				h += '<ul class="clear key-list"><li>'+data.type+'</li><li>'+data.level+'</li><li>'+data.visitResult+'</li><li>'+data.emergency+'</li></ul>';
-                				
-                				if(data.nextFocus || data.nextFollow ){
-                					h += '<p class="dec">'+data.remark+'</p>';
-                					h += '<div class="plan"><span class="title">下次计划</span>';
-                					if(data.nextFocus){
-                						h += '<div class="paper">'+data.nextFocus+'</div>'; //<span>&emsp;&emsp;2017/01/08&nbsp;12:34</span>
-                					}
-                					if(data.nextFollow){
-                						h += '<div class="paper">'+data.nextFollow+'</div>';
-                					}
-                				}
-                			h += '</div></td></tr>';
-                	}
-                	h += '</tbody>'
+                for(var m=0; m < json.length; m++){
+					var record = json[m];
+					for (var k in record) {
+						arr.push(k);
+						h += '<thead><tr class="status"><td width="20"><span class="s-2"></span></td><td><div class="status-head clear">';
+						h += '<p class="left">'+k+'</p>';
+						h += '<p class="right">'+record[k].time+'</p></div></td></tr></thead>';
+						h += '<tbody>';
+						for(var i = 0, ii = record[k].data.length; i < ii; i++){
+							var data = record[k].data[i];
+							h += '<tr><td><span class="line"></span><span class="circle"></span></td>';
+							h += '<td><div class="cord-detail">';
+							h += '<div class="t"><i></i>';
+							var v = data.visitId.split(',');
+							for(var j = 0; j < v.length; j++){
+								h += '<span>'+v[j]+'</span>';
+							}
+							h += '<span>'+data.createTime+'</span></div>';
+							h += '<ul class="clear key-list"><li>'+data.type+'</li><li>'+data.level+'</li><li>'+data.visitResult+'</li><li>'+data.emergency+'</li></ul>';
+
+							if(data.nextFocus || data.nextFollow ){
+								h += '<p class="dec">'+(data.support ? data.support : '-')+'</p>';
+								h += '<p class="dec">'+data.remark+'</p>';
+								h += '<div class="plan"><span class="title">下次计划</span>';
+								if(data.nextFocus){
+									h += '<div class="paper">'+data.nextFocus+'</div>'; //<span>&emsp;&emsp;2017/01/08&nbsp;12:34</span>
+								}
+								if(data.nextFollow){
+									h += '<div class="paper">'+data.nextFollow+'</div>';
+								}
+							}
+							h += '</div></td></tr>';
+						}
+						h += '</tbody>'
+					}
                 }
                 if(arr.length){
                     $('#bussProNameTile').html(arr[0]).css({'display':'inline-block'});

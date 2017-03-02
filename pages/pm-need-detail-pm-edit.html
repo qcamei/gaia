@@ -58,6 +58,8 @@
                     <tr>
                         <td>处理状态：</td>
                         <td><select id="status"></select></td>
+                        <td>预计工时：</td>
+                        <td><input type="text" id="working-hours"/> 小时</td>
                     </tr>
                     <tr class="area">
                         <td>简述：</td>
@@ -142,7 +144,7 @@
                     $('#version').val(data.version);
                     $('#discribe').val(data.discribe);
                     $('#solution').val(data.solution);
-
+                    $('#working-hours').val(data.expectWorkhour);
                     data.attachment && attachment.getAttachmentList(data.attachment.split(','));
                 }else{
                     alert('更新失败, 请稍后重试！');
@@ -190,7 +192,23 @@
             "status":$('#status').val(),
             "attachment":attachment.join(','),
             "discribe":$('#discribe').val(),
-            "solution":$('#solution').val()
+            "solution":$('#solution').val(),
+            "expectWorkhour": $('#working-hours').val()
+        }
+        var hourFormat = /^[0-9]+(.[0-9])?$/;
+        var nameValidate = hourFormat.test(data.expectWorkhour);
+        if (data.expectWorkhour) {
+            if(!nameValidate) {
+                alert('计划工时必须是正整数或一位小数');
+                return false;
+            }
+            else {
+                data.expectWorkhour = parseFloat(data.expectWorkhour);
+            }
+        }
+        else if(data.expectWorkhour === 0){
+            alert('计划工时必须是正整数或一位小数');
+            return false;
         }
         $.ajax({
             url:url,

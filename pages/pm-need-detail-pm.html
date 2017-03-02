@@ -34,7 +34,10 @@
             <div class="table-head clear"><div class="left document-name"><i class="bug-i"></i>No.01234</div><div class="right edit" id="editNeed"><a onclick="edit()" class="sure">编辑</a></div></div>
             <div class="table-cont">
                 <table class="content-table">
-                    
+                    <tr>
+                        <td>需求名称：</td>
+                        <td id="needName" colspan="3">合同到期提醒</td>
+                    </tr>
                     <tr>
                         <td>需求类别：</td>
                         <td id="typeList"></td>
@@ -49,16 +52,16 @@
                     </tr>
 
                     <tr>
-                        <td>需求名称：</td>
-                        <td id="needName">合同到期提醒</td>
                         <td>优先级：</td>
                         <td id="priority"></td>
-                    </tr>
-                    <tr>
                         <td>计划版本：</td>
                         <td id="version"></td>
+                    </tr>
+                    <tr>
                         <td>处理状态：</td>
                         <td id="status"></td>
+                        <td>预计工时：</td>
+                        <td id="expectWorkhour"></td>
                     </tr>
                     <tr>
                         <td>简述：</td>
@@ -141,6 +144,7 @@
                     $('#status').html(data.status);
                     $('#discribe').html(data.discribe);
                     $('#solution').html(data.solution);
+                    $('#expectWorkhour').html(data.expectWorkhour+' 小时');
                     if(data.attachment){
                         attachment.init({
                             addAttachmentList:$('#addAttachmentList'),
@@ -149,7 +153,7 @@
                     }
 
                 }else{
-                    alert('获取失败, 请稍后重试！');
+             /*       alert('获取失败, 请稍后重试！');*/
                 }
             }
         })
