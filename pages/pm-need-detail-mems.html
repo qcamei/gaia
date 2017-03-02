@@ -21,8 +21,6 @@
     <ul class="menu" id="asidemenu">
     </ul>
 </aside>
-
-
 <!--content-->
 
 <div class="content">
@@ -30,7 +28,7 @@
         <div class="header-info"><i></i><a href="pm-need-list.html">pm-需求列表</a>&nbsp;>&nbsp;原始需求详情</div>
     </div>
     <div class="page-inner">
-        <div class="commit-new-item"><a onclick="creatRelativeLink()" class="btn" style="width: 100px">创建相关需求&nbsp;<b>+</b></a>&emsp;<a href="javascript:" id="creatShareid" onclick="creatShare()" style="width: 100px" class="btn">关联已有需求&nbsp;<b>+</b></a></div>
+        <div class="commit-new-item"><a onclick="creatRelativeLink()" class="btn" style="width: 100px" id="creatRelativeNeed">创建相关需求&nbsp;<b>+</b></a>&emsp;<a href="javascript:" id="creatShareid" onclick="creatShare()" style="width: 100px" class="btn">关联已有需求&nbsp;<b>+</b></a></div>
         <div class="page-content">
             <div class="table-head clear"><div class="left document-name"><i class="bug-i"></i>No.01234</div><div class="right edit" id="needEdit" style="display: none"><a class="sure" onclick="edit()">编辑</a></div></div>
             <div class="table-cont">
@@ -129,6 +127,17 @@
         location.href = 'pm-need-detail-mems-edit.html?id='+_id;
     }
 
+    //权限控制
+    var roleid = $.cookie('userrole');
+    function cannotrelative(){
+
+        if(roleid == 1 || roleid == 2 || roleid == 3){
+            $('#creatShareid').remove();
+            $('#creatRelativeNeed').remove()
+        }
+    }
+    cannotrelative()
+
     function updata(){
         var url  = _ip+'/original/getRequireById?callback=update&id='+_id;
         $.ajax({
@@ -160,8 +169,7 @@
                     }
                     //权限控制
                     var roleid = $.cookie('userrole');
-                    console.log(data.creater)
-                    if( ((roleid==1 || roleid==2 || roleid==3) && data.creater.tolocaleUpperCase == $.cookie('name').tolocaleUpperCase && data.status=='待处理') || roleid==9 || roleid== 0){
+                    if( ((roleid==1 || roleid==2 || roleid==3) && data.creater == $.cookie('username') && data.status=='待处理') || roleid==9 || roleid== 0){
                         $('#needEdit').show()
                     }else{
                         $('#needEdit').hide();
@@ -185,7 +193,7 @@
             html += '<div class="con-box">';
                 html += '<div class="search clear">';
                     html += '<i class="icon left"></i>';
-                    html += '<input placeholder="输入产品名称或主题关键字" class="left" id="JS_search"/>';
+                    html += '<input placeholder="输入产品名称或主题关键字" class="left" id="JS_search" style="border: 0px;height: 33px"/>';
                 html += '</div>';
                 html += '<div class="search-box" id="JS_search_box"><table class="search-table"><tbody  id="JS_searchTable"> ';
 
@@ -272,7 +280,6 @@
 
     getRelativList();
 
-    var roleid = $.cookie('userrole');
     function getRelativList(){
         var url  = _ip+'/requireRelation/getRequireRelationByOid?oid='+_id;        
         $.ajax({
@@ -282,10 +289,10 @@
             contentType:'application/json',
             jsonpCallback: 'off',
             success:function(data){
-                console.log(data);
+//                console.log(data);
                 var data = data.data;
                 var h = '';
-                if(!data || data.length) {
+                if(!data.length) {
                     $('#relativeList').html('<tr><td colspan="6" style="text-align: center">暂无数据！</td></tr>');
                     return false;
                 }
@@ -298,7 +305,7 @@
 
                         if(roleid == 1 || roleid == 2 || roleid == 3){
                             h += '<td></td></tr>';
-                        }else{
+                        }else if(roleid ==0 || roleid == 9){
                             h += '<td><a class="delete" onclick="callOff('+data[k].pId+','+data[k].oId+')">解绑</a></td></tr>';
                         }
 
@@ -308,29 +315,24 @@
         })
     }
     function callOff(pid,oid){
-
-        var url  = _ip+'/requireRelation/deleteRequireRelation?pid='+pid+'&oid='+oid;
-        
-        $.ajax({
-            url:url,
-            type: 'GET',
-            dataType: 'jsonp',
-            contentType:'application/json',
-            jsonpCallback: 'off',
-            success:function(data){
-                if (data.success) {
-                    location.reload();
+        if(confirm('确认解绑？')){
+            var url  = _ip+'/requireRelation/deleteRequireRelation?pid='+pid+'&oid='+oid;
+            $.ajax({
+                url:url,
+                type: 'GET',
+                dataType: 'jsonp',
+                contentType:'application/json',
+                jsonpCallback: 'off',
+                success:function(data){
+                    if (data.success) {
+                        location.reload();
+                    }
                 }
-            }
-        })
-    }
-    function cannotrelative(){
-
-        if(roleid == 1 || roleid == 2 || roleid == 3){
-            $('#creatShareid').remove()
+            })
         }
+
     }
-    cannotrelative()
+
 </script>
 </body>
 </html>

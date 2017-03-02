@@ -58,7 +58,7 @@
                     <tr>
                         <td>优先级别：</td>
                         <td><select id="priority"></select></td>
-                        <td><span class="red-start">*</span>计划版本：</td>
+                        <td>计划版本：</td>
                         <td><input type="text" id="version" placeholder="如：1.0版本"/></td>
                     </tr>
                     <tr>
@@ -129,15 +129,15 @@
 
 
     var named = $('#name');
-        version = $('#version');
+//        version = $('#version');
     named.focus(function(){
         named.removeClass('error-i');
         named.siblings('.error-icon').css({'visibility':'hidden'});
     })
-    version.focus(function(){
-        version.removeClass('error-i');
-        version.siblings('.error-icon').css({'visibility':'hidden'});
-    })
+//    version.focus(function(){
+//        version.removeClass('error-i');
+//        version.siblings('.error-icon').css({'visibility':'hidden'});
+//    })
 
     function commit() {
         if(named.val() == ''){
@@ -145,11 +145,11 @@
             named.siblings('.error-icon').css({'visibility':'visible'});
             return
         } 
-        if( version.val() == ''){
-            version.addClass('error-i');
-            version.siblings('.error-icon').css({'visibility':'visible'});
-            return;
-        }
+//        if( version.val() == ''){
+//            version.addClass('error-i');
+//            version.siblings('.error-icon').css({'visibility':'visible'});
+//            return;
+//        }
 
         var attachment = [];
         var li = $('#addAttachmentList').find('li');

@@ -31,7 +31,7 @@
     </div>
     <div class="page-inner">
         <div class="page-content">
-            <div class="table-head clear"><div class="left document-name"><i class="bug-i"></i>No.01234</div><div class="right edit"><a onclick="edit()" class="sure">编辑</a></div></div>
+            <div class="table-head clear"><div class="left document-name"><i class="bug-i"></i>No.01234</div><div class="right edit" id="editNeed"><a onclick="edit()" class="sure">编辑</a></div></div>
             <div class="table-cont">
                 <table class="content-table">
                     
@@ -115,7 +115,11 @@
     function edit(){
         location.href = 'pm-need-detail-pm-edit.html?id='+_id;
     }
-
+    //权限控制
+    var roleid = $.cookie('userrole');
+    if(roleid == 1 || roleid == 2 || roleid == 3){
+        $('#editNeed').remove()
+    }
     function updata(){
         var url  = _ip+'/product/getRequireById?callback=update&id='+_id;
         $.ajax({

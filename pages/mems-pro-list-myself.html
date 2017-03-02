@@ -98,6 +98,16 @@
         .getBussTypeList('bussType',0,true)
         .dynamicDistrick('district','privence','city');
     var roleid = $.cookie('userrole');
+
+
+    //权限控制
+    if(roleid == 0){
+        $('#creatProId').remove()
+    }
+    if(roleid == 0 || roleid == 1 || roleid == 2){
+        $('#exportExcelId').remove()
+    }
+
     $('#checkAll').on('click',function () {
         var checked = $(this).prop('checked');
         var checkbox = $('#bodyList').find('input[type=checkbox]');
@@ -341,18 +351,6 @@
         });
     }
 
-    function cannotcreatpro(){
-        if(roleid == 0){
-            $('#creatProId').remove()
-        }
-    }
-    cannotcreatpro()
-    function cannotexportExcel(){
-        if(roleid == 0 || roleid == 1 || roleid == 2){
-            $('#exportExcelId').remove()
-        }
-    }
-    cannotexportExcel()
 </script>
 </body>
 </html>

@@ -108,7 +108,11 @@
         .getStatusListPm('status',0,true)
         .getPriorityList('priority',0,true);
 
+    //权限控制
     var roleid = $.cookie('userrole');
+    if(roleid == 1 || roleid == 2 || roleid == 3){
+        $('#creatpmneed').remove()
+    }
     function getData(p,checPara){
         var PerPage = 20;
         var url  = _ip+'/product/getRequireList?page='+p+'&size='+PerPage;
@@ -259,12 +263,6 @@
         }
 
     }
-    function cannotcreatpmneed(){
-        if(roleid == 1 || roleid == 2 || roleid == 3){
-            $('#creatpmneed').remove()
-        }
-    }
-    cannotcreatpmneed()
 
 </script>
 </body>

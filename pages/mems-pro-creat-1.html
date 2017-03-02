@@ -89,7 +89,7 @@
             <div class="btns">
                 <a class="pro-btn pro-sure" id="nextstep">下一步</a>
             </div>
-            <div>医院未找到？&emsp;<a class="pro-btn pro-sure pro-sure-can" href="mems-pro-creat-2.html">直接创建</a></div>
+            <div id="createProDirectly">医院未找到？&emsp;<a class="pro-btn pro-sure pro-sure-can" href="mems-pro-creat-2.html">直接创建</a></div>
         </div>
     </div>
 </div>
@@ -99,6 +99,13 @@
 <script src="../js/common.js"></script>
 <script type="text/javascript">
 
+
+//权限控制
+
+var roleid = $.cookie('userrole');
+if(roleid == 0 || roleid==1 || roleid == 2){
+    $('#createProDirectly').remove()
+}
 
 function getDistrictdom(id){
     var _id = $('#'+id);
