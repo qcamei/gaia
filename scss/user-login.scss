@@ -6,13 +6,10 @@ body,html{
   font-family:'Arial', 'Miscrosoft yahei';
   height: 100%;
   font-size: 13px;
-  background: url("../images/login-bg.png") no-repeat;
-  background-size: 100% 100%;
   width: 100%;
-  height:100%;
   .error-msg {
     margin: auto;
-    color: #b74b4b;
+    color: #ed807c;
     margin-bottom: 5px;
     width: 285px;
   }
@@ -25,6 +22,16 @@ table{
 }
 a{
   text-decoration: none;
+}
+.table{
+  display: table;
+  .table-cell{
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+img {
+  max-width: 100%;
 }
 .clear:after{
   content: '.';
@@ -61,12 +68,37 @@ a{
     line-height: 75px;
   }
 }
-
+.login-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: url("../images/login-bg.jpg") no-repeat center bottom;
+  background-size: cover;
+  overflow: hidden;
+  .table {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    .login-logo {
+      width: 100px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .login-title {
+      margin-top: 2%;
+      color: #fff;
+      font-size: 36px;
+    }
+  }
+}
 .login-box{
-  width: 390px;
-  height: 320px;
-  background: #ffffff;
-  margin: 90px auto 0 auto;
+  position: absolute;
+  top: 40%;
+  height: 60%;
+  left: 0;
+  right: 0;
   .head{
     height: 55px;
     line-height: 55px;
@@ -79,27 +111,58 @@ a{
   .user-input{
     height: 42px;
     width: 285px;
-    margin: 0 auto 16px auto;
+    margin: 0 auto;
+    margin-bottom:5px;
+    border-bottom: solid 1px #99aabb;
+    &.password-input {
+      margin-top: 10px;
+    }
     >i{
       width: 42px;
       height: 42px;
+      background: url("../images/u_icon.png") no-repeat;
       &.i-n{
-        background: url("../images/u-name.png") no-repeat #31aae1 center center;
-        background-size: 12px 14px;
+        background-position: 10px -25px;
       }
       &.i-p{
-        background: url("../images/u-pass.png") no-repeat #555 center center;
-        background-size: 12px 14px;
+        background-position: 10px 10px;
+      }
+    }
+    &.error {
+      border-bottom: solid 1px #ed807c;
+      >i{
+        &.i-n{
+          background-position: -65px -25px;
+        }
+        &.i-p{
+          background-position: -65px 10px;
+        }
+      }
+    }
+    &.focus {
+      border-bottom: solid 1px #03a9f4;
+      >i{
+        &.i-n{
+          background-position: -30px -25px;
+        }
+        &.i-p{
+          background-position: -30px 10px;
+        }
       }
     }
     >input{
       width: 238px;
       height: 42px;
       border: 0px;
-      background: #ececec;
       outline: 0px;
       padding:  0 0 0 5px;
     }
+    input:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 1000px #fff inset;
+    }
+  }
+  .margin-top {
+    margin-top:5%;
   }
   .login-btn{
     width: 285px;
@@ -110,7 +173,9 @@ a{
     background: #31aae1;
     color: #FFF;
     margin: 0 auto;
+    margin-top: 32px;
     display: block;
+    border-radius: 6px;
   }
   .forget{
     width: 285px;

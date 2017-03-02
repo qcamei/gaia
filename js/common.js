@@ -1,6 +1,7 @@
 
 var _ip = location.origin;
-if(_ip.indexOf('localhost') >= 0){
+console.log(_ip.indexOf('localhost'));
+if(_ip.indexOf('localhost') <= -1){
     _ip = 'http://121.42.187.170';
 }
 
