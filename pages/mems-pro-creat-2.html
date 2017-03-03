@@ -174,8 +174,9 @@
 
     var position = $$.getUrlParaObj('p');
     if(position){
+        console.log(11)
         var hdata =  JSON.parse(localStorage.getItem("hospitalData"));
-        $('#name').val(hdata.chineseName);
+        $('#name').val(hdata.name);
         $('#bed').val(hdata.bedNum);
         $('#address').val(hdata.address);
 
