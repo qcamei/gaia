@@ -122,6 +122,61 @@
 <script src="../js/common.js"></script>
 
 <script type="text/javascript">
+
+    //权限控制
+    var roleid = $.cookie('userrole');
+    function forbidenOpe() {}
+    forbidenOpe.prototype = {
+        init:function(){
+            this.mark = false;
+            this.userId = $.cookie('userid');
+            this.ismember()
+        },
+        ismember:function() {
+            var that = this;
+            var url  = _ip+'/puser/select';
+            var data = {
+                id: getUrlId()
+            };
+            var arr = [];
+            organizeAjaxGet(url, data, 'tttt', function(json) {
+                if (json.success) {
+                    arr.push(json.data.owner.id);
+                    for(var k = 0; k < json.data.list.length; k++){
+                        arr.push(json.data.list[k].id);
+                    }
+                    var isProMember = false;
+                    for(var n = 0; n < arr.length; n++){
+                        if(that.userId == arr[n]){
+                            isProMember = true;
+                            break;
+                        }
+                    }
+                    if(roleid == 9 || roleid==3 ){
+                        that.mark = true;
+                    }
+                    if(roleid ==0){
+                        that.mark == false;
+                    }
+                    if( roleid == 1 && json.data.owner.id ==  that.userId  ){
+                        that.mark = true;
+                    }
+                    if( roleid == 2 && isProMember){
+                        that.mark = true;
+                    }
+                    if(!that.mark){
+                        $('#edit').remove();
+                    }
+
+                }
+
+            })
+        }
+    }
+    forbidenOpe =  new forbidenOpe()
+    forbidenOpe.init();
+
+
     function  edit() {
         location.href = 'mems-pro-baseInfo-edite.html?id='+getUrlId();
     }
@@ -170,30 +225,6 @@
             }
         })
    }
-
-
-    var roleid = $.cookie('userrole');
-    var userid = $.cookie('userid');
-    var mark   = false;
-
-   function ismember(){
-       var url  = _ip+'/puser/select';
-       var data = {
-           id: getUrlId()
-       };
-       organizeAjaxGet(url, data, 'dd', function(json) {
-           if (json.success) {
-                if(roleid == json.data.owner.id){
-                    mark = true;
-
-                }
-               if(roleid == 0 || ( roleid == 2 && !mark )){
-                   $('#edit').remove();
-               }
-           }
-       })
-   }
-    ismember()
 </script>
 </body>
 </html>

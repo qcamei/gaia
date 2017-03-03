@@ -192,7 +192,12 @@
             .getPLevelList('level')
             .dynamicDistrick('district','province','city');
     }
-
+    //权限控制
+    var roleid = $.cookie('userrole');
+    if(roleid == 1 || roleid == 2 ){
+        $('#name').prop({'disabled':'disabled'});
+        $('#segmentation').prop({'disabled':true})
+    }
 
     <!--var nameflag = false;-->
     <!--function veryName(that) {-->

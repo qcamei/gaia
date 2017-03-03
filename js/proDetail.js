@@ -319,28 +319,70 @@ manageTagSelf.prototype = {
         	jsonpCallback: 'initdata',
             success:function(json){
                 if(json.success && json.data){
-                	var data = json.data;
-                	$('#'+id1).val(data.interestDesc || '');
-                	$('#'+id2).val(data.managementDesc || '');
-                	$('#'+id3).val(data.competitorDesc || '');
-                	$('#'+id4).val(data.riskDesc || '');
-                	that.userId = data.id;
-                    window.canuserId = data.id;
-                	manageTagSelf.proId  = data.proId;
-                	var obj = {};
-                	obj[id5] = data.interestTag ? data.interestTag.split(','):'';
-                	obj[id6] = data.managementTag ? data.managementTag.split(','):'';
-                	obj[id7] = data.competitorTag ? data.competitorTag.split(','):'';
-                	for(var k in obj){
-                		var dom  = $('#'+k);
-                		var html = ''; 
-                		if(obj[k] != ''){
-	                		for(var i = 0 ; i < obj[k].length; i++){
-	                			html += '<li>'+obj[k][i]+'<input type="hidden" value="'+obj[k][i]+'"/><span>&times;</span></li>';
-	                		}
-	                		dom.html(html);
-                		}
-                	}
+
+					var data = json.data;
+					$('#'+id1).val(data.interestDesc || '');
+					$('#'+id2).val(data.managementDesc || '');
+					$('#'+id3).val(data.competitorDesc || '');
+					$('#'+id4).val(data.riskDesc || '');
+					that.userId = data.id;
+					window.canuserId = data.id;
+					manageTagSelf.proId  = data.proId;
+
+					// var that = this;//判断是否是项目成员
+					var url  = _ip+'/puser/select';
+					var dataPara = {
+						id: getUrlId()
+					};
+					var isShowMark = false;
+					var arr = [];
+					organizeAjaxGet(url, dataPara, 'xxx', function(memberJson) {
+						if (memberJson.success) {
+							arr.push(memberJson.data.owner.id);
+							for(var k = 0; k < memberJson.data.list.length; k++){
+								arr.push(memberJson.data.list[k].id);
+							}
+							var isProMember = false;
+							for(var n = 0; n < arr.length; n++){
+								if(that.userId == arr[n]){
+									isProMember = true;
+									break;
+								}
+							}
+							if(globleRoleId == 9 || globleRoleId == 3){
+								isShowMark = true;
+							}
+							if( (globleRoleId == 0 || globleRoleId == 1 || globleRoleId == 2) && isProMember ){
+								isShowMark = true;
+							}
+
+
+							var obj = {};
+							obj[id5] = data.interestTag ? data.interestTag.split(','):'';
+							obj[id6] = data.managementTag ? data.managementTag.split(','):'';
+							obj[id7] = data.competitorTag ? data.competitorTag.split(','):'';
+							// console.log(isShowMark)
+							for(var k in obj){
+								var dom  = $('#'+k);
+								var html = '';
+								if(obj[k] != ''){
+									for(var i = 0 ; i < obj[k].length; i++){
+										html += '<li>'+obj[k][i]+'<input type="hidden" value="'+obj[k][i]+'"/>'+(isShowMark?'<span>&times;</span>':'')+'</li>';
+									}
+									dom.html(html);
+
+								}
+							}
+
+						}
+
+					})
+
+
+
+
+
+
                 }else{
                     // alert('更新dd失败, 请稍后重试！');
                 }
@@ -436,20 +478,24 @@ clientDataCard.prototype = {
 
 					var arrn = [];
 					organizeAjaxGet(url, data, 'gg', function(data) {
-
 						if (data.success) {
 							arrn.push(data.data.owner.id);
 							for(var k = 0; k < data.data.list.length; k++){
 								arrn.push(data.data.list[k].id);
 							}
-
+							var isProMember = false;
 							for(var n = 0; n < arrn.length; n++){
 								if(globleUserId == arrn[n]){
-									that.mark = true;
+									isProMember = true;
 									break;
 								}
 							}
-							if(globleRoleId == 9) that.mark = true;
+							if(globleRoleId == 9 || globleRoleId == 3){
+								that.mark = true;
+							}
+							if( (globleRoleId == 0 || globleRoleId == 1 || globleRoleId == 2) && isProMember ){
+								that.mark = true;
+							}
 
 							that.creatCardDom(json.data,that.mark);
 						}
@@ -475,7 +521,11 @@ clientDataCard.prototype = {
  				h += '<div class="head clear"><div class="left name"><span class="left">'+s.name+'</span><span class="left">'+s.position+'</span>';
  					h += '<div class="left detail"><i onmouseover="clientInfoCard.showBaseInfo(this);" onmouseout="clientInfoCard.hideBaseInfo(this)"></i>';
  						h += '<div class="detail-slide"><table><tr><td><h6>角色</h6><span>'+s.role+'</span></td><td><h6>科室</h6><span>'+s.department+'</span></td></tr><tr><td><h6>联系电话</h6><span>'+s.tel+'</span></td><td><h6>短号</h6><span>'+s.shortTel+'</span></td></tr></table></div></div></div>';
- 					h += '<div class="right edit" onmouseover="clientInfoCard.showOpero(this);" onmouseout="clientInfoCard.hideOpero(this)"><i></i><div class="edit-slide"><a onclick="clientInfoCard.editeClientCard('+n+')">编辑</a><a onclick="clientInfoCard.deleteClientCard('+n+')">删除</a></div></div></div>';
+ 					h += '<div class="right edit" onmouseover="clientInfoCard.showOpero(this);" onmouseout="clientInfoCard.hideOpero(this)"><i></i></div>';
+					if(mark){
+						h += '<div class="edit-slide"><a onclick="clientInfoCard.editeClientCard('+n+')">编辑</a><a onclick="clientInfoCard.deleteClientCard('+n+')">删除</a></div>';
+					}
+				h += '</div>'
  				h += '<ul class="clear dot-tab"><li class="current">兴趣点</li><li>抵触点</li><li>沟通要点</li><li>相关需求</li></ul>';
  				h += '<div class="tabcontener">';
  					// 兴趣点
@@ -483,7 +533,7 @@ clientDataCard.prototype = {
  						if(b.insterest){
 	 						var ins = b.insterest.split(',');
 	 						for(var x = 0, xx = ins.length; x < xx; x++){
-	 							h += '<li>'+ins[x]+'<input type="hidden" value="'+ins[x]+'"/><span>&times;</span></li>';
+	 							h += '<li>'+ins[x]+'<input type="hidden" value="'+ins[x]+'"/>'+(mark?'<span>&times;</span>':'')+'</li>';
 	 						}
  						}
  						h += '</ul>';
@@ -531,7 +581,10 @@ clientDataCard.prototype = {
 
  				h += '</div></li>';
  		}
- 		h += '<li class="li-add-card"><a class="card-btn" onclick="clientInfoCard.clientCardDom()">添加客户</a></li>';
+ 		//此处的权限没有加
+		if(mark){
+			h += '<li class="li-add-card"><a class="card-btn" onclick="clientInfoCard.clientCardDom()">添加客户</a></li>';
+		}
  		$('#all-card-list').html(h);
 
  		for(var k = 0, kk = arr.length; k < kk; k++){

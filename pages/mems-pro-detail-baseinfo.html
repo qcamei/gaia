@@ -418,9 +418,12 @@ $('#nextFocus').fdatepicker({
         getPuser();
     }
 
-    function addMemberShow(obj) {
+    function addMemberShow(obj,isTrans) {
         var $obj = $(obj);
-        var url  = _ip+'/user/plist';
+        var url  = _ip+'/user/plist'; //添加成员
+        if(isTrans){
+            url = _ip + '/user/assign'  //转让列表
+        }
         var name = $('#searchUser').val();
         var data = {
             pid: itemId,
@@ -524,18 +527,54 @@ $('#nextFocus').fdatepicker({
     }
 
     function deletePuserClick(obj) {
-        var $obj = $(obj);
-        var id = $obj.closest('li').attr('id');
-        var url  = _ip+'/puser/delete';
+        var url  = _ip+'/puser/select';
         var data = {
-            pid: itemId,
-            uid: id
+            id: getUrlId()
         };
-        organizeAjaxGet(url, data, 'delete_puser', function(json) {
+        var arr = [];
+        var isShowMark = false;
+        organizeAjaxGet(url, data, 'dd', function(json) {
             if (json.success) {
-                getPuser();
+                arr.push(json.data.owner.id);
+                for(var k = 0; k < json.data.list.length; k++){
+                    arr.push(json.data.list[k].id);
+                }
+                var isProMember = false;
+                for(var n = 0; n < arr.length; n++){
+                    if(globleUserId == arr[n]){
+                        isProMember = true;
+                        break;
+                    }
+                }
+                if(globleRoleId == 9 || globleRoleId == 3 || ( globleRoleId == 1 && isProMember )){
+                    isShowMark = true;
+                }
+
+                if(isShowMark){
+
+                    var $obj = $(obj);
+                    var id = $obj.closest('li').attr('id');
+                    var url  = _ip+'/puser/delete';
+                    var data = {
+                        pid: itemId,
+                        uid: id
+                    };
+//        console.log(11);
+                    organizeAjaxGet(url, data, 'delete_puser', function(json) {
+                        if (json.success) {
+                            getPuser();
+                        }
+                    });
+
+                }else{
+                    alert('您无权限操作！');
+                }
             }
-        });
+
+        })
+
+
+
     }
 
     function puserList(owner_data, $content, leader) {
@@ -556,13 +595,13 @@ $('#nextFocus').fdatepicker({
 //                '</table>' +
 //                '</div>' +
                 '</div>');
-        console.log(owner_data);
+//        console.log(owner_data);
         var owner_info = $('<div class="info left"><p>'+ owner_data.name +'</p><p class="removeOcp">'+ owner_data.ocpName +'</p></div>');
-        if( (owner_data.id != globleUserId && globleRoleId == 2)  || globleRoleId == 0 ){
-            var owner_opero = $('<div class="opero right"></div>');
-        }else{
-            var owner_opero = $('<div class="opero right"><a href="javascript:;" class="assignment" id="transferMember" onclick="addMemberShow(this);">转让</a></div>');
 
+        if(globleRoleId == 9 || globleRoleId == 3 || globleRoleId == 1){
+            var owner_opero = $('<div class="opero right"><a href="javascript:;" class="assignment" id="transferMember" onclick="addMemberShow(this,true);">转让</a></div>');
+        }else{
+            var owner_opero = $('<div class="opero right"></div>');
         }
         var $div = $('<div class="member clear"></div>');
         var $li = $('<li id="'+ owner_data.id +'"></li>');
@@ -583,6 +622,7 @@ $('#nextFocus').fdatepicker({
         else {
             var owner_info = $('<div class="info left"><p>'+ owner_data.name+ '&nbsp;&nbsp;<span>'+ owner_data.phone +'</span></p><p class="removeOcp">'+ owner_data.dptName+ '-'+ owner_data.ocpName +'</p></div>');
             owner_opero = $('<div class="opero right"><a class="deletePuserClick" href="javascript:;" onclick="deletePuserClick(this)">×</a></div>');
+
         }
         $div.append(owner_photo).append(owner_info).append(owner_opero);
         $li.append($div);
@@ -636,16 +676,15 @@ forbidenOpe.prototype = {
     init:function(){
         this.mark = false;
         this.userId = $.cookie('userid');
-        this.ismember()
+        var that = this;
+        this.ismember(that.do)
     },
-    ismember:function() {
+    ismember:function(callback) {
         var that = this;
         var url  = _ip+'/puser/select';
-
         var data = {
             id: getUrlId()
         };
-
         var arr = [];
         organizeAjaxGet(url, data, 'dd', function(json) {
             if (json.success) {
@@ -653,35 +692,40 @@ forbidenOpe.prototype = {
                 for(var k = 0; k < json.data.list.length; k++){
                     arr.push(json.data.list[k].id);
                 }
+                var isProMember = false;
                 for(var n = 0; n < arr.length; n++){
                     if(that.userId == arr[n]){
-                        that.mark = true;
+                        isProMember = true;
                         break;
                     }
                 }
-                if(globleRoleId == 9){
+                if(globleRoleId == 9 || globleRoleId == 3){
+                    that.mark = true;
+                }
+                if( (globleRoleId == 0 || globleRoleId == 1 || globleRoleId == 2) && isProMember ){
                     that.mark = true;
                 }
                 if(!that.mark){
-                    $('#addMemberShowId').remove();
-                    $('#addtag-1').remove();
-                    $('#addtag-2').remove();
-                    $('#addtag-3').remove();
-                    $('#tag-dec-1').prop({'disabled':true});
-                    $('#tag-dec-2').prop({'disabled':true});
-                    $('#tag-dec-3').prop({'disabled':true});
-                    $('#tag-dec-4').prop({'disabled':true});
-                    $('#addcordbtn').remove();
-                    $('#editeSaleType').remove();
-//                    $('#transferMember').remove();
+                    if(callback) callback();
                 }
-
             }
 
         })
+    },
+    do:function () {
+//        console.log(222222)
+        $('#addMemberShowId').remove();
+        $('#addtag-1').remove();
+        $('#addtag-2').remove();
+        $('#addtag-3').remove();
+        $('#tag-dec-1').prop({'disabled':true});
+        $('#tag-dec-2').prop({'disabled':true});
+        $('#tag-dec-3').prop({'disabled':true});
+        $('#tag-dec-4').prop({'disabled':true});
+        $('#addcordbtn').remove();
+        $('#editeSaleType').remove();
     }
 }
-
 forbidenOpe =  new forbidenOpe()
 forbidenOpe.init();
 </script>

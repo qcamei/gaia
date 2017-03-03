@@ -159,3 +159,10 @@ img {
       color: #a6a6a6; }
       .login-box .forget > a:hover {
         color: #31aae1; }
+  .login-box .bottom-info {
+    position: absolute;
+    bottom: 3%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #989ea1; }

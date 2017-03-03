@@ -417,6 +417,8 @@ aside.aside {
                   border: 1px solid #b74b4b;
                   box-shadow: 0px 0px 3px #b74b4b;
                   animation: light .3s ease-in-out; }
+                .content .page-inner .page-content .table-cont .content-table > tbody > tr > td:nth-child(2n) > input#working-hours {
+                  width: 73%; }
               .content .page-inner .page-content .table-cont .content-table > tbody > tr > td:nth-child(2n) > i.error-icon {
                 display: inline-block;
                 width: 12px;
