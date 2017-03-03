@@ -53,10 +53,11 @@
   }
 }
 .content {
-  background: #f7f7f7;
+  background-color: #f2f5f7;
 
   .item-tab {
     height: 38px;
+    margin-bottom: 20px;
     > li {
       float: left;
       width: 100px;
@@ -65,9 +66,7 @@
       position: relative;
       color: $color-white;
       font-size: 13px;
-      border-top: 1px solid $color-gray-d;
-      border-left: 1px solid $color-gray-d;
-      border-bottom: 1px solid $color-gray-d;
+      border: #03a9f4 1px solid;
       &:nth-child(3) {
         border-right: 1px solid $color-gray-d;
       }
@@ -79,10 +78,12 @@
         left: 0;
         width: 70px;
         height: 36px;
-        background: url("../images/icon-2.png") no-repeat #AAA 15px center;
+        background-color: #FFF;
+        color: #03a9f4;
         background-size: 12px 10px;
         padding: 0 0 0 30px;
-        &:hover, &.current {
+        &.current {
+          color: white;
           height: 38px;
           line-height: 38px;
           top: -1px;
