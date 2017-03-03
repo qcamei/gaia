@@ -8,8 +8,9 @@
 <body>
 <!--header-->
 <header id="header" class="header">
-    <div class="right-user">
-        <div class="right t" id="headusername">admin</div>
+    <div class="header-info left"><i></i><a href="pm-need-list.html">pm-需求列表</a>&nbsp;>&nbsp;原始需求详情</div>
+    <div class="right-user right">
+         <div class="clear t" >             <div id="headusername" class="role"></div>             <div class="icon"></div>         </div>
         <div class="head-down">
             <ul><li><a href="edit-pwd.html">修改密码</a></li><li><a onclick="loginOut()">退出系统</a></li></ul></div><div>
     </div>
@@ -24,9 +25,6 @@
 <!--content-->
 
 <div class="content">
-    <div class="page-header">
-        <div class="header-info"><i></i><a href="pm-need-list.html">pm-需求列表</a>&nbsp;>&nbsp;原始需求详情</div>
-    </div>
     <div class="page-inner">
         <div class="commit-new-item"><a onclick="creatRelativeLink()" class="btn" style="width: 100px" id="creatRelativeNeed">创建相关需求&nbsp;<b>+</b></a>&emsp;<a href="javascript:" id="creatShareid" onclick="creatShare()" style="width: 100px" class="btn">关联已有需求&nbsp;<b>+</b></a></div>
         <div class="page-content">

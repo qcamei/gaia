@@ -2,8 +2,6 @@ html body {
   overflow: hidden; }
   html body div, html body table {
     box-sizing: border-box; }
-  html body header.header div.t {
-    width: 120px; }
   html body .user-mask {
     position: absolute;
     top: 0;

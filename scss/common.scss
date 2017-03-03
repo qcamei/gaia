@@ -61,30 +61,44 @@ header.header{
   >div{
     height:42px;
     position: relative;
+
   }
   div.t{
-    background: url(../images/Welcome.png) no-repeat 18px center;
-    background-size: 10px 11px;
-    padding-left: 35px;
-    line-height: 42px;
+
     position: absolute;
     height: 42px;
-    width: 130px;
+    width: 100%;
     right: 0;
-    >span{
-      position: absolute;
-      vertical-align: top;
-      width: 14px;
-      height: 14px;
-      line-height: 14px;
-      font-size: 12px;
-      text-align: center;
-      border-radius: 14px;
-      top:2px;
-      right: 7px;
-      background: #fd6769;
-      color: #FFF;
+    .icon{
+      float: right;
+      background: url(../images/Welcome.png) no-repeat 18px center;
+      background-size: 10px 11px;
+      padding-left: 35px;
+      line-height: 42px;
+      height:42px;
+      //border-left: 1px solid #e2e2e2;
     }
+    .role{
+      float: right;
+      height: 42px;
+      line-height:42px;
+      margin: 0 20px 0 0;
+
+    }
+    //>span{
+    //  position: absolute;
+    //  vertical-align: top;
+    //  width: 14px;
+    //  height: 14px;
+    //  line-height: 14px;
+    //  font-size: 12px;
+    //  text-align: center;
+    //  border-radius: 14px;
+    //  top:2px;
+    //  right: 7px;
+    //  background: #fd6769;
+    //  color: #FFF;
+    //}
     &:after{
       content: '';
       position: absolute;
@@ -104,7 +118,7 @@ header.header{
     padding: 20px 20px 10px 20px;
     border-top: 0;
     background: $color-white;
-    box-shadow:3px 0 3px rgba(0,0,0,.2);
+    box-shadow:0px 3px 3px rgba(0,0,0,.2);
     display: none;
     li {
       text-align: center;
@@ -115,13 +129,19 @@ header.header{
       }
     }
   }
-  .right-user:hover .head-down{
-    display: block;
+  //.right-user:hover .head-down{
+  //}
+  .right-user{
+    width: 40%;
+    &:hover .head-down{
+      display: block;
+    }
   }
   .header-info{
     color: #334455;
     font-size: 16px;
     line-height: 42px;
+    width: 60%;
     >i{
       display: inline-block;
       vertical-align: top;

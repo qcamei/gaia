@@ -3,7 +3,7 @@
   padding: 0px; }
 
 body, html {
-  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Simsun";
+  font-family: 'Helvetica Neue',Helvetica,Arial,'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Simsun';
   height: 100%;
   font-size: 13px; }
   body .error-msg, html .error-msg {
@@ -53,27 +53,22 @@ header.header {
     height: 42px;
     position: relative; }
   header.header div.t {
-    background: url(../images/Welcome.png) no-repeat 18px center;
-    background-size: 10px 11px;
-    padding-left: 35px;
-    line-height: 42px;
     position: absolute;
     height: 42px;
-    width: 130px;
+    width: 100%;
     right: 0; }
-    header.header div.t > span {
-      position: absolute;
-      vertical-align: top;
-      width: 14px;
-      height: 14px;
-      line-height: 14px;
-      font-size: 12px;
-      text-align: center;
-      border-radius: 14px;
-      top: 2px;
-      right: 7px;
-      background: #fd6769;
-      color: #FFF; }
+    header.header div.t .icon {
+      float: right;
+      background: url(../images/Welcome.png) no-repeat 18px center;
+      background-size: 10px 11px;
+      padding-left: 35px;
+      line-height: 42px;
+      height: 42px; }
+    header.header div.t .role {
+      float: right;
+      height: 42px;
+      line-height: 42px;
+      margin: 0 20px 0 0; }
     header.header div.t:after {
       content: '';
       position: absolute;
@@ -91,7 +86,7 @@ header.header {
     padding: 20px 20px 10px 20px;
     border-top: 0;
     background: #FFF;
-    box-shadow: 3px 0 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
     display: none; }
     header.header .head-down li {
       text-align: center;
@@ -99,12 +94,15 @@ header.header {
       header.header .head-down li a {
         display: block;
         color: #1f262d; }
-  header.header .right-user:hover .head-down {
-    display: block; }
+  header.header .right-user {
+    width: 40%; }
+    header.header .right-user:hover .head-down {
+      display: block; }
   header.header .header-info {
     color: #334455;
     font-size: 16px;
-    line-height: 42px; }
+    line-height: 42px;
+    width: 60%; }
     header.header .header-info > i {
       display: inline-block;
       vertical-align: top;
@@ -552,18 +550,21 @@ aside.aside {
     .page-list > a.page-next:hover {
       background: url("../images/next-b.png") no-repeat 12px center;
       background-size: 6px 7px; }
+
 .page-list > span {
   float: left;
   line-height: 30px;
   height: 30px; }
   .page-list > span:nth-child(2) {
     margin: 0 10px; }
+
 .page-list > input {
   float: left;
   height: 24px;
   line-height: 24px;
   width: 30px;
   outline: 0px; }
+
 .page-list > button {
   width: 36px;
   height: 26px;
@@ -588,6 +589,7 @@ aside.aside .logo {
   padding-left: 90px;
   background: url("../images/logo.png") no-repeat 20px center;
   background-size: 40px; }
+
 aside.aside .menu {
   width: 100%; }
   aside.aside .menu .menu-first {
@@ -824,8 +826,10 @@ aside.aside .menu {
     transform: translateX(-1px); }
   100% {
     transform: translateX(0px); } }
+
 .content .page-inner .commit-new-item {
   margin: 0 0 30px 0; }
+
 .content .page-inner .page-content .table-head {
   font-size: 14px;
   color: #555; }
@@ -847,6 +851,7 @@ aside.aside .menu {
     .content .page-inner .page-content .table-head > div.edit .sure {
       color: #0088cc;
       margin: 0 5px 0; }
+
 .content .page-inner .page-content .table-cont .content-table {
   margin: 0 auto; }
   .content .page-inner .page-content .table-cont .content-table > tbody > tr.tr-come > td > div > input {
@@ -944,6 +949,7 @@ aside.aside .menu {
         border: 1px solid #dbdbdb;
         height: 75px;
         outline: 0px; }
+
 .content .page-inner .page-content .back-table {
   width: 94%;
   margin: 0 auto; }
@@ -989,6 +995,7 @@ aside.aside .menu {
         left: 0px; }
       .content .page-inner .page-content .back-table > tbody > tr > th .hr:nth-child(3) {
         right: 0px; }
+
 .content .page-inner .page-content .table-log {
   width: 87%;
   margin: 20px 0 0 3.5%; }
@@ -1019,6 +1026,7 @@ aside.aside .menu {
       padding: 9px 10px;
       font-size: 14px;
       margin: 3px 0 0 0; }
+
 .content .page-inner .page-content .relative-list {
   width: 100%; }
   .content .page-inner .page-content .relative-list > tbody > tr > th {
@@ -1033,5 +1041,3 @@ aside.aside .menu {
       color: #0088cc; }
   .content .page-inner .page-content .relative-list > tbody > tr.even {
     background: #f2f2f2; }
-
-/*# sourceMappingURL=list-detial.css.map */
