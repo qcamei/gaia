@@ -514,6 +514,9 @@ aside.aside{
                   box-shadow: 0px 0px 3px $color-red;
                   animation: light .3s ease-in-out;
                 }
+                &#working-hours {
+                  width: 73%;
+                }
               }
               >i.error-icon{
                 display: inline-block;
