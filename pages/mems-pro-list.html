@@ -53,7 +53,7 @@
             </tbody>
         </table>
         <div class="commit-new-item"><a class="btn" href="mems-pro-creat-1.html" id="creatProId">创建项目&nbsp;<b>+</b></a>&emsp;<a class="btn" onclick="exportExcel();" id="exportExcelId">导出&nbsp;</a></div>
-        
+
         <div class="item-content">
             <div class="table-box">
                 <table>
@@ -84,6 +84,88 @@
 
 </div>
 
+<script type="text/javascript">
+    function creatAsideDom() {
+        var obj = {
+            promanage: {
+                name:'项目管理',
+                data: [
+                    {
+                        id:'prolit',
+                        name:'项目列表',
+                        src:'mems-pro-list'
+                    }
+                ]
+            },
+            needmange:{
+                name:'需求管理',
+                data:[
+                    {
+                        id:'needlist',
+                        name:'需求池',
+                        src:'pm-need-list'
+                    },
+                    {
+                        id:'buglist',
+                        name:'缺陷池',
+                        src:'pm-bug-list'
+                    }
+                ]
+            },
+            system:{
+                name:'系统配置',
+                data:[
+                    {
+                        id:'usermanage',
+                        name:'用户管理',
+                        src:'user-manage'
+                    },
+                    {
+                        id:'organize',
+                        name:'组织架构',
+                        src:'organize-architecture'
+                    },
+                    {
+                        id:'tagmanage',
+                        name:'标签管理',
+                        src:'tag-manage'
+                    }
+                ]
+            },
+            documentmanage:{
+                name:'文档管理',
+                data:[
+                    {
+                        id:'docmanage',
+                        name:'文档管理',
+                        src:'doc-manage'
+                    }
+                ]
+            }
+        }
+        var h = ''
+        for(var k in obj){
+            var first = obj[k];
+            if(k == 'system' && (globleRoleId == 0 || globleRoleId == 1 || globleRoleId == 2) ){
+                continue;
+            }
+
+            h += '<li id="'+k+'">';
+            h += '<div class="menu-first"><i class="project"></i>'+first.name+'</div>';
+            var second = first.data;
+            h += '<dl class="menu-second">';
+            for(var n = 0; n < second.length; n ++){
+                var item = second[n];
+                if(globleRoleId==3 && (item.name == '用户管理' || item.name == '组织架构')) continue;
+                h += '<dd><a href="'+item.src+'.html" id="'+item.id+'">'+item.name+'</a></dd>';
+            }
+            h += '</dl>';
+            h += '</li>';
+        }
+        $('#asidemenu').html(h);
+    }
+
+</script>
 
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.cookie.js"></script>
@@ -276,7 +358,7 @@
         html += '<div class="share-box">';
             html += '<p class="relative-title">导出列表</p>';
             html += '<div class="con-box">';
-               
+
                 html += '<table class="exportItem" style="width:92%;height:50px;margin:0 auto">';
                     html += '<tr><th align="left" colspan="2">拜访信息</th></tr>';
                     html += '<tr height="50"><td width="100" align="right">拜访方式：</td><td><select id="visitType"></select></td></tr>';
