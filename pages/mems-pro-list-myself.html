@@ -85,7 +85,6 @@
 </div>
 
 
-<script src="../js/vue.js"></script>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.cookie.js"></script>
 <script src="../js/common.js"></script>
@@ -303,7 +302,7 @@
 
         _API.getVisitTypeList('visitType',0,true)
         .getEmergencyList('exemergency',0,true)
-        .getVisitStatusList('exvisitResult',0,true)
+        .getVisitResultList('exvisitResult',0,true)
 
         $('#confirmRelative').on('click',function(){
             var url = _ip + '/customer/exportReport';

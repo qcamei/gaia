@@ -141,7 +141,6 @@
 </div>
 <script src='../js/jquery.min.js'  type="text/javascript"></script>
 <script src="../js/jquery.cookie.js"></script>
-<script src="../js/vue.js" type="text/javascript"></script>
 <script src="../js/common.js"></script>
 <script>
 
@@ -283,7 +282,7 @@
         if(!flag) return;
         var url  = _ip+'/project/insert';
         var data = {
-            "hosId":hdata.id,
+//            "hosId":hdata.id,
             "name": $('#name').val(),
             "shortName":$('#shortName').val(),
             "alias":$('#alias').val(),
@@ -302,7 +301,9 @@
 //            "longitude":$('#longitude').val(),
             "creater": $.cookie('userid')
         }
-
+        if(position){
+            data['hosId'] = hdata.id;
+        }
         $.ajax({
             url:url,
             type : "POST",

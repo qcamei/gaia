@@ -85,15 +85,12 @@
 </div>
 
 
-<script src="../js/vue.js"></script>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.cookie.js"></script>
-<script src="../js/common.js"></script>
 <script src="../js/foundation-datepicker.min.js"></script>
 <script src="../js/common.js"></script>
 <script>
-    _API.getProNameList('needSource',false,true)
-        .getPSegmentationList('Segmentation',0,true)
+    _API.getPSegmentationList('Segmentation',0,true)
         .getPLevelList('level',0,true)
         .getBussTypeList('bussType',0,true)
         .dynamicDistrick('district','privence','city');

@@ -93,7 +93,6 @@
         </div>
     </div>
 </div>
-<script src="../js/vue.js" type="text/javascript"></script>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.cookie.js"></script>
 <script src="../js/common.js"></script>
@@ -221,7 +220,7 @@ getDistrictdom('district');
 //获取医院的详细信息
 function geihospitaldetaildata(id) {
     $.ajax({
-        url:_ip+'/hospital/select?id='+id,
+        url:_ip+'/project/select?id='+id,
         type: 'GET',
         dataType: 'jsonp',
         contentType:'application/json',
