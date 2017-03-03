@@ -8,3 +8,5 @@ testurl.json
 url.json
 
 package.json
+.sass-cache/
+css/
