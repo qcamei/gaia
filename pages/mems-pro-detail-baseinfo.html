@@ -315,7 +315,7 @@
         <a class="add-member add" href="javascript:;" onclick="addMemberShow(this);" id="addMemberShowId">+&nbsp;添加</a>
         <div class="member-slide" style="display:none">
             <div class="search-member">
-                <input type="" name="" id="searchUser" onblur="addMemberShow()"/>
+                <input type="" name="" id="searchUser" onkeyup="addMemberShow()"/>
             </div>
             <div class="member-box">
                 <ul class="mem-list" id="mem-list">
@@ -441,13 +441,12 @@ $('#nextFocus').fdatepicker({
         $('.member-slide').show();
         if ($('.member-slide').hasClass('assignmentClass')) {
             $('.search-member').css('display', 'none');
-            url  = _ip+'/puser/select';
             data = {
-                id: itemId
+
             };
-            organizeAjaxGet(url, data, 'assignment_list',  function(json) {
+            organizeAjaxPost(url, data, function(json) {
                 if (json.success) {
-                    var allUserData = json.data.list;
+                    var allUserData = json.data;
                     for (var key in allUserData) {
                         allUserData[key].single = 'single';
                         puserList(allUserData[key], $memList, 'allUser');
@@ -511,7 +510,7 @@ $('#nextFocus').fdatepicker({
                 if (json.success) {
                     var $deleteIcon = $('#list-line').find('#'+ownerId).find('.deletePuserClick');
                     addMemberHide();
-                    deletePuserClick($deleteIcon);
+                    getPuser();
                 }
             });
         }
