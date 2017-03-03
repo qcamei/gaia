@@ -308,7 +308,7 @@
                 "visitType":$("#visitType").find('option:selected').text() == '请选择'?null:$("#visitType").val(),
                 "emergency":$("#exemergency").find('option:selected').text() == '请选择'?null:$("#exemergency").val(),
                 "visitResult":$("#exvisitResult").find('option:selected').text() == '请选择'?null:$("#exvisitResult").val(),
-                "date": $('#procurementTime').val() + '-01' || null
+                "date": $('#procurementTime').val()==""?null: $('#procurementTime').val()
             }
             $.ajax({
                 url:url,
