@@ -15,7 +15,7 @@ if(_ip.indexOf('localhost') != -1){
   *-----------------------------*/
  var globleUserId;
  function isLogin(){
-     var url ='http://121.42.187.170' + '/user/getLoginUserInfo';
+     var url = _ip + '/user/getLoginUserInfo';
      $.ajax({
          url:url,
          type: 'GET',
