@@ -22,7 +22,7 @@ function detailItemTab(that,id){
  	showCard.siblings('div.rel').css({'display':'none'});
 }
 
-
+// globleRoleId = $.cookie('userrole')
 
 
 /*----------
@@ -349,6 +349,7 @@ manageTagSelf.prototype = {
 									break;
 								}
 							}
+
 							if(globleRoleId == 9 || globleRoleId == 3){
 								isShowMark = true;
 							}

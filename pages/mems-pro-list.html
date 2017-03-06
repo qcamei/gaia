@@ -10,7 +10,7 @@
 <body>
 <!--header-->
 <header id="header" class="header">
-    <div class="header-info left"><i></i><a href="/innerOpera/pages/mems-need-list.html">项目列表</a></div>
+    <div class="header-info left"><i></i><a href="mems-pro-list.html">项目列表</a></div>
     <div class="right-user right">
         <div class="clear t" >
             <div id="headusername" class="role"></div>
@@ -201,7 +201,19 @@
     function getData(p,checPara){
         var PerPage = 20;
         var url  = _ip+'/project/getProjectList?page='+p+'&size='+PerPage;
-        var data = checPara || {};
+        var data = {};
+        if(checPara){
+            var para = {
+                "name": $('#needSource').val() || null,
+                "segmentation": $('#Segmentation').val() || null,
+                "level": $('#level').val() || null,
+                "businessType": $('#bussType').val() || null,
+                "area": $('#district').find('option:selected').text()=='请选择'?null:$('#district').val(),
+                "province": $('#privence').find('option:selected').text()=='请选择'?null : $('#privence').val(),
+                "city": $('#city').find('option:selected').text()=='请选择'?null : $('#city').val()
+            }
+            data = para
+        }
         $.ajax({
             url:url,
             type : "POST",
@@ -254,8 +266,8 @@
                 }
                 _pager.push('<span>共：'+ totalPage +'页</span>');
                 _pager.push('<span>您正在第：'+p+'页</span>')
-                _pager.push('<a href="javascript:;" class="page-pre" onclick="getData('+prev+');return !1;">上一页</a>');
-                _pager.push('<a href="javascript:;" class="page-next" onclick="getData('+next+');return !1;">下一页</a>');
+                _pager.push('<a href="javascript:;" class="page-pre" onclick="getData('+prev+',true'+');return !1;">上一页</a>');
+                _pager.push('<a href="javascript:;" class="page-next" onclick="getData('+next+',true'+');return !1;">下一页</a>');
                 _pager.push('<span>前往第</span>');
                 _pager.push('<input type="text" id="goToPage"/>');
                 _pager.push('<span>页</span>');
@@ -285,16 +297,7 @@
     }
     getData(1);
     $('#checkout').on('click',function(){
-        var para = {
-            "name": $('#needSource').val() || null,
-            "segmentation": $('#Segmentation').val() || null,
-            "level": $('#level').val() || null,
-            "businessType": $('#bussType').val() || null,
-            "area": $('#district').find('option:selected').text()=='请选择'?null:$('#district').val(),
-            "province": $('#privence').find('option:selected').text()=='请选择'?null : $('#privence').val(),
-            "city": $('#city').find('option:selected').text()=='请选择'?null : $('#city').val()
-        }
-        getData(1,para);
+        getData(1,true);
     })
 
     function  deleteList(id) {

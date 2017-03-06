@@ -118,6 +118,19 @@
                 $addTagbox.prepend('<p class="error-msg">标签名字不能为空</p>');
                 return false;
             }
+            //去重
+            var isRepeatTagsName = false;
+            var list = $('.tag-content').find('div.display-middle');
+            for(var k = 0, kk = list.length; k < kk; k++){
+                var _tagName = list.eq(k).find('span.tag-name').text();
+                if(_tagName == tagValue){
+                    isRepeatTagsName = true;
+                }
+            }
+            if(isRepeatTagsName){
+                $addTagbox.prepend('<p class="error-msg">标签名不能重复</p>');
+                return false;
+            }
             organizeAjaxGet(url, {name: tagValue, type: type }, 'tags_insert', function(json) {
                 if (json.success) {
                     $('.cancel-add-edit').click();

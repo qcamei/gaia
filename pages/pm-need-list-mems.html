@@ -114,7 +114,20 @@
     function getData(p,checPara){
         var PerPage = 20;
         var url  = _ip+'/product/getRequireList?page='+p+'&size='+PerPage;
-        var data = checPara || {};
+        var data = {};
+        if(checPara){
+            var para = {
+                product: $('#productList').val() || null,
+                feature: $('#functionList').find('option:selected').text() == '请选择'?null:$('#functionList').val(),
+                name:$('#name').val() || null,
+                level:$('#levelList').val() || null,
+                priority:$('#priority').val() || null,
+                status:$('#status').val() || null,
+                startTime: $('#dpd1').val()?$('#dpd1').val() + ' 00:00:00' : null,
+                endTime: $('#dpd2').val()?$('#dpd2').val() + ' 00:00:00' : null
+            }
+            data = para
+        }
         $.ajax({
             url:url,
             type : "POST",
@@ -168,8 +181,8 @@
                 }
                 _pager.push('<span>共：'+ totalPage +'页</span>');
                 _pager.push('<span>您正在第：'+p+'页</span>')
-                _pager.push('<a href="javascript:;" class="page-pre" onclick="getData('+prev+');return !1;">上一页</a>');
-                _pager.push('<a href="javascript:;" class="page-next" onclick="getData('+next+');return !1;">下一页</a>');
+                _pager.push('<a href="javascript:;" class="page-pre" onclick="getData('+prev+',true'+');return !1;">上一页</a>');
+                _pager.push('<a href="javascript:;" class="page-next" onclick="getData('+next+',true'+');return !1;">下一页</a>');
                 _pager.push('<span>前往第</span>');
                 _pager.push('<input type="text" id="goToPage"/>');
                 _pager.push('<span>页</span>');
@@ -199,17 +212,8 @@
     getData(1);
 
     $('#checkout').on('click',function(){
-        var para = {
-            product: $('#productList').val() || null,
-            feature: $('#functionList').find('option:selected').text() == '请选择'?null:$('#functionList').val(),
-            name:$('#name').val() || null,
-            level:$('#levelList').val() || null,
-            priority:$('#priority').val() || null,
-            status:$('#status').val() || null,
-            startTime: $('#dpd1').val()?$('#dpd1').val() + ' 00:00:00' : null,
-            endTime: $('#dpd2').val()?$('#dpd2').val() + ' 00:00:00' : null
-        }
-        getData(1,para);
+
+        getData(1,true);
     })
 
 
