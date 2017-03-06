@@ -37,7 +37,8 @@
 
         <table class="mems-search">
             <tr>
-                <td>需求来源：<select id="needSource"></select></td>
+                <!---->
+                <td>需求来源：<div class="nee-source-box clear"><input class="left" id="needSourceNameInput"><button class="left" id="checkNeedSource">点击搜索</button><select class="left" id="needSource"><option>请选择</option></select></div></td>
                 <td>需求名称：<input id="needName" /></td>
                 <td>紧急程度：<select id="levelList"></select></td>
                 <td>处理状态：<select id="status"></select></td>
@@ -83,9 +84,13 @@
 <script src="../js/common.js"></script>
 <script type="text/javascript">
     // getNeedSource('needSource',0,true);
-    _API.getProNameList('needSource',0,true)
-        .getLevelList('levelList',0,true)
+//    .getProNameList('needSource',0,true)
+    _API.getLevelList('levelList',0,true)
         .getStatusList('status',0,true);
+    $('#checkNeedSource').on('click',function () {
+        var _val = $('#needSourceNameInput').val();
+        _API.checkProNameList('needSource',0,true,_val)
+    })
     var roleid = $.cookie('userrole');
     function getData(p,checPara){
         var PerPage = 20;

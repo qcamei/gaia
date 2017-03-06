@@ -59,11 +59,13 @@ header.header {
     right: 0; }
     header.header div.t .icon {
       float: right;
-      background: url(../images/Welcome.png) no-repeat 18px center;
-      background-size: 10px 11px;
-      padding-left: 35px;
-      line-height: 42px;
-      height: 42px; }
+      background: url(../images/icons.png) no-repeat 18px center;
+      background-position-x: 0px;
+      background-position-y: -173px;
+      width: 11px;
+      height: 11px;
+      line-height: 11px;
+      margin: 15px 5px 0 0; }
     header.header div.t .role {
       float: right;
       height: 42px;
@@ -106,8 +108,8 @@ header.header {
     header.header .header-info > i {
       display: inline-block;
       vertical-align: top;
-      background: url("../images/home.png") no-repeat center center;
-      background-size: 12px 12px;
+      background: url("../images/icons.png") no-repeat center center;
+      background-position: 0 -145px;
       width: 11px;
       height: 11px;
       margin: 14px 0 0 12px; }
@@ -129,6 +131,32 @@ aside.aside {
   height: 100%;
   top: 0px;
   background: #1f262d; }
+
+.nee-source-box {
+  width: 300px;
+  height: 28px; }
+  .nee-source-box > input {
+    width: 128px;
+    height: 22px;
+    border: 1px solid #dbdbdb;
+    outline: 0px; }
+  .nee-source-box > button {
+    background: #03a9f4;
+    border: 0px;
+    color: #FFF;
+    outline: 0px;
+    display: inline-block;
+    text-align: center;
+    line-height: 22px;
+    cursor: pointer;
+    width: 60px;
+    height: 22px;
+    margin: 0 5px 0 5px; }
+  .nee-source-box > select {
+    width: 100px;
+    height: 24px;
+    border: 1px solid #dbdbdb;
+    outline: 0px; }
 
 .content {
   background-color: #F2F5F6;
@@ -587,8 +615,7 @@ aside.aside .logo {
   color: #FFF;
   text-align: left;
   padding-left: 90px;
-  background: url("../images/logo.png") no-repeat 20px center;
-  background-size: 40px; }
+  background: url("../images/icons.png") no-repeat 10px 0px; }
 
 aside.aside .menu {
   width: 100%; }
@@ -618,19 +645,17 @@ aside.aside .menu {
       vertical-align: top;
       width: 12px;
       height: 12px;
-      margin: 15px 12px 0 18px; }
+      margin: 15px 12px 0 18px;
+      background-position-x: 0px;
+      background-position-y: -120px; }
       aside.aside .menu .menu-first > i.dash {
-        background: url("../images/Dashboard.png") no-repeat;
-        background-size: 12px 12px; }
+        background-image: url("../images/icons.png"); }
       aside.aside .menu .menu-first > i.project {
-        background: url("../images/project-manage.png") no-repeat;
-        background-size: 12px 12px; }
+        background-image: url("../images/icons.png"); }
       aside.aside .menu .menu-first > i.need {
-        background: url("../images/need-mange.png") no-repeat;
-        background-size: 12px 12px; }
+        background-image: url("../images/icons.png"); }
       aside.aside .menu .menu-first > i.system {
-        background: url("../images/system.png") no-repeat;
-        background-size: 12px 12px; }
+        background-image: url("../images/icons.png"); }
   aside.aside .menu .menu-second {
     width: 100%; }
     aside.aside .menu .menu-second > dd {

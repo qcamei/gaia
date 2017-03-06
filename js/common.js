@@ -2,6 +2,7 @@
 var _ip = location.origin;
 if(_ip.indexOf('localhost') != -1){
     _ip = 'http://121.42.187.170';
+    // _ip = 'http://192.168.8.31:8080'
     // _ip = 'http://10.0.2.14:8080/operation-web'; //广播
 }
 
@@ -509,6 +510,11 @@ _api.prototype = {
     getProNameList: function(id, defaultId,isSelect) { // 21. 项目管理：项目名称列表
         var url = _ip+'/project/name';
         this.getListFirst.apply(this,[url,id,defaultId,isSelect,'pname']);
+        return this;
+    },
+    checkProNameList: function(id, defaultId,isSelect,name) { // 21. 项目管理：项目名称列表
+        var url = _ip+'/project/name?name='+name;
+        this.getListFirst.apply(this,[url,id,defaultId,isSelect,'checkname']);
         return this;
     },
     getDistrict: function(id, defaultId,isSelect){ //获取大区
