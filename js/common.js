@@ -1,7 +1,8 @@
 
 var _ip = location.origin;
-if(_ip.indexOf('localhost') >= -1){
+if(_ip.indexOf('localhost') != -1){
     _ip = 'http://121.42.187.170';
+    // _ip = 'http://10.0.2.14:8080/operation-web'; //广播
 }
 
 /*----------
@@ -14,7 +15,7 @@ if(_ip.indexOf('localhost') >= -1){
   *-----------------------------*/
  var globleUserId;
  function isLogin(){
-     var url = _ip + '/user/getLoginUserInfo';
+     var url ='http://121.42.187.170' + '/user/getLoginUserInfo';
      $.ajax({
          url:url,
          type: 'GET',
@@ -34,6 +35,7 @@ if(_ip.indexOf('localhost') >= -1){
                  $.cookie('name',json.data.name);
                  $.cookie('userid',json.data.id);
                  $.cookie('userrole',json.data.role);
+
                  globleUserId = parseInt(json.data.id);
                  globleRoleId = parseInt(json.data.role);
                  creatAsideDom();

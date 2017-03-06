@@ -41,12 +41,13 @@
 <script type="text/javascript">
 
     var _ip = location.origin;
-    if(_ip.indexOf('localhost') >= -1){
+    if(_ip.indexOf('localhost') != -1){
         _ip = 'http://121.42.187.170';
+//        _ip = 'http://10.0.2.14:8080/operation-web'; //广播
     }
     function Login() {
-        $('.error-msg').remove();
-        $('.user-input').removeClass('error').removeClass('focus');
+//        $('.error-msg').remove();
+//        $('.user-input').removeClass('error').removeClass('focus');
         var url = _ip + '/login';
         var data = {
             userName: $('#userName').val(),
@@ -61,7 +62,9 @@
             $('#password').closest('.user-input').addClass('error').after('<p class="error-msg">请输入密码</p>');
             return false;
         }
+//        alert(3333)
         organizeAjaxPost(url, data, function(json) {
+
             if (json.success) {
                 $.cookie('userid',json.data.id);
                 $.cookie('userrole',json.data.role);
