@@ -24,6 +24,7 @@
     <div class="user-input clear password-input">
         <i class="left i-p"></i>
         <input class="left" placeholder="密码" type="password" id="password" onkeydown="EnterPress()"/>
+        <p class="error-msg" style="display: none"></p>
     </div>
     <a class="login-btn" href="javascript:;" onclick="Login()">登录</a>
     <div class="forget clear">
@@ -72,7 +73,7 @@
                 window.location.href = 'mems-pro-list.html';
             }
             else {
-                $('.password-input').after('<p class="error-msg">'+ json.message +'</p>');
+                $('.error-msg').html(json.message).css({'display':'block'});
             }
         });
     }
@@ -85,11 +86,11 @@
     $('.user-input').on('focus', 'input', function() {
         var $obj = $(this);
         $obj.closest('.user-input').addClass('focus');
-        $('.error-msg').remove();
+        $('.error-msg').css({'display':'none'});
     }).on('blur', 'input', function() {
         var $obj = $(this);
         $obj.closest('.user-input').removeClass('focus');
-        $('.error-msg').remove();
+        $('.error-msg').css({'display':'none'});
     })
 </script>
 </body>

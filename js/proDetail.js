@@ -948,10 +948,10 @@ presell.prototype = {
             return false;
         }
         var budget = $('#budget').val();
-        if(budget != '' && !/(\d)/.test(budget)){
-            $('#budget').addClass('error-i');
-            return false;
-        }
+        // if(budget != '' && !/(\d)/.test(budget)){
+        //     $('#budget').addClass('error-i');
+        //     return false;
+        // }
 
     	var data = {
     		"id": presell.userId,
