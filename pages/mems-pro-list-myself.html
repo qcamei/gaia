@@ -394,7 +394,14 @@
                 "visitType":$("#visitType").find('option:selected').text() == '请选择'?null:$("#visitType").val(),
                 "emergency":$("#exemergency").find('option:selected').text() == '请选择'?null:$("#exemergency").val(),
                 "visitResult":$("#exvisitResult").find('option:selected').text() == '请选择'?null:$("#exvisitResult").val(),
-                "date": $('#procurementTime').val()==""?null: $('#procurementTime').val()
+                "date": $('#procurementTime').val()==""?null: $('#procurementTime').val(),
+                "name": $('#needSource').val() || null,
+                "segmentation": $('#Segmentation').val() || null,
+                "level": $('#level').val() || null,
+                "businessType": $('#bussType').val() || null,
+                "area": $('#district').find('option:selected').text()=='请选择'?null:$('#district').val(),
+                "province": $('#privence').find('option:selected').text()=='请选择'?null : $('#privence').val(),
+                "city": $('#city').find('option:selected').text()=='请选择'?null : $('#city').val()
             }
             $.ajax({
                 url:url,

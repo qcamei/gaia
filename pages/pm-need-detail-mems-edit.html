@@ -40,7 +40,20 @@
                     </tr>
                     <tr>
                         <td><span class="red-start">*</span>来源：</td>
-                        <td><select id="needSource" onchange="_API.getComeSource('needSide',false,true,$(this).val(),'needSide')"></select></td>
+                        <td>
+                            <!--<select id="needSource" onchange="_API.getComeSource('needSide',false,true,$(this).val(),'needSide')"></select>-->
+                            <input type="hidden" id="needSource"/>
+                            <div class="exist-source clear" style="display: block" id="existSourceBox">
+                            <div class="left" id="originalSourceName"></div><a class="left edit-source-btn" id="goEditSource">修改</a>
+                            </div>
+                            <div class="search-box clear" style="display: none" id="searchBox">
+
+                                <input class="left" placeholder="输入关键词" />
+                                <a class="left edit-source-btn" id="goSearchBtn">搜索</a>
+                                <a class="left edit-source-btn" id="giveUp">放弃</a>
+                                <select class="left" id="keyMatchSelect" onchange="_API.getComeSource('needSide',false,true,$(this).val())"><option>请输入关键词</option></select>
+                            </div>
+                        </td>
                         <td><span class="red-start">*</span>需求方：</td>
                         <td><select id="needSide"><option>请选择</option></select><span class="red-start" style="color: #4cae4c">先选择来源</span></td>
                     </tr>
@@ -48,7 +61,7 @@
                         <td><span class="red-start">*</span>需求类别：</td>
                         <td><select id="typeList"></select></td>
                         <td><span class="red-start">*</span>产品:</td>
-                        <td><select id="productList" onchange="_API.getFunctionList('functionList',false,false,'productList')"></select></td>
+                        <td><select id="productList"></select></td>
                     </tr>
                     <tr>
                         <td><span class="red-start">*</span>使用平台：</td>
@@ -125,6 +138,34 @@
         location.href = 'pm-need-detail-mems.html?id='+_id;
     }
 
+    //修改需求来源
+    var goEditSource = $('#goEditSource');
+    var searchBox = $('#searchBox');
+    var existSourceBox = $('#existSourceBox');
+    var giveUp = $('#giveUp');
+    var goSearchBtn = $('#goSearchBtn');
+    var keyMatchSelect = $('#keyMatchSelect');
+    var needSource = $('#needSource');
+    goEditSource.on('click',function () {
+        searchBox.css({'display':'block'})
+        existSourceBox.css({'display':'none'})
+    })
+    giveUp.on('click',function () {
+        searchBox.css({'display':'none'});
+        existSourceBox.css({'display':'block'});
+        needSource.val(originalProjectId);
+        _API.getComeSource('needSide',originalCustomerId,false,originalProjectId)
+    })
+    goSearchBtn.on('click',function () {
+        var _val = $(this).siblings('input').val();
+        if(_val.length < 3) return;
+        _API.checkProNameList('keyMatchSelect',0,true,_val)
+    })
+    keyMatchSelect.on('change',function () {
+        _API.getFunctionList('functionList',false,false,'productList');
+        needSource.val($(this).val());
+    })
+
     // 上传文件
     attachment.init({
         fileUpload:$('#fileUpload'),
@@ -143,13 +184,18 @@
             success:function(data){
                 if(data.success){
                     var data = data.data;
-                    _API.getProNameList('needSource',data.projectId)
-                        .getComeSource('needSide',data.customerId,false,data.projectId)
+//                    console.log(data);
+//                .getProNameList('needSource',data.projectId)
+                    _API.getComeSource('needSide',data.customerId,false,data.projectId)
                         .getPlatformList('platformList',data.plat)
                         .getFunctionList('functionList',data.feature,false,false,data.product)
                         .getTypeList('typeList',data.type)
                         .getLevelList('levelList',data.level)
                         .getProductList('productList',data.product);
+                    window.originalProjectId = data.projectId;
+                    window.originalCustomerId = data.customerId;
+                    $('#originalSourceName').html(data.projectName);
+                    $('#needSource').val(data.projectId);
                     $('#needName').val(data.name);
                     $('#scenario').html(data.scenario);
                     $('#nowSolution').html(data.nowSolution);
@@ -204,7 +250,6 @@
         var url  = _ip+'/original/updateRequire';
         var data = {
             "id":_id,
-            "creater":$.cookie('username'),
             "customerId":$('#needSource').val(),
             "feature":$('#functionList').val(),
             "name":$('#needName').val(),

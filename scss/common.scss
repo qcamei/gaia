@@ -725,24 +725,24 @@ aside.aside{
       width: 59px;
     }
     &.page-pre{
-      padding: 0 0 0 8px;
-      background: url("../images/pre-g.png") no-repeat 12px center;
+      //padding: 0 0 0 8px;
+      //background: url("../images/pages-arrow.png") no-repeat ;
       border-right: 1px solid $color-gray-d;
-      background-size: 6px 7px;
+      //background-size: 6px 7px;
       &:hover{
-        background: url("../images/pre-b.png") no-repeat 12px center;
-        background-size: 6px 7px;
+        //background: url("../images/pages-arrow.png") no-repeat;
+        //background-size: 6px 7px;
       }
     }
     &.page-next{
       margin: 0 10px 0 10px;
       border-right: 1px solid $color-gray-d;
-      padding: 0 0 0 8px;
-      background: url("../images/next-g.png") no-repeat 12px center;
-      background-size: 6px 7px;
+      //padding: 0 0 0 8px;
+      //background: url("../images/pages-arrow.png") no-repeat;
+      //background-size: 6px 7px;
       &:hover{
-        background: url("../images/next-b.png") no-repeat 12px center;
-        background-size: 6px 7px;
+        //background: url("../images/pages-arrow.png") no-repeat ;
+        //background-size: 6px 7px;
       }
     }
   }
@@ -781,13 +781,13 @@ aside.aside{
 //menu
 aside.aside{
   .logo{
-    width: 100%;
+    width: 70%;
     height: 120px;
     font-size: 23px;
     line-height: 120px;
     color: $color-white;
     text-align: left;
-    padding-left:90px;
+    padding-left:30%;
     background: url("../images/icons.png") no-repeat   10px 0px;
   }
   .menu{
@@ -898,6 +898,8 @@ aside.aside{
     font-size: 16px;
     color:#FFF;
   }
+
+
   .con-box{
     margin: 15px 20px 0 20px;
     // border: 1px solid $color-gray-d;
@@ -1093,5 +1095,35 @@ aside.aside{
   }
   100% {
     transform: translateX(0px);
+  }
+}
+
+
+.edit-source-btn{
+  width: 32px;
+  height: 20px;
+  background: #03a9f4;
+  border: 1px solid #03a9f4;
+  color: #FFF;
+  outline: 0px;
+  display: inline-block;
+  text-align: center;
+  line-height: 20px;
+  cursor: pointer;
+  margin: 0 0 0 5px;
+}
+.search-box{
+  >input{
+    width: 140px;
+    height: 20px;
+    border: 1px solid #dbdbdb;
+    outline: 0px;
+  }
+  >select{
+    width: 120px;
+    height: 20px;
+    border: 1px solid #dbdbdb;
+    outline: 0px;
+    margin: 0 5px 0 5px;
   }
 }

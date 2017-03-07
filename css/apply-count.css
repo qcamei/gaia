@@ -562,22 +562,10 @@ aside.aside {
   .page-list > a.page-pre, .page-list > a.page-next {
     width: 59px; }
   .page-list > a.page-pre {
-    padding: 0 0 0 8px;
-    background: url("../images/pre-g.png") no-repeat 12px center;
-    border-right: 1px solid #dbdbdb;
-    background-size: 6px 7px; }
-    .page-list > a.page-pre:hover {
-      background: url("../images/pre-b.png") no-repeat 12px center;
-      background-size: 6px 7px; }
+    border-right: 1px solid #dbdbdb; }
   .page-list > a.page-next {
     margin: 0 10px 0 10px;
-    border-right: 1px solid #dbdbdb;
-    padding: 0 0 0 8px;
-    background: url("../images/next-g.png") no-repeat 12px center;
-    background-size: 6px 7px; }
-    .page-list > a.page-next:hover {
-      background: url("../images/next-b.png") no-repeat 12px center;
-      background-size: 6px 7px; }
+    border-right: 1px solid #dbdbdb; }
 
 .page-list > span {
   float: left;
@@ -608,13 +596,13 @@ aside.aside {
   margin: 0 0 0 5px; }
 
 aside.aside .logo {
-  width: 100%;
+  width: 70%;
   height: 120px;
   font-size: 23px;
   line-height: 120px;
   color: #FFF;
   text-align: left;
-  padding-left: 90px;
+  padding-left: 30%;
   background: url("../images/icons.png") no-repeat 10px 0px; }
 
 aside.aside .menu {
@@ -851,6 +839,32 @@ aside.aside .menu {
     transform: translateX(-1px); }
   100% {
     transform: translateX(0px); } }
+
+.edit-source-btn {
+  width: 32px;
+  height: 20px;
+  background: #03a9f4;
+  border: 1px solid #03a9f4;
+  color: #FFF;
+  outline: 0px;
+  display: inline-block;
+  text-align: center;
+  line-height: 20px;
+  cursor: pointer;
+  margin: 0 0 0 5px; }
+
+.search-box > input {
+  width: 140px;
+  height: 20px;
+  border: 1px solid #dbdbdb;
+  outline: 0px; }
+
+.search-box > select {
+  width: 120px;
+  height: 20px;
+  border: 1px solid #dbdbdb;
+  outline: 0px;
+  margin: 0 5px 0 5px; }
 
 .dd {
   color: red; }

@@ -252,11 +252,11 @@
 //                    _data.push('<td><input type="checkbox" name=""></td>');
                     _data.push('<td>'+ (k+1) +'</td>');
                     _data.push('<td><a href="mems-pro-detail-baseinfo.html?id='+msg.id+'&name='+msg.name+'" class="link" title="'+msg.name+'">'+(msg.name.length<12?msg.name:msg.name.substring(0,12)+'...' )+'</a></td>');
-                    _data.push('<td>'+msg.ownerName+'</td>')
+                    _data.push('<td>'+(msg.ownerName || '')+'</td>')
                     _data.push('<td>'+msg.area+msg.province+msg.city+'</td>');
-                    _data.push('<td>'+msg.segmentation+'</td>');
-                    _data.push('<td>'+msg.level+'</td>');
-                    _data.push('<td>'+msg.businessType+'</td>');
+                    _data.push('<td>'+(msg.segmentation || '')+'</td>');
+                    _data.push('<td>'+(msg.level || '')+'</td>');
+                    _data.push('<td>'+(msg.businessType || '')+'</td>');
 
                     if(roleid==9 || roleid==3){
                         _data.push('<td><a class="link" href="javascript:" onclick="deleteList('+msg.id+')">删除</a></td>');
@@ -393,7 +393,14 @@
                 "visitType":$("#visitType").find('option:selected').text() == '请选择'?null:$("#visitType").val(),
                 "emergency":$("#exemergency").find('option:selected').text() == '请选择'?null:$("#exemergency").val(),
                 "visitResult":$("#exvisitResult").find('option:selected').text() == '请选择'?null:$("#exvisitResult").val(),
-                "date": $('#procurementTime').val()==""?null: $('#procurementTime').val()
+                "date": $('#procurementTime').val()==""?null: $('#procurementTime').val(),
+                "name": $('#needSource').val() || null,
+                "segmentation": $('#Segmentation').val() || null,
+                "level": $('#level').val() || null,
+                "businessType": $('#bussType').val() || null,
+                "area": $('#district').find('option:selected').text()=='请选择'?null:$('#district').val(),
+                "province": $('#privence').find('option:selected').text()=='请选择'?null : $('#privence').val(),
+                "city": $('#city').find('option:selected').text()=='请选择'?null : $('#city').val()
             }
             $.ajax({
                 url:url,

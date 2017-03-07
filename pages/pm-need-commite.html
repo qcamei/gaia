@@ -40,7 +40,20 @@
                     </tr>
                     <tr>
                         <td><span class="red-start">*</span>来源：</td>
-                        <td><select id="needSource" onchange="_API.getComeSource('needSide',false,true,$(this).val(),'needSide')"></select></td>
+                        <!--<select id="needSource" onchange="_API.getComeSource('needSide',false,true,$(this).val(),'needSide')"></select>-->
+                        <td>
+                            <!--<div class="exist-source clear" style="display: block" id="existSourceBox">-->
+                                <!--<div class="left">原有来源</div><a class="left edit-source-btn" id="goEditSource">修改</a>-->
+                            <!--</div>-->
+                            <div class="search-box clear" style="display: block" id="searchBox">
+
+                                <input class="left" placeholder="输入关键词" />
+                                <a class="left edit-source-btn" id="goSearchBtn">搜索</a>
+                                <!--<a class="left edit-source-btn" id="giveUp">放弃</a>-->
+                                <select class="left" id="keyMatchSelect" onchange="_API.getComeSource('needSide',false,true,$(this).val())"><option>请输入关键词</option></select>
+                            </div>
+
+                        </td>
                         <td><span class="red-start">*</span>需求方：</td>
                         <td><select id="needSide"><option>请选择</option></select><span class="red-start" style="color: #4cae4c">先选择来源</span></td>
                     </tr>
@@ -107,9 +120,9 @@
     _API.getTypeList('typeList')
         .getProductList('productList',false,true)
         .getPlatformList('platformList')
-        .getProNameList('needSource',false,true)
+//        .getProNameList('needSource',false,true)
 //        .getComeSource('needSide',false,false,1)
-        .getFunctionList('functionList')
+//        .getFunctionList('functionList')
         .getLevelList('levelList');
 
     // 上传文件
@@ -117,6 +130,28 @@
         fileUpload:$('#fileUpload'),
         addAttachmentList:$('#addAttachmentList')
     });
+
+
+    //修改需求来源
+//    var goEditSource = $('#goEditSource');
+    var searchBox = $('#searchBox');
+    var existSourceBox = $('#existSourceBox');
+//    var giveUp = $('#giveUp');
+    var goSearchBtn = $('#goSearchBtn');
+    var keyMatchSelect = $('#keyMatchSelect');
+//    goEditSource.on('click',function () {
+//        searchBox.css({'display':'block'})
+//        existSourceBox.css({'display':'none'})
+//    })
+//    giveUp.on('click',function () {
+//        searchBox.css({'display':'none'})
+//        existSourceBox.css({'display':'block'})
+//    })
+    goSearchBtn.on('click',function () {
+        var _val = $(this).siblings('input').val();
+        if(_val.length < 3) return;
+        _API.checkProNameList('keyMatchSelect',0,true,_val)
+    })
 
 
 
@@ -146,7 +181,7 @@
             })
         }
 
-        if($('#needSource').find('option:selected').text() == '请选择'){
+        if($('#keyMatchSelect').find('option:selected').text() == '请选择'){
             alert('请选择来源');
             return false
         }
@@ -171,7 +206,7 @@
             "nowSolution":$('#nowSolution').val(),
             "plat": $('#platformList').val(),
             "product": $('#productList').val(),
-            "projectId":$('#needSource').val(),
+            "projectId":$('#keyMatchSelect').val(),
             "scenario": $('#scenario').val(),
             "sugSolution": $('#sugSolution').val(),
             "type": $('#typeList').val(),
