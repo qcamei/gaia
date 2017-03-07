@@ -1,7 +1,5 @@
 html body {
   overflow: hidden; }
-  html body div, html body table {
-    box-sizing: border-box; }
   html body .user-mask {
     position: absolute;
     top: 0;

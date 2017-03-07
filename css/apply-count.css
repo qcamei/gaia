@@ -603,7 +603,8 @@ aside.aside .logo {
   color: #FFF;
   text-align: left;
   padding-left: 30%;
-  background: url("../images/icons.png") no-repeat 10px 0px; }
+  background: url("../images/icons.png") no-repeat 10px 0px;
+  overflow: hidden; }
 
 aside.aside .menu {
   width: 100%; }
