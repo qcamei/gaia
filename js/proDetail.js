@@ -932,8 +932,8 @@ presell.prototype = {
 	},
 	uploadInfo:function(){
 		var url = _ip + '/salebgt/update';
-		var time = $('#proTime').val()+'-01 00:00:00:00';
-		var time2 = $('#getMoneyTime').val()+'-01 00:00:00:00';
+		var time = $('#proTime').val()==''?null:$('#proTime').val()+'-01 00:00:00:00';
+		var time2 = $('#getMoneyTime').val()==''?null:$('#getMoneyTime').val()+'-01 00:00:00:00';
 		// var date = new Date(time).getTime();
         $('#tel').focus(function(){
             $('#tel').removeClass('error-i');
@@ -955,13 +955,13 @@ presell.prototype = {
 
     	var data = {
     		"id": presell.userId,
-		    "type": $('#sellTypeSelect').val(),
-		    "budget": parseInt($('#budget').val()),
+		    "type": $('#sellTypeSelect').val() || null,
+		    "budget": $('#budget').val() || null,
 		    "proTime": time,
 			"expectPaymentTime":time2,
-		    "discribe": $('#discribe').val(),
-		    "contacts": $('#contacts').val(),
-		    "tel": parseInt($('#tel').val())
+		    "discribe": $('#discribe').val() || null,
+		    "contacts": $('#contacts').val() || null,
+		    "tel": parseInt($('#tel').val()) || null
     	};
     	var that = this;
     	$.ajax({
