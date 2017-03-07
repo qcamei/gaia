@@ -294,8 +294,9 @@
     }
 
      getRelativList();
+    var roleid = $.cookie('userrole');
     function getRelativList(){
-        var url  = _ip+'/requireRelation/getRequireRelationByOid?oid='+_id;        
+        var url  = _ip+'/requireRelation/getRequireRelationByOid?oid='+_id;
         $.ajax({
             url:url,
             type: 'GET',
@@ -305,7 +306,7 @@
             success:function(data){
                 var data = data.data;
                 var h = '';
-                if(!data || data.length) {
+                if(!data) {
                     $('#relativeList').html('<tr><td colspan="6" style="text-align: center">暂无数据！</td></tr>');
                     return false;
                 }
@@ -315,12 +316,34 @@
                         h += '<td>'+data[k].pName+'</td>';
                         h += '<td>'+data[k].priority+'</td>';
                         h += '<td>'+data[k].status+'</td>';
-                        h += '<td><a class="delete" onclick="callOff('+data[k].pId+','+data[k].oId+')">解绑</a></td></tr>';
-                        
+                        if(roleid == 1 || roleid == 2 || roleid == 3){
+                            h += '<td></td></tr>';
+                        }else if(roleid ==0 || roleid == 9){
+                            h += '<td><a class="delete" onclick="callOff('+data[k].pId+','+data[k].oId+')">解绑</a></td></tr>';
+                        }
+
                 }
                 $('#relativeList').html(h);
             }
         })
+    }
+    function callOff(pid,oid){
+        if(confirm('确认解绑？')){
+            var url  = _ip+'/requireRelation/deleteRequireRelation?pid='+pid+'&oid='+oid;
+            $.ajax({
+                url:url,
+                type: 'GET',
+                dataType: 'jsonp',
+                contentType:'application/json',
+                jsonpCallback: 'off',
+                success:function(data){
+                    if (data.success) {
+                        location.reload();
+                    }
+                }
+            })
+        }
+
     }
 
 </script>
