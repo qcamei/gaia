@@ -141,7 +141,7 @@
                     $('#status').html(data.status);
                     $('#discribe').html(data.discribe);
                     $('#solution').html(data.solution);
-                    $('#expectWorkhour').html( data.expectWorkhour?'': data.expectWorkhour + ' 小时');
+                    $('#expectWorkhour').html( data.expectWorkhour==null?'': data.expectWorkhour + ' 小时');
                     if(data.attachment){
                         attachment.init({
                             addAttachmentList:$('#addAttachmentList'),
