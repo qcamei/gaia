@@ -470,15 +470,17 @@ clientDataCard.prototype = {
         	contentType:'application/json',
         	jsonpCallback: 'iniata',
             success:function(json){
-                if(json.success && json.data){
+				console.log(json)
+                if(json.success){
 					// that.creatCardDom(json.data,that.mark);
 					var url  = _ip+'/puser/select';
-					var data = {
+					var datap = {
 						id: getUrlId()
 					};
 
 					var arrn = [];
-					organizeAjaxGet(url, data, 'gg', function(data) {
+					organizeAjaxGet(url, datap, 'gg', function(data) {
+						console.log(data);
 						if (data.success) {
 							arrn.push(data.data.owner.id);
 							for(var k = 0; k < data.data.list.length; k++){
@@ -522,11 +524,11 @@ clientDataCard.prototype = {
  				h += '<div class="head clear"><div class="left name"><span class="left">'+s.name+'</span><span class="left">'+s.position+'</span>';
  					h += '<div class="left detail"><i onmouseover="clientInfoCard.showBaseInfo(this);" onmouseout="clientInfoCard.hideBaseInfo(this)"></i>';
  						h += '<div class="detail-slide"><table><tr><td><h6>角色</h6><span>'+s.role+'</span></td><td><h6>科室</h6><span>'+s.department+'</span></td></tr><tr><td><h6>联系电话</h6><span>'+s.tel+'</span></td><td><h6>短号</h6><span>'+s.shortTel+'</span></td></tr></table></div></div></div>';
- 					h += '<div class="right edit" onmouseover="clientInfoCard.showOpero(this);" onmouseout="clientInfoCard.hideOpero(this)"><i></i></div>';
+ 					h += '<div class="right edit" onmouseover="clientInfoCard.showOpero(this);" onmouseout="clientInfoCard.hideOpero(this)"><i></i>';
 					if(mark){
 						h += '<div class="edit-slide"><a onclick="clientInfoCard.editeClientCard('+n+')">编辑</a><a onclick="clientInfoCard.deleteClientCard('+n+')">删除</a></div>';
 					}
-				h += '</div>'
+				h += '</div></div>'
  				h += '<ul class="clear dot-tab"><li class="current">兴趣点</li><li>抵触点</li><li>沟通要点</li><li>相关需求</li></ul>';
  				h += '<div class="tabcontener">';
  					// 兴趣点

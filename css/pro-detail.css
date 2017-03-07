@@ -903,8 +903,7 @@ aside.aside .menu {
       background: #6baa5c;
       font-size: 11px; }
     .p-content .content-left .p-header .opers .person {
-      background: url(../images/person.png) no-repeat left center;
-      background-size: 16px 16px;
+      background: url(../images/icons-pro.png) no-repeat 0 -392px;
       width: 16px;
       height: 16px;
       margin: 25px 0 0 10px; }
@@ -955,7 +954,7 @@ aside.aside .menu {
           position: absolute;
           right: 2%;
           top: 5px;
-          background: url("../images/icon-edite.png") no-repeat;
+          background: url("../images/icons-pro.png") no-repeat 0px -337px;
           width: 14px;
           height: 14px;
           cursor: pointer; }
@@ -1048,13 +1047,13 @@ aside.aside .menu {
             vertical-align: top;
             margin: 0 5px 0 0; }
             .p-content .content-left .info-module .module-left .dot-module .dot-head > i.dot-1 {
-              background: url(../images/dot-1.png) no-repeat center center #8899aa; }
+              background: url(../images/icons-pro.png) no-repeat 5px 1px #8899aa; }
             .p-content .content-left .info-module .module-left .dot-module .dot-head > i.dot-2 {
-              background: url(../images/dot-2.png) no-repeat center center #8899aa; }
+              background: url(../images/icons-pro.png) no-repeat 6px -109px #8899aa; }
             .p-content .content-left .info-module .module-left .dot-module .dot-head > i.dot-3 {
-              background: url(../images/dot-3.png) no-repeat center center #8899aa; }
+              background: url(../images/icons-pro.png) no-repeat 4px -53px #8899aa; }
             .p-content .content-left .info-module .module-left .dot-module .dot-head > i.dot-4 {
-              background: url(../images/dot-4.png) no-repeat center center #8899aa; }
+              background: url(../images/icons-pro.png) no-repeat 7px -165px #8899aa; }
         .p-content .content-left .info-module .module-left .dot-module > textarea {
           border: 0px;
           margin: 5px 0 0 5px;
@@ -1157,7 +1156,7 @@ aside.aside .menu {
     .p-content .content-right .business .cord-list .cord-table .status {
       height: 34px; }
       .p-content .content-right .business .cord-list .cord-table .status > td > span {
-        background: url(../images/s-1.png) no-repeat center center #FFF;
+        background: url(../images/icons-list.png) no-repeat 6px -54px #FFF;
         border: 1px solid #dee6e9;
         width: 20px;
         height: 20px;
@@ -1165,7 +1164,7 @@ aside.aside .menu {
         display: inline-block;
         vertical-align: middle; }
         .p-content .content-right .business .cord-list .cord-table .status > td > span.s-2 {
-          background: url(../images/s-2.png) no-repeat center center #FFF; }
+          background: url(../images/icons-list.png) no-repeat 6px -54px #FFF; }
       .p-content .content-right .business .cord-list .cord-table .status > td .status-head {
         background: #edf1f3;
         border-radius: 2px;
@@ -1219,7 +1218,7 @@ aside.aside .menu {
         .p-content .content-right .business .cord-list .cord-table .cord-detail > .t > i {
           width: 16px;
           height: 16px;
-          background: url(../images/s-p.png) no-repeat center center #FFF;
+          background: url(../images/icons-list.png) no-repeat 0px 0px #FFF;
           display: inline-block;
           vertical-align: top;
           margin: 1px 0 0 0; }

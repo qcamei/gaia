@@ -195,14 +195,14 @@
                         return false;
                     }
                     if(v>1 && v<totalPage){
-                        getData(v);
+                        getData(v,true);
                     }
                     if(v <= 1){
-                        getData(1);
+                        getData(1,true);
                         return false;
                     }
                     if(v >= totalPage){
-                        getData(totalPage);
+                        getData(totalPage,true);
                         return false;
                     }
                 })

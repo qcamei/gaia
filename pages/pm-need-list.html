@@ -38,8 +38,9 @@
         <table class="mems-search">
             <tr>
                 <!---->
-                <td>需求来源：<div class="nee-source-box clear"><input class="left" id="needSourceNameInput"><button class="left" id="checkNeedSource">点击搜索</button><select class="left" id="needSource"><option>请选择</option></select></div></td>
+                <!--<td>需求来源：<div class="nee-source-box clear"><input class="left" id="needSourceNameInput"><button class="left" id="checkNeedSource">点击搜索</button><select class="left" id="needSource"><option>请选择</option></select></div></td>-->
                 <td>需求名称：<input id="needName" /></td>
+                <td>需求来源：<input id="needSource" /></td>
                 <td>紧急程度：<select id="levelList"></select></td>
                 <td>处理状态：<select id="status"></select></td>
 
@@ -87,10 +88,10 @@
 //    .getProNameList('needSource',0,true)
     _API.getLevelList('levelList',0,true)
         .getStatusList('status',0,true);
-    $('#checkNeedSource').on('click',function () {
-        var _val = $('#needSourceNameInput').val();
-        _API.checkProNameList('needSource',0,true,_val)
-    })
+//    $('#checkNeedSource').on('click',function () {
+//        var _val = $('#needSourceNameInput').val();
+//        _API.checkProNameList('needSource',0,true,_val)
+//    })
     var roleid = $.cookie('userrole');
     function getData(p,checPara){
         var PerPage = 20;
@@ -98,7 +99,7 @@
         var data = {};
         if(checPara){
             var para = {
-                projectId: $('#needSource').val() || null,
+                projectName: $('#needSource').val() || null,
                 name: $('#needName').val() || null,
                 level:$('#levelList').val() || null,
                 status:$('#status').val() || null,
@@ -169,14 +170,14 @@
                         return false;
                     }
                     if(v>1 && v<totalPage){
-                        getData(v);
+                        getData(v,true);
                     }
                     if(v <= 1){
-                        getData(1);
+                        getData(1,true);
                         return false;
                     }
                     if(v >= totalPage){
-                        getData(totalPage);
+                        getData(totalPage,true);
                         return false;
                     }
                 })
