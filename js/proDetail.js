@@ -914,10 +914,10 @@ presell.prototype = {
 				// console.log(json.proYear)
                 var h = '';
                 	h += '<tr><td colspan="2">销售方式：'+ (json.type?'<span class="type">'+json.type+'</span>':'') +'</td></tr>';
-                    h += '<tr><td width="40%"><div class="name">预算：</div><div class="text"><span class="num-style">'+json.budget+'</span>&nbsp;万元</div></td>';
+                    h += '<tr><td width="40%"><div class="name">预算：</div><div class="text"><span class="num-style">'+(json.budget || 0)+'</span>&nbsp;万元</div></td>';
                     	h += '<td><div class="name">采购时间：</div><div class="text"><span class="num-style">'+(json.proYear || 0)+'</span>&nbsp;年&nbsp;<span class="num-style">'+(json.proMonth || 0)+'</span>&nbsp;月</div></td></tr>';
 					h += '<tr><td><div class="name">预计收款时间：</div><div class="text"><span class="num-style">'+(json.payYear || 0)+'</span>&nbsp;年&nbsp;<span class="num-style">'+(json.payMonth || 0) +'</span>&nbsp;月</div></td></tr>';
-				h += '<tr><td colspan="2">'+json.discribe+'</td></tr>';
+				h += '<tr><td colspan="2">'+(json.discribe || '')+'</td></tr>';
                 $('#'+id).html(h);
 
                 $('#contacts').val(json.contacts);
