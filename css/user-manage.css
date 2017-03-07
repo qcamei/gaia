@@ -2,8 +2,6 @@ html body {
   overflow: hidden; }
   html body .success-msg {
     color: #5cb85c; }
-  html body div, html body table {
-    box-sizing: border-box; }
   html body .user-mask {
     position: absolute;
     top: 0;
