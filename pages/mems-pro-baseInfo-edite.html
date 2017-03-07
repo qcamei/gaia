@@ -125,20 +125,12 @@
 <script src="../js/common.js"></script>
 
 <script type="text/javascript">
-//    var position = $$.getUrlParaObj('position');
-//    if(position){
-//        position = position['position'];
-//        var parr = position.split('／');
-//    _API.getDistrict('district',parr[0],true)
-//            .getPrivence('province',parr[1],true,parr[0])
-//            .getCity('city',parr[2],true,parr[0],parr[1]);
-//    }
+
     function cancelEdit() {
         location.href = 'mems-pro-baseInfo.html?id=' + getUrlId();
     }
 
-    _API.getNeedSource('needSource')
-        .getPSegmentationList('segmentation')
+    _API.getPSegmentationList('segmentation')
         .getPLevelList('level')
         .dynamicDistrick('district','province','city');
 
@@ -187,7 +179,6 @@
                     $('#postcode').val(data.postcode);
                     $('#bed').val(data.bed);
                     $('#people').val(data.people);
-
                     _API.getDistrict('district',data.area,true)
                         .getPrivence('province',data.province,true,data.area)
                         .getCity('city',data.city,true,data.area,data.province);
