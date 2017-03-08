@@ -47,7 +47,7 @@
                             <!--</div>-->
                             <div class="search-box clear" style="display: block" id="searchBox">
 
-                                <input class="left" placeholder="输入三个字以上" />
+                                <input class="left" placeholder="输入至少两个字" />
                                 <a class="left edit-source-btn" id="goSearchBtn">搜索</a>
                                 <!--<a class="left edit-source-btn" id="giveUp">放弃</a>-->
                                 <select class="left" id="keyMatchSelect" onchange="_API.getComeSource('needSide',false,true,$(this).val())"><option>请输入关键词</option></select>
@@ -149,7 +149,7 @@
 //    })
     goSearchBtn.on('click',function () {
         var _val = $(this).siblings('input').val();
-        if(_val.length < 3) return;
+        if(_val.length < 2) return;
         _API.checkProNameList('keyMatchSelect',0,true,_val)
     })
 
