@@ -39,7 +39,20 @@
                     </tr>
                     <tr>
                         <td>来源：</td>
-                        <td><select id="source"></select></td>
+                        <td>
+                            <!--<select id="source"></select>-->
+                            <input type="hidden" id="needSource"/>
+                            <div class="exist-source clear" style="display: block" id="existSourceBox">
+                                <div class="left" id="originalSourceName"></div><a class="left edit-source-btn" id="goEditSource">修改</a>
+                            </div>
+                            <div class="search-box clear" style="display: none" id="searchBox">
+
+                                <input class="left" placeholder="输入至少两个字" />
+                                <a class="left edit-source-btn" id="goSearchBtn">搜索</a>
+                                <a class="left edit-source-btn" id="giveUp">放弃</a>
+                                <select class="left" id="keyMatchSelect" onchange="_API.getComeSource('needSide',false,true,$(this).val())"><option>请输入关键词</option></select>
+                            </div>
+                        </td>
                         <td>紧急程度：</td>
                         <td><select id="level"></select></td>
                     </tr>
@@ -115,6 +128,33 @@
         location.href = 'pm-bug-detail.html?id='+_id;
     }
 
+    //修改需求来源
+    var goEditSource = $('#goEditSource');
+    var searchBox = $('#searchBox');
+    var existSourceBox = $('#existSourceBox');
+    var giveUp = $('#giveUp');
+    var goSearchBtn = $('#goSearchBtn');
+    var keyMatchSelect = $('#keyMatchSelect');
+    var needSource = $('#needSource');
+    goEditSource.on('click',function () {
+        searchBox.css({'display':'block'})
+        existSourceBox.css({'display':'none'})
+    })
+    giveUp.on('click',function () {
+        searchBox.css({'display':'none'});
+        existSourceBox.css({'display':'block'});
+        needSource.val(originalProjectId);
+        _API.getComeSource('needSide',originalCustomerId,false,originalProjectId)
+    })
+    goSearchBtn.on('click',function () {
+        var _val = $(this).siblings('input').val();
+        if(_val.length < 2) return;
+        _API.checkProNameList('keyMatchSelect',0,true,_val)
+    })
+    keyMatchSelect.on('change',function () {
+        needSource.val($(this).val());
+    })
+
     // 上传文件
     attachment.init({
         fileUpload:$('#fileUpload'),
@@ -137,7 +177,7 @@
 
                     _API.getIssueType('issueType',data.issueType)
 //                        .getNeedSource('source',data.projectId)
-                        .getProNameList('source',data.projectId)
+//                        .getProNameList('source',data.projectId)
                         .getTypeList('typeList',data.type)
                         .getProductList('product',data.product)
                         .getPlatformList('plat',data.plat)
@@ -146,6 +186,10 @@
                         .getLevelList('level',data.level)
                         .getIssueStatusList('status',data.status)
                         .getPriorityList('priority',data.priority);
+                    window.originalProjectId = data.projectId;
+                    window.originalCustomerId = data.customerId;
+                    $('#originalSourceName').html(data.projectName);
+                    $('#needSource').val(data.projectId);
                     $('#browser').val(data.browser);
                     $('#mobileType').val(data.mobileType);
                     $('#discribe').val(data.discribe);
@@ -212,7 +256,7 @@
             "status":$('#status').val(),
             "level":$('#level').val(),
             "priority":$('#priority').val(),
-            "projectId":$('#source').val()
+            "projectId":$('#needSource').val()
         }
         $.ajax({
             url:url,
