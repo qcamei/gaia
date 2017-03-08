@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>mems-编辑项目基本信息</title>
+    <title>编辑项目信息</title>
     <link href="../css/creat-pro.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <!--header-->
 <header id="header" class="header">
-    <div class="header-info left"><i></i><a href="mems-pro-creat.html">编辑项目信息</a></div>
+    <div class="header-info left"><i></i><a href="javascript:" onclick="toProDetail()">项目信息</a> > 编辑项目信息</div>
     <div class="right-user right">
          <div class="clear t" >             <div id="headusername" class="role"></div>             <div class="icon"></div>         </div>
         <div class="head-down">
@@ -125,7 +125,9 @@
 <script src="../js/common.js"></script>
 
 <script type="text/javascript">
-
+    function toProDetail() {
+        location.href = 'mems-pro-baseinfo.html?id='+getUrlId()+'&name='+$$.getUrlParaObj()['name'];
+    }
     function cancelEdit() {
         location.href = 'mems-pro-baseInfo.html?id=' + getUrlId();
     }

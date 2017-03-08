@@ -10,3 +10,7 @@ url.json
 package.json
 .sass-cache/
 css/
+
+images/.DS_Store
+
+.DS_Store
