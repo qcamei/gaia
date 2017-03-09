@@ -10,7 +10,7 @@
 
 <!--header-->
 <header id="header" class="header">
-    <div class="header-info left"><i></i><a href="pm-need-list.html">原始需求列表</a>&nbsp;>&nbsp;原始需求详情</div>
+    <div class="header-info left"><i></i><a onclick="toNedDetail()" href="javascript:">原始需求详情</a>&nbsp;>&nbsp;编辑原始需求</div>
     <div class="right-user right">
          <div class="clear t" >             <div id="headusername" class="role"></div>             <div class="icon"></div>         </div>
         <div class="head-down">
@@ -136,6 +136,9 @@
     var _id = getUrlId();
     function returnList(){
         location.href = 'pm-need-detail-mems.html?id='+_id;
+    }
+    function toNedDetail() {
+        location.href = 'pm-need-detail-mems.html?id='+getUrlId();
     }
 
     //修改需求来源

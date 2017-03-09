@@ -8,7 +8,7 @@
 <body>
 <!--header-->
 <header id="header" class="header">
-    <div class="header-info left"><i></i><a href="pm-need-list-mems.html">pm-需求列表</a>&nbsp;>&nbsp;产品需求详情</div>
+    <div class="header-info left"><i></i><a onclick="toNedDetail()" href="javascript:">产品需求详情</a>&nbsp;>&nbsp;编辑产品需求</div>
     <div class="right-user right">
          <div class="clear t" >             <div id="headusername" class="role"></div>             <div class="icon"></div>         </div>
         <div class="head-down">
@@ -113,6 +113,10 @@
     function returnList(){
         location.href = 'pm-need-detail-pm.html?id='+_id;
     }
+    function toNedDetail() {
+        location.href = 'pm-need-detail-pm.html?id='+getUrlId();
+    }
+
     // 上传文件
     attachment.init({
         fileUpload:$('#fileUpload'),
