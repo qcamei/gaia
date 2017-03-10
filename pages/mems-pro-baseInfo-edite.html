@@ -132,9 +132,7 @@
         location.href = 'mems-pro-baseInfo.html?id=' + getUrlId();
     }
 
-    _API.getPSegmentationList('segmentation')
-        .getPLevelList('level')
-        .dynamicDistrick('district','province','city');
+    _API.dynamicDistrick('district','province','city');
 
     //权限控制
     var roleid = $.cookie('userrole');
@@ -181,7 +179,9 @@
                     $('#postcode').val(data.postcode);
                     $('#bed').val(data.bed);
                     $('#people').val(data.people);
-                    _API.getDistrict('district',data.area,true)
+                    _API.getPLevelList('level',data.level,false)
+                        .getPSegmentationList('segmentation',data.segmentation,false)
+                        .getDistrict('district',data.area,true)
                         .getPrivence('province',data.province,true,data.area)
                         .getCity('city',data.city,true,data.area,data.province);
                     $('#address').val(data.address);
