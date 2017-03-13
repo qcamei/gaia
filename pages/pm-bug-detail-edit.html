@@ -205,7 +205,7 @@
                     data.attachment && attachment.getAttachmentList(data.attachment.split(','));       
 
                 }else{
-                    alert('上传失败, 请稍后重试！');
+                    alert(data.message);
                 }
             }
         })
@@ -281,7 +281,7 @@
 
                     location.href = 'pm-bug-detail.html?id='+_id;
                 }else{
-                    alert('更新失败, 请稍后重试！');
+                    alert(data.message);
                 }
             }
         })
