@@ -33,7 +33,7 @@
             <div class="table-cont">
                 <table class="content-table">
                     <tr>
-                        <td>缺陷主题：</td>
+                        <td><span class="red-start">*</span>缺陷主题：</td>
                         <td colspan="2"><input id="name" /></td>
 
                     </tr>
@@ -53,19 +53,19 @@
                                 <select class="left" id="keyMatchSelect" onchange="_API.getComeSource('needSide',false,true,$(this).val())"><option>请输入关键词</option></select>
                             </div>
                         </td>
-                        <td>紧急程度：</td>
+                        <td><span class="red-start">*</span>紧急程度：</td>
                         <td><select id="level"></select></td>
                     </tr>
                     <tr>
-                        <td>产品：</td>
+                        <td><span class="red-start">*</span>产品：</td>
                         <td><select id="product" onchange="_API.getFunctionList('functionList',false,false,'product')"></select></td>
-                        <td>功能模块:</td>
+                        <td><span class="red-start">*</span>功能模块:</td>
                         <td><select id="functionList"></select><span class="red-start" style="color: #4cae4c">先选择产品</span></td>
                     </tr>
                     <tr>
-                        <td>使用平台：</td>
+                        <td><span class="red-start">*</span>使用平台：</td>
                         <td><select id="plat"></select></td>
-                        <td>缺陷类型：</td>
+                        <td><span class="red-start">*</span>缺陷类型：</td>
                         <td><select id="issueType"></select></td>
                     </tr>
 
@@ -87,7 +87,7 @@
                     </tr>
 
                     <tr class="area">
-                        <td>缺陷描述：</td>
+                        <td><span class="red-start">*</span>缺陷描述：</td>
                         <td colspan="3">
                             <textarea id="discribe"></textarea>
                         </td>
