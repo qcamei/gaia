@@ -165,7 +165,6 @@
         _API.checkProNameList('keyMatchSelect',0,true,_val)
     })
     keyMatchSelect.on('change',function () {
-        _API.getFunctionList('functionList',false,false,'productList');
         needSource.val($(this).val());
     })
 
