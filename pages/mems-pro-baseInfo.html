@@ -63,6 +63,10 @@
                     <td>有无高铁</td>
                     <td id="hsrEnable"></td>
                 </tr>
+                <tr>
+                    <td>是否为百强医院</td>
+                    <td id="isTopHundred"></td>
+                </tr>
                 <!--<tr>-->
                     <!--<td>邮编</td>-->
                     <!--<td id="postcode"></td>-->
@@ -85,11 +89,11 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><span class="red-start">*</span>所属区域</td>
+                    <td>所属区域</td>
                     <td id="dis"></td>
                 </tr>
                 <tr>
-                    <td><span class="red-start">*</span>地址</td>
+                    <td>地址</td>
                     <td id="address"></td>
                 </tr>
                 <tr>
@@ -209,6 +213,7 @@
                     $('#segmentation').html(data.segmentation);
                     $('#level').html(data.level);
                     $('#hsrEnable').html( (data.hsrEnable==1?'有':'无') );
+                    $('#isTopHundred').html( (data.isTopHundred==1?'是':'否') );
 //                    $('#postcode').html(data.postcode);
                     $('#bed').html(data.bed);
                     $('#people').html(data.people);

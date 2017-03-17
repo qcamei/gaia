@@ -159,7 +159,7 @@
                     var msg = json.data[k];
 
                     _data.push('<tr>');
-                    _data.push('<td>'+(k+1)+'</td>');
+                    _data.push('<td>'+msg.id+'</td>');
                     _data.push('<td><a href="pm-need-detail-pm.html?id='+msg.id+'" class="link" title="'+msg.name+'">'+(msg.name.length<12?msg.name:msg.name.substring(0,12)+'...' )+'</a></td>');
 
                     _data.push('<td>'+ msg.product +'</td>');

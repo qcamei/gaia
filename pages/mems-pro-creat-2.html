@@ -75,6 +75,10 @@
                     <td><span class="red-start">*</span>有无高铁</td>
                     <td><label><input type="radio" value="1" name="hsrEnable">&nbsp;有</label>&emsp;<label><input type="radio" name="hsrEnable" checked="checked" value="0">&nbsp;无</label></td>
                 </tr>
+                <tr>
+                    <td><span class="red-start">*</span>是否为百强医院</td>
+                    <td><label><input type="radio" value="1" name="isTopHundred">&nbsp;是</label>&emsp;<label><input type="radio" name="isTopHundred" checked="checked" value="0">&nbsp;否</label></td>
+                </tr>
                 <!--<tr>-->
                     <!--<td>邮编</td>-->
                     <!--<td><input type="" name="" class="short" id="postcode"></td>-->
@@ -287,6 +291,7 @@
             "segmentation": $('#segmentation').val(),
             "level": $('#level').val(),
             "hsrEnable":parseInt($('input[name=hsrEnable]').val()),
+            "isTopHundred":parseInt($('input[name=isTopHundred]').val()),
 //            "postcode":parseInt($('#postcode').val()),
             "bed":parseInt($('#bed').val()),
             "people":parseInt($('#people').val()),

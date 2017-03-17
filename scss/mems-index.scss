@@ -107,25 +107,29 @@
       >table{
         width: 100%;
         >thead>tr{
+          border-bottom:1px solid #dee6ea;
+          border-top:1px solid #dee6ea;
           >th{
             text-align: left;
             padding-left:20px;
             height: 37px;
-            border: 1px solid $color-gray-d;
           }
           &.odd{
             background: #f5f5f5;
           }
         }
         >tbody>tr{
-          &.even{
-            background: #f5f5f5;
+          border-bottom:1px solid #dee6ea;
+          //&.even{
+          //  background: #f5f5f5;
+          //}
+          &:hover {
+            background: #e6ecef;
           }
           >td{
             text-align: left;
             padding-left: 20px;
             height: 37px;
-            border:1px solid $color-gray-d;
             >a.link{
               color: $color-blue;
             }

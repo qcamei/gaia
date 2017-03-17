@@ -63,6 +63,10 @@
                     <td><span class="red-start">*</span>有无高铁</td>
                     <td><label><input type="radio" value="1" name="hsrEnable">&nbsp;有</label>&emsp;<label><input type="radio" name="hsrEnable" value="0">&nbsp;无</label></td>
                 </tr>
+                <tr>
+                    <td><span class="red-start">*</span>是否为百强医院</td>
+                    <td><label><input type="radio" value="1" name="isTopHundred">&nbsp;是</label>&emsp;<label><input type="radio" name="isTopHundred" checked="checked" value="0">&nbsp;否</label></td>
+                </tr>
                 <!--<tr>-->
                     <!--<td>邮编</td>-->
                     <!--<td><input type="" name="" class="short" id="postcode"></td>-->
@@ -171,9 +175,14 @@
                     $('#segmentation').val(data.segmentation);
                     $('#level').val(data.level);
                     if(data.hsrEnable == 1){
-                        $('input[value=1]').prop('checked',true);
+                        $("input[name='hsrEnable'][value='1']").prop('checked',true);
                     }else{
-                        $('input[value=0]').prop('checked',true);
+                        $("input[name='hsrEnable'][value='0']").prop('checked',true);
+                    }
+                    if(data.isTopHundred == 1){
+                        $("input[name='isTopHundred'][value='1']").prop('checked',true);
+                    }else{
+                        $("input[name='isTopHundred'][value='0']").prop('checked',true);
                     }
 //                    $('#hsrEnable').html((data.hsrEnable == 1 ? '有' : '无'));
                     $('#postcode').val(data.postcode);
@@ -256,7 +265,8 @@
             "alias":$('#alias').val(),
             "segmentation": $('#segmentation').val(),
             "level": $('#level').val(),
-            "hsrEnable":parseInt($('input[name=hsrEnable]').val()),
+            "hsrEnable":parseInt($('input[name=hsrEnable]:checked').val()),
+            "isTopHundred":parseInt($('input[name=isTopHundred]:checked').val()),
 //            "postcode":parseInt($('#postcode').val()),
             "bed":parseInt($('#bed').val()),
             "people":parseInt($('#people').val()),
@@ -286,7 +296,6 @@
                     return false;
                 }
                 if(data.success){
-                    var id = data.data;
                     location.href = 'mems-pro-baseInfo.html?id='+getUrlId();
                 }else{
                     if(data.message == '项目名重复，请重新输入'){

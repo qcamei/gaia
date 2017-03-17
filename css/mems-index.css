@@ -952,22 +952,25 @@ aside.aside .menu {
       margin: 19px 19px 0 19px; }
       .content .item-content .table-box > table {
         width: 100%; }
-        .content .item-content .table-box > table > thead > tr > th {
-          text-align: left;
-          padding-left: 20px;
-          height: 37px;
-          border: 1px solid #dbdbdb; }
-        .content .item-content .table-box > table > thead > tr.odd {
-          background: #f5f5f5; }
-        .content .item-content .table-box > table > tbody > tr.even {
-          background: #f5f5f5; }
-        .content .item-content .table-box > table > tbody > tr > td {
-          text-align: left;
-          padding-left: 20px;
-          height: 37px;
-          border: 1px solid #dbdbdb; }
-          .content .item-content .table-box > table > tbody > tr > td > a.link {
-            color: #0088cc; }
+        .content .item-content .table-box > table > thead > tr {
+          border-bottom: 1px solid #dee6ea;
+          border-top: 1px solid #dee6ea; }
+          .content .item-content .table-box > table > thead > tr > th {
+            text-align: left;
+            padding-left: 20px;
+            height: 37px; }
+          .content .item-content .table-box > table > thead > tr.odd {
+            background: #f5f5f5; }
+        .content .item-content .table-box > table > tbody > tr {
+          border-bottom: 1px solid #dee6ea; }
+          .content .item-content .table-box > table > tbody > tr:hover {
+            background: #e6ecef; }
+          .content .item-content .table-box > table > tbody > tr > td {
+            text-align: left;
+            padding-left: 20px;
+            height: 37px; }
+            .content .item-content .table-box > table > tbody > tr > td > a.link {
+              color: #0088cc; }
     .content .item-content .pages {
       padding: 14px 19px 16px 0; }
       .content .item-content .pages .page-list {
