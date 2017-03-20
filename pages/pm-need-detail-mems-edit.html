@@ -30,7 +30,7 @@
     <div class="page-inner">
         <div class="commit-new-item"><a  onclick="creatShare()" class="btn" style="width: 100px">创建相关需求&nbsp;<b>+</b></a>&emsp;<a href="javascript:" onclick="creatShare()" style="width: 100px" class="btn">关联已有需求&nbsp;<b>+</b></a></div>
         <div class="page-content">
-            <div class="table-head clear"><div class="left document-name"><i class="bug-i"></i>No.01234</div><div class="right edit"><a class="sure" onclick="returnList()">取消</a><a onclick="commitEdit()" class="sure">保存</a></div></div> 
+            <div class="table-head clear"><div class="left document-name"><i class="bug-i"></i></div><div class="right edit"><a class="sure" onclick="returnList()">取消</a><a onclick="commitEdit()" class="sure">保存</a></div></div>
             <div class="table-cont">
                 <table class="content-table">
                     <tr>
@@ -186,8 +186,7 @@
             success:function(data){
                 if(data.success){
                     var data = data.data;
-//                    console.log(data);
-//                .getProNameList('needSource',data.projectId)
+                    $('.document-name').append('ID.'+data.id)
                     _API.getComeSource('needSide',data.customerId,false,data.projectId)
                         .getPlatformList('platformList',data.plat)
                         .getFunctionList('functionList',data.feature,false,false,data.product)

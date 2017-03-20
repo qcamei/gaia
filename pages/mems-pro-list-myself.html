@@ -58,7 +58,7 @@
                     <thead>
                         <tr class="odd">
                             <!--<th><input type="checkbox" name="" id="checkAll">全选</th>-->
-                            <th>序号</th>
+                            <th>ID</th>
                             <th>项目</th>
                             <th>负责人</th>
                             <th>区域</th>
@@ -87,13 +87,7 @@
 <script src="../js/foundation-datepicker.min.js"></script>
 <script src="../js/common.js"></script>
 <script>
-    _API.getPSegmentationList('Segmentation',0,true)
-        .getPLevelList('level',0,true)
-        .getBussTypeList('bussType',0,true)
-        .dynamicDistrick('district','privence','city');
     var roleid = $.cookie('userrole');
-
-
     //权限控制
     if(roleid == 0){
         $('#creatProId').remove()
@@ -116,7 +110,7 @@
         }
     })
 
-    function getData(p,checPara){
+    function getData(p,checPara,sessionPara){
         var PerPage = 20;
         var url  = _ip+'/project/getProjectList?page='+p+'&size='+PerPage;
         var data = {};
@@ -131,6 +125,9 @@
                 "city": $('#city').find('option:selected').text()=='请选择'?null : $('#city').val()
             }
             data = para
+        }
+        if(sessionPara){
+            data = sessionPara;
         }
         data['ownerId'] = $.cookie('userid');
         $.ajax({
@@ -151,7 +148,11 @@
                     window.location.href = 'user-login.html';
                     return false;
                 }
-
+                var storage = {
+                    p:p,
+                    para:data
+                }
+                sessionStorage.setItem('myPro', JSON.stringify(storage));
                 if(!json.data || json.data.length <= 0){
                     $('#bodyList').html('<tr><td colspan="8">暂无数据！</td></tr>');
                     $('#pageList').html('');
@@ -214,11 +215,32 @@
             }
         })
     }
-    getData(1);
     $('#checkout').on('click',function(){
         getData(1,true);
     })
-
+    function init() {
+        var sessionPage = JSON.parse(sessionStorage.getItem('myPro')) || null;
+        if(sessionPage){
+            var p = sessionPage.p;
+            var para = sessionPage.para;
+            getData(p,false,para);
+            $('#needSource').val(sessionPage.para.name);
+            _API.getProductList('productList',sessionPage.para.product,true).getIssueStatusList('issueStatusList',sessionPage.para.status,true);
+            _API.getPSegmentationList('Segmentation',sessionPage.para.segmentation,true)
+                    .getPLevelList('level',sessionPage.para.level,true)
+                    .getBussTypeList('bussType',sessionPage.para.businessType,true)
+                    .getDistrict('district',sessionPage.para.area,true)
+                    .getPrivence('privence',sessionPage.para.province,true,sessionPage.para.area)
+                    .getCity('city',sessionPage.para.city,true,sessionPage.para.area,sessionPage.para.province);
+        }else{
+            getData(1);
+            _API.getPSegmentationList('Segmentation',0,true)
+                    .getPLevelList('level',0,true)
+                    .getBussTypeList('bussType',0,true)
+                    .dynamicDistrick('district','privence','city');
+        }
+    }
+    init()
     function  deleteList(id) {
         if(confirm("该项目下所有相关的内容将被删除！是否删除？")){
             var url = _ip + '/project/delete?id='+id;

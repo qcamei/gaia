@@ -29,7 +29,7 @@
 <div class="content">
     <div class="page-inner">
         <div class="page-content">
-            <div class="table-head clear"><div class="left document-name"><i class="bug-i"></i>No.01234</div><div class="right edit" id="editNeed"><a onclick="edit()" class="sure">编辑</a></div></div>
+            <div class="table-head clear"><div class="left document-name"><i class="bug-i"></i></div><div class="right edit" id="editNeed"><a onclick="edit()" class="sure">编辑</a></div></div>
             <div class="table-cont">
                 <table class="content-table">
                     <tr>
@@ -131,6 +131,7 @@
             success:function(data){
                 if(data.success){
                     var data = data.data;
+                    $('.document-name').append('ID.'+data.id)
                     $('#needName').html(data.name);
                     $('#typeList').html(data.type);
                     $('#productList').html(data.product);

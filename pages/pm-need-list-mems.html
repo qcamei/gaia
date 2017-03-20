@@ -55,7 +55,7 @@
                 <table>
                     <thead>
                         <tr class="odd">
-                        <th>序号</th>
+                        <th>ID</th>
                         <th>需求名称</th>
                         <th>产品</th>
                         <th>功能模块</th>
@@ -101,17 +101,13 @@
 <script src="../js/foundation-datepicker.min.js"></script>
 <script src="../js/common.js"></script>
 <script type="text/javascript">
-    _API.getProductList('productList',0,true)
-        .getLevelList('levelList',0,true)
-        .getStatusListPm('status',0,true)
-        .getPriorityList('priority',0,true);
 
     //权限控制
     var roleid = $.cookie('userrole');
     if(roleid == 1 || roleid == 2 || roleid == 3){
         $('#creatpmneed').remove()
     }
-    function getData(p,checPara){
+    function getData(p,checPara,sessionPara){
         var PerPage = 20;
         var url  = _ip+'/product/getRequireList?page='+p+'&size='+PerPage;
         var data = {};
@@ -128,6 +124,9 @@
             }
             data = para
         }
+        if(sessionPara){
+            data = sessionPara;
+        }
         $.ajax({
             url:url,
             type : "POST",
@@ -143,7 +142,12 @@
                     window.location.href = 'user-login.html';
                     return false;
                 }
-               if(!json.data || json.data.length <= 0){
+                var storage = {
+                    p:p,
+                    para:data
+                }
+                sessionStorage.setItem('pmNeed', JSON.stringify(storage));
+                if(!json.data || json.data.length <= 0){
                     $('#bodyList').html('<tr><td colspan="11">暂无数据！</td></tr>');
                     $('#pageList').html('');
                     return false;
@@ -209,12 +213,34 @@
             }
         })
     }
-    getData(1);
 
     $('#checkout').on('click',function(){
 
         getData(1,true);
     })
+
+    function init() {
+        var sessionPage = JSON.parse(sessionStorage.getItem('pmNeed')) || null;
+        if(sessionPage){
+            var p = sessionPage.p;
+            var para = sessionPage.para;
+            getData(p,false,para);
+            $('#name').val(sessionPage.para.name);
+            $('#dpd1').val(sessionPage.para.startTime?sessionPage.para.startTime.split(' ')[0]:'');
+            $('#dpd2').val(sessionPage.para.endTime?sessionPage.para.endTime.split(' ')[0]:'');
+            _API.getProductList('productList',sessionPage.para.product,true)
+                    .getLevelList('levelList',sessionPage.para.level,true)
+                    .getStatusListPm('status',sessionPage.para.status,true)
+                    .getPriorityList('priority',sessionPage.para.priority,true);
+        }else{
+            getData(1);
+            _API.getProductList('productList',0,true)
+                    .getLevelList('levelList',0,true)
+                    .getStatusListPm('status',0,true)
+                    .getPriorityList('priority',0,true);
+        }
+    }
+    init()
 
 
     var nowTemp = new Date();

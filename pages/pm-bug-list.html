@@ -51,7 +51,7 @@
                     <thead>
                         <tr class="odd">
                         
-                            <th>序号</th>
+                            <th>ID</th>
                             <th>缺陷主题</th>
                             <th>产品</th>
                             <th>紧急程度</th>
@@ -87,7 +87,7 @@
 //    _API.getProductList('productList',false,true).getIssueStatusList('issueStatusList',0,true);
     var roleid = $.cookie('userrole');
     function getData(p,checPara,sessionPara){
-        var PerPage = 1;
+        var PerPage = 7;
         var url  = _ip+'/issue/getIssueList?page='+p+'&size='+PerPage;
         var data = {};
         if(checPara){
@@ -115,7 +115,6 @@
             contentType:'application/json',
             data:JSON.stringify(data),
             success: function(json) {
-
                 if(json.message === 'LOGIN') {
                     window.location.href = 'user-login.html';
                     return false;
@@ -138,9 +137,6 @@
                 if(prev < 1)prev = 1;
                 var next = p + 1;
                 if(next > totalPage)next = totalPage;
-
-
-
                 for(var k = 0, kk = json.data.length; k < kk; k++){
                     var msg = json.data[k];
 

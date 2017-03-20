@@ -28,7 +28,7 @@
 <div class="content">
     <div class="page-inner">
         <div class="page-content">
-            <div class="table-head clear"><div class="left document-name"><i class="bug-i"></i>No.01234</div><div class="right edit" id="goToEdit"><a onclick="edit()" class="sure">编辑</a></div></div>
+            <div class="table-head clear"><div class="left document-name"><i class="bug-i"></i></div><div class="right edit" id="goToEdit"><a onclick="edit()" class="sure">编辑</a></div></div>
             <!-- pm-bug-detail-edit.html -->
             <div class="table-cont">
                 <table class="content-table">
@@ -132,6 +132,7 @@
             success:function(data){
                 if(data.success){
                     var data = data.data;
+                    $('.document-name').append('ID.'+data.id)
                     $('#name').html(data.name);
                     $('#projectName').html(data.projectName);
                     $('#level').html(data.level);

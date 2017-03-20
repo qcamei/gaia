@@ -162,15 +162,12 @@
             "mobileType":$('#mobileType').val(),
             "product":$('#product').val(),
             "plat":$('#platform').val(),
-            "feature":$('#functionList').val()赚钱啊晚上跟你见面说说我的肥肉给他一句看了。／结合土豪金款自行车 v不n，美女比较快乐
-        】【-盘"" +
-        "】】" +
-        ""
+            "feature":$('#functionList').val(),
             "browser":$('#browser').val(),
             "discribe":$('#discribe').val(),
             "remark":$('#remark').val(),
 //            "creater":$.cookie('username'),
-            "attachment":attachment.join(''),
+            "attachment":attachment.join(','),
             "status":"新建",
             "level":$('#level').val(),
             "projectId":$('#keyMatchSelect').val() == "请输入关键词"?null:$('#keyMatchSelect').val()
@@ -194,7 +191,7 @@
 
                     location.href = 'pm-bug-list.html';
                 }else{
-                    alert('上传失败, 请稍后重试！');
+                    alert('添加失败, 请稍后重试！');
                 }
             }
         })

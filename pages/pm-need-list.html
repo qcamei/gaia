@@ -53,7 +53,7 @@
                 <table>
                     <thead>
                         <tr class="odd">
-                            <th>序号</th>
+                            <th>ID</th>
                             <th>需求名称</th>
                             <th>需求来源</th>
                             <th>需求方</th>
@@ -84,16 +84,9 @@
 <script src="../js/jquery.cookie.js"></script>
 <script src="../js/common.js"></script>
 <script type="text/javascript">
-    // getNeedSource('needSource',0,true);
-//    .getProNameList('needSource',0,true)
-    _API.getLevelList('levelList',0,true)
-        .getStatusList('status',0,true);
-//    $('#checkNeedSource').on('click',function () {
-//        var _val = $('#needSourceNameInput').val();
-//        _API.checkProNameList('needSource',0,true,_val)
-//    })
+
     var roleid = $.cookie('userrole');
-    function getData(p,checPara){
+    function getData(p,checPara,sessionPara){
         var PerPage = 20;
         var url  = _ip+'/original/getRequireList?page='+p+'&size='+PerPage;
         var data = {};
@@ -105,6 +98,9 @@
                 status:$('#status').val() || null,
             }
             data = para
+        }
+        if(sessionPara){
+            data = sessionPara;
         }
         $.ajax({
             url:url,
@@ -121,11 +117,18 @@
                     window.location.href = 'user-login.html';
                     return false;
                 }
+                var storage = {
+                    p:p,
+                    para:data
+                }
+                sessionStorage.setItem('memsNeed', JSON.stringify(storage));
+
                 if(!json.data || json.data.length <= 0){
                     $('#bodyList').html('<tr><td colspan="10">暂无数据！</td></tr>');
                     $('#pageList').html('');
                     return false;
                 }
+
                 var _data     = [];
                 var _pager    = [];
                 var totalPage = json.totlePage;
@@ -185,12 +188,26 @@
             }
         })
     }
-    getData(1);
 
     $('#checkout').on('click',function(){
         getData(1,true);
     })
 
+    function init() {
+        var sessionPage = JSON.parse(sessionStorage.getItem('memsNeed')) || null;
+        if(sessionPage){
+            var p = sessionPage.p;
+            var para = sessionPage.para;
+            getData(p,false,para);
+            $('#needName').val(sessionPage.para.name);
+            $('#needSource').val(sessionPage.para.projectName);
+            _API.getLevelList('levelList',sessionPage.para.level,true).getStatusList('status',sessionPage.para.status,true);
+        }else{
+            getData(1);
+            _API.getLevelList('levelList',false,true).getStatusList('status',false,true);
+        }
+    }
+    init()
 
     function  deleteList(id) {
         if(confirm("原始需求删除后，与之相关的产品需求自动解绑！确认删除吗？")){
