@@ -578,18 +578,27 @@ function attachment(config){
             var filePath=$(this).val();
             if(that.config.noFormat) {
                 if(filePath){
-                    // var arr=filePath.split('\\');
-                    // var fileName=arr[arr.length-1];
-                    // that.config.fileName.html(fileName);
                     that.uploadFile();
 
                 }else{
-                    // that.config.fileName.html("");
                     alert("您未上传文件!");
                     return false;
                 }
             }
             else {
+                var specialSymbols = ['*','#','&','@','%','^'];
+                var isSpecial = false;
+                for(var m = 0; m < specialSymbols.length; n++){
+                    if(filePath.indexOf(specialSymbols[m]) != -1){
+                        isSpecial = true;
+                        break;
+                    }
+                }
+                if(isSpecial){
+                    alert("文件名不能包含*、#等特殊符号！");
+                    return false
+                }
+
                 var format = filePath.split('.')[1].toLocaleUpperCase();
                 var formatArr = ['JPG','PDF','XLSX','XLS','CSV','PNG','DOCX','DOC','ZIP','PPT'];
                 var isSport = false;
@@ -607,17 +616,6 @@ function attachment(config){
                     alert("您上传文件类型有误！");
                     return false
                 }
-
-                // if(filePath.indexOf("jpg")!=-1 || filePath.indexOf("pdf")!=-1 || filePath.indexOf("xlsx")!=-1 || filePath.indexOf("xls")!=-1 || filePath.indexOf("csv")!=-1 || filePath.indexOf("png")!=-1 || filePath.indexOf("docx")!=-1 || filePath.indexOf("doc")!=-1 || filePath.indexOf("zip")!=-1 || filePath.indexOf("ppt")!=-1){
-                //     var arr=filePath.split('\\');
-                //     var fileName=arr[arr.length-1];
-                //     // that.config.fileName.html(fileName);
-                //     that.uploadFile();
-                // }else{
-                //     // that.config.fileName.html("");
-                //     alert("您未上传文件，或者您上传文件类型有误！");
-                //     return false
-                // }
             }
         })
     };
