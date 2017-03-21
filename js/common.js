@@ -590,16 +590,34 @@ function attachment(config){
                 }
             }
             else {
-                if(filePath.indexOf("jpg")!=-1 || filePath.indexOf("pdf")!=-1 || filePath.indexOf("xlsx")!=-1 || filePath.indexOf("xls")!=-1 || filePath.indexOf("csv")!=-1 || filePath.indexOf("png")!=-1 || filePath.indexOf("docx")!=-1 || filePath.indexOf("doc")!=-1 || filePath.indexOf("zip")!=-1 || filePath.indexOf("ppt")!=-1){
+                var format = filePath.split('.')[1].toLocaleUpperCase();
+                var formatArr = ['JPG','PDF','XLSX','XLS','CSV','PNG','DOCX','DOC','ZIP','PPT'];
+                var isSport = false;
+                for(var n = 0; n < formatArr.length; n++){
+                    if(format.indexOf(formatArr[n]) != -1){
+                        isSport = true;
+                        break;
+                    }
+                }
+                if(isSport){
                     var arr=filePath.split('\\');
                     var fileName=arr[arr.length-1];
-                    // that.config.fileName.html(fileName);
                     that.uploadFile();
                 }else{
-                    // that.config.fileName.html("");
-                    alert("您未上传文件，或者您上传文件类型有误！");
+                    alert("您上传文件类型有误！");
                     return false
                 }
+
+                // if(filePath.indexOf("jpg")!=-1 || filePath.indexOf("pdf")!=-1 || filePath.indexOf("xlsx")!=-1 || filePath.indexOf("xls")!=-1 || filePath.indexOf("csv")!=-1 || filePath.indexOf("png")!=-1 || filePath.indexOf("docx")!=-1 || filePath.indexOf("doc")!=-1 || filePath.indexOf("zip")!=-1 || filePath.indexOf("ppt")!=-1){
+                //     var arr=filePath.split('\\');
+                //     var fileName=arr[arr.length-1];
+                //     // that.config.fileName.html(fileName);
+                //     that.uploadFile();
+                // }else{
+                //     // that.config.fileName.html("");
+                //     alert("您未上传文件，或者您上传文件类型有误！");
+                //     return false
+                // }
             }
         })
     };

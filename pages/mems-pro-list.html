@@ -221,25 +221,27 @@
         getData(1,true);
     })
     function init() {
+        _API.dynamicDistrick('district','privence','city');
         var sessionPage = JSON.parse(sessionStorage.getItem('allPro')) || null;
         if(sessionPage){
             var p = sessionPage.p;
             var para = sessionPage.para;
             getData(p,false,para);
             $('#needSource').val(sessionPage.para.name);
-            _API.getProductList('productList',sessionPage.para.product,true).getIssueStatusList('issueStatusList',sessionPage.para.status,true);
             _API.getPSegmentationList('Segmentation',sessionPage.para.segmentation,true)
                     .getPLevelList('level',sessionPage.para.level,true)
                     .getBussTypeList('bussType',sessionPage.para.businessType,true)
-                    .getDistrict('district',sessionPage.para.area,true)
-                    .getPrivence('privence',sessionPage.para.province,true,sessionPage.para.area)
-                    .getCity('city',sessionPage.para.city,true,sessionPage.para.area,sessionPage.para.province);
+
+            if(sessionPage.para.area){
+                _API.getDistrict('district',sessionPage.para.area,true)
+                        .getPrivence('privence',sessionPage.para.province,true,sessionPage.para.area)
+                        .getCity('city',sessionPage.para.city,true,sessionPage.para.area,sessionPage.para.province);
+            }
         }else{
             getData(1);
             _API.getPSegmentationList('Segmentation',0,true)
                     .getPLevelList('level',0,true)
                     .getBussTypeList('bussType',0,true)
-                    .dynamicDistrick('district','privence','city');
         }
     }
     init()

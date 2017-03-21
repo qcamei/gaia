@@ -87,7 +87,7 @@
 //    _API.getProductList('productList',false,true).getIssueStatusList('issueStatusList',0,true);
     var roleid = $.cookie('userrole');
     function getData(p,checPara,sessionPara){
-        var PerPage = 7;
+        var PerPage = 20;
         var url  = _ip+'/issue/getIssueList?page='+p+'&size='+PerPage;
         var data = {};
         if(checPara){

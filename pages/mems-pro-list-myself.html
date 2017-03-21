@@ -219,6 +219,7 @@
         getData(1,true);
     })
     function init() {
+        _API.dynamicDistrick('district','privence','city');
         var sessionPage = JSON.parse(sessionStorage.getItem('myPro')) || null;
         if(sessionPage){
             var p = sessionPage.p;
@@ -229,15 +230,17 @@
             _API.getPSegmentationList('Segmentation',sessionPage.para.segmentation,true)
                     .getPLevelList('level',sessionPage.para.level,true)
                     .getBussTypeList('bussType',sessionPage.para.businessType,true)
-                    .getDistrict('district',sessionPage.para.area,true)
-                    .getPrivence('privence',sessionPage.para.province,true,sessionPage.para.area)
-                    .getCity('city',sessionPage.para.city,true,sessionPage.para.area,sessionPage.para.province);
+
+            if(sessionPage.para.area){
+                _API.getDistrict('district',sessionPage.para.area,true)
+                        .getPrivence('privence',sessionPage.para.province,true,sessionPage.para.area)
+                        .getCity('city',sessionPage.para.city,true,sessionPage.para.area,sessionPage.para.province);
+            }
         }else{
             getData(1);
             _API.getPSegmentationList('Segmentation',0,true)
                     .getPLevelList('level',0,true)
                     .getBussTypeList('bussType',0,true)
-                    .dynamicDistrick('district','privence','city');
         }
     }
     init()
