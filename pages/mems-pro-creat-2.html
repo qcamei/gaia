@@ -174,6 +174,7 @@
 
 <script type="text/javascript">
 
+    _API.dynamicDistrick('district','province','city');
     var position = $$.getUrlParaObj('p');
     if(position){
         var hdata =  JSON.parse(localStorage.getItem("hospitalData"));
@@ -187,11 +188,12 @@
             .getPSegmentationList('segmentation',hdata.segmentation,false)
             .getPLevelList('level',hdata.grade,false)
 
+
     }else{
 
         _API.getPSegmentationList('segmentation')
             .getPLevelList('level')
-            .dynamicDistrick('district','province','city');
+
     }
     //权限控制
     var roleid = $.cookie('userrole');

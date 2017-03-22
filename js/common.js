@@ -601,7 +601,7 @@ function attachment(config){
 
                 var format = filePath.split('.')[1].toLocaleUpperCase();
                 var formatArr = ['JPG','PDF','XLSX','XLS','CSV','PNG','DOCX','DOC','ZIP','PPT'];
-                var isSport = true;
+                var isSport = false;
                 for(var n = 0; n < formatArr.length; n++){
                     if(format.indexOf(formatArr[n]) != -1){
                         isSport = true;
