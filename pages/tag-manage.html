@@ -100,7 +100,7 @@
         $('.error-msg').remove();
         if(edit) {
             var id = $obj.prev().data('id');
-            var name= $obj.prev().val();
+            var name= $obj.prev().val().replace(/(^\s*)|(\s*$)/g,"");
             url = _ip+'/tags/update';
             if(!name) {
                 $addTagbox.prepend('<p class="error-msg">标签名字不能为空</p>');
@@ -114,7 +114,7 @@
             })
         }
         else {
-            if(!tagValue) {
+            if(!tagValue.replace(/(^\s*)|(\s*$)/g,"")) {
                 $addTagbox.prepend('<p class="error-msg">标签名字不能为空</p>');
                 return false;
             }
