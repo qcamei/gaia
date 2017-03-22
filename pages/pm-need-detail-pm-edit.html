@@ -27,7 +27,7 @@
 <div class="content">
     <div class="page-inner">
         <div class="page-content">
-            <div class="table-head clear"><div class="left document-name"><i class="bug-i"></i></div><div class="right edit"><a  onclick="returnList()" class="sure">取消</a><a onclick="commitEdit()" class="sure">保存</a></div></div>
+            <div class="table-head clear"><div class="left document-name" id="document-name"><i class="bug-i"></i></div><div class="right edit"><a  onclick="returnList()" class="sure">取消</a><a onclick="commitEdit()" class="sure">保存</a></div></div>
            
             <div class="table-cont">
                 <table class="content-table">
@@ -136,7 +136,7 @@
             success:function(data){
                 if(data.success){
                     var data = data.data;
-                    $('.document-name').append('ID.'+data.id)
+                    $('#document-name').append('ID.'+data.id)
                     _API.getTypeList('typeList',data.type)
                         .getProductList('productList',data.product)
                         .getPlatformList('platformList',data.plat)

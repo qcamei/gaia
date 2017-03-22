@@ -588,7 +588,7 @@ function attachment(config){
             else {
                 var specialSymbols = ['*','#','&','@','%','^'];
                 var isSpecial = false;
-                for(var m = 0; m < specialSymbols.length; n++){
+                for(var m = 0; m < specialSymbols.length; m++){
                     if(filePath.indexOf(specialSymbols[m]) != -1){
                         isSpecial = true;
                         break;
@@ -601,7 +601,7 @@ function attachment(config){
 
                 var format = filePath.split('.')[1].toLocaleUpperCase();
                 var formatArr = ['JPG','PDF','XLSX','XLS','CSV','PNG','DOCX','DOC','ZIP','PPT'];
-                var isSport = false;
+                var isSport = true;
                 for(var n = 0; n < formatArr.length; n++){
                     if(format.indexOf(formatArr[n]) != -1){
                         isSport = true;

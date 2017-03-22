@@ -135,7 +135,6 @@ manageTagSelf.prototype = {
 
 		    		data['id'] = that.userId;
 		    	}
-
 		    	$.ajax({
 		            url:url,
 		            type : "POST",
@@ -251,7 +250,9 @@ manageTagSelf.prototype = {
         		i.css({'display':'none'});
 
         	}else{
-        		i.css({'display':'block'});
+
+
+				i.css({'display':'block'});
 				var name = $(this).find('input').val()
 				// var url = _ip + '/pci/update';
 				var data = {};
@@ -259,14 +260,14 @@ manageTagSelf.prototype = {
 				var isre = false;
 				_id2.find('li').each(function(k){
 					var s = $(this).find('input').val();
-					if(s != name){
-						str.push(s);
-						isre = false;
-					}else{
-						isre = true;
-
-					}
+					str.push(s);
 				})
+				for(var j = 0; j < str.length; j++){
+					if(str[j] == name){
+						isre = true;
+						break;
+					}
+				}
 
 				if(!isre){
 					str.push(name);
@@ -278,8 +279,6 @@ manageTagSelf.prototype = {
 		    	if(id1.indexOf('card') >= 0){
 		    		data['cusId'] = id1.split('-')[4]; 
 		    	}else{
-
-
                     data['id'] = canuserId; //that.userId
 		    	}
 		    	$.ajax({
@@ -470,7 +469,6 @@ clientDataCard.prototype = {
         	contentType:'application/json',
         	jsonpCallback: 'iniata',
             success:function(json){
-				console.log(json)
                 if(json.success){
 					// that.creatCardDom(json.data,that.mark);
 					var url  = _ip+'/puser/select';
@@ -480,7 +478,6 @@ clientDataCard.prototype = {
 
 					var arrn = [];
 					organizeAjaxGet(url, datap, 'gg', function(data) {
-						console.log(data);
 						if (data.success) {
 							arrn.push(data.data.owner.id);
 							for(var k = 0; k < data.data.list.length; k++){
