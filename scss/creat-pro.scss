@@ -300,6 +300,10 @@
 }
 .pro-sure-can{
 	background:#009ff2;
+	&:hover{
+		background: #66bb6a;
+		border:1px solid #66bb6a;
+	}
 }
 .error-i{
   border: 1px solid $color-red!important;

@@ -89,6 +89,7 @@ function creatAsideDom() {
     var obj = {
         promanage: {
             name:'项目管理',
+            iconClass:'project',
             data: [
                     {
                         id:'prolit',
@@ -99,6 +100,7 @@ function creatAsideDom() {
         },
         needmange:{
             name:'需求管理',
+            iconClass:'need',
             data:[
                     {
                         id:'needlist',
@@ -114,6 +116,7 @@ function creatAsideDom() {
         },
         system:{
             name:'系统配置',
+            iconClass:'system',
             data:[
                     {
                         id:'usermanage',
@@ -134,6 +137,7 @@ function creatAsideDom() {
         },
         documentmanage:{
             name:'文档管理',
+            iconClass:'document',
             data:[
                     {
                         id:'docmanage',
@@ -151,7 +155,7 @@ function creatAsideDom() {
         }
 
         h += '<li id="'+k+'">';
-            h += '<div class="menu-first"><i class="project"></i>'+first.name+'</div>';
+            h += '<div class="menu-first"><i class="'+first.iconClass+'"></i>'+first.name+'</div>';
             var second = first.data;
             h += '<dl class="menu-second">';
             for(var n = 0; n < second.length; n ++){

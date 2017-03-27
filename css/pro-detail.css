@@ -518,7 +518,7 @@ aside.aside {
         width: 93%;
         padding: 20px 0;
         text-align: center; }
-        .content .page-inner .page-content .buttons > button, .content .page-inner .page-content .buttons a {
+        .content .page-inner .page-content .buttons > button, .content .page-inner .page-content .buttons > a {
           width: 86px;
           height: 28px;
           line-height: 28px;
@@ -527,10 +527,12 @@ aside.aside {
           background: #009ff2;
           display: inline-block;
           cursor: pointer; }
-          .content .page-inner .page-content .buttons > button.cancel, .content .page-inner .page-content .buttons a.cancel {
+          .content .page-inner .page-content .buttons > button.cancel, .content .page-inner .page-content .buttons > a.cancel {
             background: #FFF;
             border: 1px solid #d9e2e7;
             color: #2e3f51; }
+        .content .page-inner .page-content .buttons > a:nth-child(2n):hover {
+          background: #66bb6a; }
 
 .btn {
   width: 86px;
@@ -544,6 +546,9 @@ aside.aside {
   text-align: center;
   line-height: 28px;
   cursor: pointer; }
+  .btn:hover {
+    background: #66bb6a;
+    border: 1px solid #66bb6a; }
 
 .page-list > a {
   float: left;
@@ -594,6 +599,9 @@ aside.aside {
   cursor: pointer;
   float: left;
   margin: 0 0 0 5px; }
+  .page-list > button:hover {
+    background: #66bb6a;
+    border: 1px solid #66bb6a; }
 
 aside.aside .logo {
   width: 70%;
@@ -635,16 +643,19 @@ aside.aside .menu {
       width: 12px;
       height: 12px;
       margin: 15px 12px 0 18px;
-      background-position-x: 0px;
-      background-position-y: -120px; }
-      aside.aside .menu .menu-first > i.dash {
-        background-image: url("../images/icons.png"); }
+      background-position-x: 0px; }
       aside.aside .menu .menu-first > i.project {
-        background-image: url("../images/icons.png"); }
+        background-image: url("../images/icons.png");
+        background-position-y: -120px; }
       aside.aside .menu .menu-first > i.need {
-        background-image: url("../images/icons.png"); }
+        background-image: url("../images/icons.png");
+        background-position-y: -224px; }
       aside.aside .menu .menu-first > i.system {
-        background-image: url("../images/icons.png"); }
+        background-image: url("../images/icons.png");
+        background-position-y: -251px; }
+      aside.aside .menu .menu-first > i.document {
+        background-image: url("../images/icons.png");
+        background-position-y: -200px; }
   aside.aside .menu .menu-second {
     width: 100%; }
     aside.aside .menu .menu-second > dd {
@@ -1131,6 +1142,9 @@ aside.aside .menu {
       border-radius: 4px;
       color: #FFF;
       cursor: pointer; }
+      .p-content .content-right .business .add-cord > input:hover {
+        background: #66bb6a;
+        border: 1px solid #66bb6a; }
     .p-content .content-right .business .add-cord .add-input {
       width: 92%;
       margin: 0 auto; }
@@ -1159,6 +1173,10 @@ aside.aside .menu {
             border: 1px solid #d9e2e7;
             color: #99aabb;
             margin: 0 0 0 10px;
+            cursor: pointer; }
+          .p-content .content-right .business .add-cord .add-input > tbody > tr > td:nth-child(2n) > button:nth-child(2n+1):hover {
+            background: #66bb6a;
+            border: 1px solid #66bb6a;
             cursor: pointer; }
       .p-content .content-right .business .add-cord .add-input > tbody > tr > td .visitors > li {
         float: left;

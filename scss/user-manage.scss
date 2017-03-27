@@ -70,6 +70,9 @@ html{
               color: #fff;
               cursor: pointer;
               outline: none;
+              &:hover{
+                background: #66bb6a;
+              }
             }
           }
           &:after{
@@ -240,6 +243,9 @@ html{
               background:#03a9f4;
               color:#ffffff;
               margin-top: 30px;
+              &:hover{
+                background: #66bb6a;
+              }
             }
             &.cancel-user-btn {
               background:#ffffff;

@@ -388,6 +388,10 @@
           border-radius: 4px;
           color: #FFF;
           cursor: pointer;
+          &:hover{
+            background: #66bb6a;
+            border:1px solid #66bb6a;
+          }
         }
         .add-input{
           width: 92%;
@@ -424,6 +428,13 @@
                       color: #99aabb;
                       margin: 0 0 0 10px;
                       cursor: pointer;
+                    }
+                    &:nth-child(2n+1){
+                      &:hover{
+                        background: #66bb6a;
+                        border:1px solid #66bb6a;
+                        cursor: pointer;
+                      }
                     }
                   }
                 }

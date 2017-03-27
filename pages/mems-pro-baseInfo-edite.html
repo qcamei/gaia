@@ -64,7 +64,7 @@
                     <td><label><input type="radio" value="1" name="hsrEnable">&nbsp;有</label>&emsp;<label><input type="radio" name="hsrEnable" value="0">&nbsp;无</label></td>
                 </tr>
                 <tr>
-                    <td><span class="red-start">*</span>是否为百强医院</td>
+                    <td width="150"><span class="red-start">*</span>是否为百强医院</td>
                     <td><label><input type="radio" value="1" name="isTopHundred">&nbsp;是</label>&emsp;<label><input type="radio" name="isTopHundred" checked="checked" value="0">&nbsp;否</label></td>
                 </tr>
                 <!--<tr>-->
@@ -144,7 +144,11 @@
         $('#name').prop({'disabled':'disabled'});
         $('#segmentation').prop({'disabled':true})
         $('#level').prop({'disabled':true});
+        $('input[name=isTopHundred]').prop({'disabled':'disabled'})
     }
+//    if(roleid==9 || roleid==3){
+//        $('#isTopHundredTr').css({'visibility':'visible'});
+//    }
 
 
 
