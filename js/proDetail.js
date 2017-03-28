@@ -1187,8 +1187,8 @@ businessProgress.prototype = {
 								h += '<span>'+v[j]+'</span>';
 							}
 							h += '<span>'+data.createTime+'</span></div>';
-							h += '<ul class="clear key-list"><li>'+data.type+'</li><li>'+data.level+'</li><li>'+data.visitResult+'</li><li>'+data.emergency+'</li></ul>';
-
+							// h += '<ul class="clear key-list"><li>'+data.type+'</li><li>'+data.level+'</li><li>'+data.visitResult+'</li><li>'+data.emergency+'</li>';
+							h += '<ul class="clear key-list">'+(data.type?'<li>'+data.type+'</li>':'')+(data.level?'<li>'+data.level+'</li>':'')+(data.visitResult?'<li>'+data.visitResult+'</li>':'')+(data.emergency?'<li>'+data.emergency+'</li>':'')+'</ul>';
 							if(data.nextFocus || data.nextFollow ){
 								h += '<p class="dec">'+(data.support ? data.support : '-')+'</p>';
 								h += '<p class="dec">'+data.remark+'</p>';
