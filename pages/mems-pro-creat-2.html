@@ -293,8 +293,8 @@
             "alias":$('#alias').val(),
             "segmentation": $('#segmentation').val(),
             "level": $('#level').val(),
-            "hsrEnable":parseInt($('input[name=hsrEnable]').val()),
-            "isTopHundred":parseInt($('input[name=isTopHundred]').val()),
+            "hsrEnable":parseInt($('input[name=hsrEnable]:checked').val()),
+            "isTopHundred":parseInt($('input[name=isTopHundred]:checked').val()),
 //            "postcode":parseInt($('#postcode').val()),
             "bed":parseInt($('#bed').val()),
             "people":parseInt($('#people').val()),
@@ -327,7 +327,7 @@
                 }
                 if(data.success){
                     var id = data.data;
-                    location.href = 'mems-pro-creat-3.html?id='+id+'&name='+$('#name').val();
+                   location.href = 'mems-pro-creat-3.html?id='+id+'&name='+$('#name').val();
                 }else{
                     if(data.message == '项目名重复，请重新输入'){
                         $('#name').addClass('error-i')
