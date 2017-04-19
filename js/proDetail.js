@@ -336,6 +336,7 @@ manageTagSelf.prototype = {
 					var isShowMark = false;
 					var arr = [];
 					organizeAjaxGet(url, dataPara, 'xxx', function(memberJson) {
+					        console.log(memberJson)
 						if (memberJson.success) {
 							arr.push(memberJson.data.owner.id);
 							for(var k = 0; k < memberJson.data.list.length; k++){
@@ -361,7 +362,6 @@ manageTagSelf.prototype = {
 							obj[id5] = data.interestTag ? data.interestTag.split(','):'';
 							obj[id6] = data.managementTag ? data.managementTag.split(','):'';
 							obj[id7] = data.competitorTag ? data.competitorTag.split(','):'';
-							// console.log(isShowMark)
 							for(var k in obj){
 								var dom  = $('#'+k);
 								var html = '';

@@ -233,8 +233,9 @@
         })
     }
 
-
+    var isClick = false;
     function creatItem() {
+
         var flag = true;
         for(var k = 0; k < 2; k ++){
             var v = $('#'+arr[k]).val();
@@ -271,7 +272,6 @@
             "level": $('#level').val(),
             "hsrEnable":parseInt($('input[name=hsrEnable]:checked').val()),
             "isTopHundred":parseInt($('input[name=isTopHundred]:checked').val()),
-//            "postcode":parseInt($('#postcode').val()),
             "bed":parseInt($('#bed').val()),
             "people":parseInt($('#people').val()),
             "province": $('#province').val() || '',
@@ -279,11 +279,11 @@
             "area": $('#district').val() || '',
             "address":$('#address').val() || '',
             "location":$('#location').val(),
-//            "latitude":$('#latitude').val(),
-//            "longitude":$('#longitude').val(),
             "creater": $.cookie('userid')
         }
-
+        if(isClick) return;
+        $('.pro-sure-can').addClass('sending');
+        isClick = true;
         $.ajax({
             url:url,
             type : "POST",

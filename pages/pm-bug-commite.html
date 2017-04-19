@@ -92,7 +92,7 @@
             </div>
             <div class="buttons">
                 <a href="pm-bug-list.html" class="cancel">返回</a>
-                <a onclick="commit()">提交</a>
+                <a onclick="commit(this)">提交</a>
             </div>
         </div>
     </div>
@@ -137,7 +137,10 @@
     discribe.focus(function(){
         discribe.removeClass('error-i');
     })
-    function commit() {
+
+
+    var isClick = false;
+    function commit(that) {
         if(needName.val() == ''){
             needName.addClass('error-i');
             return
@@ -173,6 +176,9 @@
             "level":$('#level').val(),
             "projectId":$('#keyMatchSelect').val() == "请输入关键词"?null:$('#keyMatchSelect').val()
         }
+        if(isClick) return;
+        $(that).addClass('sending');
+        isClick = true;
         $.ajax({
             url:url,
             type : "POST",

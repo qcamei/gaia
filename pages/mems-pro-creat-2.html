@@ -144,34 +144,6 @@
 <script src='../js/jquery.min.js'  type="text/javascript"></script>
 <script src="../js/jquery.cookie.js"></script>
 <script src="../js/common.js"></script>
-<script>
-
-
-//    (function(){
-//        var iframe = document.getElementById('test').contentWindow;
-//        document.getElementById('test').onload = function(){
-//            iframe.postMessage('hello','https://m.amap.com/picker/');
-//        };
-//        window.addEventListener("message", function(e){
-//            alert('您选择了:' + e.data.name + ',' + e.data.location)
-//        }, false);
-//    }())
-//
-//    window.Konsole = {
-//        exec: function(code) {
-//            code = code || '';
-//            try {
-//                var result = window.eval(code);
-//                window.parent.setIFrameResult('result', result);
-//            } catch (e) {
-//                window.parent.setIFrameResult('error', e);
-//            }
-//        }
-//    }
-</script>
-
-
-
 <script type="text/javascript">
 
     _API.dynamicDistrick('district','province','city');
@@ -202,30 +174,6 @@
         $('#segmentation').prop({'disabled':true})
     }
 
-
-    <!--var nameflag = false;-->
-    <!--function veryName(that) {-->
-        <!--var name = $(that).val();-->
-        <!--var url = _ip + '/project/verify?name='+name;-->
-        <!--$.ajax({-->
-            <!--url: url,-->
-            <!--type: 'GET',-->
-            <!--dataType: 'jsonp',-->
-            <!--contentType: 'application/json',-->
-            <!--jsonpCallback: 'very',-->
-            <!--success: function (json) {-->
-
-                <!--if(json.success == false){-->
-                    <!--nameflag = false;-->
-                    <!--$(that).siblings('span').css({'display':'inline-block','color':'#ed8073'}).html(json.message);-->
-                <!--}else{-->
-                    <!--nameflag = true-->
-                    <!--$(that).siblings('span').css({'display':'inline-block','color':'#009926'}).html(json.message);-->
-                <!--}-->
-
-            <!--}-->
-        <!--})-->
-    <!--}-->
     function reInputName(that) {
         $(that).removeClass('error-i');
         $(that).sibling('span').css({'display':'none'});
@@ -254,11 +202,9 @@
             $(this).removeClass('error-i');
         })
     }
+    var isClick = false;
     function creatItem() {
-//        if(!nameflag){
-//            alert('请重新输入项目名称！');
-//            return;
-//        }
+
         var flag = true;
         for(var k = 0; k < 2; k ++){
             var v = $('#'+arr[k]).val();
@@ -287,7 +233,6 @@
         if(!flag) return;
         var url  = _ip+'/project/insert';
         var data = {
-//            "hosId":hdata.id,
             "name": $('#name').val(),
             "shortName":$('#shortName').val(),
             "alias":$('#alias').val(),
@@ -295,7 +240,6 @@
             "level": $('#level').val(),
             "hsrEnable":parseInt($('input[name=hsrEnable]:checked').val()),
             "isTopHundred":parseInt($('input[name=isTopHundred]:checked').val()),
-//            "postcode":parseInt($('#postcode').val()),
             "bed":parseInt($('#bed').val()),
             "people":parseInt($('#people').val()),
             "province": $('#province').val() || '',
@@ -303,13 +247,14 @@
             "area": $('#district').val() || '',
             "address":$('#address').val() || '',
             "location":$('#location').val(),
-//            "latitude":$('#latitude').val(),
-//            "longitude":$('#longitude').val(),
             "creater": $.cookie('userid')
         }
         if(position){
             data['hosId'] = hdata.id;
         }
+        if(isClick) return;
+        $('.pro-sure-can').addClass('sending');
+        isClick = true;
         $.ajax({
             url:url,
             type : "POST",
@@ -331,7 +276,6 @@
                 }else{
                     if(data.message == '项目名重复，请重新输入'){
                         $('#name').addClass('error-i')
-
                     }
                     alert(data.message);
                 }

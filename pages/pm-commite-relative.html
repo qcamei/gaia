@@ -90,7 +90,7 @@
             </div>
             <div class="buttons">
                 <a class="cancel" onclick="returnLink()">取消</a>
-                <a onclick="commit()">提交</a>
+                <a onclick="commit(this)">提交</a>
             </div>
         </div>
     </div>
@@ -132,12 +132,10 @@
         named.removeClass('error-i');
         named.siblings('.error-icon').css({'visibility':'hidden'});
     })
-//    version.focus(function(){
-//        version.removeClass('error-i');
-//        version.siblings('.error-icon').css({'visibility':'hidden'});
-//    })
 
-    function commit() {
+
+    var isClick = false;
+    function commit(that) {
         if(named.val() == ''){
             named.addClass('error-i');
             named.siblings('.error-icon').css({'visibility':'visible'});
@@ -174,6 +172,10 @@
                 "discribe":$('#discribe').val()
                 
             }
+
+        if(isClick) return;
+        $(that).addClass('sending');
+        isClick = true;
         $.ajax({
             url:url,
             type: 'post',

@@ -73,7 +73,8 @@
                     <tr>
                         <td><span class="red-start">*</span>紧急程度：</td>
                         <td><select id="levelList"></select></td>
-
+                        <td class="reliableTd" style="visibility: hidden;"><span class="red-start">*</span>可靠度：</td>
+                        <td class="reliableTd" style="visibility: hidden"><select id="reliableList"></select></td>
                     </tr>
                     <tr class="area">
                         <td><span class="red-start">*</span>需求场景：</td>
@@ -140,6 +141,14 @@
     function toNedDetail() {
         location.href = 'pm-need-detail-mems.html?id='+getUrlId();
     }
+    //权限控制
+    var roleid = $.cookie('userrole');
+    function cannotrelative(){
+        if(roleid == 9 || roleid == 0){
+            $('.reliableTd').css({'visibility':'visible'});
+        }
+    }
+    cannotrelative()
 
     //修改需求来源
     var goEditSource = $('#goEditSource');
@@ -192,6 +201,7 @@
                         .getFunctionList('functionList',data.feature,false,false,data.product)
                         .getTypeList('typeList',data.type)
                         .getLevelList('levelList',data.level)
+                        .getReliableSet('reliableList',data.reliableDesc)
                         .getProductList('productList',data.product);
                     window.originalProjectId = data.projectId;
                     window.originalCustomerId = data.customerId;
@@ -263,7 +273,8 @@
             "sugSolution": $('#sugSolution').val(),
             "type": $('#typeList').val(),
             "attachment":attachment.join(','),
-            "level":$('#levelList').val()
+            "level":$('#levelList').val(),
+            "reliableDesc":$('#reliableList').val()
         }
         $.ajax({
             url:url,

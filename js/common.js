@@ -426,6 +426,11 @@ _api.prototype = {
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'level']);
         return this;
     },
+    getReliableSet: function(id, defaultId,isSelect){ // 6. 获取可靠度 get
+        var url = _ip+'/common/getReliableSet';
+        this.getListSecond.apply(this,[url,id,defaultId,isSelect,'ReliableSet']);
+        return this;
+    },
     getProductList: function(id, defaultId,isSelect){ // 7. 获取产品列表
         var url = _ip+'/common/getProductList';
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'pro']);

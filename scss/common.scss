@@ -1002,8 +1002,19 @@ aside.aside{
 
       }
     }
+    >a.sending{
+      background: #f1f1f1;
+      border: 1px solid #f2f2f2;
+
+    }
   }
 }
+
+.sending{
+  background: #f1f1f1!important;
+  border: 1px solid #f2f2f2!important;
+}
+
 
 .file-name{
   color: $color-gray-d;

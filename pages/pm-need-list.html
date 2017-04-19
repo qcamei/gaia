@@ -41,9 +41,9 @@
                 <!--<td>需求来源：<div class="nee-source-box clear"><input class="left" id="needSourceNameInput"><button class="left" id="checkNeedSource">点击搜索</button><select class="left" id="needSource"><option>请选择</option></select></div></td>-->
                 <td>需求名称：<input id="needName" /></td>
                 <td>需求来源：<input id="needSource" /></td>
-                <td>紧急程度：<select id="levelList"></select></td>
+                <td>产品：<select id="productList"></select></td>
                 <td>处理状态：<select id="status"></select></td>
-
+                <td>可靠度：<select id="reliableDesc"></select></td>
                 <td align="right"><button class="btn" id="checkout">查询</button></td>
             </tr>
         </table>
@@ -57,11 +57,12 @@
                             <th>需求名称</th>
                             <!--<th>需求来源</th>-->
                             <!--<th>需求方</th>-->
-                            <th width="70">紧急程度</th>
+                            <th width="110">产品</th>
                            <!--  <th>附件</th> -->
                             <th width="50">提出人</th>
                             <th width="140">提出时间</th>
                             <th width="70">处理状态</th>
+                            <th width="70">可靠度</th>
                             <th width="100">关联产品需求数</th>
                             <th width="30">操作</th>
                         </tr>
@@ -94,8 +95,9 @@
             var para = {
                 projectName: $('#needSource').val() || null,
                 name: $('#needName').val() || null,
-                level:$('#levelList').val() || null,
+                product:$('#productList').val() || null,
                 status:$('#status').val() || null,
+                reliableDesc:$('#reliableDesc').val() || null
             }
             data = para
         }
@@ -144,10 +146,11 @@
                     _data.push('<td><a href="pm-need-detail-mems.html?id='+msg.id+'" title="'+msg.name+'" class="link">'+msg.name+'</a></td>');
 //                    _data.push('<td>'+msg.projectName+'</td>');
 //                    _data.push('<td>'+msg.customerName+'</td>');
-                    _data.push('<td>'+msg.level+'</td>');
+                    _data.push('<td>'+msg.product+'</td>');
                     _data.push('<td>'+msg.creater+'</td>');
                     _data.push('<td>'+msg.createTime+'</td>');
                     _data.push('<td>'+msg.status+'</td>');
+                    _data.push('<td>'+msg.reliableDesc+'</td>');
                     _data.push('<td>'+msg.downRelationCount+'/'+msg.relationCount+'</td>');
 
                     if( ((roleid==1 || roleid==2 || roleid==3) && msg.creater == $.cookie('name') && msg.status=='待处理') || roleid==9 || roleid== 0){
@@ -201,10 +204,10 @@
             getData(p,false,para);
             $('#needName').val(sessionPage.para.name);
             $('#needSource').val(sessionPage.para.projectName);
-            _API.getLevelList('levelList',sessionPage.para.level,true).getStatusList('status',sessionPage.para.status,true);
+            _API.getProductList('productList',sessionPage.para.product,true).getStatusList('status',sessionPage.para.status,true).getReliableSet('reliableDesc',sessionPage.para.reliableDesc,true);
         }else{
             getData(1);
-            _API.getLevelList('levelList',false,true).getStatusList('status',false,true);
+            _API.getProductList('productList',false,true).getStatusList('status',false,true).getReliableSet('reliableDesc',false,true);
         }
     }
     init()

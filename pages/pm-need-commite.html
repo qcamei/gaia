@@ -107,7 +107,7 @@
             </div>
             <div class="buttons">
                 <a class="cancel" href="pm-need-list.html">取消</a>
-                <a onclick="commit()">提交</a>
+                <a onclick="commit(this)">提交</a>
             </div>
         </div>
     </div>
@@ -120,9 +120,6 @@
     _API.getTypeList('typeList')
         .getProductList('productList',false,true)
         .getPlatformList('platformList')
-//        .getProNameList('needSource',false,true)
-//        .getComeSource('needSide',false,false,1)
-//        .getFunctionList('functionList')
         .getLevelList('levelList');
 
     // 上传文件
@@ -139,14 +136,6 @@
 //    var giveUp = $('#giveUp');
     var goSearchBtn = $('#goSearchBtn');
     var keyMatchSelect = $('#keyMatchSelect');
-//    goEditSource.on('click',function () {
-//        searchBox.css({'display':'block'})
-//        existSourceBox.css({'display':'none'})
-//    })
-//    giveUp.on('click',function () {
-//        searchBox.css({'display':'none'})
-//        existSourceBox.css({'display':'block'})
-//    })
     goSearchBtn.on('click',function () {
         var _val = $(this).siblings('input').val();
         if(_val.length < 2) return;
@@ -163,7 +152,9 @@
     scenario.focus(function(){
         scenario.removeClass('error-i');
     })
-    function commit() {
+
+    var isClick = false;
+    function commit(that) {
         if(needName.val() == ''){
             needName.addClass('error-i');
             return
@@ -214,6 +205,10 @@
             "level":$('#levelList').val(),
             "status":'待处理'
         }
+        if(isClick) return;
+        $(that).addClass('sending');
+        isClick = true;
+
         $.ajax({
             url:url,
             type : "POST",

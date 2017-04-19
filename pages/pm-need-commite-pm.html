@@ -87,7 +87,7 @@
             </div>
             <div class="buttons">
                 <a class="cancel" href="pm-need-list.html">取消</a>
-                <a onclick="commit()" >提交</a>
+                <a onclick="commit(this)" >提交</a>
                 <!-- href="pm-need-list.html" -->
             </div>
         </div>
@@ -116,7 +116,8 @@
         named.removeClass('error-i');
     })
 
-    function commit() {
+    var isClick = false;
+    function commit(that) {
         if(named.val() == ''){
             named.addClass('error-i');
             return
@@ -178,8 +179,9 @@
             alert('计划工时必须是正整数或一位小数');
             return false;
         }
-
-
+        if(isClick) return;
+        $(that).addClass('sending');
+        isClick = true;
         $.ajax({
             url:url,
             type : "POST",

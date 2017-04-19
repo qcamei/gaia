@@ -89,9 +89,9 @@
                     <thead>
                         <tr>
                             <th>来源</th>
-                            <th>需求方</th>
+                            <th>需求名称</th>
                             <th>需求信息</th>
-                            <th>紧急程度</th>
+                            <th>提出人</th>
                             <th>处理状态</th>
                            
                         </tr>
@@ -173,9 +173,9 @@
 
                 for(var k = 0; k < data.length; k++){
                     h += '<tr><td>'+data[k].pName+'</td>';
-                        h += '<td>'+data[k].customerName+'</td>';
+                        h += '<td>'+data[k].requireName+'</td>';
                         h += '<td><a href="pm-need-detail-mems.html?id='+data[k].oId+'">'+( data[k].productName + '&nbsp;|&nbsp;' + data[k].feature+ '&nbsp;|&nbsp;' +(data[k].name || '')    )+'</a></td>';
-                        h += '<td>'+data[k].priority+'</td>';
+                        h += '<td>'+data[k].creater+'</td>';
                         h += '<td>'+data[k].status+'</td>';
                 }
                 $('#relativeList').html(h);

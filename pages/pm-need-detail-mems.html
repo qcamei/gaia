@@ -51,12 +51,13 @@
                         <td>使用平台：</td>
                         <td id="platformList"></td>
                         <td>功能模块：</td>
-                        <td id="functionList">合同管理</td>
+                        <td id="functionList"></td>
                     </tr>
                     <tr>
                         <td>紧急程度：</td>
-                        <td id="levelList">低</td>
-
+                        <td id="levelList"></td>
+                        <td>可靠度：</td>
+                        <td id="reliableList"></td>
                     </tr>
                     <tr>
                         <td>需求场景：</td>
@@ -155,6 +156,7 @@
                     $('#platformList').html(data.plat);
                     $('#functionList').html(data.feature);
                     $('#levelList').html(data.level);
+                    $('#reliableList').html(data.reliableDesc);
                     $('#scenario').html(data.scenario);
                     $('#nowSolution').html(data.nowSolution);
                     $('#sugSolution').html(data.sugSolution);
@@ -262,7 +264,7 @@
                 var json = json.data;
                 if(json.length >= 1){
                     for(var k = 0; k < json.length; k ++){
-                        h += '<tr class="'+(json[k].checked?'current':'')+'"><td><label><input value="'+json[k].id+'" type="checkbox" '+(json[k].checked?'disabled="disabled" checked="checked"':'')+' />'+json[k].name+'|'+json[k].feature+'</label></td><td>'+json[k].product+'</td><td>'+json[k].plat+'</td></tr>';
+                        h += '<tr class="'+(json[k].checked?'current':'')+'"><td><label><input value="'+json[k].id+'" type="checkbox" '+(json[k].checked?'disabled="disabled" checked="checked"':'')+' />'+json[k].name+'|'+json[k].feature+'</label></td><td>'+json[k].product+'</td><td>'+json[k].status+'</td></td><td>'+json[k].plat+'</td></tr>';
                     }
                 }
                 if( h  ){
@@ -297,7 +299,7 @@
                 for(var k = 0; k < data.length; k++){
                     h += '<tr><td>'+data[k].productName+'</td>';
                         h += '<td>'+data[k].feature+'</td>';
-                        h += '<td>'+data[k].pName+'</td>';
+                        h += '<td><a href="pm-need-detail-pm.html?id='+data[k].id+'">'+data[k].pName+'</a></td>';
                         h += '<td>'+data[k].priority+'</td>';
                         h += '<td>'+data[k].status+'</td>';
 

@@ -331,8 +331,11 @@
         .getEmergencyList('exemergency',0,true)
         .getVisitResultList('exvisitResult',0,true)
 
+        var isClick = false;
         $('#confirmRelative').on('click',function(){
-//            var url = _ip + '/customer/exportReport';
+            if(isClick) return;
+            isClick = true;
+            $(this).addClass('sending');
             var url = _ip + '/customer/exportParams';
             var data = {
                 "visitType":$("#visitType").find('option:selected').text() == '请选择'?null:$("#visitType").val(),
