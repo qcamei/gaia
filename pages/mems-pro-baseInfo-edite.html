@@ -190,7 +190,7 @@
                     }
 //                    $('#hsrEnable').html((data.hsrEnable == 1 ? '有' : '无'));
                     $('#postcode').val(data.postcode);
-                    $('#bed').val(data.bed);
+                    $('#bed').val(data.bed?data.bed:0);
                     $('#people').val(data.people);
                     _API.getPLevelList('level',data.level,false)
                         .getPSegmentationList('segmentation',data.segmentation,false)
@@ -266,19 +266,19 @@
         var data = {
             "id":parseInt(getUrlId()),
             "name": $('#name').val(),
-            "shortName":$('#shortName').val(),
-            "alias":$('#alias').val(),
+            "shortName":$('#shortName').val() || null,
+            "alias":$('#alias').val() || null,
             "segmentation": $('#segmentation').val(),
             "level": $('#level').val(),
             "hsrEnable":parseInt($('input[name=hsrEnable]:checked').val()),
             "isTopHundred":parseInt($('input[name=isTopHundred]:checked').val()),
-            "bed":parseInt($('#bed').val()),
+            "bed":parseInt($('#bed').val())  || null,
             "people":parseInt($('#people').val()),
             "province": $('#province').val() || '',
-            "city": $('#city').val() || '',
-            "area": $('#district').val() || '',
-            "address":$('#address').val() || '',
-            "location":$('#location').val(),
+            "city": $('#city').val() || null,
+            "area": $('#district').val() || null,
+            "address":$('#address').val() || null,
+            "location":$('#location').val() || null,
             "creater": $.cookie('userid')
         }
         if(isClick) return;

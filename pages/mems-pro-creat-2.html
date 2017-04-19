@@ -234,8 +234,8 @@
         var url  = _ip+'/project/insert';
         var data = {
             "name": $('#name').val(),
-            "shortName":$('#shortName').val(),
-            "alias":$('#alias').val(),
+            "shortName":$('#shortName').val() || null,
+            "alias":$('#alias').val() || null,
             "segmentation": $('#segmentation').val(),
             "level": $('#level').val(),
             "hsrEnable":parseInt($('input[name=hsrEnable]:checked').val()),
@@ -246,7 +246,7 @@
             "city": $('#city').val() || '',
             "area": $('#district').val() || '',
             "address":$('#address').val() || '',
-            "location":$('#location').val(),
+            "location":$('#location').val() || null,
             "creater": $.cookie('userid')
         }
         if(position){

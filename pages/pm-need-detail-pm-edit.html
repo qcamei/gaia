@@ -190,12 +190,12 @@
             "feature":$('#functionList').val(),
             "name":$('#name').val(),
             "priority":$('#priority').val(),
-            "version":$('#version').val(),
+            "version":$('#version').val() || null,
             "status":$('#status').val(),
             "attachment":attachment.join(','),
-            "discribe":$('#discribe').val(),
-            "solution":$('#solution').val(),
-            "expectWorkhour": $('#working-hours').val()
+            "discribe":$('#discribe').val() || null,
+            "solution":$('#solution').val() || null,
+            "expectWorkhour": $('#working-hours').val() || null
         }
         var hourFormat = /^[0-9]+(.[0-9])?$/;
         var nameValidate = hourFormat.test(data.expectWorkhour);

@@ -158,11 +158,11 @@
             "type":$('#typeList').val(),
             "priority":$('#priority').val(),
             "status":$('#status').val(),
-            "version":$('#version').val(),
-            "discribe":$('#discribe').val(),
-            "solution":$('#solution').val(),
+            "version":$('#version').val() || null,
+            "discribe":$('#discribe').val() || null,
+            "solution":$('#solution').val() || null,
             "attachment":attachment.join(''),
-            "expectWorkhour": $('#working-hours').val()
+            "expectWorkhour": $('#working-hours').val() || null
             };
         var hourFormat = /^[0-9]+(.[0-9])?$/;
         var nameValidate = hourFormat.test(data.expectWorkhour);
