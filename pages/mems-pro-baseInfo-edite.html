@@ -302,6 +302,8 @@
                 if(data.success){
                     location.href = 'mems-pro-baseInfo.html?id='+getUrlId();
                 }else{
+                    $(that).removeCla
+                    isClick = false;
                     if(data.message == '项目名重复，请重新输入'){
                         $('#name').addClass('error-i')
 

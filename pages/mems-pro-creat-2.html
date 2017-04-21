@@ -274,6 +274,8 @@
                     var id = data.data;
                    location.href = 'mems-pro-creat-3.html?id='+id+'&name='+$('#name').val();
                 }else{
+                    $(that).removeClass('sending');
+                    isClick = false;
                     if(data.message == '项目名重复，请重新输入'){
                         $('#name').addClass('error-i')
                     }

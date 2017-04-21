@@ -198,6 +198,8 @@
 
                     location.href = 'pm-bug-list.html';
                 }else{
+                    $(that).removeClass('sending');
+                    isClick = false;
                     alert('添加失败, 请稍后重试！');
                 }
             }
