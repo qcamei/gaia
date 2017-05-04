@@ -714,7 +714,7 @@ clientInfoCard.prototype = {
             html += '<tr><td>角色</td><td><input id="role" class="short"></td></tr>';
             html += '<tr><td><span class="red-start">*</span>姓名</td><td><input id="name" placeholder="必填" class="short"></td></tr>';
             html += '<tr><td>科室</td><td><input id="department" class="short"></td></tr>';
-            html += '<tr><td><span class="red-start">*</span>联系电话</td><td><input id="telphone" placeholder="必填" class="short"></td></tr>';
+            html += '<tr><td>联系电话</td><td><input id="telphone" class="short"></td></tr>';
             html += '<tr><td>短号</td><td><input id="short_tel" class="short"></td></tr></table></tbody></div>';
             html += '<div class="buttons"><a class="card-btn card-btn-gray" href="javascript:$$.closeLayer()">取消</a>&emsp;<a class="card-btn" onclick="clientInfoCard.addClientCard('+'\''+(url || '')+'\''+(id?','+id+'':'')+')">确认</a></div>'
             html += '</div>';
@@ -740,7 +740,7 @@ clientInfoCard.prototype = {
             return;
         }
         var tel = $('#telphone').val();
-        if(!/^1(\d){10}$/.test(tel)){
+        if(tel!= '' && !/^1(\d){10}$/.test(tel)){
             $('#telphone').addClass('error-i');
             return;
         }
