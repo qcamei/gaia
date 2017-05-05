@@ -336,7 +336,6 @@ manageTagSelf.prototype = {
 					var isShowMark = false;
 					var arr = [];
 					organizeAjaxGet(url, dataPara, 'xxx', function(memberJson) {
-					        console.log(memberJson)
 						if (memberJson.success) {
 							arr.push(memberJson.data.owner.id);
 							for(var k = 0; k < memberJson.data.list.length; k++){
@@ -914,7 +913,7 @@ presell.prototype = {
                 var h = '';
                 	h += '<tr><td colspan="2">销售方式：'+ (json.type?'<span class="type">'+json.type+'</span>':'') +'</td></tr>';
                     h += '<tr><td width="40%"><div class="name">预算：</div><div class="text"><span class="num-style">'+(json.budget || 0)+'</span>&nbsp;万元</div></td>';
-                    	h += '<td><div class="name">采购时间：</div><div class="text"><span class="num-style">'+(json.proYear || 0)+'</span>&nbsp;年&nbsp;<span class="num-style">'+(json.proMonth || 0)+'</span>&nbsp;月</div></td></tr>';
+                    	h += '<td><div class="name">预计试用时间：</div><div class="text"><span class="num-style">'+(json.proYear || 0)+'</span>&nbsp;年&nbsp;<span class="num-style">'+(json.proMonth || 0)+'</span>&nbsp;月</div></td></tr>';
 					h += '<tr><td><div class="name">预计收款时间：</div><div class="text"><span class="num-style">'+(json.payYear || 0)+'</span>&nbsp;年&nbsp;<span class="num-style">'+(json.payMonth || 0) +'</span>&nbsp;月</div></td></tr>';
 				h += '<tr><td colspan="2">'+(json.discribe || '')+'</td></tr>';
                 $('#'+id).html(h);
@@ -947,6 +946,10 @@ presell.prototype = {
             return false;
         }
         var budget = $('#budget').val();
+        if(time == null){
+          alert('请填写预计试用时间！');
+          return
+        }
         // if(budget != '' && !/(\d)/.test(budget)){
         //     $('#budget').addClass('error-i');
         //     return false;
@@ -1108,6 +1111,12 @@ businessProgress.prototype = {
         	alert('请添加拜访人员！');
 			return;
 		}
+		var remark = $('#remark').val() || null;
+    if(remark == null || !remark){
+      alert('请填写本次拜访状况！');
+      return;
+    }
+
     	var data = {
     		  "id": null,
 		      "proId": parseInt(globleProjectId),

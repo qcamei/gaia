@@ -132,7 +132,7 @@
                             </table>
                             <table class="edite-show-list" style="display: none;">
                                 <tr>
-                                    <td>销售方式</td>
+                                    <td width="40%">销售方式</td>
                                     <td><select id="sellTypeSelect"></select></td>
                                 </tr>
                                 <tr>
@@ -148,7 +148,7 @@
                                     <td><input id="budget" placeholder="支持一位小数: 1.0"></td>
                                 </tr>
                                 <tr>
-                                    <td>采购时间</td>
+                                    <td><span style="color: red;padding: 0 3px 0 0;">*</span>预计试用时间</td>
                                     <td><input id="proTime" ／></td>
                                 </tr>
                                 <tr>
@@ -276,7 +276,7 @@
                             <td><textarea id="support"></textarea></td>
                         </tr>
                         <tr>
-                            <td>备注</td>
+                            <td><span style="color: red;padding: 0 3px 0 0;">*</span>本次拜访状况</td>
                             <td><textarea id="remark"></textarea></td>
                         </tr>
                         <tr>
@@ -378,6 +378,7 @@ $('#nextFocus').fdatepicker({
         format: 'yyyy-mm',
 //        pickTime: false
     });
+
 
 
     // addCard();
