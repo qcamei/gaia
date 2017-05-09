@@ -950,10 +950,22 @@ presell.prototype = {
           alert('请填写预计试用时间！');
           return
         }
-        // if(budget != '' && !/(\d)/.test(budget)){
-        //     $('#budget').addClass('error-i');
-        //     return false;
-        // }
+        if(budget != ''){
+          if(budget.indexOf('.') != -1){
+            var regNum=/^\d+(\.\d{1,1})?$/;
+            if(!regNum.test(budget)){
+              $('#budget').addClass('error-i');
+              return false;
+            }
+          }else{
+            if(!/^[1-9]\d*$/.test(budget)){
+              $('#budget').addClass('error-i');
+              return false;
+            }
+          }
+        }
+
+
 
     	var data = {
     		"id": presell.userId,
