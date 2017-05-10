@@ -1138,8 +1138,8 @@ businessProgress.prototype = {
 		      "progress": $('#bussTypeList').val(),
 		      "emergency": $('#emergencyList').val(),
 		      "visitId": arr.join(','),
-		      "nextFollow": $('#nextFocus').val(),
-		      "nextFocus": $('#nextFollow').val(),
+		      "nextFollow": $('#nextFollow').val(),
+		      "nextFocus": $('#nextFocus').val(),
 			  "support": $('#support').val(),
 		      "remark": $('#remark').val(),
 		      "creater": $.cookie('userid'),
@@ -1210,17 +1210,17 @@ businessProgress.prototype = {
 							h += '<span>'+data.createTime+'</span></div>';
 							// h += '<ul class="clear key-list"><li>'+data.type+'</li><li>'+data.level+'</li><li>'+data.visitResult+'</li><li>'+data.emergency+'</li>';
 							h += '<ul class="clear key-list">'+(data.type?'<li>'+data.type+'</li>':'')+(data.level?'<li>'+data.level+'</li>':'')+(data.visitResult?'<li>'+data.visitResult+'</li>':'')+(data.emergency?'<li>'+data.emergency+'</li>':'')+'</ul>';
-							if(data.nextFocus || data.nextFollow ){
-								h += '<p class="dec">'+(data.support ? data.support : '-')+'</p>';
-								h += '<p class="dec">'+data.remark+'</p>';
-								h += '<div class="plan"><span class="title">下次计划</span>';
-								if(data.nextFocus){
-									h += '<div class="paper">'+data.nextFocus+'</div>'; //<span>&emsp;&emsp;2017/01/08&nbsp;12:34</span>
-								}
-								if(data.nextFollow){
-									h += '<div class="paper">'+data.nextFollow+'</div>';
-								}
-							}
+
+              h += '<p class="dec">'+(data.support ? data.support : '')+'</p>';
+              h += '<p class="dec">'+(data.remark ? data.remark : '')+'</p>';
+              // h += '<div class="plan"><span class="title">下次计划</span>';
+              if(data.nextFocus){
+                h += '<div class="paper">'+data.nextFocus+'</div>'; //<span>&emsp;&emsp;2017/01/08&nbsp;12:34</span>
+              }
+              if(data.nextFollow){
+                h += '<div class="paper">'+data.nextFollow+'</div>';
+              }
+
 							h += '</div></td></tr>';
 						}
 						h += '</tbody>'
