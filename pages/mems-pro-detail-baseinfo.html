@@ -268,11 +268,11 @@
                             <td colspan="4"><input type="text" placeholder="实施经理在系统中的名称及电话" id="remark_manage" disabled/></td>
                         </tr>
                         <tr>
-                            <td>实施科室数：</td>
+                            <td><span class="red-start">*</span>实施科室数：</td>
                             <td><input type="text" class="inputText" id="office_count" disabled/></td>
                         </tr>
                         <tr>
-                            <td>实施设备数：</td>
+                            <td><span class="red-start">*</span>实施设备数：</td>
                             <td><input type="text" class="inputText" id="equipment_count" disabled/></td>
                         </tr>
                         <tr>
@@ -295,7 +295,7 @@
                             <td>上传科室建筑物目录：</td>
                             <td colspan="3">
                                 <a v-show="isEdit_2" style="display: none;" href="javascript:;" class="a-upload" id="fileUpload"><input id="file_1" value="请选择" type="file"/>点击这里上传</a>
-                                <p class="format">支持的格式有：'XLSX','xls'</p>
+                                <p class="format">支持的格式有：'xlsm',XLSX','xls'</p>
                                 <ul class="addAttachmentList" id="addAttachmentList">
                                 </ul>
                             </td>
@@ -304,7 +304,7 @@
                             <td>上传医院台账资料：</td>
                             <td colspan="3">
                                 <a v-show="isEdit_2" style="display: none;" href="javascript:;" class="a-upload" id="fileUpload_2"><input id="file_2" value="请选择" type="file"/>点击这里上传</a>
-                                <p class="format">支持的格式有：'XLSX','xls'</p>
+                                <p class="format">支持的格式有：'xlsm',XLSX','xls'</p>
                                 <ul class="addAttachmentList" id="addAttachmentList_2">
                                 </ul>
                             </td>
