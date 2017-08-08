@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>运营报告-数据概览-趋势统计</title>
+        <link href="../css/mems-index.css" type="text/css" rel="stylesheet"/>
+    </head>
+<body>
+
+
+<!--header-->
+<header id="header" class="header">
+    <div class="header-info left"><i></i><a href="pm-need-list.html">需求池</a></div>
+    <div class="right-user right">
+         <div class="clear t" >             <div id="headusername" class="role"></div>             <div class="icon"></div>         </div>
+        <div class="head-down">
+            <ul><li><a href="edit-pwd.html">修改密码</a></li><li><a onclick="loginOut()">退出系统</a></li></ul></div><div>
+    </div>
+    </div>
+</header>
+<!--menu-->
+<aside id="aside" class="aside">
+    <div class="logo">运营平台</div>
+    <ul class="menu" id="asidemenu">
+    </ul>
+</aside>
+
+
+<!--content-->
+<div class="content">
+    <div class="page-inner" style="padding-top: 13px">
+        <ul class="item-tab clear">
+            <li><a href="key-data.html">关键数据</a></li>
+            <li><a class="current" href="trend-count.html">趋势统计</a></li>
+        </ul>
+        <div class="commit-new-item"><a class="btn" style="width: 120px">导出&nbsp;<b>+</b></a></div>
+        <div class="item-content">
+            <div class="table-box">
+                <table>
+                    <thead>
+                        <tr class="odd">
+                            <th>ID</th>
+                            <th>需求名称</th>
+                            <!--<th>需求来源</th>-->
+                            <!--<th>需求方</th>-->
+                            <th width="110">产品</th>
+                           <!--  <th>附件</th> -->
+                            <th width="50">提出人</th>
+                            <th width="140">提出时间</th>
+                            <th width="70">处理状态</th>
+                            <th width="70">可靠度</th>
+                            <th width="100">关联产品需求数</th>
+                            <th width="30">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bodyList">
+                        
+                    </tbody>
+                </table>
+            </div>
+            <div class="pages clear">
+                <div class="page-list clear" id="pageList">
+                
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/common.js"></script>
+
+</body>
+</html>

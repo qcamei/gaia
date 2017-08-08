@@ -162,6 +162,7 @@
                     $('#sugSolution').html(data.sugSolution);
                     
                     if(data.attachment){
+                        var attachment = new attachment();
                         attachment.init({
                             addAttachmentList:$('#addAttachmentList'),
                             isDetail:true

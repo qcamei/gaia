@@ -146,6 +146,18 @@ function creatAsideDom() {
                     }
                  ]
         }
+        // ,
+        // runReport:{
+        //     name:'运营报告',
+        //     iconClass:'report',
+        //     data:[
+        //       {
+        //         id:'keydata',
+        //         name:'数据概览',
+        //         src:'key-data'
+        //       }
+        //     ]
+        // }
     }
     var h = ''
     for(var k in obj){
@@ -188,7 +200,12 @@ function modityAsideCurrent(){
         },      //系统配置文件列表
         documentmanage:{
             docmanage:['doc-manage']
-        }   //文档管理文件列表
+        }
+        // ,   //文档管理文件列表
+        // runReport:{
+        //   keydata:['key-data','tend-count']
+        // }
+
     }
 
     for(var k in obj){
@@ -584,6 +601,12 @@ function attachment(config){
             $(this).val('');
         });
         this.config.fileUpload.on("change","input[type='file']",function(){
+            if(that.config.fileLength){
+              if(that.config.addAttachmentList.find('li').length>=that.config.fileLength){
+                alert('只能上传'+that.config.fileLength+'个文件！');
+                return
+              }
+            }
             var filePath=$(this).val();
             if(that.config.noFormat) {
                 if(filePath){
@@ -607,9 +630,11 @@ function attachment(config){
                     alert("文件名不能包含*、#等特殊符号！");
                     return false
                 }
-
                 var format = filePath.split('.')[1].toLocaleUpperCase();
                 var formatArr = ['JPG','PDF','XLSX','XLS','CSV','PNG','DOCX','DOC','ZIP','PPT'];
+                if(that.config.fileType && that.config.fileType.length > 0){
+                  formatArr = that.config.fileType
+                }
                 var isSport = false;
                 for(var n = 0; n < formatArr.length; n++){
                     if(format.indexOf(formatArr[n]) != -1){
@@ -633,7 +658,7 @@ function attachment(config){
         var that = this;
         var formData = new FormData();
         
-        formData.append('file', $('#file')[0].files[0]);
+        formData.append('file', that.config.fileBtn?that.config.fileBtn[0].files[0]:$('#file')[0].files[0]);
         $.ajax({
             url:  that.config.url ||_ip+'/file/upload',
             type: 'POST',
@@ -672,21 +697,27 @@ function attachment(config){
             }
         })
     }
-    this.getAttachmentList = function(attachmentList){
+    this.getAttachmentList = function(attachmentList,time){
         var h = '';
         var that = this;
         if(attachmentList.length >= 1){
           for(var k = 0 ; k < attachmentList.length; k++){
             if(attachmentList[k].indexOf('__') <= -1) return;
-            var name = attachmentList[k].split('__')[1];
-            h += '<li rel="'+attachmentList[k]+'"><div>'+name+(that.config.isDetail?'<a class="delete" href="'+_ip+'/file/download?path='+attachmentList[k]+'">下载</a>':'<span class="delete">删除</span>')+'</div></li>';
+            var nameArr = attachmentList[k].split('__')[1].split('.');
+            var name = nameArr[0]+time+'.'+nameArr[1];
+            if(that.config.downloadDelete){
+              h += '<li rel="'+attachmentList[k]+'"><div>'+name+'  <span>' + (attachmentList[k].time || '')+'</span> <a class="delete" href="'+_ip+'/file/download?path='+attachmentList[k]+'">下载</a>'+'<span class="delete" style="display: none">删除</span></div></li>';
+            }else{
+              h += '<li rel="'+attachmentList[k]+'"><div>'+name+(that.config.isDetail?'<a class="delete" href="'+_ip+'/file/download?path='+attachmentList[k]+'">下载</a>':'<span class="delete">删除</span>')+'</div></li>';
+            }
           }
-          that.config.addAttachmentList.append(h); 
+
+          that.config.addAttachmentList.html(h);
         }
     }
 
 }
-var attachment = new attachment();
+// var attachment = new attachment();
 
 
 

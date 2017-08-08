@@ -6,6 +6,7 @@
     <link href="../css/pro-detail.css" type="text/css" rel="stylesheet"/>
     <link href="../css/foundation-datepicker.css" rel="stylesheet"/>
     <link href="../css/client-card.css" rel="stylesheet"/>
+    <script type="text/javascript" src="../js/vue.min.js"></script>
 </head>
 <body>
 <!--header-->
@@ -38,7 +39,7 @@
             </div>
             <ul class="nav clear">
                 <li onclick="detailItemTab(this,'clientInfo')" class="current">客户资料</li>
-                <li onclick="detailItemTab(this,'unfinished')">开户资料(暂不做)</li>
+                <li onclick="detailItemTab(this,'accountInfo')">开户资料</li>
                 <li onclick="detailItemTab(this,'clientInfoCard')">客户信息卡</li>
                 <li onclick="detailItemTab(this,'proNeedList')">项目需求</li>
                 <li onclick="detailItemTab(this,'unfinished')">项目合同(暂不做)</li>
@@ -180,6 +181,197 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!--开户资料-->
+            <div class="accountInfo info-module clear rel" id="accountInfo" style="display: none;">
+                <table class="accountTable">
+                    <thead>
+                        <tr>
+                            <td align="right" style="font-size: 15px;font-family: 'Microsoft YaHei'">开户申请</td>
+                        </tr>
+                    </thead>
+                    <tbody class="account-check-body" id="account-check-body">
+                        <tr>
+                            <td>外修：</td>
+                            <td><input type="checkbox" value="外修" disabled/></td>
+                            <td>直接外修：</td>
+                            <td><input type="checkbox" value="直接外修" disabled/></td>
+                        </tr>
+                        <tr>
+                            <td>文档管理：</td>
+                            <td><input type="checkbox" value="文档管理" disabled/></td>
+                            <td>工单验收：</td>
+                            <td><input type="checkbox" value="工单验收" disabled/></td>
+                        </tr>
+                        <tr>
+                            <td>日常检查：</td>
+                            <td><input type="checkbox" value="日常检查" disabled/></td>
+                            <td>隐藏隐私设备：</td>
+                            <td><input type="checkbox" value="隐藏隐私设备" disabled/></td>
+                        </tr>
+                        <tr>
+                            <td>预防维护：</td>
+                            <td><input type="checkbox" value="预防维护" disabled/></td>
+                            <td>非授权用户可报修：</td>
+                            <td><input type="checkbox" value="非授权用户可报修" disabled/></td>
+                        </tr>
+                        <tr>
+                            <td>计量：</td>
+                            <td><input type="checkbox" value="计量" disabled/></td>
+                            <td>质控批量操作：</td>
+                            <td><input type="checkbox" value="质控批量操作" disabled/></td>
+                        </tr>
+                        <tr>
+                            <td>工程师巡检：</td>
+                            <td><input type="checkbox" value="工程师巡检" disabled/></td>
+                            <td>大屏幕：</td>
+                            <td><input type="checkbox" value="大屏幕" disabled/></td>
+                        </tr>
+                        <tr>
+                            <td>预估实施日期：</td>
+                            <td><input type="text" id="carry_out_time" disabled/></td>
+                        </tr>
+                    </tbody>
+                    <tbody class="account-btn-body"  id="example-1">
+                        <tr v-show="isShowEditBtn_1" style="display: none;">
+                            <td colspan="4"><a class="btn" v-on:click="showEdit_1">编辑</a></td>
+                        </tr>
+                        <tr v-show="isEdit_1" style="display: none;">
+                            <td colspan="2" ><a class="btn" v-on:click="cancelEdit_1">取消</a></td><td colspan="2"><a class="btn" v-on:click="commitEdit_1">提交</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="accountTable">
+                    <thead>
+                    <tr>
+                        <td align="right" style="font-size: 15px;font-family: 'Microsoft YaHei'">实施申请</td>
+                    </tr>
+                    </thead>
+                    <tbody class="account-check-body" id="account-check-body-2">
+                        <tr>
+                            <td>医信精盘：</td>
+                            <td><input type="checkbox" value="医信精盘" disabled/></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>实施经理：</td>
+                            <td>
+                                <select id="managers">
+                                    <option v-for="data in list" v-bind:value="data">{{data}}</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>备注：</td>
+                            <td colspan="4"><input type="text" placeholder="实施经理在系统中的名称及电话" id="remark_manage" disabled/></td>
+                        </tr>
+                        <tr>
+                            <td>实施科室数：</td>
+                            <td><input type="text" class="inputText" id="office_count" disabled/></td>
+                        </tr>
+                        <tr>
+                            <td>实施设备数：</td>
+                            <td><input type="text" class="inputText" id="equipment_count" disabled/></td>
+                        </tr>
+                        <tr>
+                            <td>预估实施完成日期：</td>
+                            <td><input type="text" id="complete_time" id="expectTime"/></td>
+                        </tr>
+                        <tr>
+                            <td>后台完善：</td>
+                            <td><input type="checkbox" value="后台完善" disabled/></td>
+                        </tr>
+                        <tr>
+                            <td>实施报告：</td>
+                            <td><input type="checkbox" value="实施报告" disabled/></td>
+                        </tr>
+                        <tr>
+                            <td>备注：</td>
+                            <td colspan="4"><input type="text" placeholder="后台默认完善spu基础字段，如果有特殊需求请再次备注" id="remark_complete" disabled/></td>
+                        </tr>
+                        <tr>
+                            <td>上传科室建筑物目录：</td>
+                            <td colspan="3">
+                                <a v-show="isEdit_2" style="display: none;" href="javascript:;" class="a-upload" id="fileUpload"><input id="file_1" value="请选择" type="file"/>点击这里上传</a>
+                                <p class="format">支持的格式有：'XLSX','xls'</p>
+                                <ul class="addAttachmentList" id="addAttachmentList">
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>上传医院台账资料：</td>
+                            <td colspan="3">
+                                <a v-show="isEdit_2" style="display: none;" href="javascript:;" class="a-upload" id="fileUpload_2"><input id="file_2" value="请选择" type="file"/>点击这里上传</a>
+                                <p class="format">支持的格式有：'XLSX','xls'</p>
+                                <ul class="addAttachmentList" id="addAttachmentList_2">
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>上传医院质控资料：</td>
+                            <td colspan="3">
+                                <a  v-show="isEdit_2" style="display: none;" href="javascript:;" class="a-upload" id="fileUpload_3"><input id="file_3" value="请选择" type="file"/>点击这里上传</a>
+                                <p class="format">支持的格式有：JPG，PNG，PDF，PPT，XLSX，XLS，CSV，DOCX，DOC，ZIP</p>
+                                <ul class="addAttachmentList" id="addAttachmentList_3">
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>上传其他资料：</td>
+                            <td colspan="3">
+                                <a v-show="isEdit_2" style="display: none;" href="javascript:;" class="a-upload" id="fileUpload_4"><input id="file_4" value="请选择" type="file"/>点击这里上传</a>
+                                <p class="format">支持的格式有：JPG，PNG，PDF，PPT，XLSX，XLS，CSV，DOCX，DOC，ZIP</p>
+                                <ul class="addAttachmentList" id="addAttachmentList_4">
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody class="account-btn-body"  id="example-2">
+                        <tr v-show="isShowEditBtn_2" style="display: none;">
+                            <td colspan="4"><a class="btn" v-on:click="showEdit_2">编辑</a></td>
+                        </tr>
+                        <tr v-show="isEdit_2" style="display: none;">
+                            <td colspan="2" ><a class="btn" v-on:click="cancelEdit_2">取消</a></td><td colspan="2"><a class="btn" v-on:click="commitEdit_2">提交</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="accountTable">
+                    <thead>
+                    <tr>
+                        <td align="right" style="font-size: 15px;font-family: 'Microsoft YaHei'">物料申请</td>
+                    </tr>
+                    </thead>
+                    <tbody class="account-check-body" id="account-check-body-3">
+                        <tr>
+                            <td>二维码：</td>
+                            <td><input type="checkbox" value="二维码" disabled/></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>小米盒子：</td>
+                            <td><input type="checkbox" value="小米盒子" disabled/></td>
+                        </tr>
+                        <tr>
+                            <td>大屏电视：</td>
+                            <td><input type="checkbox" value="大屏电视" disabled/></td>
+                        </tr>
+                    </tbody>
+                    <tbody class="account-btn-body"  id="example-3">
+                        <tr v-show="isShowEditBtn_3" style="display: none;">
+                            <td colspan="4"><a class="btn" v-on:click="showEdit_3">编辑</a></td>
+                        </tr>
+                        <tr v-show="isEdit_3" style="display: none;">
+                            <td colspan="2" ><a class="btn" v-on:click="cancelEdit_3">取消</a></td><td colspan="2"><a class="btn" v-on:click="commitEdit_3">提交</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
             </div>
 
             <!-- 客户信息卡 -->
@@ -341,6 +533,7 @@
 
 <script src="../js/foundation-datepicker.min.js"></script>
 <script src="../js/proDetail.js"></script>
+<script src="../js/proDetail_account.js"></script>
 <script type="text/javascript">
 _API.getSellType('sellTypeSelect')
     .getPBussTypeList('bussTypeList',false,false,globleProjectId)
@@ -360,6 +553,18 @@ function getHeadProName() {
 var nowTemp = new Date();
 var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 $('#nextFocus').fdatepicker({
+    format: 'yyyy-mm-dd',
+    onRender: function (date) {
+        return date.valueOf() < now.valueOf() ? 'disabled' : '';
+    }
+});
+$('#carry_out_time').fdatepicker({
+    format: 'yyyy-mm-dd',
+    onRender: function (date) {
+        return date.valueOf() < now.valueOf() ? 'disabled' : '';
+    }
+});
+$('#complete_time').fdatepicker({
     format: 'yyyy-mm-dd',
     onRender: function (date) {
         return date.valueOf() < now.valueOf() ? 'disabled' : '';

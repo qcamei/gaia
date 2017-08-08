@@ -148,6 +148,7 @@
                     $('#priority').html(data.priority);
                     $('#status').html(data.status);
                     if(data.attachment){
+                        var attachment = new attachment();
                         attachment.init({
                             addAttachmentList:$('#addAttachmentList'),
                             isDetail:true

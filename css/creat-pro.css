@@ -656,6 +656,9 @@ aside.aside .menu {
       aside.aside .menu .menu-first > i.document {
         background-image: url("../images/icons.png");
         background-position-y: -200px; }
+      aside.aside .menu .menu-first > i.report {
+        background-image: url("../images/icons.png");
+        background-position-y: -200px; }
   aside.aside .menu .menu-second {
     width: 100%; }
     aside.aside .menu .menu-second > dd {
