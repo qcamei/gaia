@@ -2,6 +2,15 @@
   width: 200px;
   height: 28px;
 }
-.chart-box{
+.use-chart-box{
   margin: 19px 19px 0 19px;
+  .use-chart{
+    width: 60%;
+    height: 250px;
+    border: 1px solid #aa0000;
+  }
+  .use-mark{
+    width: 20%;
+    height: 250px;
+  }
 }
