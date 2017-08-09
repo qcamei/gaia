@@ -3,6 +3,7 @@ README.md
 interior_gaia/
 node_modules/
 rev/
+gulpfile.js
 testurl.json
 url.json
 
