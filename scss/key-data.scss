@@ -8,6 +8,7 @@
   height: 40px;
   line-height: 40px;
   padding-left: 20px;
+  color: #005777;
 }
 /*拜访*/
 .visit-chart-box{
@@ -24,6 +25,7 @@
       >tbody>tr{
         >td{
           text-align: center;
+          color: #6d6d6d;
         }
       }
     }
@@ -55,6 +57,7 @@
           >td{
             height: 70px;
             text-align: center;
+            color: #6d6d6d;
           }
         }
       }
@@ -180,6 +183,7 @@
         >tbody>tr{
           >td{
             text-align: center;
+            color: #6d6d6d;
           }
         }
       }
@@ -195,6 +199,7 @@
   width: 100%;
   margin-bottom: 20px;
   height: 300px;
+  border: 1px solid #e1e1e1;
   background: #FFF;
   .current-add-box{
     width: 50%;
