@@ -34,7 +34,7 @@ function threeBar(element, optionData, echartObject) {
       splitLine: {
         show:true,
         lineStyle: {
-          color: 'rgb(221,221,221)',
+          color: 'rgba(221,221,221, 0.5)',
           width: 1
         }
       },
@@ -53,7 +53,7 @@ function threeBar(element, optionData, echartObject) {
       },
       splitLine: {
         lineStyle: {
-          color: 'rgb(221,221,221)',
+          color: 'rgba(221,221,221, 0.5)',
           width: 1
         }
       },

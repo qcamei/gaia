@@ -16,12 +16,14 @@ var openAccountPreOption = {
   y_data:[
     {
       type:'bar',
+      key: 'hospital',
       name:'医院(家)',
       data:[5, 20, 36, 10, 10, 20, 61],
       color:'rgb(85,137,209)',
     },
     {
       type:'bar',
+      key:'client',
       name:'项目和集团客户(家)',
       data:[15, 26, 26, 18, 70, 50, 15],
       color:'rgb(118,213,185)',
@@ -37,12 +39,14 @@ var openAccountTotalOption = {
   y_data:[
     {
       type:'bar',
+      key: 'hospital',
       name:'医院(家)',
       data:[5, 20, 36, 10, 10, 20, 61],
       color:'rgb(85,137,209)'
     },
     {
       type:'bar',
+      key:'client',
       name:'项目和集团客户(家)',
       data:[15, 26, 26, 18, 70, 50, 15],
       color:'rgb(118,213,185)'
