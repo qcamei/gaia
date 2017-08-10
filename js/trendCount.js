@@ -115,7 +115,7 @@ var openAccountPresentOption = {
       name:'三甲(家)',
       data:[5, 6, 16, 18, 10, 14,13],
       color:'rgb(246,230,82)',
-      disLabel: true
+      offset: [0, 4]
     }
   ]
 }
@@ -148,7 +148,7 @@ var openAccountTotalOption = {
       name:'三甲(家)',
       data:[5, 6, 16, 18, 10, 14,13],
       color:'rgb(246,230,82)',
-      disLabel: true
+      offset: [0,4]
     }
   ]
 }
@@ -253,13 +253,13 @@ var repairPresentOption = {
       type:'bar',
       name:'报修',
       data:[5, 20, 36, 10, 10, 20, 39],
-      color:'rgb(90,144,220)'
+      color:'rgb(85,137,209)'
     },
     {
       type:'bar',
       name:'接修',
       data:[15, 26, 26, 18, 70, 50, 76],
-      color:'rgb(24,68,115)'
+      color:'rgb(118,213,185)'
     }
   ]
 }
@@ -274,13 +274,13 @@ var repairTotalOption = {
       type:'bar',
       name:'报修',
       data:[5, 20, 36, 10, 10, 20, 39],
-      color:'rgb(90,144,220)'
+      color:'rgb(85,137,209)'
     },
     {
       type:'bar',
       name:'接修',
       data:[15, 26, 26, 18, 70, 50, 76],
-      color:'rgb(24,68,115)'
+      color:'rgb(118,213,185)'
     }
   ]
 }
@@ -361,7 +361,7 @@ var documentPresentOption = {
       type:'bar',
       name:'文档',
       data:[45, 46, 46, 78, 50, 74, 79],
-      color:'rgb(160,178,209)'
+      color:'rgb(85,137,209)'
     }
   ]
 }
@@ -376,7 +376,7 @@ var documentTotalOption = {
       type:'bar',
       name:'文档',
       data:[45, 46, 46, 78, 50, 74, 79],
-      color:'rgb(160,178,209)'
+      color:'rgb(85,137,209)'
     }
   ]
 }
@@ -426,3 +426,32 @@ threeBar(documentPresentEcharts, documentPresentOption, G_VAR.echarts.documentPr
 threeBar(documentTotalEcharts, documentTotalOption, G_VAR.echarts.documentTotalEcharts)
 threeBar(userPresentEcharts, userPresentOption, G_VAR.echarts.userPresentEcharts)
 threeBar(userTotalEcharts, userTotalOption, G_VAR.echarts.userTotalEcharts)
+
+function dataInit($ele) {
+  var dateMax = moment().subtract(1,'d').format('YYYY-MM-DD')
+  switch ($ele.val()) {
+    case 'week':
+      dateMax = moment().subtract(1,'d').format('YYYY-MM-DD')
+      break;
+    case 'month':
+      dateMax = moment().subtract(1,'d').format('YYYY-MM-DD')
+      break;
+    case 'halfYear':
+      dateMax = moment().subtract(1,'M').format('YYYY-MM-DD')
+      break;
+    case 'year':
+      dateMax = moment().subtract(1,'M').format('YYYY-MM-DD')
+      break;
+  }
+  $('#endDate').remove();
+  $('.endDate_box').append('<input type="text" id="endDate" name="endDate" class="calendar-input">')
+  $('#endDate').fdatepicker({
+    initialDate: dateMax,
+    format: 'yyyy-mm-dd',
+    endDate: dateMax
+  });
+}
+dataInit($('#dateRange'))
+$('#dateRange').on('change', function (ele) {
+  dataInit($(this))
+})

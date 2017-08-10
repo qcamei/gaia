@@ -1,3 +1,24 @@
+.endDate_box{
+  display: inline-block;
+  vertical-align: middle;
+}
+.calendar-icon{
+  display: none;
+}
+.calendar-input{
+  width: 200px;
+  height: 28px;
+  border: solid 1px #dbdbdb;
+  padding-left: 10px;
+}
+#dateRange {
+  width: 100px;
+  height: 28px;
+  -webkit-appearance:button;
+  border-radius: 0;
+  border: solid 1px #dbdbdb;
+  padding-left: 10px;
+}
 .content {
   .trendCount-content.item-content {
     background: transparent;

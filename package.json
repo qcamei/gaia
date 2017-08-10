@@ -44,5 +44,8 @@
     "vue": "^2.0.1",
     "vue-resource": "^1.0.3",
     "yargs": "^6.6.0"
+  },
+  "dependencies": {
+    "moment": "^2.18.1"
   }
 }

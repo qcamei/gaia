@@ -119,9 +119,11 @@ function threeBar(element, optionData, echartObject) {
       lineJson.name = yData.name;
       lineJson.type = yData.type;
       lineJson.data = yData.data;
+      lineJson.zlevel = 2
       lineJson.itemStyle.normal.color = yData.color;
-      if (yData.disLabel) {
-        lineJson.label.normal.show = false;
+      if (yData.offset) {
+        lineJson.label.normal.offset = yData.offset;
+        // lineJson.label.normal.textStyle.color = yData.color;
       }
       series_data.push(lineJson)
     }
