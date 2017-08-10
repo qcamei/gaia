@@ -203,6 +203,11 @@
   background: #FFF;
   .current-add-box{
     width: 50%;
+    height: 100%;
+    .current-add-container {
+      width: 100%;
+      height: calc(100% - 40px);
 
+    }
   }
 }

@@ -105,6 +105,16 @@ function threeBar(element, optionData, echartObject) {
     },
     data: []
   }
+  if (optionData.half) {
+    option.grid.top = 50
+    option.grid.right = '6%'
+    option.grid.left = '10%'
+    option.grid.bottom = 35
+    option.legend.orient = 'horizontal'
+    option.legend.top = 'top'
+    option.legend.left = 'center'
+    bar_json.barWidth = '15%'
+  }
   $.each(optionData.y_data, function (index, yData) {
     if (yData.type === 'bar') {
       var barJson = JSON.parse(JSON.stringify(bar_json))
