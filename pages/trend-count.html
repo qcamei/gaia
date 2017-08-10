@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>运营报告-数据概览-趋势统计</title>
         <link href="../css/mems-index.css" type="text/css" rel="stylesheet"/>
+        <link rel="stylesheet" href="../css/trendCount.css">
     </head>
 <body>
 
@@ -34,33 +35,95 @@
             <li><a class="current" href="trend-count.html">趋势统计</a></li>
         </ul>
         <div class="commit-new-item"><a class="btn" style="width: 120px">导出&nbsp;<b>+</b></a></div>
-        <div class="item-content">
-            <div class="table-box">
-                <table>
-                    <thead>
-                        <tr class="odd">
-                            <th>ID</th>
-                            <th>需求名称</th>
-                            <!--<th>需求来源</th>-->
-                            <!--<th>需求方</th>-->
-                            <th width="110">产品</th>
-                           <!--  <th>附件</th> -->
-                            <th width="50">提出人</th>
-                            <th width="140">提出时间</th>
-                            <th width="70">处理状态</th>
-                            <th width="70">可靠度</th>
-                            <th width="100">关联产品需求数</th>
-                            <th width="30">操作</th>
-                        </tr>
-                    </thead>
-                    <tbody id="bodyList">
-                        
-                    </tbody>
-                </table>
-            </div>
-            <div class="pages clear">
-                <div class="page-list clear" id="pageList">
-                
+        <div class="item-content trendCount-content">
+            <div class="trendCount_box">
+                <div class="echart_trend_box">
+                    <div class="trendCount_title">拜访</div>
+                    <div class="present_box_line">
+                        <div class="visit_present_echarts echarts_con"></div>
+                        <div class="echart_title blue_color">当期</div>
+                    </div>
+                    <div class="present_box_line">
+                        <div class="visit_total_echarts echarts_con"></div>
+                        <div class="echart_title green_color">累计</div>
+                    </div>
+                </div>
+                <div class="echart_trend_box">
+                    <div class="trendCount_title">开户</div>
+                    <div class="present_box_line">
+                        <div class="openAccount_present_echarts echarts_con"></div>
+                        <div class="echart_title blue_color">当期</div>
+                    </div>
+                    <div class="present_box_line">
+                        <div class="openAccount_total_echarts echarts_con"></div>
+                        <div class="echart_title green_color">累计</div>
+                    </div>
+                </div>
+                <div class="echart_trend_box">
+                    <div class="trendCount_title">实施-设备</div>
+                    <div class="present_box_line">
+                        <div class="device_present_echarts echarts_con"></div>
+                        <div class="echart_title blue_color">当期</div>
+                    </div>
+                    <div class="present_box_line">
+                        <div class="device_total_echarts echarts_con"></div>
+                        <div class="echart_title green_color">累计</div>
+                    </div>
+                </div>
+                <div class="echart_trend_box">
+                    <div class="trendCount_title">实施-人力</div>
+                    <div class="present_box_line">
+                        <div class="manpower_present_echarts echarts_con"></div>
+                        <div class="echart_title blue_color">录入</div>
+                    </div>
+                    <div class="present_box_line">
+                        <div class="manpower_total_echarts echarts_con"></div>
+                        <div class="echart_title green_color">完善</div>
+                    </div>
+                </div>
+                <div class="echart_trend_box">
+                    <div class="trendCount_title">功能-维修</div>
+                    <div class="present_box_line">
+                        <div class="repair_present_echarts echarts_con"></div>
+                        <div class="echart_title blue_color">当期</div>
+                    </div>
+                    <div class="present_box_line">
+                        <div class="repair_total_echarts echarts_con"></div>
+                        <div class="echart_title green_color">累计</div>
+                    </div>
+                </div>
+                <div class="echart_trend_box">
+                    <div class="trendCount_title">功能-质控</div>
+                    <div class="present_box_line">
+                        <div class="control_present_echarts echarts_con"></div>
+                        <div class="echart_title blue_color">当期</div>
+                    </div>
+                    <div class="present_box_line">
+                        <div class="control_total_echarts echarts_con"></div>
+                        <div class="echart_title green_color">累计</div>
+                    </div>
+                </div>
+                <div class="echart_trend_box">
+                    <div class="trendCount_title">功能-文档</div>
+                    <div class="present_box_line">
+                        <div class="document_present_echarts echarts_con"></div>
+                        <div class="echart_title blue_color">当期</div>
+                    </div>
+                    <div class="present_box_line">
+                        <div class="document_total_echarts echarts_con"></div>
+                        <div class="echart_title green_color">累计</div>
+                    </div>
+                </div>
+                <div class="echart_trend_box">
+                    <div class="trendCount_title">功能-用户</div>
+                    <div class="present_box_line">
+                        <div class="user_present_echarts echarts_con"></div>
+                        <div class="echart_title blue_color">当期</div>
+                    </div>
+                    <div class="present_box_line">
+                        <div class="user_total_echarts echarts_con"></div>
+                        <div class="echart_title green_color">累计</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -68,8 +131,10 @@
 
 </div>
 <script src="../js/jquery.min.js"></script>
+<script src="../js/echarts.min.js"></script>
 <script src="../js/jquery.cookie.js"></script>
 <script src="../js/common.js"></script>
-
+<script src="../js/echartsSub.js"></script>
+<script src="../js/trendCount.js"></script>
 </body>
 </html>
