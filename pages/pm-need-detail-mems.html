@@ -135,7 +135,7 @@
         }
     }
     cannotrelative()
-
+    var attachment = new attachment();
     function updata(){
         var url  = _ip+'/original/getRequireById?callback=update&id='+_id;
         $.ajax({
@@ -160,9 +160,7 @@
                     $('#scenario').html(data.scenario);
                     $('#nowSolution').html(data.nowSolution);
                     $('#sugSolution').html(data.sugSolution);
-                    
                     if(data.attachment){
-                        var attachment = new attachment();
                         attachment.init({
                             addAttachmentList:$('#addAttachmentList'),
                             isDetail:true

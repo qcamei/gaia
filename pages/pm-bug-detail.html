@@ -121,6 +121,7 @@
         location.href = 'pm-bug-detail-edit.html?id='+_id;
     }
 
+    var attachment = new attachment();
     function updata(){
         var url  = _ip+'/issue/getIssueById?callback=update&id='+_id;
         $.ajax({
@@ -148,7 +149,6 @@
                     $('#priority').html(data.priority);
                     $('#status').html(data.status);
                     if(data.attachment){
-                        var attachment = new attachment();
                         attachment.init({
                             addAttachmentList:$('#addAttachmentList'),
                             isDetail:true

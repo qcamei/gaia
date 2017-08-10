@@ -120,6 +120,7 @@
     if(roleid == 1 || roleid == 2 || roleid == 3){
         $('#editNeed').remove()
     }
+    var attachment = new attachment();
     function updata(){
         var url  = _ip+'/product/getRequireById?callback=update&id='+_id;
         $.ajax({
@@ -144,7 +145,6 @@
                     $('#solution').html(data.solution);
                     $('#expectWorkhour').html( data.expectWorkhour==null?'': data.expectWorkhour + ' 小时');
                     if(data.attachment){
-                        var attachment = new attachment();
                         attachment.init({
                             addAttachmentList:$('#addAttachmentList'),
                             isDetail:true

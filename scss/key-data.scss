@@ -2,15 +2,191 @@
   width: 200px;
   height: 28px;
 }
+.charts-title{
+  font-weight: bold;
+  font-size: 13px;
+  height: 40px;
+  line-height: 40px;
+  padding-left: 20px;
+}
+/*拜访*/
+.visit-chart-box{
+  background: #FFF;
+  width: 100%;
+  height: 300px;
+  margin-bottom: 20px;
+  .visit-title{
+    width: 15%;
+    >table{
+      width: 100%;
+      height: 100px;
+      margin: 80px 0 0 0;
+      >tbody>tr{
+        >td{
+          text-align: center;
+        }
+      }
+    }
+  }
+  .visit-chart-container{
+    .visit-chart{
+      width: 28%;
+      height: 260px;
+    }
+  }
+
+}
 .use-chart-box{
-  margin: 19px 19px 0 19px;
+  background: #FFF;
+  border: 1px solid #e1e1e1;
+  width: 100%;
+  margin-bottom: 20px;
+  height: 300px;
   .use-chart{
-    width: 60%;
-    height: 250px;
-    border: 1px solid #aa0000;
+    width: 20%;
+    height: 260px;
+    margin: 0 0 0 15%;
+    >table{
+      width: 80%;
+      height: 210px;
+      margin: 45px 0 0 10%;
+      >tbody{
+        >tr{
+          >td{
+            height: 70px;
+            text-align: center;
+          }
+        }
+      }
+    }
   }
   .use-mark{
-    width: 20%;
-    height: 250px;
+    width: 50%;
+    height: 260px;
+  }
+}
+
+.chart-open-account{
+  background: #FFF;
+  border: 1px solid #e1e1e1;
+  width: 100%;
+  margin-bottom: 20px;
+  height: 300px;
+  .account-box{
+    width: 48%;
+    height: 260px;
+    position: relative;
+    .open-account{
+      width: 60%;
+      height: 260px;
+    }
+    .line-turn{
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      animation: lineTurn 0.5s linear 1.2s;
+      animation-fill-mode:forwards;
+    }
+    .columnar{
+      width: 200px;
+      height: 200px;
+      margin: 30px 0 0 0;
+      opacity: 0;
+      animation: lineTurn 0.5s linear 1.7s;
+      animation-fill-mode:forwards;
+      .col{
+        width: 100%;
+        height: 20%;
+        .col-area{
+          width: 40px;
+          height: 100%;
+        }
+        .name{
+          margin: 0 0 0 10px;
+        }
+        &.col-1{
+          .col-area{
+            background: #5aa3e8;
+          }
+          .name{
+            color: #5aa3e8;
+          }
+        }
+
+        &.col-2{
+          .col-area{
+            background: #75b2eb;
+          }
+          .name{
+            color: #75b2eb;
+          }
+        }
+
+        &.col-3{
+          .col-area{
+            background: #a6cdf2;
+          }
+          .name{
+            color: #a6cdf2;
+          }
+        }
+
+        &.col-4{
+          .col-area{
+            background: #c4def7;
+          }
+          .name{
+            color: #c4def7;
+          }
+        }
+
+        &.col-5{
+          .col-area{
+            background: #d7e8f9;
+          }
+          .name{
+            color: #d7e8f9;
+          }
+        }
+
+      }
+    }
+  }
+}
+@keyframes lineTurn {
+  to{
+    opacity: 1;
+  }
+}
+
+.entryAndPerfecting{
+  width: 100%;
+  margin-bottom: 20px;
+  .entry-perfecting-box{
+    background: #FFF;
+    border: 1px solid #e1e1e1;
+    height: 300px;
+    width: 48%;
+    .entry-perfecting-container{
+      width: 100%;
+    }
+    .entry-perfecting-title{
+      width: 30%;
+      >table{
+        width: 100%;
+        height: 100px;
+        margin: 80px 0 0 0;
+        >tbody>tr{
+          >td{
+            text-align: center;
+          }
+        }
+      }
+    }
+    .entry-perfecting-chart{
+      width: 70%;
+      height: 260px;
+    }
   }
 }
