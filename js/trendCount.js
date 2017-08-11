@@ -44,6 +44,7 @@ var visitPresentOption = {
   y_data:[
     {
       type:'bar',
+      key: 'visit_hospital',
       name:'拜访医院(家)',
       data:[5, 20, 36, 10, 10, 20,35],
       color:'rgb(85,137,209)'
@@ -51,12 +52,14 @@ var visitPresentOption = {
     {
       type:'bar',
       name:'拜访次数(次)',
+      key: 'visit_count',
       data:[15, 26, 26, 18, 70, 50, 64],
       color:'rgb(118,213,185)'
     },
     {
       type:'bar',
       name:'拜访人力(人次)',
+      key: 'visit_person',
       data:[35, 86, 46, 38, 10, 34,23],
       color:'rgb(160,178,209)'
     }
@@ -70,18 +73,21 @@ var visitTotalOption = {
     {
       type:'bar',
       name:'拜访医院(家)',
+      key: 'visit_hospital',
       data:[5, 20, 36, 10, 10, 20, 34],
       color:'rgb(85,137,209)'
     },
     {
       type:'bar',
       name:'拜访次数(次)',
+      key: 'visit_count',
       data:[15, 26, 26, 18, 70, 50, 24],
       color:'rgb(118,213,185)'
     },
     {
       type:'bar',
       name:'拜访人力(人次)',
+      key: 'visit_person',
       data:[35, 86, 46, 38, 10, 34, 26],
       color:'rgb(160,178,209)'
     }
@@ -94,28 +100,32 @@ var openAccountPresentOption = {
   y_data:[
     {
       type:'bar',
+      key: 'client',
       name:'项目与集团客户(家)',
       data:[5, 20, 36, 10, 10, 20,35],
       color:'rgb(85,137,209)'
     },
     {
       type:'bar',
+      key: 'hospital',
       name:'医院(家)',
       data:[15, 26, 26, 18, 70, 50, 64],
       color:'rgb(118,213,185)'
     },
     {
       type:'bar',
+      key: 'server',
       name:'维修商(家)',
       data:[35, 86, 46, 38, 10, 34,23],
       color:'rgb(160,178,209)'
     },
     {
       type:'line',
+      key: 'superfine',
       name:'三甲(家)',
       data:[5, 6, 16, 18, 10, 14,13],
       color:'rgb(246,230,82)',
-      disLabel: true
+      offset: [0, 4]
     }
   ]
 }
@@ -127,28 +137,32 @@ var openAccountTotalOption = {
   y_data:[
     {
       type:'bar',
+      key: 'client',
       name:'项目与集团客户(家)',
       data:[5, 20, 36, 10, 10, 20,35],
       color:'rgb(85,137,209)'
     },
     {
       type:'bar',
+      key: 'hospital',
       name:'医院(家)',
       data:[15, 26, 26, 18, 70, 50, 64],
       color:'rgb(118,213,185)'
     },
     {
       type:'bar',
+      key: 'server',
       name:'维修商(家)',
       data:[35, 86, 46, 38, 10, 34,23],
       color:'rgb(160,178,209)'
     },
     {
       type:'line',
+      key: 'superfine',
       name:'三甲(家)',
       data:[5, 6, 16, 18, 10, 14,13],
       color:'rgb(246,230,82)',
-      disLabel: true
+      offset: [0,4]
     }
   ]
 }
@@ -159,12 +173,14 @@ var devicePresentOption = {
   y_data:[
     {
       type:'bar',
+      key: 'entering',
       name:'录入设备(台)',
       data:[5, 20, 36, 10, 10, 20, 61],
       color:'rgb(85,137,209)'
     },
     {
       type:'bar',
+      key: 'perfect',
       name:'完善设备(台)',
       data:[15, 26, 26, 18, 70, 50, 15],
       color:'rgb(118,213,185)'
@@ -179,12 +195,14 @@ var deviceTotalOption = {
   y_data:[
     {
       type:'line',
+      key: 'entering',
       name:'录入设备(千台)',
       data:[5, 20, 36, 10, 10, 20, 87],
       color:'rgb(90,144,220)'
     },
     {
       type:'line',
+      key: 'perfect',
       name:'完善设备(千台)',
       data:[15, 25, 16, 60, 40, 70, 27],
       color:'rgb(124,223,195)'
@@ -199,18 +217,21 @@ var manpowerPresentOption = {
   y_data:[
     {
       type:'bar',
+      key: 'fullTime',
       name:'全职(人时)',
       data:[5, 20, 36, 10, 10, 20, 23],
       color:'rgb(85,137,209)'
     },
     {
       type:'bar',
+      key: 'pluralism',
       name:'兼职(人时)',
       data:[15, 26, 26, 18, 70, 50, 35],
       color:'rgb(118,213,185)'
     },
     {
       type:'bar',
+      key:'hospital',
       name:'医院(人时)',
       data:[35, 86, 46, 38, 10, 34, 47],
       color:'rgb(160,178,209)'
@@ -225,18 +246,21 @@ var manpowerTotalOption = {
   y_data:[
     {
       type:'bar',
+      key: 'fullTime',
       name:'全职(人时)',
       data:[5, 20, 36, 10, 10, 20, 87],
       color:'rgb(85,137,209)'
     },
     {
       type:'bar',
+      key: 'pluralism',
       name:'兼职(人时)',
       data:[15, 26, 26, 18, 70, 50, 35],
       color:'rgb(118,213,185)'
     },
     {
       type:'bar',
+      key:'hospital',
       name:'医院(人时)',
       data:[35, 86, 46, 38, 10, 34, 67],
       color:'rgb(160,178,209)'
@@ -251,15 +275,17 @@ var repairPresentOption = {
   y_data:[
     {
       type:'bar',
+      key: 'report',
       name:'报修',
       data:[5, 20, 36, 10, 10, 20, 39],
-      color:'rgb(90,144,220)'
+      color:'rgb(85,137,209)'
     },
     {
       type:'bar',
+      key: 'receive',
       name:'接修',
       data:[15, 26, 26, 18, 70, 50, 76],
-      color:'rgb(24,68,115)'
+      color:'rgb(118,213,185)'
     }
   ]
 }
@@ -272,15 +298,17 @@ var repairTotalOption = {
   y_data:[
     {
       type:'bar',
+      key: 'report',
       name:'报修',
       data:[5, 20, 36, 10, 10, 20, 39],
-      color:'rgb(90,144,220)'
+      color:'rgb(85,137,209)'
     },
     {
       type:'bar',
+      key: 'receive',
       name:'接修',
       data:[15, 26, 26, 18, 70, 50, 76],
-      color:'rgb(24,68,115)'
+      color:'rgb(118,213,185)'
     }
   ]
 }
@@ -293,24 +321,28 @@ var controlPresentOption = {
   y_data:[
     {
       type:'bar',
+      key: 'servicing',
       name:'预防性维护',
       data:[35, 86, 46, 38, 10, 34, 29],
       color:'rgb(31,84,155)'
     },
     {
       type:'bar',
+      key: 'inspect',
       name:'日常检查',
       data:[15, 50, 86, 70, 40, 60, 59],
       color:'rgb(49,121,192)'
     },
     {
       type:'bar',
+      key: 'inspection',
       name:'工程师巡检',
       data:[35, 86, 26, 68, 30, 80, 46],
       color:'rgb(99,158,213)'
     },
     {
       type:'bar',
+      key: 'meterage',
       name:'计量',
       data:[25, 36, 56, 88, 50, 74, 59],
       color:'rgb(124,224,195)'
@@ -326,24 +358,28 @@ var controlTotalOption = {
   y_data:[
     {
       type:'bar',
+      key: 'servicing',
       name:'预防性维护',
       data:[35, 86, 46, 38, 10, 34, 29],
       color:'rgb(31,84,155)'
     },
     {
       type:'bar',
+      key: 'inspect',
       name:'日常检查',
       data:[15, 50, 86, 70, 40, 60, 59],
       color:'rgb(49,121,192)'
     },
     {
       type:'bar',
+      key: 'inspection',
       name:'工程师巡检',
       data:[35, 86, 26, 68, 30, 80, 46],
       color:'rgb(99,158,213)'
     },
     {
       type:'bar',
+      key: 'meterage',
       name:'计量',
       data:[25, 36, 56, 88, 50, 74, 59],
       color:'rgb(124,224,195)'
@@ -359,9 +395,10 @@ var documentPresentOption = {
   y_data:[
     {
       type:'bar',
+      key: 'doc',
       name:'文档',
       data:[45, 46, 46, 78, 50, 74, 79],
-      color:'rgb(160,178,209)'
+      color:'rgb(85,137,209)'
     }
   ]
 }
@@ -374,9 +411,10 @@ var documentTotalOption = {
   y_data:[
     {
       type:'bar',
+      key: 'doc',
       name:'文档',
       data:[45, 46, 46, 78, 50, 74, 79],
-      color:'rgb(160,178,209)'
+      color:'rgb(85,137,209)'
     }
   ]
 }
@@ -388,6 +426,7 @@ var userPresentOption = {
   y_data:[
     {
       type:'bar',
+      key: 'use_person',
       name:'使用人数(人)',
       data:[5, 20, 36, 10, 10, 20, 87],
       color:'rgb(85,137,209)'
@@ -402,6 +441,7 @@ var userTotalOption = {
   y_data:[
     {
       type:'line',
+      key: 'use_person',
       name:'使用人数(人)',
       data:[5, 20, 36, 10, 10, 20, 87],
       color:'rgb(124,223,195)'
@@ -426,3 +466,32 @@ threeBar(documentPresentEcharts, documentPresentOption, G_VAR.echarts.documentPr
 threeBar(documentTotalEcharts, documentTotalOption, G_VAR.echarts.documentTotalEcharts)
 threeBar(userPresentEcharts, userPresentOption, G_VAR.echarts.userPresentEcharts)
 threeBar(userTotalEcharts, userTotalOption, G_VAR.echarts.userTotalEcharts)
+
+function dataInit($ele) {
+  var dateMax = moment().subtract(1,'d').format('YYYY-MM-DD')
+  switch ($ele.val()) {
+    case 'week':
+      dateMax = moment().subtract(1,'d').format('YYYY-MM-DD')
+      break;
+    case 'month':
+      dateMax = moment().subtract(1,'d').format('YYYY-MM-DD')
+      break;
+    case 'halfYear':
+      dateMax = moment().subtract(1,'M').format('YYYY-MM-DD')
+      break;
+    case 'year':
+      dateMax = moment().subtract(1,'M').format('YYYY-MM-DD')
+      break;
+  }
+  $('#endDate').remove();
+  $('.endDate_box').append('<input type="text" id="endDate" name="endDate" class="calendar-input">')
+  $('#endDate').fdatepicker({
+    initialDate: dateMax,
+    format: 'yyyy-mm-dd',
+    endDate: dateMax
+  });
+}
+dataInit($('#dateRange'))
+$('#dateRange').on('change', function (ele) {
+  dataInit($(this))
+})

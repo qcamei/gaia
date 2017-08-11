@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>运营报告-数据概览-趋势统计</title>
+        <link href="../css/foundation-datepicker.css" type="text/css" rel="stylesheet"/>
         <link href="../css/mems-index.css" type="text/css" rel="stylesheet"/>
         <link rel="stylesheet" href="../css/trendCount.css">
     </head>
@@ -34,7 +35,24 @@
             <li><a href="key-data.html">关键数据</a></li>
             <li><a class="current" href="trend-count.html">趋势统计</a></li>
         </ul>
-        <div class="commit-new-item"><a class="btn" style="width: 120px">导出&nbsp;<b>+</b></a></div>
+        <div class="clear">
+            <div class="left">
+                <div>
+                    <select name="dateRange" id="dateRange">
+                        <option value="week">周</option>
+                        <option value="month">月</option>
+                        <option value="halfYear">半年</option>
+                        <option value="year">年</option>
+                    </select>
+                    <div class="endDate_box">
+                        <input type="text" id="endDate" name="endDate" class="calendar-input">
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="commit-new-item"><a class="btn" style="width: 120px">导出&nbsp;<b>+</b></a></div>
+            </div>
+        </div>
         <div class="item-content trendCount-content">
             <div class="trendCount_box">
                 <div class="echart_trend_box">
@@ -131,6 +149,8 @@
 
 </div>
 <script src="../js/jquery.min.js"></script>
+<script src="../js/foundation-datepicker.min.js"></script>
+<script src="../js/moment.js"></script>
 <script src="../js/echarts.min.js"></script>
 <script src="../js/jquery.cookie.js"></script>
 <script src="../js/common.js"></script>

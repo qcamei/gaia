@@ -34,7 +34,7 @@ function threeBar(element, optionData, echartObject) {
       splitLine: {
         show:true,
         lineStyle: {
-          color: 'rgb(221,221,221)',
+          color: 'rgba(221,221,221, 0.5)',
           width: 1
         }
       },
@@ -53,7 +53,7 @@ function threeBar(element, optionData, echartObject) {
       },
       splitLine: {
         lineStyle: {
-          color: 'rgb(221,221,221)',
+          color: 'rgba(221,221,221, 0.5)',
           width: 1
         }
       },
@@ -105,6 +105,16 @@ function threeBar(element, optionData, echartObject) {
     },
     data: []
   }
+  if (optionData.half) {
+    option.grid.top = 50
+    option.grid.right = '6%'
+    option.grid.left = '10%'
+    option.grid.bottom = 35
+    option.legend.orient = 'horizontal'
+    option.legend.top = 'top'
+    option.legend.left = 'center'
+    bar_json.barWidth = '15%'
+  }
   $.each(optionData.y_data, function (index, yData) {
     if (yData.type === 'bar') {
       var barJson = JSON.parse(JSON.stringify(bar_json))
@@ -119,9 +129,11 @@ function threeBar(element, optionData, echartObject) {
       lineJson.name = yData.name;
       lineJson.type = yData.type;
       lineJson.data = yData.data;
+      lineJson.zlevel = 2
       lineJson.itemStyle.normal.color = yData.color;
-      if (yData.disLabel) {
-        lineJson.label.normal.show = false;
+      if (yData.offset) {
+        lineJson.label.normal.offset = yData.offset;
+        // lineJson.label.normal.textStyle.color = yData.color;
       }
       series_data.push(lineJson)
     }
