@@ -335,12 +335,14 @@ var controlPresentOption = {
     },
     {
       type:'bar',
+      key: 'inspection',
       name:'工程师巡检',
       data:[35, 86, 26, 68, 30, 80, 46],
       color:'rgb(99,158,213)'
     },
     {
       type:'bar',
+      key: 'meterage',
       name:'计量',
       data:[25, 36, 56, 88, 50, 74, 59],
       color:'rgb(124,224,195)'
@@ -356,24 +358,28 @@ var controlTotalOption = {
   y_data:[
     {
       type:'bar',
+      key: 'servicing',
       name:'预防性维护',
       data:[35, 86, 46, 38, 10, 34, 29],
       color:'rgb(31,84,155)'
     },
     {
       type:'bar',
+      key: 'inspect',
       name:'日常检查',
       data:[15, 50, 86, 70, 40, 60, 59],
       color:'rgb(49,121,192)'
     },
     {
       type:'bar',
+      key: 'inspection',
       name:'工程师巡检',
       data:[35, 86, 26, 68, 30, 80, 46],
       color:'rgb(99,158,213)'
     },
     {
       type:'bar',
+      key: 'meterage',
       name:'计量',
       data:[25, 36, 56, 88, 50, 74, 59],
       color:'rgb(124,224,195)'
@@ -389,6 +395,7 @@ var documentPresentOption = {
   y_data:[
     {
       type:'bar',
+      key: 'doc',
       name:'文档',
       data:[45, 46, 46, 78, 50, 74, 79],
       color:'rgb(85,137,209)'
@@ -404,6 +411,7 @@ var documentTotalOption = {
   y_data:[
     {
       type:'bar',
+      key: 'doc',
       name:'文档',
       data:[45, 46, 46, 78, 50, 74, 79],
       color:'rgb(85,137,209)'
@@ -418,6 +426,7 @@ var userPresentOption = {
   y_data:[
     {
       type:'bar',
+      key: 'use_person',
       name:'使用人数(人)',
       data:[5, 20, 36, 10, 10, 20, 87],
       color:'rgb(85,137,209)'
@@ -432,6 +441,7 @@ var userTotalOption = {
   y_data:[
     {
       type:'line',
+      key: 'use_person',
       name:'使用人数(人)',
       data:[5, 20, 36, 10, 10, 20, 87],
       color:'rgb(124,223,195)'
