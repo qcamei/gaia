@@ -154,6 +154,11 @@ function creatAsideDom() {
                 id:'keydata',
                 name:'数据概览',
                 src:'key-data'
+              },
+              {
+                id:'dataexport',
+                name:'数据导出',
+                src:'data-export'
               }
             ]
         }
@@ -201,7 +206,8 @@ function modityAsideCurrent(){
             docmanage:['doc-manage']
         },   //文档管理文件列表
         runReport:{
-          keydata:['key-data','tend-count']
+            keydata:['key-data','tend-count'],
+            dataexport:['data-export']
         }
 
     }
@@ -702,7 +708,7 @@ function attachment(config){
           for(var k = 0 ; k < attachmentList.length; k++){
             if(attachmentList[k].indexOf('__') <= -1) return;
             var nameArr = attachmentList[k].split('__')[1].split('.');
-            var name = nameArr[0]+time+'.'+nameArr[1];
+            var name = nameArr[0]+'-'+time+'.'+nameArr[1];
             if(that.config.downloadDelete){
               h += '<li rel="'+attachmentList[k]+'"><div>'+name+'  <span>' + (attachmentList[k].time || '')+'</span> <a class="delete" href="'+_ip+'/file/download?path='+attachmentList[k]+'">下载</a>'+'<span class="delete" style="display: none">删除</span></div></li>';
             }else{

@@ -3,7 +3,7 @@
  */
 
 setVisitOption = {
-  option:function () {
+  option:function (labelLine) {
     opt = {
       tooltip: {
         trigger: 'item',
@@ -13,33 +13,14 @@ setVisitOption = {
         {
           name:'访问来源',
           type:'pie',
-          selectedMode: 'single',
-          radius: [0, '30%'],
-
-          label: {
-            normal: {
-              position: 'inner'
-            }
-          },
-          labelLine: {
-            normal: {
-              show: false
-            }
-          },
-
-        },
-        {
-          name:'访问来源',
-          type:'pie',
           radius: ['40%', '55%'],
-
           data:[
             {
               value:335,
               name:'直达',
               labelLine: {
                 normal: {
-                  show: false
+                  show: labelLine
                 }
               },
               itemStyle:{
@@ -63,24 +44,24 @@ setVisitOption = {
     };
     return opt;
   },
-  drawChart:function (chart) {
-    var opt = setVisitOption.option();
+  drawChart:function (chart,labelLine) {
+    var opt = setVisitOption.option(labelLine);
     chart.setOption(opt)
   }
 }
 
 //拜访
-setVisitOption.drawChart(echarts.init(document.getElementById('visit-chart-1')));
-setVisitOption.drawChart(echarts.init(document.getElementById('visit-chart-2')));
-setVisitOption.drawChart(echarts.init(document.getElementById('visit-chart-3')));
+setVisitOption.drawChart(echarts.init(document.getElementById('visit-chart-1')),true);
+setVisitOption.drawChart(echarts.init(document.getElementById('visit-chart-2')),true);
+setVisitOption.drawChart(echarts.init(document.getElementById('visit-chart-3')),true);
 
 //录入和完善
-setVisitOption.drawChart(echarts.init(document.getElementById('entry-perfecting-chart-1')));
-setVisitOption.drawChart(echarts.init(document.getElementById('entry-perfecting-chart-2')));
+setVisitOption.drawChart(echarts.init(document.getElementById('entry-perfecting-chart-1')),true);
+setVisitOption.drawChart(echarts.init(document.getElementById('entry-perfecting-chart-2')),true);
 
 //开户
-setVisitOption.drawChart(echarts.init(document.getElementById('open-account-1')));
-setVisitOption.drawChart(echarts.init(document.getElementById('open-account-2')));
+setVisitOption.drawChart(echarts.init(document.getElementById('open-account-1')),false);
+setVisitOption.drawChart(echarts.init(document.getElementById('open-account-2')),false);
 
 //开户的折线
 drawline = {
