@@ -10,7 +10,7 @@ function threeBar(element, optionData, echartObject) {
     legend: {
       data:optionData.legend_data,
       orient: 'vertical',
-      right: 5,
+      left: '88%',
       align: 'left',
       top: 'middle',
       textStyle: {
@@ -72,7 +72,7 @@ function threeBar(element, optionData, echartObject) {
         show: true,
         position: 'top',
         textStyle: {
-          color: 'rgb(191, 191, 191)'
+          color: 'rgb(0, 0, 0)'
         }
       }
     },

@@ -495,3 +495,7 @@ dataInit($('#dateRange'))
 $('#dateRange').on('change', function (ele) {
   dataInit($(this))
 })
+const export_ele = document.querySelector('.trendCount_box')
+$('#export_trend').on('click', function () {
+  export_image(export_ele, '趋势统计', 'jpg');
+})
