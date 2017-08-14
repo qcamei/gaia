@@ -9,10 +9,10 @@ function export_image(element, fileName, type) {
     width: eleWidth,
     height: eleHeight,
     onrendered: function(canvas) {
-      canvas.width = 2 * eleWidth;
-      canvas.height = 2 * eleHeight;
-      $('body').append(canvas)
-      return false
+      // canvas.width = 2 * eleWidth;
+      // canvas.height = 2 * eleHeight;
+      // $('body').append(canvas)
+      // return false
       var pageData = canvas.toDataURL(type, 1.0);
       var fixtype=function(type){
         type=type.toLocaleLowerCase().replace(/jpg/i,'jpeg');
