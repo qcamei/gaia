@@ -469,26 +469,38 @@ threeBar(userTotalEcharts, userTotalOption, G_VAR.echarts, 'userTotalEcharts')
 
 function dataInit($ele) {
   var dateMax = moment().subtract(1,'d').format('YYYY-MM-DD')
+  var format = 'yyyy-mm-dd'
+  var maxView = 'month'
   switch ($ele.val()) {
     case 'week':
       dateMax = moment().subtract(1,'d').format('YYYY-MM-DD')
+      format = 'yyyy-mm-dd'
+      maxView = 'month'
       break;
     case 'month':
       dateMax = moment().subtract(1,'d').format('YYYY-MM-DD')
+      format = 'yyyy-mm-dd';
+      maxView = 'month'
       break;
     case 'halfYear':
-      dateMax = moment().subtract(1,'M').format('YYYY-MM-DD')
+      dateMax = moment().subtract(1,'M').format('YYYY-MM')
+      format = 'yyyy-mm';
+      maxView = 'year'
       break;
     case 'year':
-      dateMax = moment().subtract(1,'M').format('YYYY-MM-DD')
+      dateMax = moment().subtract(1,'M').format('YYYY-MM')
+      format = 'yyyy-mm'
+      maxView = 'year'
       break;
   }
   $('#endDate').remove();
   $('.endDate_box').append('<input type="text" id="endDate" name="endDate" class="calendar-input">')
   $('#endDate').fdatepicker({
     initialDate: dateMax,
-    format: 'yyyy-mm-dd',
-    endDate: dateMax
+    format: format,
+    endDate: dateMax,
+    startView: maxView,
+    minView: maxView
   });
 }
 dataInit($('#dateRange'))
