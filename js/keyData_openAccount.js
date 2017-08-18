@@ -3,8 +3,8 @@
  */
 window.G_VAR = {}
 G_VAR.echarts = {
-  openAccountPreEcharts: null,
-  openAccountTotalEcharts: null
+  // openAccountPreEcharts: null,
+  // openAccountTotalEcharts: null
 }
 var openAccountPreEcharts = document.querySelector('#openAccountPre')
 var openAccountTotalEcharts = document.querySelector('#openAccountTotal')
@@ -55,5 +55,12 @@ var openAccountTotalOption = {
   half: true
 }
 
-threeBar(openAccountPreEcharts, openAccountPreOption, G_VAR.echarts.openAccountPreEcharts)
-threeBar(openAccountTotalEcharts, openAccountTotalOption, G_VAR.echarts.openAccountTotalEcharts)
+threeBar(openAccountPreEcharts, openAccountPreOption, G_VAR.echarts, 'openAccountPreEcharts')
+threeBar(openAccountTotalEcharts, openAccountTotalOption, G_VAR.echarts, 'openAccountTotalEcharts')
+window.onresize = function () {
+  for (var i in G_VAR.echarts) {
+    if (G_VAR.echarts[i]) {
+      G_VAR.echarts[i].resize()
+    }
+  }
+}

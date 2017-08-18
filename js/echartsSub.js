@@ -1,20 +1,20 @@
 /**
  * Created by txl-pc on 2017/8/9.
  */
-function threeBar(element, optionData, echartObject) {
-  if (!echartObject) {
-    echartObject = echarts.init(element)
+function threeBar(element, optionData, echartObject, parameter) {
+  if (!echartObject[parameter]) {
+    echartObject[parameter] = echarts.init(element)
   }
   var option = {
     tooltip: {},
     legend: {
       data:optionData.legend_data,
       orient: 'vertical',
-      right: 5,
+      left: '88%',
       align: 'left',
       top: 'middle',
       textStyle: {
-        color: 'rgb(191,191,191)'
+        color: 'rgb(0,0,0)'
       }
     },
     grid: {
@@ -39,7 +39,10 @@ function threeBar(element, optionData, echartObject) {
         }
       },
       axisLabel: {
-        margin: 4
+        margin: 4,
+        textStyle: {
+          color: 'rgb(0,0,0)'
+        }
       },
       data: optionData.x_data
     },
@@ -58,7 +61,10 @@ function threeBar(element, optionData, echartObject) {
         }
       },
       axisLabel: {
-        margin: 4
+        margin: 4,
+        textStyle: {
+          color: 'rgb(0,0,0)'
+        }
       }
     },
     series: []
@@ -72,7 +78,7 @@ function threeBar(element, optionData, echartObject) {
         show: true,
         position: 'top',
         textStyle: {
-          color: 'rgb(191, 191, 191)'
+          color: 'rgb(0, 0, 0)'
         }
       }
     },
@@ -94,7 +100,7 @@ function threeBar(element, optionData, echartObject) {
         show: true,
         position: 'top',
         textStyle: {
-          color: 'rgb(191, 191, 191)'
+          color: 'rgb(0, 0, 0)'
         }
       }
     },
@@ -139,5 +145,5 @@ function threeBar(element, optionData, echartObject) {
     }
   })
   option.series = series_data;
-  echartObject.setOption(option);
+  echartObject[parameter].setOption(option);
 }

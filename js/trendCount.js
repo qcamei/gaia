@@ -3,22 +3,22 @@
  */
 window.G_VAR = {}
 G_VAR.echarts = {
-  visitPresentEcharts: null,
-  visitTotalEcharts: null,
-  openAccountPresentEcharts: null,
-  openAccountTotalEcharts: null,
-  devicePresentEcharts: null,
-  deviceTotalEcharts: null,
-  manpowerPresentEcharts: null,
-  manpowerTotalEcharts: null,
-  repairPresentEcharts: null,
-  repairTotalEcharts: null,
-  controlPresentEcharts: null,
-  controlTotalEcharts: null,
-  documentPresentEcharts: null,
-  documentTotalEcharts: null,
-  userPresentEcharts: null,
-  userTotalEcharts: null
+  // visitPresentEcharts: null,
+  // visitTotalEcharts: null,
+  // openAccountPresentEcharts: null,
+  // openAccountTotalEcharts: null,
+  // devicePresentEcharts: null,
+  // deviceTotalEcharts: null,
+  // manpowerPresentEcharts: null,
+  // manpowerTotalEcharts: null,
+  // repairPresentEcharts: null,
+  // repairTotalEcharts: null,
+  // controlPresentEcharts: null,
+  // controlTotalEcharts: null,
+  // documentPresentEcharts: null,
+  // documentTotalEcharts: null,
+  // userPresentEcharts: null,
+  // userTotalEcharts: null
 }
 var visitPresentEcharts = document.querySelector('.visit_present_echarts')
 var visitTotalEcharts = document.querySelector('.visit_total_echarts')
@@ -450,48 +450,82 @@ var userTotalOption = {
 }
 
 
-threeBar(visitPresentEcharts, visitPresentOption, G_VAR.echarts.visitPresentEcharts)
-threeBar(visitTotalEcharts, visitTotalOption, G_VAR.echarts.visitTotalEcharts)
-threeBar(openAccountPresentEcharts, openAccountPresentOption, G_VAR.echarts.openAccountPresentEcharts)
-threeBar(openAccountTotalEcharts, openAccountTotalOption, G_VAR.echarts.openAccountTotalEcharts)
-threeBar(devicePresentEcharts, devicePresentOption, G_VAR.echarts.devicePresentEcharts)
-threeBar(deviceTotalEcharts, deviceTotalOption, G_VAR.echarts.deviceTotalEcharts)
-threeBar(manpowerPresentEcharts, manpowerPresentOption, G_VAR.echarts.manpowerPresentEcharts)
-threeBar(manpowerTotalEcharts, manpowerTotalOption, G_VAR.echarts.manpowerTotalEcharts)
-threeBar(repairPresentEcharts, repairPresentOption, G_VAR.echarts.repairPresentEcharts)
-threeBar(repairTotalEcharts, repairTotalOption, G_VAR.echarts.repairTotalEcharts)
-threeBar(controlPresentEcharts, controlPresentOption, G_VAR.echarts.controlPresentEcharts)
-threeBar(controlTotalEcharts, controlTotalOption, G_VAR.echarts.controlTotalEcharts)
-threeBar(documentPresentEcharts, documentPresentOption, G_VAR.echarts.documentPresentEcharts)
-threeBar(documentTotalEcharts, documentTotalOption, G_VAR.echarts.documentTotalEcharts)
-threeBar(userPresentEcharts, userPresentOption, G_VAR.echarts.userPresentEcharts)
-threeBar(userTotalEcharts, userTotalOption, G_VAR.echarts.userTotalEcharts)
+threeBar(visitPresentEcharts, visitPresentOption, G_VAR.echarts, 'visitPresentEcharts')
+threeBar(visitTotalEcharts, visitTotalOption, G_VAR.echarts, 'visitTotalEcharts')
+threeBar(openAccountPresentEcharts, openAccountPresentOption, G_VAR.echarts, 'openAccountPresentEcharts')
+threeBar(openAccountTotalEcharts, openAccountTotalOption, G_VAR.echarts, 'openAccountTotalEcharts')
+threeBar(devicePresentEcharts, devicePresentOption, G_VAR.echarts, 'devicePresentEcharts')
+threeBar(deviceTotalEcharts, deviceTotalOption, G_VAR.echarts, 'deviceTotalEcharts')
+threeBar(manpowerPresentEcharts, manpowerPresentOption, G_VAR.echarts, 'manpowerPresentEcharts')
+threeBar(manpowerTotalEcharts, manpowerTotalOption, G_VAR.echarts, 'manpowerTotalEcharts')
+threeBar(repairPresentEcharts, repairPresentOption, G_VAR.echarts, 'repairPresentEcharts')
+threeBar(repairTotalEcharts, repairTotalOption, G_VAR.echarts, 'repairTotalEcharts')
+threeBar(controlPresentEcharts, controlPresentOption, G_VAR.echarts, 'controlPresentEcharts')
+threeBar(controlTotalEcharts, controlTotalOption, G_VAR.echarts, 'controlTotalEcharts')
+threeBar(documentPresentEcharts, documentPresentOption, G_VAR.echarts, 'documentPresentEcharts')
+threeBar(documentTotalEcharts, documentTotalOption, G_VAR.echarts, 'documentTotalEcharts')
+threeBar(userPresentEcharts, userPresentOption, G_VAR.echarts, 'userPresentEcharts')
+threeBar(userTotalEcharts, userTotalOption, G_VAR.echarts, 'userTotalEcharts')
 
 function dataInit($ele) {
   var dateMax = moment().subtract(1,'d').format('YYYY-MM-DD')
+  var format = 'yyyy-mm-dd'
+  var maxView = 'month'
   switch ($ele.val()) {
     case 'week':
       dateMax = moment().subtract(1,'d').format('YYYY-MM-DD')
+      format = 'yyyy-mm-dd'
+      maxView = 'month'
       break;
     case 'month':
       dateMax = moment().subtract(1,'d').format('YYYY-MM-DD')
+      format = 'yyyy-mm-dd';
+      maxView = 'month'
       break;
     case 'halfYear':
-      dateMax = moment().subtract(1,'M').format('YYYY-MM-DD')
+      dateMax = moment().subtract(1,'M').format('YYYY-MM')
+      format = 'yyyy-mm';
+      maxView = 'year'
       break;
     case 'year':
-      dateMax = moment().subtract(1,'M').format('YYYY-MM-DD')
+      dateMax = moment().subtract(1,'M').format('YYYY-MM')
+      format = 'yyyy-mm'
+      maxView = 'year'
       break;
   }
   $('#endDate').remove();
   $('.endDate_box').append('<input type="text" id="endDate" name="endDate" class="calendar-input">')
   $('#endDate').fdatepicker({
     initialDate: dateMax,
-    format: 'yyyy-mm-dd',
-    endDate: dateMax
+    format: format,
+    endDate: dateMax,
+    startView: maxView,
+    minView: maxView
   });
 }
 dataInit($('#dateRange'))
 $('#dateRange').on('change', function (ele) {
   dataInit($(this))
 })
+function echartsResize() {
+  for (var i in G_VAR.echarts) {
+    if (G_VAR.echarts[i]) {
+      G_VAR.echarts[i].resize()
+    }
+  }
+}
+const export_ele = document.querySelector('.trendCount_box')
+$('#export_trend').on('click', function () {
+  var export_width = export_ele.offsetWidth
+  $(export_ele).css('width', export_width * 2 +'px')
+  $('.echarts_con').css('height', 300 * 2 + 'px')
+  echartsResize()
+  setTimeout(function () {
+    export_image(export_ele, '趋势统计', 'jpg');
+  }, 5 * 1000)
+})
+
+
+window.onresize = function () {
+  echartsResize()
+}
