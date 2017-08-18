@@ -145,23 +145,24 @@ function creatAsideDom() {
                         src:'doc-manage'
                     }
                  ]
-        },
-        runReport:{
-            name:'运营报告',
-            iconClass:'report',
-            data:[
-              {
-                id:'keydata',
-                name:'数据概览',
-                src:'key-data'
-              },
-              {
-                id:'dataexport',
-                name:'数据导出',
-                src:'data-export'
-              }
-            ]
         }
+        // ,
+        // runReport:{
+        //     name:'运营报告',
+        //     iconClass:'report',
+        //     data:[
+        //       {
+        //         id:'keydata',
+        //         name:'数据概览',
+        //         src:'key-data'
+        //       },
+        //       {
+        //         id:'dataexport',
+        //         name:'数据导出',
+        //         src:'data-export'
+        //       }
+        //     ]
+        // }
     }
     var h = ''
     for(var k in obj){
@@ -204,11 +205,12 @@ function modityAsideCurrent(){
         },      //系统配置文件列表
         documentmanage:{
             docmanage:['doc-manage']
-        },   //文档管理文件列表
-        runReport:{
-            keydata:['key-data','tend-count'],
-            dataexport:['data-export']
         }
+        // ,   //文档管理文件列表
+        // runReport:{
+        //     keydata:['key-data','tend-count'],
+        //     dataexport:['data-export']
+        // }
 
     }
 

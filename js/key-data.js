@@ -13,7 +13,7 @@ setVisitOption = {
         {
           name:'访问来源',
           type:'pie',
-          radius: ['40%', '55%'],
+          radius: ['45%', '55%'],
           data:[
             {
               value:335,

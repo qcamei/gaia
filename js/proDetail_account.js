@@ -17,7 +17,9 @@ const managers = new Vue({
         contentType:'application/json',
         jsonpCallback: 'abcd',
       }).done(function (json) {
+        json.data.unshift('---请选择---')
         that.list = json.data;
+
       })
     }
   }
@@ -177,6 +179,7 @@ const form_2 = new Vue({
       $('#account-check-body-2').find('input[type=text]').each(function () {
         $(this).removeAttr('disabled')
       })
+      $('#managers').removeAttr('disabled')
       $('.a-upload').css({'display':'block'})
       $('#account-check-body-2').find('span.delete').attr("style","");
     },
@@ -188,6 +191,7 @@ const form_2 = new Vue({
       $('#account-check-body-2').find('input[type=text]').each(function () {
         $(this).prop({'disabled':'disable'})
       })
+      $('#managers').prop({'disabled':'disable'})
       $('.a-upload').css({'display':'none'})
       $('#account-check-body-2').find('span.delete').css({'display':'none'})
     },
@@ -201,6 +205,11 @@ const form_2 = new Vue({
           arr.push(text)
         }
       })
+      var m = $('#managers').val();
+      if(m == '---请选择---'){
+        alert('请选择实施经理！');
+        return;
+      }
       var reg = /^\+?[1-9][0-9]*$/
       var office_count = $('#office_count').val();
       var equipment_count = $('#equipment_count').val();
