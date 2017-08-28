@@ -1,0 +1,8 @@
+<div id="chooseTemplate">
+    <select name="" id="">
+        {{each data}}
+        <option value="{{$value.templateID}}">{{$value.templateName}}</option>
+        {{/each}}
+    </select>
+    <button class="btn" data-hospitalname="{{hospitalName}}">确定导出</button>
+</div>

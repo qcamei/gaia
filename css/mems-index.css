@@ -996,3 +996,7 @@ aside.aside .menu {
       padding: 14px 19px 16px 0; }
       .content .item-content .pages .page-list {
         float: right; }
+
+#chooseTemplate {
+  padding: 2em;
+  text-align: center; }

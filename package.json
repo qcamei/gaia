@@ -46,6 +46,10 @@
     "yargs": "^6.6.0"
   },
   "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.15.4",
+    "gulp": "^3.9.1",
+    "mockjs": "^1.0.1-beta3",
     "moment": "^2.18.1"
   }
 }

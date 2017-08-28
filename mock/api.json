@@ -1,0 +1,17 @@
+{
+  "Demo": [
+    {
+      "url":"/getAllTemplate",
+      "desc": "模板列表",
+      "mock":true,
+      "res": {
+        "success":true,
+        "message": "模板列表",
+        "data|2-6": [{
+          "templateID":"@integer(1-100)",
+          "templateName":"@name()"
+        }]
+      }
+    }
+  ]
+}

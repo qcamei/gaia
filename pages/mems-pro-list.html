@@ -69,6 +69,7 @@
                             <th>级别</th>
                             <th>商务阶段</th>
                             <th>操作</th>
+                            <th>导出PDF</th>
                         </tr>
                     </thead>
                     <tbody id="bodyList">
@@ -82,13 +83,14 @@
             </div>
         </div>
     </div>
-
 </div>
 
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.cookie.js"></script>
 <script src="../js/foundation-datepicker.min.js"></script>
 <script src="../js/common.js"></script>
+<script src="../framework/layer-v3.0.3/layer/layer.js"></script>
+<script src="../library/template-web.js"></script>
 <script>
     var roleid = $.cookie('userrole');
     //权限控制
@@ -182,8 +184,11 @@
 
                     if(roleid==9 || roleid==3){
                         _data.push('<td><a class="link" href="javascript:" onclick="deleteList('+msg.id+')">删除</a></td>');
+                        _data.push('<td><a class="link" href="javascript:" onclick="exportPDF('+msg.id+',\''+msg.name.toString()+'\')">导出</a></td>)');
                     }else{
                         _data.push('<td></td>');
+                      _data.push('<td><a class="link" href="javascript:" onclick="exportPDF('+msg.id+',\''+msg.name.toString()+'\')">导出</a></td>)');
+
                     }
                 }
                 _pager.push('<span>共：'+ totalPage +'页</span>');
@@ -268,7 +273,31 @@
             })
         }
     }
+    function exportPDF(hospitalID, hospitalName){
 
+        if(typeof hospitalID === 'number' && hospitalName.length !== 0){
+          //request templates
+          $.get("http://10.0.1.135:8080/mock/getAllTemplate",{hospitalID:hospitalID, hospitalName:hospitalName}).then(function(data){
+            data.hospitalName = hospitalName
+            $.get("../template_for_alert/choose_template_id.html",function(str){
+              var render = template.compile(str);
+              var html = render(data);
+              layer.open({
+                type: 1,
+                closeBtn: 1,
+                area: ['420px', '140px'], //宽高
+                content: html,
+                title:"请选择模板"
+              });
+            })
+
+          },function(){
+            layer.msg('无法连接服务器,发生了错误');
+          })
+    }else{
+          layer.msg("请传入医院ID、名称")
+        }
+    }
     var nowTemp = new Date();
     var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
     var checkin = $('#dpd1').fdatepicker({
@@ -386,6 +415,14 @@
             }
         });
     }
+
+    //listen to the exportPDF action
+    $("body").on("click","#chooseTemplate .btn",  function(){
+      var templateID = $("#chooseTemplate select").val()
+      var hospitalName = $("#chooseTemplate button").data("hospitalname");
+      var url ="http://10.0.1.135:3000/"+templateID
+      window.open(url)
+    })
 </script>
 </body>
 </html>
