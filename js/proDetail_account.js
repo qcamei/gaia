@@ -270,13 +270,16 @@ const form_2 = new Vue({
         jsonpCallback: 'form2',
       }).done(function (json) {
         // console.log(json)
-        if(!json.data) return
-        $('#managers').find('option').each(function () {
-          var text = $(this).text();
-          if(text == json.data.manager){
-            $(this).prop({'selected':"selected"})
-          }
-        })
+        if(!json.data) return;
+        setTimeout(function () {
+          $('#managers').find('option').each(function () {
+            var text = $(this).text();
+            if(text == json.data.manager){
+              $(this).prop({'selected':"selected"})
+            }
+          })
+        },500)
+
         $('#remark_manage').val(json.data.remarkManager);
         $('#office_count').val(json.data.officeCount);
         $('#equipment_count').val(json.data.equipmentCount);
