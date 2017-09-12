@@ -6,7 +6,7 @@ if(_ip.indexOf('localhost') != -1){
     // _ip = 'http://10.0.2.14:8080/operation-web'; //广播
 }else{
     //will remove after project complete
-  _ip = 'http://121.42.187.170';
+  _ip = 'http://121.42.252.26/';
 }
 
 /*----------
