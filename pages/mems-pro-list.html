@@ -281,6 +281,7 @@
             data.hospitalName = hospitalName
             $.get("../template_for_alert/choose_template_id.html",function(str){
               var render = template.compile(str);
+              data.hospitalID = hospitalID;
               var html = render(data);
               layer.open({
                 type: 1,
@@ -419,8 +420,9 @@
     //listen to the exportPDF action
     $("body").on("click","#chooseTemplate .btn",  function(){
       var templateID = $("#chooseTemplate select").val()
-      var hospitalName = $("#chooseTemplate button").data("hospitalname");
-      var url ="http://121.42.187.170:3001/"+templateID
+      var hosid = $("#chooseTemplate button").data("hosid");
+//      var url ="http://121.42.187.170:3001/"+hosid+"?template="+templateID
+      var url ="http://121.42.187.170:3001/"+hosid
       window.open(url)
     })
 </script>
