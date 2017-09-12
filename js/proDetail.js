@@ -1019,8 +1019,9 @@ businessProgress.prototype = {
 	surecord:$('#surecord'),
 	canclecord:$('#canclecord'),
 	busCordTable:$('#busCordTable'),
-    addPeopleUl:$('#addPeopleUl'),
-    addPeopleList:$('#addPeopleList'),
+  addPeopleUl:$('#addPeopleUl'),
+  addPeopleList:$('#addPeopleList'),
+  isClick:false,
 	init:function(){
 		this.addPeople();
 		this.getBusCordList();
@@ -1032,9 +1033,11 @@ businessProgress.prototype = {
 			that.showEdite(that);
 		})
 		this.surecord.click(function(){
-			that.insertBusInfo();
+		  if(!that.isClick){
+        that.insertBusInfo();
+      }
 		})
-        that.getExistPeople();
+    that.getExistPeople();
 		return this;
 	},
 	showInfo:function(that){
@@ -1163,6 +1166,7 @@ businessProgress.prototype = {
                     return false;
                 }
                 if(data.success){
+                  that.isClick = false;
                 	that.getBusCordList();
                 	that.showEdite(that);
 					_API.getPBussTypeList('bussTypeList',false,false,globleProjectId)

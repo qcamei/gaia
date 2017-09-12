@@ -1,9 +1,10 @@
 
 var _ip = location.origin;
 if(_ip.indexOf('localhost') != -1){
-    _ip = 'http://121.42.187.170'; //本地
+    // _ip = 'http://121.42.187.170'; //本地
     // _ip = 'http://192.168.8.31:8080'  //展播
     // _ip = 'http://10.0.2.14:8080/operation-web'; //广播
+    _ip = 'http://10.0.1.115:8888/';
 }else{
     //will remove after project complete
   _ip = 'http://121.42.252.26/';
@@ -32,7 +33,7 @@ if(_ip.indexOf('localhost') != -1){
          jsonpCallback: 'login',
          success: function(json) {
              if(!json.success){
-                 location.href = 'user-login.html';
+                 // location.href = 'user-login.html';
              }
              else {
                  $.cookie('username',json.data.userName);
@@ -149,6 +150,7 @@ function creatAsideDom() {
                     }
                  ]
         }
+        // ,
         // runReport:{
         //     name:'运营报告',
         //     iconClass:'report',
@@ -207,7 +209,8 @@ function modityAsideCurrent(){
         },      //系统配置文件列表
         documentmanage:{
             docmanage:['doc-manage']
-        }   //文档管理文件列表
+        }
+        // ,   //文档管理文件列表
         // runReport:{
         //     keydata:['key-data','tend-count'],
         //     dataexport:['data-export']
@@ -384,7 +387,7 @@ var _api = function(){
             jsonpCallback: callback,
             success: function(json) {
                 var json = json.data;
-
+                if(!json || !json.length) return
                 var h = '';
                 if (isSelect) {
                     h += '<option value="">请选择</option>';
@@ -406,6 +409,7 @@ var _api = function(){
             jsonpCallback: callback,
             success: function(json) {
                 var json = json.data;
+                if(!json || !json.length) return
                 var h = '';
                 if (isSelect) {
                     h += '<option value="">请选择</option>';

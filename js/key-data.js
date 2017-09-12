@@ -4,6 +4,7 @@
 
 setVisitOption = {
   option:function (labelLine) {
+
     opt = {
       tooltip: {
         trigger: 'item',
@@ -50,18 +51,189 @@ setVisitOption = {
   }
 }
 
+/*
+*
+* chart,url,labelLine,data
+*
+* */
+function drawCircularMap (config){
+  this.init = function(config){
+    this.config = $.extend({
+      type:"draw",
+      color:['#4d9be5','#5ce5cd']
+    },config);
+    return this;
+  };
+  this.getOption = function () {
+    opt = {
+      tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+      },
+      series: [
+        {
+          name:'访问来源',
+          type:'pie',
+          radius: ['45%', '55%'],
+          data:[]
+        }
+      ]
+    };
+    return opt;
+  };
+  this.drawChart = function () {
+    var that = this;
+
+    var url  = this.config.url;
+    var data = this.config.data;
+    var callBack = this.config.callBack;
+    $.ajax({
+      url:'http://10.0.1.115:8888'+url,
+      type: 'GET',
+      data:data?data:'',
+      dataType: 'jsonp',
+      async:false,
+      contentType:'application/json',
+      jsonpCallback: callBack,
+      success: function(json) {
+        if(url == '/key/visit') that.callBack_1(json.data)
+        if(url == '/device/in') that.callBack_2(json.data)
+        if(url == '/open/column') that.callBack_3(json.data)
+      }
+    })
+  },
+  this.callBack_1 = function (json) {
+    $('#visitHospital').html(json.visitHospital)
+    $('#visitNum').html(json.visitNum)
+    var that = this;
+    var len = that.config.chart.length
+    if(len){
+      for(var m = 0; m < len; m++){
+        var opt = this.getOption();
+        var key = 'chart_'+ (m+1)
+        var data = [];
+        for(var n = 0; n < json[key].length; n++){
+          data.push(json[key][n])
+        }
+        for(var k = 0; k < data.length; k++){
+          opt.series[0].data.push({
+            value:data[k].value,
+            name:data[k].name,
+            itemStyle:{
+              normal:{
+                color:that.config.color[k]
+              }
+            }
+          })
+        }
+        that.config.chart[m].setOption(opt)
+      }
+    }
+  },
+  this.callBack_2 = function (json) {
+    $('#entryCurrent').html(json.chart_1.current)
+    $('#entryTotal').html(json.chart_1.total)
+    $('#perfectingCurrent').html(json.chart_2.current)
+    var that = this;
+    var len = that.config.chart.length
+    if(len){
+      for(var m = 0; m < len; m++){
+        var opt = this.getOption();
+        var key = 'chart_'+ (m+1)
+        var data = [];
+        for(var n = 0; n < json[key].chart.length; n++){
+          data.push(json[key].chart[n])
+        }
+        for(var k = 0; k < data.length; k++){
+          opt.series[0].data.push({
+            value:data[k].value,
+            name:data[k].name,
+            itemStyle:{
+              normal:{
+                color:that.config.color[k]
+              }
+            }
+          })
+        }
+        that.config.chart[m].setOption(opt)
+      }
+    }
+  },
+  this.callBack_3 = function (json) {
+      var that = this;
+      var len = that.config.chart.length
+      if(len){
+        for(var m = 0; m < len; m++){
+          //环状图
+          var opt = this.getOption();
+          var key = 'chart_'+ (m+1)
+          var data = [];
+          for(var n = 0; n < json[key].ring.length; n++){
+            data.push(json[key].ring[n])
+          }
+          for(var k = 0; k < data.length; k++){
+            opt.series[0].data.push({
+              value:data[k].value,
+              name:data[k].name,
+              labelLine: {
+                normal: {
+                  show: false
+                }
+              },
+              itemStyle:{
+                normal:{
+                  color:that.config.color[k]
+                }
+              }
+            })
+          }
+          that.config.chart[m].setOption(opt)
+
+          //柱状图
+          var columnData = [];
+          var columnHtml = '';
+          var H = 200;
+          for(var j = 0; j < json[key].column.length; j++){
+            columnData.push(json[key].column[j])
+          }
+          for(var x = 0; x < columnData.length; x++){
+            if(columnData[x].present == 0) continue;
+            var ch = columnData[x].present+'%';
+            columnHtml += '<div class="col col-'+(x+1)+' clear" style="height: '+ch+'">';
+              columnHtml += '<div class="col-area left"></div>'
+              columnHtml += '<div class="name left">'+columnData[x].name+' '+ columnData[x].value +'家</div></div>'
+          }
+          $('#account_columnar_'+ (m+1) ).html(columnHtml);
+        }
+      }
+    }
+}
+
+
 //拜访
-setVisitOption.drawChart(echarts.init(document.getElementById('visit-chart-1')),true);
-setVisitOption.drawChart(echarts.init(document.getElementById('visit-chart-2')),true);
-setVisitOption.drawChart(echarts.init(document.getElementById('visit-chart-3')),true);
+drawCircularMap_1 = new drawCircularMap()
+drawCircularMap_1.init({
+  chart:[echarts.init(document.getElementById('visit-chart-1')),echarts.init(document.getElementById('visit-chart-2')),echarts.init(document.getElementById('visit-chart-3'))],
+  url:'/key/visit',
+  callBack:'visit'
+}).drawChart()
+
 
 //录入和完善
-setVisitOption.drawChart(echarts.init(document.getElementById('entry-perfecting-chart-1')),true);
-setVisitOption.drawChart(echarts.init(document.getElementById('entry-perfecting-chart-2')),true);
+drawCircularMap_2 = new drawCircularMap()
+drawCircularMap_2.init({
+  chart:[echarts.init(document.getElementById('entry-perfecting-chart-1')),echarts.init(document.getElementById('entry-perfecting-chart-2'))],
+  url:'/device/in',
+  callBack:'device'
+}).drawChart()
 
 //开户
-setVisitOption.drawChart(echarts.init(document.getElementById('open-account-1')),false);
-setVisitOption.drawChart(echarts.init(document.getElementById('open-account-2')),false);
+drawCircularMap_3 = new drawCircularMap()
+drawCircularMap_3.init({
+  chart:[echarts.init(document.getElementById('open-account-1')),echarts.init(document.getElementById('open-account-2'))],
+  url:'/open/column',
+  callBack:'column'
+}).drawChart()
 
 //开户的折线
 drawline = {
@@ -105,6 +277,7 @@ drawline = {
 }
 drawline.lineTurn('lineTop_1')
 drawline.lineTurn('lineTop_2')
+
 
 
 //使用
