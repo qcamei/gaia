@@ -69,6 +69,9 @@ function threeBar(element, optionData, echartObject, parameter) {
     },
     series: []
   };
+  if (optionData.color) {
+    option.color = optionData.color
+  }
   var series_data = []
   var bar_json = {
     name: '销量',
