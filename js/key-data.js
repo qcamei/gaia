@@ -45,6 +45,46 @@ setVisitOption = {
     };
     return opt;
   },
+  columnOption: function () {
+    var option_use_chart = {
+      color: ['#4d9be5'],
+      tooltip : {
+        trigger: 'axis',
+        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+          type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis : [
+        {
+          type : 'category',
+          //data : ['报修', '接修', '预防性维护', '日常检查', '工程师巡检', '计量'],
+          axisTick: {
+            alignWithLabel: true
+          }
+        }
+      ],
+      yAxis : [
+        {
+          type : 'value'
+        }
+      ],
+      series : [
+        {
+          name:'维护次数',
+          type:'bar',
+          barWidth: '20%',
+         // data:[10, 52, 200, 334, 390, 330]
+        }
+      ]
+    };
+    return option_use_chart
+  },
   drawChart:function (chart,labelLine) {
     var opt = setVisitOption.option(labelLine);
     chart.setOption(opt)
@@ -65,7 +105,7 @@ function drawCircularMap (config){
     return this;
   };
   this.getOption = function () {
-    opt = {
+    var opt = {
       tooltip: {
         trigger: 'item',
         formatter: "{a} <br/>{b}: {c} ({d}%)"
@@ -81,6 +121,46 @@ function drawCircularMap (config){
     };
     return opt;
   };
+  this.columnOption = function () {
+    var option_use_chart = {
+      color: ['#4d9be5'],
+      tooltip : {
+        trigger: 'axis',
+        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+          type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis : [
+        {
+          type : 'category',
+          //data : ['报修', '接修', '预防性维护', '日常检查', '工程师巡检', '计量'],
+          axisTick: {
+            alignWithLabel: true
+          }
+        }
+      ],
+      yAxis : [
+        {
+          type : 'value'
+        }
+      ],
+      series : [
+        {
+          name:'维护次数',
+          type:'bar',
+          barWidth: '20%',
+          // data:[10, 52, 200, 334, 390, 330]
+        }
+      ]
+    };
+    return option_use_chart
+  },
   this.drawChart = function () {
     var that = this;
 
@@ -99,6 +179,7 @@ function drawCircularMap (config){
         if(url == '/key/visit') that.callBack_1(json.data)
         if(url == '/device/in') that.callBack_2(json.data)
         if(url == '/open/column') that.callBack_3(json.data)
+        if(url == '/quality/use') that.callBack_4(json.data)
       }
     })
   },
@@ -206,7 +287,25 @@ function drawCircularMap (config){
           $('#account_columnar_'+ (m+1) ).html(columnHtml);
         }
       }
+    },
+  this.callBack_4 = function (json) {
+    $('#currentUser').html(json.currentUser)
+    $('#totalUser').html(json.totalUser)
+    $('#currentFunction').html(json.currentFunction)
+    $('#totaltFunction').html(json.totaltFunction)
+    $('#currentPersent').html(json.currentPersent)
+    $('#totaltPersent').html(json.totaltPersent)
+    var that = this;
+    var len = that.config.chart.length
+    if(len){
+      for(var m = 0; m < len; m++){
+        var opt = this.columnOption();
+        opt.xAxis[0].data = json.x
+        opt.series[0].data = json.y
+        that.config.chart[m].setOption(opt)
+      }
     }
+  }
 }
 
 
@@ -233,6 +332,14 @@ drawCircularMap_3.init({
   chart:[echarts.init(document.getElementById('open-account-1')),echarts.init(document.getElementById('open-account-2'))],
   url:'/open/column',
   callBack:'column'
+}).drawChart()
+
+//使用
+drawCircularMap_4 = new drawCircularMap()
+drawCircularMap_4.init({
+  chart:[echarts.init(document.getElementById('use-chart'))],
+  url:'/quality/use',
+  callBack:'quality'
 }).drawChart()
 
 //开户的折线
@@ -282,44 +389,61 @@ drawline.lineTurn('lineTop_2')
 
 //使用
 var chartUseChart = echarts.init(document.getElementById('use-chart'));
-option_use_chart = {
-  color: ['#4d9be5'],
-  tooltip : {
-    trigger: 'axis',
-    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-      type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-    }
-  },
-  grid: {
-    left: '3%',
-    right: '4%',
-    bottom: '3%',
-    containLabel: true
-  },
-  xAxis : [
-    {
-      type : 'category',
-      data : ['报修', '接修', '预防性维护', '日常检查', '工程师巡检', '计量'],
-      axisTick: {
-        alignWithLabel: true
+function getUseChart(){
+  var option_use_chart = {
+    color: ['#4d9be5'],
+    tooltip : {
+      trigger: 'axis',
+      axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
       }
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    xAxis : [
+      {
+        type : 'category',
+        data : ['报修', '接修', '预防性维护', '日常检查', '工程师巡检', '计量'],
+        axisTick: {
+          alignWithLabel: true
+        }
+      }
+    ],
+    yAxis : [
+      {
+        type : 'value'
+      }
+    ],
+    series : [
+      {
+        name:'维护次数',
+        type:'bar',
+        barWidth: '20%',
+        data:[10, 52, 200, 334, 390, 330]
+      }
+    ]
+  };
+  $.ajax({
+    url:'http://10.0.1.115:8888/quality/use',
+    type: 'GET',
+    dataType: 'jsonp',
+    async:false,
+    contentType:'application/json',
+    jsonpCallback: 'quality',
+    success: function(json) {
+      console.log(json)
+      chartUseChart.setOption(option_use_chart)
     }
-  ],
-  yAxis : [
-    {
-      type : 'value'
-    }
-  ],
-  series : [
-    {
-      name:'维护次数',
-      type:'bar',
-      barWidth: '20%',
-      data:[10, 52, 200, 334, 390, 330]
-    }
-  ]
-};
-chartUseChart.setOption(option_use_chart)
+  })
+
+}
+//getUseChart()
+
+
 
 
 
