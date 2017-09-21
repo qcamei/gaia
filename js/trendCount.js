@@ -450,22 +450,12 @@ var userTotalOption = {
 }
 
 
-threeBar(visitPresentEcharts, visitPresentOption, G_VAR.echarts, 'visitPresentEcharts')
-threeBar(visitTotalEcharts, visitTotalOption, G_VAR.echarts, 'visitTotalEcharts')
-threeBar(openAccountPresentEcharts, openAccountPresentOption, G_VAR.echarts, 'openAccountPresentEcharts')
-threeBar(openAccountTotalEcharts, openAccountTotalOption, G_VAR.echarts, 'openAccountTotalEcharts')
-threeBar(devicePresentEcharts, devicePresentOption, G_VAR.echarts, 'devicePresentEcharts')
-threeBar(deviceTotalEcharts, deviceTotalOption, G_VAR.echarts, 'deviceTotalEcharts')
-threeBar(manpowerPresentEcharts, manpowerPresentOption, G_VAR.echarts, 'manpowerPresentEcharts')
-threeBar(manpowerTotalEcharts, manpowerTotalOption, G_VAR.echarts, 'manpowerTotalEcharts')
-threeBar(repairPresentEcharts, repairPresentOption, G_VAR.echarts, 'repairPresentEcharts')
-threeBar(repairTotalEcharts, repairTotalOption, G_VAR.echarts, 'repairTotalEcharts')
-threeBar(controlPresentEcharts, controlPresentOption, G_VAR.echarts, 'controlPresentEcharts')
-threeBar(controlTotalEcharts, controlTotalOption, G_VAR.echarts, 'controlTotalEcharts')
-threeBar(documentPresentEcharts, documentPresentOption, G_VAR.echarts, 'documentPresentEcharts')
-threeBar(documentTotalEcharts, documentTotalOption, G_VAR.echarts, 'documentTotalEcharts')
-threeBar(userPresentEcharts, userPresentOption, G_VAR.echarts, 'userPresentEcharts')
-threeBar(userTotalEcharts, userTotalOption, G_VAR.echarts, 'userTotalEcharts')
+
+
+
+
+
+
 
 function dataInit($ele) {
   var dateMax = moment().subtract(1,'d').format('YYYY-MM-DD')
@@ -506,7 +496,112 @@ function dataInit($ele) {
 dataInit($('#dateRange'))
 $('#dateRange').on('change', function (ele) {
   dataInit($(this))
+  echartsInitTrend()
 })
+$('#endDate').on('change', function () {
+  echartsInitTrend()
+})
+function echartsInitTrend() {
+  var endDate = $('.calendar-input').val()
+  var dateRange = $('#dateRange').val()
+  var baseUrl = 'http://10.0.1.115:8888'
+  var option = {
+    dateRange:dateRange,
+    endDate: endDate
+  }
+  //拜访
+  organizeAjaxGet(baseUrl + '/trend/visit', option, null, function (data) {
+    if (data.success) {
+      var echartsData = data.data || {}
+      echartsData.visitPresentOption.color = ['rgb(85,137,209)', 'rgb(118,213,185)', 'rgb(160,178,209)']
+      echartsData.visitTotalOption.color = ['rgb(85,137,209)', 'rgb(118,213,185)', 'rgb(160,178,209)']
+      threeBar(visitPresentEcharts, echartsData.visitPresentOption, G_VAR.echarts, 'visitPresentEcharts')
+      threeBar(visitTotalEcharts, echartsData.visitTotalOption, G_VAR.echarts, 'visitTotalEcharts')
+    }
+  })
+  //开户
+  organizeAjaxGet(baseUrl + '/open/account', option, null, function (data) {
+    if (data.success) {
+      var echartsData = data.data || {}
+      echartsData.openAccountPresentOption.color = ['rgb(85,137,209)', 'rgb(118,213,185)', 'rgb(160,178,209)', 'rgb(246,230,82)']
+      echartsData.openAccountTotalOption.color = ['rgb(85,137,209)', 'rgb(118,213,185)', 'rgb(160,178,209)', 'rgb(246,230,82)']
+      threeBar(openAccountPresentEcharts, echartsData.openAccountPresentOption, G_VAR.echarts, 'openAccountPresentEcharts')
+      threeBar(openAccountTotalEcharts, echartsData.openAccountTotalOption, G_VAR.echarts, 'openAccountTotalEcharts')
+    }
+  })
+  //实施-设备
+  organizeAjaxGet(baseUrl + '/device/oper', option, null, function (data) {
+    if (data.success) {
+      var echartsData = data.data || {}
+      echartsData.devicePresentOption.color = ['rgb(85,137,209)', 'rgb(118,213,185)', 'rgb(160,178,209)', 'rgb(246,230,82)']
+      echartsData.deviceTotalOption.color = ['rgb(85,137,209)', 'rgb(118,213,185)', 'rgb(160,178,209)', 'rgb(246,230,82)']
+      echartsData.deviceTotalOption.y_data.forEach(function (val) {
+        val.type = 'line'
+      })
+      threeBar(devicePresentEcharts, echartsData.devicePresentOption, G_VAR.echarts, 'devicePresentEcharts')
+      threeBar(deviceTotalEcharts, echartsData.deviceTotalOption, G_VAR.echarts, 'deviceTotalEcharts')
+    }
+  })
+  //实施-人力
+  organizeAjaxGet(baseUrl + '/imple/power', option, null, function (data) {
+    if (data.success) {
+      var echartsData = data.data || {}
+      echartsData.manpowerPresentOption.color = ['rgb(85,137,209)', 'rgb(118,213,185)', 'rgb(160,178,209)', 'rgb(246,230,82)']
+      echartsData.manpowerTotalOption.color = ['rgb(85,137,209)', 'rgb(118,213,185)', 'rgb(160,178,209)', 'rgb(246,230,82)']
+      threeBar(manpowerPresentEcharts, echartsData.manpowerPresentOption, G_VAR.echarts, 'manpowerPresentEcharts')
+      threeBar(manpowerTotalEcharts, echartsData.manpowerTotalOption, G_VAR.echarts, 'manpowerTotalEcharts')
+    }
+  })
+  //功能-维修
+  organizeAjaxGet(baseUrl + '/func/maintain', option, null, function (data) {
+    if (data.success) {
+      var echartsData = data.data || {}
+      console.log(echartsData.repairPresentOption)
+      echartsData.repairPresentOption.color = ['rgb(85,137,209)', 'rgb(118,213,185)', 'rgb(160,178,209)', 'rgb(246,230,82)']
+      echartsData.repairTotalOption.color = ['rgb(85,137,209)', 'rgb(118,213,185)', 'rgb(160,178,209)', 'rgb(246,230,82)']
+      threeBar(repairPresentEcharts, echartsData.repairPresentOption, G_VAR.echarts, 'repairPresentEcharts')
+      threeBar(repairTotalEcharts, echartsData.repairTotalOption, G_VAR.echarts, 'repairTotalEcharts')
+    }
+  })
+  //功能-质控
+  organizeAjaxGet(baseUrl + '/quality/control', option, null, function (data) {
+    if (data.success) {
+      var echartsData = data.data || {}
+      echartsData.controlPresentOption.color = ['rgb(31,84,155)', 'rgb(49,121,192)', 'rgb(99,158,213)', 'rgb(124,224,195)']
+      echartsData.controlTotalOption.color = ['rgb(31,84,155)', 'rgb(49,121,192)', 'rgb(99,158,213)', 'rgb(124,224,195)']
+      echartsData.controlPresentOption.y_data.forEach(function (val) {
+        val.type = 'bar'
+      })
+      echartsData.controlTotalOption.y_data.forEach(function (val) {
+        val.type = 'bar'
+      })
+      threeBar(controlPresentEcharts, echartsData.controlPresentOption, G_VAR.echarts, 'controlPresentEcharts')
+      threeBar(controlTotalEcharts, echartsData.controlTotalOption, G_VAR.echarts, 'controlTotalEcharts')
+    }
+  })
+
+  //功能-文档
+  organizeAjaxGet(baseUrl + '/doc/func', option, null, function (data) {
+    if (data.success) {
+      var echartsData = data.data || {}
+      echartsData.documentPresentOption.color = ['rgb(85,137,209)', 'rgb(118,213,185)', 'rgb(160,178,209)', 'rgb(246,230,82)']
+      echartsData.documentTotalOption.color = ['rgb(85,137,209)', 'rgb(118,213,185)', 'rgb(160,178,209)', 'rgb(246,230,82)']
+      threeBar(documentPresentEcharts, echartsData.documentPresentOption, G_VAR.echarts, 'documentPresentEcharts')
+      threeBar(documentTotalEcharts, echartsData.documentTotalOption, G_VAR.echarts, 'documentTotalEcharts')
+    }
+  })
+  //功能-文档
+  organizeAjaxGet(baseUrl + '/func/use', option, null, function (data) {
+    if (data.success) {
+      var echartsData = data.data || {}
+      echartsData.userPresentOption.color = ['rgb(85,137,209)', 'rgb(118,213,185)', 'rgb(160,178,209)', 'rgb(246,230,82)']
+      echartsData.userTotalOption.color = ['rgb(118,213,185)', 'rgb(118,213,185)', 'rgb(160,178,209)', 'rgb(246,230,82)']
+      threeBar(userPresentEcharts, echartsData.userPresentOption, G_VAR.echarts, 'userPresentEcharts')
+      threeBar(userTotalEcharts, echartsData.userTotalOption, G_VAR.echarts, 'userTotalEcharts')
+    }
+  })
+}
+echartsInitTrend()
 function echartsResize() {
   for (var i in G_VAR.echarts) {
     if (G_VAR.echarts[i]) {
