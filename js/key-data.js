@@ -100,7 +100,7 @@ function drawCircularMap (config){
   this.init = function(config){
     this.config = $.extend({
       type:"draw",
-      color:['#4d9be5','#5ce5cd']
+      color:['#4d9be5','#5ce5cd','#FFD700']
     },config);
     return this;
   };
@@ -311,8 +311,9 @@ function drawCircularMap (config){
 
 //拜访
 drawCircularMap_1 = new drawCircularMap()
+chatArr1 = [echarts.init(document.getElementById('visit-chart-1')),echarts.init(document.getElementById('visit-chart-2')),echarts.init(document.getElementById('visit-chart-3'))]
 drawCircularMap_1.init({
-  chart:[echarts.init(document.getElementById('visit-chart-1')),echarts.init(document.getElementById('visit-chart-2')),echarts.init(document.getElementById('visit-chart-3'))],
+  chart:chatArr1,
   url:'/key/visit',
   callBack:'visit'
 }).drawChart()
@@ -320,27 +321,67 @@ drawCircularMap_1.init({
 
 //录入和完善
 drawCircularMap_2 = new drawCircularMap()
+chartArr2 = [echarts.init(document.getElementById('entry-perfecting-chart-1')),echarts.init(document.getElementById('entry-perfecting-chart-2'))]
 drawCircularMap_2.init({
-  chart:[echarts.init(document.getElementById('entry-perfecting-chart-1')),echarts.init(document.getElementById('entry-perfecting-chart-2'))],
+  chart:chartArr2,
   url:'/device/in',
-  callBack:'device'
+  callBack:'deviceIn'
 }).drawChart()
 
 //开户
 drawCircularMap_3 = new drawCircularMap()
+chatArr3 = [echarts.init(document.getElementById('open-account-1')),echarts.init(document.getElementById('open-account-2'))]
 drawCircularMap_3.init({
-  chart:[echarts.init(document.getElementById('open-account-1')),echarts.init(document.getElementById('open-account-2'))],
+  chart:chatArr3,
   url:'/open/column',
   callBack:'column'
 }).drawChart()
 
 //使用
 drawCircularMap_4 = new drawCircularMap()
+chatArr4 = [echarts.init(document.getElementById('use-chart'))]
 drawCircularMap_4.init({
-  chart:[echarts.init(document.getElementById('use-chart'))],
+  chart:chatArr4,
   url:'/quality/use',
   callBack:'quality'
 }).drawChart()
+
+$('#date_checkout').on('click',function(){
+  var data = {
+    beginDate:$('#dpd1').val() || '',
+    endDate: $('#dpd2').val() || ''
+  }
+  drawCircularMap_1.init({
+    chart:chatArr1,
+    url:'/key/visit',
+    callBack:'visit2',
+    data:data
+  }).drawChart()
+
+  drawCircularMap_2.init({
+    chart:chartArr2,
+    url:'/device/in',
+    callBack:'deviceIn2',
+    data:data
+  }).drawChart()
+
+  drawCircularMap_3.init({
+    chart:chatArr3,
+    url:'/open/column',
+    callBack:'column2',
+    data:data
+  }).drawChart()
+
+  drawCircularMap_4.init({
+    chart:chatArr4,
+    url:'/quality/use',
+    callBack:'quality2',
+    data:data
+  }).drawChart()
+
+  getThreeBar(data)
+})
+
 
 //开户的折线
 drawline = {
@@ -386,62 +427,28 @@ drawline.lineTurn('lineTop_1')
 drawline.lineTurn('lineTop_2')
 
 
-
-//使用
-var chartUseChart = echarts.init(document.getElementById('use-chart'));
-function getUseChart(){
-  var option_use_chart = {
-    color: ['#4d9be5'],
-    tooltip : {
-      trigger: 'axis',
-      axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-      }
-    },
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true
-    },
-    xAxis : [
-      {
-        type : 'category',
-        data : ['报修', '接修', '预防性维护', '日常检查', '工程师巡检', '计量'],
-        axisTick: {
-          alignWithLabel: true
-        }
-      }
-    ],
-    yAxis : [
-      {
-        type : 'value'
-      }
-    ],
-    series : [
-      {
-        name:'维护次数',
-        type:'bar',
-        barWidth: '20%',
-        data:[10, 52, 200, 334, 390, 330]
-      }
-    ]
-  };
-  $.ajax({
-    url:'http://10.0.1.115:8888/quality/use',
-    type: 'GET',
-    dataType: 'jsonp',
-    async:false,
-    contentType:'application/json',
-    jsonpCallback: 'quality',
-    success: function(json) {
-      console.log(json)
-      chartUseChart.setOption(option_use_chart)
+function echartsResize() {
+  for (var i in G_VAR.echarts) {
+    if (G_VAR.echarts[i]) {
+      G_VAR.echarts[i].resize()
     }
-  })
-
+  }
 }
-//getUseChart()
+
+const export_ele = document.querySelector('#key-data-export-images')
+$('#export_trend').on('click', function () {
+  var export_width = export_ele.offsetWidth
+  echartsResize()
+  setTimeout(function () {
+    export_image(export_ele, '关键数据', 'jpg');
+  }, 5 * 1000)
+})
+
+
+window.onresize = function () {
+  echartsResize()
+}
+
 
 
 

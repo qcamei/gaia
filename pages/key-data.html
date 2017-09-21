@@ -4,8 +4,9 @@
         <meta charset="UTF-8">
         <title>运营报告-数据概览-关键数据</title>
         <link href="../css/mems-index.css" type="text/css" rel="stylesheet"/>
-        <link href="../css/asDatepicker.css" type="text/css" rel="stylesheet"/>
         <link href="../css/key-data.css" type="text/css" rel="stylesheet"/>
+        <link rel="stylesheet" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+        <link href="../css/foundation-datepicker.css" rel="stylesheet"/>
     </head>
 <body>
 
@@ -36,15 +37,19 @@
             <li><a href="trend-count.html">趋势统计</a></li>
         </ul>
         <div class="clear">
+            <div class="left" style="margin: 0 10px 0 0 ">
+                <input id="dpd1" style="height: 25px; margin: 20px 0 0;"/>～<input id="dpd2" style="height: 25px; margin: 20px 0 0;"/>
+            </div>
             <div class="left">
-                <input type="text" id="calendar2" class="calendar-input">
+                <div class="commit-new-item"><a class="btn" style="width: 120px" id="date_checkout">查询&nbsp;</a></div>
             </div>
             <div class="right">
-                <div class="commit-new-item"><a class="btn" style="width: 120px">导出&nbsp;<b>+</b></a></div>
+                <div class="commit-new-item"><a class="btn" style="width: 120px" id="export_trend">导出&nbsp;<b>+</b></a></div>
             </div>
         </div>
 
         <!--拜访-->
+        <div id="key-data-export-images">
         <div class="visit-chart-box clear">
             <div class="charts-title">拜访</div>
             <div class="visit-chart-container">
@@ -77,52 +82,12 @@
                 <div class="left open-account" id="open-account-1"></div>
                 <canvas id="lineTop_1" class="line-turn"></canvas>
                 <div class="left columnar" id="account_columnar_1">
-                    <!--<div class="col col-1 clear">-->
-                        <!--<div class="col-area left"></div>-->
-                        <!--<div class="name left">三甲 120家</div>-->
-                    <!--</div>-->
-                    <!--<div class="col col-2 clear">-->
-                        <!--<div class="col-area left"></div>-->
-                        <!--<div class="name left">三级 120家</div>-->
-                    <!--</div>-->
-                    <!--<div class="col col-3 clear">-->
-                        <!--<div class="col-area left"></div>-->
-                        <!--<div class="name left">二级 120家</div>-->
-                    <!--</div>-->
-                    <!--<div class="col col-4 clear">-->
-                        <!--<div class="col-area left"></div>-->
-                        <!--<div class="name left">二级以下 120家</div>-->
-                    <!--</div>-->
-                    <!--<div class="col col-5 clear">-->
-                        <!--<div class="col-area left"></div>-->
-                        <!--<div class="name left">民营及其他 120家</div>-->
-                    <!--</div>-->
                 </div>
             </div>
             <div class="account-box left">
                 <div class="left open-account" id="open-account-2"></div>
                 <canvas id="lineTop_2" class="line-turn"></canvas>
                 <div class="left columnar" id="account_columnar_2">
-                    <!--<div class="col col-1 clear">-->
-                        <!--<div class="col-area left"></div>-->
-                        <!--<div class="name left">三甲 120家</div>-->
-                    <!--</div>-->
-                    <!--<div class="col col-2 clear">-->
-                        <!--<div class="col-area left"></div>-->
-                        <!--<div class="name left">三级 120家</div>-->
-                    <!--</div>-->
-                    <!--<div class="col col-3 clear">-->
-                        <!--<div class="col-area left"></div>-->
-                        <!--<div class="name left">二级 120家</div>-->
-                    <!--</div>-->
-                    <!--<div class="col col-4 clear">-->
-                        <!--<div class="col-area left"></div>-->
-                        <!--<div class="name left">二级以下 120家</div>-->
-                    <!--</div>-->
-                    <!--<div class="col col-5 clear">-->
-                        <!--<div class="col-area left"></div>-->
-                        <!--<div class="name left">民营及其他 120家</div>-->
-                    <!--</div>-->
                 </div>
             </div>
         </div>
@@ -223,23 +188,46 @@
             </div>
             <div class="use-mark left" id="use-chart"></div>
         </div>
-
+        </div>
     </div>
 
 </div>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.cookie.js"></script>
 <script src="../js/common.js"></script>
-<script src="../js/jquery-asDatepicker.js"></script>
+<script src="../js/html2canvas.js"></script>
+<script src="../js/foundation-datepicker.min.js"></script>
 <script src="../js/echarts.min.js"></script>
+<script src="../js/export_image.js"></script>
 <script src="../js/user-tree.js"></script>
 <script src="../js/echartsSub.js"></script>
 <script src="../js/keyData_openAccount.js"></script>
 <script src="../js/key-data.js"></script>
 <script>
-    $(document).ready(function(){
-        $("#calendar2").asDatepicker({mode: 'range'});
-    });
+var nowTemp = new Date();
+var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+var checkin = $('#dpd1').fdatepicker({
+//    onRender: function (date) {
+//        return date.valueOf() < now.valueOf() ? 'disabled' : '';
+//    },
+    format: 'yyyy-mm-dd'
+}).on('changeDate', function (ev) {
+    if (ev.date.valueOf() > checkout.date.valueOf()) {
+        var newDate = new Date(ev.date)
+        newDate.setDate(newDate.getDate() + 1);
+        checkout.update(newDate);
+    }
+    checkin.hide();
+    $('#dpd2')[0].focus();
+}).data('datepicker');
+var checkout = $('#dpd2').fdatepicker({
+    onRender: function (date) {
+        return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+    },
+    format: 'yyyy-mm-dd'
+}).on('changeDate', function (ev) {
+    checkout.hide();
+}).data('datepicker');
 </script>
 
 </body>
