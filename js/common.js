@@ -7,8 +7,8 @@ if(_ip.indexOf('localhost') != -1){
     // _ip = 'http://10.0.1.115:8888/';
 }else{
     //will remove after project complete
-  // _ip = 'http://121.42.187.170'; //本地
-  _ip = 'http://121.42.252.26/';
+  _ip = 'http://121.42.187.170'; //本地
+  // _ip = 'http://121.42.252.26/';
 }
 
 /*----------
