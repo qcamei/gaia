@@ -504,10 +504,15 @@ $('#endDate').on('change', function () {
 function echartsInitTrend() {
   var endDate = $('.calendar-input').val()
   var dateRange = $('#dateRange').val()
-  var baseUrl = 'http://10.0.1.115:8888'
+  var baseUrl = _ip
+  //第一次加载，盘点页面上有没有日期参数
+  if($$.getUrlParaObj() &&  $$.getUrlParaObj()['dateRange'] && $$.getUrlParaObj()['endDate']){
+    var urlDateRange = $$.getUrlParaObj()['dateRange']
+    var urlEndDate = $$.getUrlParaObj()['endDate']
+  }
   var option = {
-    dateRange:dateRange,
-    endDate: endDate
+    dateRange:urlDateRange?urlDateRange:dateRange,
+    endDate: urlEndDate?urlEndDate:endDate
   }
   //拜访
   organizeAjaxGet(baseUrl + '/trend/visit', option, null, function (data) {

@@ -168,7 +168,7 @@ function drawCircularMap (config){
     var data = this.config.data;
     var callBack = this.config.callBack;
     $.ajax({
-      url:'http://10.0.1.115:8888'+url,
+      url:_ip+url,
       type: 'GET',
       data:data?data:'',
       dataType: 'jsonp',
@@ -312,73 +312,76 @@ function drawCircularMap (config){
 //拜访
 drawCircularMap_1 = new drawCircularMap()
 chatArr1 = [echarts.init(document.getElementById('visit-chart-1')),echarts.init(document.getElementById('visit-chart-2')),echarts.init(document.getElementById('visit-chart-3'))]
-drawCircularMap_1.init({
-  chart:chatArr1,
-  url:'/key/visit',
-  callBack:'visit'
-}).drawChart()
-
 
 //录入和完善
 drawCircularMap_2 = new drawCircularMap()
 chartArr2 = [echarts.init(document.getElementById('entry-perfecting-chart-1')),echarts.init(document.getElementById('entry-perfecting-chart-2'))]
-drawCircularMap_2.init({
-  chart:chartArr2,
-  url:'/device/in',
-  callBack:'deviceIn'
-}).drawChart()
 
 //开户
 drawCircularMap_3 = new drawCircularMap()
 chatArr3 = [echarts.init(document.getElementById('open-account-1')),echarts.init(document.getElementById('open-account-2'))]
-drawCircularMap_3.init({
-  chart:chatArr3,
-  url:'/open/column',
-  callBack:'column'
-}).drawChart()
 
 //使用
 drawCircularMap_4 = new drawCircularMap()
 chatArr4 = [echarts.init(document.getElementById('use-chart'))]
-drawCircularMap_4.init({
-  chart:chatArr4,
-  url:'/quality/use',
-  callBack:'quality'
-}).drawChart()
+
+
+function doDrawChart(data){
+  drawCircularMap_1.init({
+    chart:chatArr1,
+    url:'/key/visit',
+    data:data?data:'',
+    callBack:'visit'
+  }).drawChart()
+
+  drawCircularMap_2.init({
+    chart:chartArr2,
+    url:'/device/in',
+    data:data?data:'',
+    callBack:'deviceIn'
+  }).drawChart()
+
+  drawCircularMap_3.init({
+    chart:chatArr3,
+    url:'/open/column',
+    data:data?data:'',
+    callBack:'column'
+  }).drawChart()
+
+  drawCircularMap_4.init({
+    chart:chatArr4,
+    url:'/quality/use',
+    data:data?data:'',
+    callBack:'quality'
+  }).drawChart()
+}
+
+function initDrawChart (){
+  //第一次加载，盘点页面上有没有日期参数
+  if(!$$.getUrlParaObj()){
+    doDrawChart()
+    return
+  }
+  var beginDate = $$.getUrlParaObj()['beginDate'] || ''
+  var endDate = $$.getUrlParaObj()['endDate'] || ''
+  if(beginDate && endDate){
+    var initDate = {
+      beginDate:beginDate || '',
+      endDate: beginDate || ''
+    }
+    doDrawChart(initDate)
+  }else{
+    doDrawChart()
+  }
+}
+initDrawChart()
 
 $('#date_checkout').on('click',function(){
   var data = {
     beginDate:$('#dpd1').val() || '',
     endDate: $('#dpd2').val() || ''
   }
-  drawCircularMap_1.init({
-    chart:chatArr1,
-    url:'/key/visit',
-    callBack:'visit2',
-    data:data
-  }).drawChart()
-
-  drawCircularMap_2.init({
-    chart:chartArr2,
-    url:'/device/in',
-    callBack:'deviceIn2',
-    data:data
-  }).drawChart()
-
-  drawCircularMap_3.init({
-    chart:chatArr3,
-    url:'/open/column',
-    callBack:'column2',
-    data:data
-  }).drawChart()
-
-  drawCircularMap_4.init({
-    chart:chatArr4,
-    url:'/quality/use',
-    callBack:'quality2',
-    data:data
-  }).drawChart()
-
+  doDrawChart(data)
   getThreeBar(data)
 })
 

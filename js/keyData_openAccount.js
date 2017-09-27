@@ -57,7 +57,7 @@ var openAccountTotalOption = {
 
 function getThreeBar(data){
   $.ajax({
-    url:'http://10.0.1.115:8888/open/option',
+    url:_ip+'/open/option',
     type: 'GET',
     data:data?data:'',
     dataType: 'jsonp',

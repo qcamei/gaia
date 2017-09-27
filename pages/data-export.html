@@ -13,7 +13,7 @@
 
 <!--header-->
 <header id="header" class="header">
-    <div class="header-info left"><i></i><a href="pm-bug-list.html">数据导出列表</a></div>
+    <div class="header-info left"><i></i><a href="data-export.html">数据导出列表</a></div>
     <div class="right-user right">
          <div class="clear t" >             <div id="headusername" class="role"></div>             <div class="icon"></div>         </div>
         <div class="head-down">
@@ -33,36 +33,33 @@
     <div class="page-inner" style="padding-top: 13px">
         <table class="mems-search">
             <tr>
-                <td>医院名称：<input id="name" /></td>
-                <td>&emsp;&emsp;内容：<select id="productList"></select></td>
-                <td>维度：<select id="issueStatusList"></select></td>
-                <td align="right"><button class="btn" id="checkout">查询</button></td>
-            </tr>
-
-            <tr>
-                <td>提出时间：<input id="dpd1"/>～<input id="dpd2"/></td>
-                <td colspan="3"></td>
+                <td >提出时间：<input id="dpd1"/>～<input id="dpd2"/></td>
+                <td >医院名称：<input id="name" /></td>
             </tr>
             <tr>
-                <td colspan="5">区域：<select id="district"><option>请选择</option></select>&emsp;<select style="width: 200px" id="privence"><option>请选择</option></select>&emsp;<select id="city"><option>请选择</option></select></td>
+                <td >&emsp;&emsp;区域：<select id="district"><option>请选择</option></select>&emsp;<select style="width: 200px" id="privence"><option>请选择</option></select>&emsp;<select id="city"><option>请选择</option></select></td>
+                <td align="left" ><button class="btn" id="checkout">查询</button></td>
+            </tr>
+            <tr>
+                <td>&emsp;&emsp;内容：<select id="contentList"></select>&emsp;&emsp;维度：<select id="dimenList"></select></td>
+                <td><a class="btn" onclick="exportExcel();" >导出&nbsp;</a></td>
+            </tr>
+            <tr>
             </tr>
         </table>
-        <div class="commit-new-item"><a class="btn" onclick="exportExcel();" id="exportExcelId">导出&nbsp;</a></div>
 
         <div class="item-content">
             <div class="table-box">
                 <table>
                     <thead>
                         <tr class="odd">
-
+                            <th><input type="checkbox" id="selectAll"/>全选</th>
                             <th>ID</th>
-                            <th>缺陷主题</th>
-                            <th>产品</th>
-                            <th>紧急程度</th>
-                            <th>提出人</th>
-                            <th>提出时间</th>
-                            <th>缺陷状态</th>
-                            <th>操作</th>
+                            <th>机构名称</th>
+                            <th>大区</th>
+                            <th>省份</th>
+                            <th>城市</th>
+                            <th>地区</th>
                     </tr>
                     </thead>
                     <tbody id="bodyList">
@@ -87,20 +84,24 @@
 <script src="../js/foundation-datepicker.min.js"></script>
 <script src="../js/common.js"></script>
 <script>
-//    _API.getProductList('productList',false,true).getIssueStatusList('issueStatusList',0,true);
     var roleid = $.cookie('userrole');
+
+    var globalTotalIds = []
+
     function getData(p,checPara,sessionPara){
         var PerPage = 20;
-        var url  = _ip+'/issue/getIssueList?page='+p+'&size='+PerPage;
+        var url  = _ip+'/excel/list?page='+p+'&size='+PerPage;
         var data = {};
         if(checPara){
             var para = {
-                name: $('#name').val() || null,
-                product: $('#productList').val() || null,
-                creater:$('#creater').val() || null,
-                startTime: $('#dpd1').val()?$('#dpd1').val() + ' 00:00:00' : null,
-                endTime: $('#dpd2').val()?$('#dpd2').val() + ' 00:00:00' : null,
-                status:$('#issueStatusList').val() || null,
+                "name": $('#name').val() || null,
+                "content": $('#contentList').val() || null,
+                "dim":$('#dimenList').val() || null,
+                "beginDate": $('#dpd1').val()?$('#dpd1').val() + ' 00:00:00' : null,
+                "endDate": $('#dpd2').val()?$('#dpd2').val() + ' 00:00:00' : null,
+                "district": $('#district').find('option:selected').text()=='请选择'?null:$('#district').val(),
+                "province": $('#privence').find('option:selected').text()=='请选择'?null : $('#privence').val(),
+                "city": $('#city').find('option:selected').text()=='请选择'?null : $('#city').val()
             }
             data = para
         }
@@ -143,23 +144,15 @@
                 for(var k = 0, kk = json.data.length; k < kk; k++){
                     var msg = json.data[k];
 
+                    console.log(globalTotalIds.indexOf(msg.id)==-1)
                     _data.push('<tr>');
+                    _data.push('<td><input type="checkbox" value="'+msg.id+'"  '+(globalTotalIds.indexOf(msg.id)==-1?'':'checked') +'/></td>');
                     _data.push('<td>'+msg.id+'</td>');
-                    _data.push('<td><a href="pm-bug-detail.html?id='+msg.id+'" class="link" title="'+msg.name+'">'+(msg.name.length<12?msg.name:msg.name.substring(0,12)+'...' )+'</a></td>');
-                    _data.push('<td>'+ msg.product +'</td>');
-                    _data.push('<td>'+msg.level+'</td>');
-                    _data.push('<td>'+msg.creater+'</td>');
-                    _data.push('<td>'+msg.createTime+'</td>');
-                    _data.push('<td>'+msg.status+'</td>');
-                    if( ((roleid==1 || roleid==2 || roleid==3) && msg.creater == $.cookie('name') && msg.status=='新建') || roleid==9 || roleid== 0){
-                        _data.push('<td><a class="link" href="javascript:" onclick="deleteList('+msg.id+')">删除</a></td>');
-
-
-                    }else{
-                        _data.push('<td></td>');
-
-                    }
-
+                    _data.push('<td>'+(msg.name || '')+'</td>');
+                    _data.push('<td>'+(msg.district || '')+'</td>');
+                    _data.push('<td>'+(msg.province || '')+'</td>');
+                    _data.push('<td>'+(msg.city|| '')+'</td>');
+                    _data.push('<td>'+(msg.area || '')+'</td>');
                 }
                 _pager.push('<span>共：'+ totalPage +'页</span>');
                 _pager.push('<span>您正在第：'+p+'页</span>')
@@ -188,6 +181,8 @@
                         return false;
                     }
                 })
+
+                selectSingle()
             }
         })
     }
@@ -206,38 +201,117 @@
             $('#creater').val(sessionPage.para.creater);
             $('#dpd1').val(sessionPage.para.startTime?sessionPage.para.startTime.split(' ')[0]:'');
             $('#dpd2').val(sessionPage.para.endTime?sessionPage.para.endTime.split(' ')[0]:'');
-            _API.getProductList('productList',sessionPage.para.product,true).getIssueStatusList('issueStatusList',sessionPage.para.status,true);
+            _API.getExcelTheme('contentList',sessionPage.para.product,true).getExcelDimen('dimenList',sessionPage.para.status,true);
         }else{
             getData(1);
-            _API.getProductList('productList',false,true).getIssueStatusList('issueStatusList',0,true);
+            _API.getExcelTheme('contentList',false,true).getExcelDimen('dimenList',0,true);
         }
     }
     init()
 
-
-    function  deleteList(id) {
-        if(confirm("确认删除吗？")){
-            var url = _ip + '/issue/deleteIssueById?id='+id;
-            $.ajax({
-                url:url,
-                type: 'GET',
-                xhrFields: {
-                    withCredentials: true
-                },
-                crossDomain: true,
-                dataType: 'json',
-                contentType:'application/json',
-                jsonpCallback: 'login',
-                success: function(json) {
-                    if(!json.success){
-                        alert(json.message);
-                    }else{
-                        getData(1)
+    function selectAll() {
+        $('#selectAll').click(function () {
+            var checked = $(this).prop('checked')
+            var allCheckBox = $('#bodyList').find('input[type=checkbox]')
+            if(checked){
+                allCheckBox.prop({'checked':true})
+                allCheckBox.each(function () {
+                    var _val = +$(this).val()
+                    if(globalTotalIds.indexOf(_val) == -1){
+                        globalTotalIds.push(_val)
                     }
-                }
-            })
-        }
+                })
+            }else{
+                allCheckBox.prop({'checked':false})
+                allCheckBox.each(function () {
+                    var _val = $(this).val()
+                    if(globalTotalIds.indexOf(_val) > -1){
+                        globalTotalIds.remove(_val)
+                    }
+                })
+            }
+            console.log(globalTotalIds)
+        })
     }
+    selectAll()
+
+    function selectSingle(){
+        var allCheckBox = $('#bodyList').find('input[type=checkbox]')
+        allCheckBox.on('click',function () {
+            var checked = $(this).prop('checked')
+            var _val = +$(this).val()
+            if(checked && globalTotalIds.indexOf(_val) == -1){
+                globalTotalIds.push(_val)
+            }else{
+                globalTotalIds.remove(_val)
+            }
+            console.log(globalTotalIds)
+        })
+    }
+    function exportExcel() {
+        var url = _ip+'/excel/exportParams'
+        if(!globalTotalIds.length){
+            alert('为选择任何医院！')
+            return
+        }
+        var contentList = $('#contentList').val() || null
+        if(contentList == null){
+            alert('请选择内容！')
+            return
+        }
+        var dimenList = $('#dimenList').val() || null
+        if(dimenList == null){
+            alert('请选择维度！')
+            return
+        }
+        var data = {
+                name:$('#name').val() || null,
+                content: contentList,
+                dim: dimenList,
+                beginDate:$('#dpd1').val() || null,
+                endDate:$('#dpd2').val() || null,
+                district: $('#district').find('option:selected').text()=='请选择'?null:$('#district').val(),
+                province: $('#privence').find('option:selected').text()=='请选择'?null : $('#privence').val(),
+                city: $('#city').find('option:selected').text()=='请选择'?null : $('#city').val(),
+                stringids: globalTotalIds.join(',') || null
+            }
+        $.ajax({
+            url:url,
+            type : "POST",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            dataType: 'json',
+            contentType:'application/json',
+            data:JSON.stringify(data),
+            success: function(json) {
+                if(json.message === 'LOGIN') {
+                    window.location.href = 'user-login.html';
+                    return false;
+                }
+                if(json.success){
+                    location.href = _ip+'/excel/export';
+                    $$.closeLayer()
+                }else{
+                    alert('添加失败，稍后重试！')
+                }
+
+            }
+        })
+    }
+
+
+
+
+    //构造删除数组中某一个元素的函数
+    Array.prototype.remove = function(val) {
+        var index = this.indexOf(val);
+        if (index > -1) {
+            this.splice(index, 1);
+        }
+    };
+
 
     var nowTemp = new Date();
     var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);

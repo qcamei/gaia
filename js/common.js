@@ -1,10 +1,10 @@
 
 var _ip = location.origin;
 if(_ip.indexOf('localhost') != -1){
-    _ip = 'http://121.42.187.170'; //本地
+    // _ip = 'http://121.42.187.170'; //本地
     // _ip = 'http://192.168.8.31:8080'  //展播
     // _ip = 'http://10.0.2.14:8080/operation-web'; //广播
-    // _ip = 'http://10.0.1.115:8888/';
+    _ip = 'http://10.0.1.115:8888';
 }else{
     //will remove after project complete
   _ip = 'http://121.42.187.170'; //本地
@@ -211,7 +211,7 @@ function modityAsideCurrent(){
             docmanage:['doc-manage']
         },   //文档管理文件列表
         runReport:{
-            keydata:['key-data','tend-count'],
+            keydata:['key-data','trend-count'],
             dataexport:['data-export']
         } //运营报告列表
 
@@ -552,6 +552,16 @@ _api.prototype = {
         var url = _ip+'/project/name?name='+name;
         this.getListFirst.apply(this,[url,id,defaultId,isSelect,'checkname']);
         return this;
+    },
+    getExcelTheme: function(id, defaultId,isSelect) { // 22. 数据导出：获取内容
+      var url = _ip+'/excel/theme';
+      this.getListSecond.apply(this,[url,id,defaultId,isSelect,'theme']);
+      return this;
+    },
+    getExcelDimen: function(id, defaultId,isSelect) { // 23. 数据导出：获取维度
+      var url = _ip+'/excel/dimen';
+      this.getListSecond.apply(this,[url,id,defaultId,isSelect,'dimen']);
+      return this;
     },
     getDistrict: function(id, defaultId,isSelect){ //获取大区
         var url = _ip+'/common/getDistrict';
