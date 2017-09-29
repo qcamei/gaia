@@ -42,7 +42,7 @@
             </tr>
             <tr>
                 <td>&emsp;&emsp;内容：<select id="contentList"></select>&emsp;&emsp;维度：<select id="dimenList"></select></td>
-                <td><a class="btn" onclick="exportExcel();" >导出&nbsp;</a></td>
+                <td><a class="btn" onclick="exportExcel();" id="exportExcel" style="visibility: hidden">导出&nbsp;</a></td>
             </tr>
             <tr>
             </tr>
@@ -85,7 +85,9 @@
 <script src="../js/common.js"></script>
 <script>
     var roleid = $.cookie('userrole');
-
+    if(roleid ==3 || roleid == 9){
+        $('#exportExcel').css({'visibility':'visible'})
+    }
     var globalTotalIds = []
 
     function getData(p,checPara,sessionPara){
@@ -294,7 +296,7 @@
                     location.href = _ip+'/excel/export';
                     $$.closeLayer()
                 }else{
-                    alert('添加失败，稍后重试！')
+                    alert(json.msg || '添加失败，稍后重试！')
                 }
 
             }

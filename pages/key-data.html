@@ -44,7 +44,7 @@
                 <div class="commit-new-item"><a class="btn" style="width: 120px" id="date_checkout">查询&nbsp;</a></div>
             </div>
             <div class="right">
-                <div class="commit-new-item"><a class="btn" style="width: 120px" id="export_trend">导出&nbsp;<b>+</b></a></div>
+                <div class="commit-new-item"><a class="btn" style="width: 120px;visibility: hidden" id="export_key" >导出&nbsp;<b>+</b></a></div>
             </div>
         </div>
 
@@ -204,6 +204,10 @@
 <script src="../js/keyData_openAccount.js"></script>
 <script src="../js/key-data.js"></script>
 <script>
+var roleid = $.cookie('userrole');
+if(roleid ==3 || roleid == 9){
+    $('#export_key').css({'visibility':'visible'})
+}
 var nowTemp = new Date();
 var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 var checkin = $('#dpd1').fdatepicker({

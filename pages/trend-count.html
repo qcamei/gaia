@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="right">
-                <div class="commit-new-item"><a class="btn" style="width: 120px" id="export_trend">导出&nbsp;<b>+</b></a></div>
+                <div class="commit-new-item"><a class="btn" style="width: 120px;visibility: hidden;" id="export_trend">导出&nbsp;<b>+</b></a></div>
             </div>
         </div>
         <div class="item-content trendCount-content">
@@ -160,5 +160,11 @@
 <script src="../js/echartsSub.js"></script>
 <script src="../js/export_image.js"></script>
 <script src="../js/trendCount.js"></script>
+<script>
+    var roleid = $.cookie('userrole');
+    if(roleid ==3 || roleid == 9){
+        $('#export_trend').css({'visibility':'visible'})
+    }
+</script>
 </body>
 </html>

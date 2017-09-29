@@ -172,7 +172,6 @@ function drawCircularMap (config){
       type: 'GET',
       data:data?data:'',
       dataType: 'jsonp',
-      async:false,
       contentType:'application/json',
       jsonpCallback: callBack,
       success: function(json) {
@@ -364,7 +363,7 @@ function initDrawChart (){
   }
   var beginDate = $$.getUrlParaObj()['beginDate'] || ''
   var endDate = $$.getUrlParaObj()['endDate'] || ''
-  if(beginDate && endDate){
+  if(beginDate && endDate && beginDate != 'false' && endDate != 'false'){
     var initDate = {
       beginDate:beginDate || '',
       endDate: beginDate || ''
