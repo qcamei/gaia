@@ -67,12 +67,15 @@ function getThreeBar(data){
       var json = json.data
       openAccountPreOption.legend_data = json.openAccountPreOption.legend_data
       openAccountPreOption.x_data = json.openAccountPreOption.x_data
-      openAccountPreOption.y_data = json.openAccountPreOption.y_data
+      openAccountPreOption.y_data = json.openAccountPreOption.y_data.reverse()
+      openAccountPreOption.legend_data[1] = '项目和集团客户(家)'
 
-      openAccountTotalOption.legend_data = json.openAccountPreOption.legend_data
-      openAccountTotalOption.x_data = json.openAccountPreOption.x_data
-      openAccountTotalOption.y_data = json.openAccountPreOption.y_data
-
+      openAccountTotalOption.legend_data = json.openAccountTotalOption.legend_data
+      openAccountTotalOption.x_data = json.openAccountTotalOption.x_data
+      openAccountTotalOption.y_data = json.openAccountTotalOption.y_data
+      openAccountTotalOption.legend_data[1] = '项目和集团客户(家)'
+      openAccountPreOption.color = ['rgb(85,137,209)', 'rgb(118,213,185)', 'rgb(160,178,209)', 'rgb(246,230,82)']
+      openAccountTotalOption.color = ['rgb(85,137,209)', 'rgb(118,213,185)', 'rgb(160,178,209)', 'rgb(246,230,82)']
       threeBar(openAccountPreEcharts, openAccountPreOption, G_VAR.echarts, 'openAccountPreEcharts')
       threeBar(openAccountTotalEcharts, openAccountTotalOption, G_VAR.echarts, 'openAccountTotalEcharts')
     }
