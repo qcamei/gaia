@@ -76,6 +76,7 @@ function threeBar(element, optionData, echartObject, parameter) {
   var bar_json = {
     name: '销量',
     type: 'bar',
+    barGap: '150%',
     label: {
       normal: {
         show: true,
