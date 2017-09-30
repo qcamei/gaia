@@ -281,7 +281,8 @@ function drawCircularMap (config){
             var ch = columnData[x].present+'%';
             columnHtml += '<div class="col col-'+(x+1)+' clear" style="height: '+ch+'">';
               columnHtml += '<div class="col-area left"></div>'
-              columnHtml += '<div class="name left">'+columnData[x].name+' '+ columnData[x].value +'家</div></div>'
+              columnHtml += '<div class="name left">'+columnData[x].name+' '+ columnData[x].value +'家</div>'
+              columnHtml += '</div>'
           }
           $('#account_columnar_'+ (m+1) ).html(columnHtml);
         }
@@ -405,7 +406,7 @@ drawline = {
     canvas.width= w;
     canvas.height = h;
     ctx = canvas.getContext("2d");
-    ctx.resetTransform();
+    //ctx.resetTransform();
     ctx.translate(0,0);
     ctx.beginPath();
     ctx.moveTo(startX,startY);
