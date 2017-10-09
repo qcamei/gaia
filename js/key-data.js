@@ -131,30 +131,73 @@ function drawCircularMap (config){
         }
       },
       grid: {
+        top: '15%',
         left: '3%',
         right: '4%',
-        bottom: '3%',
+        bottom: '14%',
         containLabel: true
       },
       xAxis : [
         {
           type : 'category',
           //data : ['报修', '接修', '预防性维护', '日常检查', '工程师巡检', '计量'],
-          axisTick: {
-            alignWithLabel: true
+          axisTick: false,
+          axisLine: {
+            lineStyle: {
+              color: 'rgb(191,191,191)',
+              width: 2
+            }
+          },
+          splitLine: {
+            show:true,
+            lineStyle: {
+              color: 'rgba(221,221,221, 0.5)',
+              width: 1
+            }
+          },
+          axisLabel: {
+            margin: 4,
+            textStyle: {
+              color: 'rgb(0,0,0)'
+            }
           }
         }
       ],
-      yAxis : [
-        {
-          type : 'value'
+      yAxis : {
+        axisTick: false,
+        axisLine: {
+          lineStyle: {
+            color: 'rgb(191,191,191)',
+            width: 2
+          }
+        },
+        splitLine: {
+          lineStyle: {
+            color: 'rgba(221,221,221, 0.5)',
+            width: 1
+          }
+        },
+        axisLabel: {
+          margin: 4,
+          textStyle: {
+            color: 'rgb(0,0,0)'
+          }
         }
-      ],
+      },
       series : [
         {
           name:'维护次数',
           type:'bar',
           barWidth: '20%',
+          label: {
+            normal: {
+              show: true,
+              position: 'top',
+              textStyle: {
+                color: 'rgb(0, 0, 0)'
+              }
+            }
+          }
           // data:[10, 52, 200, 334, 390, 330]
         }
       ]
@@ -300,6 +343,7 @@ function drawCircularMap (config){
     if(len){
       for(var m = 0; m < len; m++){
         var opt = this.columnOption();
+        console.log(opt)
         opt.xAxis[0].data = json.x
         opt.series[0].data = json.y
         that.config.chart[m].setOption(opt)

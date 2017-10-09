@@ -561,9 +561,9 @@ function echartsInitTrend() {
   organizeAjaxGet(baseUrl + '/func/maintain', option, null, function (data) {
     if (data.success) {
       var echartsData = data.data || {}
-      console.log(echartsData.repairPresentOption)
       echartsData.repairPresentOption.color = ['rgb(85,137,209)', 'rgb(118,213,185)', 'rgb(160,178,209)', 'rgb(246,230,82)']
       echartsData.repairTotalOption.color = ['rgb(85,137,209)', 'rgb(118,213,185)', 'rgb(160,178,209)', 'rgb(246,230,82)']
+      echartsData.repairTotalOption.barGap = '180%'
       threeBar(repairPresentEcharts, echartsData.repairPresentOption, G_VAR.echarts, 'repairPresentEcharts')
       threeBar(repairTotalEcharts, echartsData.repairTotalOption, G_VAR.echarts, 'repairTotalEcharts')
     }

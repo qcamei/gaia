@@ -47,11 +47,11 @@
   .use-chart{
     width: 20%;
     height: 260px;
-    margin: 0 0 0 15%;
+    margin: 0 0 0 5%;
     >table{
       width: 80%;
       height: 210px;
-      margin: 45px 0 0 10%;
+      margin: 25px 0 0 5%;
       >tbody{
         >tr{
           >td{
@@ -64,8 +64,9 @@
     }
   }
   .use-mark{
-    width: 50%;
+    width: 65%;
     height: 260px;
+    margin-left: 5%;
   }
 }
 

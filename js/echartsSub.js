@@ -76,7 +76,7 @@ function threeBar(element, optionData, echartObject, parameter) {
   var bar_json = {
     name: '销量',
     type: 'bar',
-    barGap: '150%',
+    barGap: '80%',
     label: {
       normal: {
         show: true,
@@ -132,6 +132,11 @@ function threeBar(element, optionData, echartObject, parameter) {
       barJson.type = yData.type;
       barJson.data = yData.data;
       barJson.itemStyle.normal.color = yData.color;
+      console.log(optionData.barGap)
+      if (optionData.barGap) {
+
+        bar_json.barGap = optionData.barGap
+      }
       series_data.push(barJson)
     }
     else if (yData.type === 'line') {
