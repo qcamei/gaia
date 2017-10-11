@@ -98,6 +98,7 @@
         height: 100%; }
         .chart-open-account .account-box .columnar .columnar-text .name {
           margin: 0 auto 0 5px;
+          line-height: 20px;
           height: auto; }
           .chart-open-account .account-box .columnar .columnar-text .name.text-1 {
             color: #5aa3e8; }
