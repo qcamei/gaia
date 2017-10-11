@@ -314,7 +314,6 @@ function drawCircularMap (config){
 
           //柱状图
           var columnData = [];
-          var columnHtml = '';
           var columnHtml_img = '';
           var columnHtml_text = '';
           var H = 200;
@@ -326,6 +325,9 @@ function drawCircularMap (config){
             var ch = columnData[x].present+'%';
             columnHtml_img += '<div class="col-area col-'+(x+1)+'" style="height: '+ch+'"></div>'
             columnHtml_text += '<div class="name text-'+(x+1)+'" style="min-height: '+ch+'">'+columnData[x].name+' '+ columnData[x].value +'家</div>'
+          }
+          if(columnHtml_img && columnHtml_text){
+            drawline.lineTurn('lineTop_'+(m+1))
           }
           $('#account_columnar_'+ (m+1) ).html('<div class="columnar-img left">'+columnHtml_img+'</div><div class="columnar-text left">'+columnHtml_text+'</div>');
         }
@@ -343,7 +345,6 @@ function drawCircularMap (config){
     if(len){
       for(var m = 0; m < len; m++){
         var opt = this.columnOption();
-        console.log(opt)
         opt.xAxis[0].data = json.x
         opt.series[0].data = json.y
         that.config.chart[m].setOption(opt)
@@ -470,8 +471,8 @@ drawline = {
     ctx.stroke();
   }
 }
-drawline.lineTurn('lineTop_1')
-drawline.lineTurn('lineTop_2')
+//drawline.lineTurn('lineTop_1')
+//drawline.lineTurn('lineTop_2')
 
 
 function echartsResize() {
