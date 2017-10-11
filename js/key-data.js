@@ -270,7 +270,7 @@ function drawCircularMap (config){
         for(var k = 0; k < data.length; k++){
           opt.series[0].data.push({
             value:data[k].value,
-            name:data[k].name,
+            name:data[k].name+' '+data[k].value+'台',
             itemStyle:{
               normal:{
                 color:that.config.color[k]
@@ -297,7 +297,7 @@ function drawCircularMap (config){
           for(var k = 0; k < data.length; k++){
             opt.series[0].data.push({
               value:data[k].value,
-              name:data[k].name,
+              name:data[k].name+' '+data[k].value+'家',
               labelLine: {
                 normal: {
                   show: false
