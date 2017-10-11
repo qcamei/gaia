@@ -315,6 +315,8 @@ function drawCircularMap (config){
           //柱状图
           var columnData = [];
           var columnHtml = '';
+          var columnHtml_img = '';
+          var columnHtml_text = '';
           var H = 200;
           for(var j = 0; j < json[key].column.length; j++){
             columnData.push(json[key].column[j])
@@ -322,12 +324,10 @@ function drawCircularMap (config){
           for(var x = 0; x < columnData.length; x++){
             if(columnData[x].present == 0) continue;
             var ch = columnData[x].present+'%';
-            columnHtml += '<div class="col col-'+(x+1)+' clear" style="height: '+ch+'">';
-              columnHtml += '<div class="col-area left"></div>'
-              columnHtml += '<div class="name left">'+columnData[x].name+' '+ columnData[x].value +'家</div>'
-              columnHtml += '</div>'
+            columnHtml_img += '<div class="col-area col-'+(x+1)+'" style="height: '+ch+'"></div>'
+            columnHtml_text += '<div class="name text-'+(x+1)+'" style="min-height: '+ch+'">'+columnData[x].name+' '+ columnData[x].value +'家</div>'
           }
-          $('#account_columnar_'+ (m+1) ).html(columnHtml);
+          $('#account_columnar_'+ (m+1) ).html('<div class="columnar-img left">'+columnHtml_img+'</div><div class="columnar-text left">'+columnHtml_text+'</div>');
         }
       }
     },
