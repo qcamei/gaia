@@ -51,7 +51,8 @@
   .use-chart-box .use-mark {
     width: 65%;
     height: 260px;
-    margin-left: 5%; }
+    margin-left: 5%;
+    position: relative; }
 
 .chart-open-account {
   background: #FFF;
@@ -70,9 +71,7 @@
       position: absolute;
       left: 0;
       top: 0;
-      opacity: 0;
-      animation: lineTurn 0.5s linear 1.2s;
-      animation-fill-mode: forwards; }
+      opacity: 1; }
     .chart-open-account .account-box .columnar {
       width: 200px;
       height: 200px;

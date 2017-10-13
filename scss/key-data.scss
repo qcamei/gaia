@@ -67,6 +67,7 @@
     width: 65%;
     height: 260px;
     margin-left: 5%;
+    position: relative;
   }
 }
 
@@ -88,9 +89,9 @@
       position: absolute;
       left: 0;
       top: 0;
-      opacity: 0;
-      animation: lineTurn 0.5s linear 1.2s;
-      animation-fill-mode:forwards;
+      opacity: 1;
+      //animation: lineTurn 0.5s linear 1.2s;
+      //animation-fill-mode:forwards;
     }
     .columnar{
       width: 200px;

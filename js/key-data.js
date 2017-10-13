@@ -226,6 +226,7 @@ function drawCircularMap (config){
     })
   },
   this.callBack_1 = function (json) {
+    if(!json) return
     $('#visitHospital').html(json.visitHospital)
     $('#visitNum').html(json.visitNum)
     var that = this;
@@ -254,6 +255,7 @@ function drawCircularMap (config){
     }
   },
   this.callBack_2 = function (json) {
+    if(!json) return
     $('#entryCurrent').html(json.chart_1.current)
     $('#entryTotal').html(json.chart_1.total)
     $('#perfectingCurrent').html(json.chart_2.current)
@@ -283,6 +285,7 @@ function drawCircularMap (config){
     }
   },
   this.callBack_3 = function (json) {
+      if(!json) return
       var that = this;
       var len = that.config.chart.length
       if(len){
@@ -334,6 +337,7 @@ function drawCircularMap (config){
       }
     },
   this.callBack_4 = function (json) {
+    if(!json) return
     $('#currentUser').html(json.currentUser)
     $('#totalUser').html(json.totalUser)
     $('#currentFunction').html(json.currentFunction)
