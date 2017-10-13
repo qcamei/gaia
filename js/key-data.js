@@ -218,6 +218,7 @@ function drawCircularMap (config){
       contentType:'application/json',
       jsonpCallback: callBack,
       success: function(json) {
+        if(!json.success) return
         if(url == '/key/visit') that.callBack_1(json.data)
         if(url == '/device/in') that.callBack_2(json.data)
         if(url == '/open/column') that.callBack_3(json.data)

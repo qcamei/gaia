@@ -617,8 +617,8 @@ function echartsResize() {
 const export_ele = document.querySelector('.trendCount_box')
 $('#export_trend').on('click', function () {
   var export_width = export_ele.offsetWidth
-  $(export_ele).css('width', export_width * 2 +'px')
-  $('.echarts_con').css('height', 300 * 2 + 'px')
+  // $(export_ele).css('width', export_width * 2 +'px')
+  // $('.echarts_con').css('height', 300 * 2 + 'px')
   echartsResize()
   setTimeout(function () {
     export_image(export_ele, '趋势统计', 'jpg');

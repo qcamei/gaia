@@ -222,6 +222,14 @@ var roleid = $.cookie('userrole');
 if(roleid ==3 || roleid == 9){
     $('#export_key').css({'visibility':'visible'})
 }
+var today = new Date();
+var year = today.getFullYear();    //年
+var month = today.getMonth() + 1;  //月
+var day = today.getDate();         //日
+
+var str = year +'-'+( month>=10?month:'0'+month ) + '-'+( day>=10?day:'0'+day )
+$('#dpd1,#dpd2').val(str)
+
 var nowTemp = new Date();
 var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 var checkin = $('#dpd1').fdatepicker({
