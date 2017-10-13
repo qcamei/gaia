@@ -132,7 +132,6 @@ function threeBar(element, optionData, echartObject, parameter) {
       barJson.type = yData.type;
       barJson.data = yData.data;
       barJson.itemStyle.normal.color = yData.color;
-      console.log(optionData.barGap)
       if (optionData.barGap) {
 
         bar_json.barGap = optionData.barGap

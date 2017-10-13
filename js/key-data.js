@@ -489,12 +489,12 @@ function echartsResize() {
 }
 
 const export_ele = document.querySelector('#key-data-export-images')
-$('#export_trend').on('click', function () {
-  var export_width = export_ele.offsetWidth
-  echartsResize()
+$('#export_key').on('click', function () {
+  // var export_width = export_ele.offsetWidth
+  // echartsResize()
   setTimeout(function () {
     export_image(export_ele, '关键数据', 'jpg');
-  }, 5 * 1000)
+  }, 1000)
 })
 
 
