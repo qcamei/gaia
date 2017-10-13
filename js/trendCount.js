@@ -492,15 +492,21 @@ function dataInit($ele) {
     startView: maxView,
     minView: maxView
   });
+  endDateChange()
+}
+function endDateChange() {
+  $('#endDate').on('change', function () {
+    console.log(1)
+    echartsInitTrend()
+  })
 }
 dataInit($('#dateRange'))
 $('#dateRange').on('change', function (ele) {
   dataInit($(this))
   echartsInitTrend()
 })
-$('#endDate').on('change', function () {
-  echartsInitTrend()
-})
+endDateChange()
+
 function echartsInitTrend() {
   var endDate = $('.calendar-input').val()
   var dateRange = $('#dateRange').val()
@@ -616,13 +622,13 @@ function echartsResize() {
 }
 const export_ele = document.querySelector('.trendCount_box')
 $('#export_trend').on('click', function () {
-  var export_width = export_ele.offsetWidth
-  $(export_ele).css('width', export_width * 2 +'px')
-  $('.echarts_con').css('height', 300 * 2 + 'px')
-  echartsResize()
+  // var export_width = export_ele.offsetWidth
+  // $(export_ele).css('width', export_width * 2 +'px')
+  // $('.echarts_con').css('height', 300 * 2 + 'px')
+  // echartsResize()
   setTimeout(function () {
     export_image(export_ele, '趋势统计', 'jpg');
-  }, 5 * 1000)
+  }, 1000)
 })
 
 
