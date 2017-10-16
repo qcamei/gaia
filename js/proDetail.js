@@ -1150,6 +1150,7 @@ businessProgress.prototype = {
 		      "modifyTime": null
     	};
     	var that = this;
+
     	$.ajax({
             url:url,
             type : "POST",
@@ -1172,6 +1173,7 @@ businessProgress.prototype = {
 					_API.getPBussTypeList('bussTypeList',false,false,globleProjectId)
 						.getVisitStatusList('visitStatusList',false,false,globleProjectId);
                 }else{
+                    that.isClick = false;
                     alert('添加失败, 请稍后重试！');
                 }
             }

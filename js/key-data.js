@@ -344,7 +344,7 @@ function drawCircularMap (config){
     $('#currentFunction').html(json.currentFunction)
     $('#totaltFunction').html(json.totaltFunction)
     $('#currentPersent').html(json.currentPersent)
-    $('#totaltPersent').html(json.totaltPersent)
+    // $('#totaltPersent').html(json.totaltPersent)
     var that = this;
     var len = that.config.chart.length
     if(len){
@@ -430,6 +430,15 @@ $('#date_checkout').on('click',function(){
   var data = {
     beginDate:$('#dpd1').val() || '',
     endDate: $('#dpd2').val() || ''
+  }
+  if(!data.beginDate && !data.endDate) return
+  if(!data.beginDate && data.endDate){
+    alert('请选择开始时间！')
+    return
+  }
+  if(data.beginDate && !data.endDate){
+    alert('请选择结束时间！')
+    return
   }
   doDrawChart(data)
   getThreeBar(data)

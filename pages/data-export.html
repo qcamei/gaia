@@ -192,6 +192,16 @@
         })
     }
     $('#checkout').on('click',function(){
+        var contentList = $('#contentList').find('option:selected').text()=='请选择'?false:$('#contentList').val()
+        var dimenList = $('#dimenList').find('option:selected').text()=='请选择'?false:$('#dimenList').val()
+        if(!contentList){
+            alert('请选择内容！')
+            return
+        }
+        if(!dimenList){
+            alert('请选择维度！')
+            return
+        }
         getData(1,true);
     })
 
