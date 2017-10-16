@@ -1137,15 +1137,16 @@ aside.aside .menu {
       color: #8ea0ac;
       line-height: 35px;
       text-align: center;
-      border-bottom: 1px solid white; }
+      border-bottom: 1px solid white;
+      cursor: pointer; }
       .p-content .content-right .buttons > a:hover, .p-content .content-right .buttons > a.current {
         color: #03a1f2;
         border-bottom: 1px solid #009ff2; }
-  .p-content .content-right .business .add-cord {
+  .p-content .content-right .business .add-progress-form, .p-content .content-right .operatin .add-progress-form {
     padding: 22px 0;
     border-bottom: 1px solid #d9e2e7;
     text-align: center; }
-    .p-content .content-right .business .add-cord > input {
+    .p-content .content-right .business .add-progress-form > input, .p-content .content-right .operatin .add-progress-form > input {
       width: 75px;
       height: 28px;
       background: #03a9f4;
@@ -1153,53 +1154,54 @@ aside.aside .menu {
       border-radius: 4px;
       color: #FFF;
       cursor: pointer; }
-      .p-content .content-right .business .add-cord > input:hover {
+      .p-content .content-right .business .add-progress-form > input:hover, .p-content .content-right .operatin .add-progress-form > input:hover {
         background: #66bb6a;
         border: 1px solid #66bb6a; }
-    .p-content .content-right .business .add-cord .add-input {
+    .p-content .content-right .business .add-progress-form .add-input, .p-content .content-right .operatin .add-progress-form .add-input {
       width: 92%;
       margin: 0 auto; }
-      .p-content .content-right .business .add-cord .add-input > tbody > tr > td:nth-child(2n+1) {
+      .p-content .content-right .business .add-progress-form .add-input > tbody > tr > td:nth-child(2n+1), .p-content .content-right .operatin .add-progress-form .add-input > tbody > tr > td:nth-child(2n+1) {
         text-align: right; }
-      .p-content .content-right .business .add-cord .add-input > tbody > tr > td:nth-child(2n) {
+      .p-content .content-right .business .add-progress-form .add-input > tbody > tr > td:nth-child(2n), .p-content .content-right .operatin .add-progress-form .add-input > tbody > tr > td:nth-child(2n) {
         text-align: left;
         padding: 5px; }
-        .p-content .content-right .business .add-cord .add-input > tbody > tr > td:nth-child(2n) > input, .p-content .content-right .business .add-cord .add-input > tbody > tr > td:nth-child(2n) > select {
+        .p-content .content-right .business .add-progress-form .add-input > tbody > tr > td:nth-child(2n) > input, .p-content .content-right .business .add-progress-form .add-input > tbody > tr > td:nth-child(2n) > select, .p-content .content-right .operatin .add-progress-form .add-input > tbody > tr > td:nth-child(2n) > input, .p-content .content-right .operatin .add-progress-form .add-input > tbody > tr > td:nth-child(2n) > select {
           width: 60%;
           height: 25px;
           border: 1px solid #d5e0e6; }
-        .p-content .content-right .business .add-cord .add-input > tbody > tr > td:nth-child(2n) > textarea {
+        .p-content .content-right .business .add-progress-form .add-input > tbody > tr > td:nth-child(2n) > textarea, .p-content .content-right .operatin .add-progress-form .add-input > tbody > tr > td:nth-child(2n) > textarea {
           width: 60%;
           height: 50px;
           border: 1px solid #d5e0e6; }
-        .p-content .content-right .business .add-cord .add-input > tbody > tr > td:nth-child(2n) > button {
+        .p-content .content-right .business .add-progress-form .add-input > tbody > tr > td:nth-child(2n) > button, .p-content .content-right .operatin .add-progress-form .add-input > tbody > tr > td:nth-child(2n) > button {
           width: 50px;
           height: 28px;
           color: #FFF;
           background: #009ff2;
           border: 0px;
-          border-radius: 5px; }
-          .p-content .content-right .business .add-cord .add-input > tbody > tr > td:nth-child(2n) > button:nth-child(2n) {
+          border-radius: 5px;
+          outline: none; }
+          .p-content .content-right .business .add-progress-form .add-input > tbody > tr > td:nth-child(2n) > button:nth-child(2n), .p-content .content-right .operatin .add-progress-form .add-input > tbody > tr > td:nth-child(2n) > button:nth-child(2n) {
             background: #FFF;
             border: 1px solid #d9e2e7;
             color: #99aabb;
             margin: 0 0 0 10px;
             cursor: pointer; }
-          .p-content .content-right .business .add-cord .add-input > tbody > tr > td:nth-child(2n) > button:nth-child(2n+1):hover {
+          .p-content .content-right .business .add-progress-form .add-input > tbody > tr > td:nth-child(2n) > button:nth-child(2n+1):hover, .p-content .content-right .operatin .add-progress-form .add-input > tbody > tr > td:nth-child(2n) > button:nth-child(2n+1):hover {
             background: #66bb6a;
             border: 1px solid #66bb6a;
             cursor: pointer; }
-      .p-content .content-right .business .add-cord .add-input > tbody > tr > td .visitors > li {
+      .p-content .content-right .business .add-progress-form .add-input > tbody > tr > td .visitors > li, .p-content .content-right .operatin .add-progress-form .add-input > tbody > tr > td .visitors > li {
         float: left;
         line-height: 40px;
         color: #99aabb;
         margin-right: 10px; }
-  .p-content .content-right .business .cord-list .cord-table {
+  .p-content .content-right .business .cord-list .cord-table, .p-content .content-right .operatin .cord-list .cord-table {
     width: 92%;
     margin: 0 auto; }
-    .p-content .content-right .business .cord-list .cord-table .status {
+    .p-content .content-right .business .cord-list .cord-table .status, .p-content .content-right .operatin .cord-list .cord-table .status {
       height: 34px; }
-      .p-content .content-right .business .cord-list .cord-table .status > td > span {
+      .p-content .content-right .business .cord-list .cord-table .status > td > span, .p-content .content-right .operatin .cord-list .cord-table .status > td > span {
         background: url(../images/icons-list.png) no-repeat 6px -54px #FFF;
         border: 1px solid #dee6e9;
         width: 20px;
@@ -1207,9 +1209,9 @@ aside.aside .menu {
         border-radius: 100%;
         display: inline-block;
         vertical-align: middle; }
-        .p-content .content-right .business .cord-list .cord-table .status > td > span.s-2 {
+        .p-content .content-right .business .cord-list .cord-table .status > td > span.s-2, .p-content .content-right .operatin .cord-list .cord-table .status > td > span.s-2 {
           background: url(../images/icons-list.png) no-repeat 6px -54px #FFF; }
-      .p-content .content-right .business .cord-list .cord-table .status > td .status-head {
+      .p-content .content-right .business .cord-list .cord-table .status > td .status-head, .p-content .content-right .operatin .cord-list .cord-table .status > td .status-head {
         background: #edf1f3;
         border-radius: 2px;
         width: 94%;
@@ -1219,7 +1221,7 @@ aside.aside .menu {
         font-size: 12px;
         color: #99aabb;
         line-height: 24px; }
-    .p-content .content-right .business .cord-list .cord-table .line {
+    .p-content .content-right .business .cord-list .cord-table .line, .p-content .content-right .operatin .cord-list .cord-table .line {
       display: inline-block;
       width: 1px;
       height: 100%;
@@ -1228,7 +1230,7 @@ aside.aside .menu {
       top: 0;
       margin-left: 10px;
       z-index: 1; }
-    .p-content .content-right .business .cord-list .cord-table .circle {
+    .p-content .content-right .business .cord-list .cord-table .circle, .p-content .content-right .operatin .cord-list .cord-table .circle {
       display: inline-block;
       width: 18px;
       height: 18px;
@@ -1240,7 +1242,7 @@ aside.aside .menu {
       text-align: center;
       line-height: 20px;
       top: 17px; }
-      .p-content .content-right .business .cord-list .cord-table .circle:after {
+      .p-content .content-right .business .cord-list .cord-table .circle:after, .p-content .content-right .operatin .cord-list .cord-table .circle:after {
         content: "";
         display: inline-block;
         position: absolute;
@@ -1250,31 +1252,31 @@ aside.aside .menu {
         border-radius: 100%;
         top: 6px;
         left: 7px; }
-    .p-content .content-right .business .cord-list .cord-table > tbody > tr > td:nth-child(2n+1) {
+    .p-content .content-right .business .cord-list .cord-table > tbody > tr > td:nth-child(2n+1), .p-content .content-right .operatin .cord-list .cord-table > tbody > tr > td:nth-child(2n+1) {
       position: relative; }
-    .p-content .content-right .business .cord-list .cord-table .cord-detail {
+    .p-content .content-right .business .cord-list .cord-table .cord-detail, .p-content .content-right .operatin .cord-list .cord-table .cord-detail {
       border-bottom: 1px solid #d9e2e7;
       padding: 0 0 15px 0; }
-      .p-content .content-right .business .cord-list .cord-table .cord-detail > .t {
+      .p-content .content-right .business .cord-list .cord-table .cord-detail > .t, .p-content .content-right .operatin .cord-list .cord-table .cord-detail > .t {
         height: 20px;
         line-height: 20px;
         margin: 15px 0  5px 0; }
-        .p-content .content-right .business .cord-list .cord-table .cord-detail > .t > i {
+        .p-content .content-right .business .cord-list .cord-table .cord-detail > .t > i, .p-content .content-right .operatin .cord-list .cord-table .cord-detail > .t > i {
           width: 16px;
           height: 16px;
           background: url(../images/icons-list.png) no-repeat 0px 0px #FFF;
           display: inline-block;
           vertical-align: top;
           margin: 1px 0 0 0; }
-        .p-content .content-right .business .cord-list .cord-table .cord-detail > .t > span {
+        .p-content .content-right .business .cord-list .cord-table .cord-detail > .t > span, .p-content .content-right .operatin .cord-list .cord-table .cord-detail > .t > span {
           font-size: 12px;
           color: #667788;
           padding: 0 0 0 10px; }
-          .p-content .content-right .business .cord-list .cord-table .cord-detail > .t > span:nth-child(4) {
+          .p-content .content-right .business .cord-list .cord-table .cord-detail > .t > span:nth-child(4), .p-content .content-right .operatin .cord-list .cord-table .cord-detail > .t > span:nth-child(4) {
             color: #99aabb; }
-      .p-content .content-right .business .cord-list .cord-table .cord-detail .key-list {
+      .p-content .content-right .business .cord-list .cord-table .cord-detail .key-list, .p-content .content-right .operatin .cord-list .cord-table .cord-detail .key-list {
         margin: 5px 0 10px 0; }
-        .p-content .content-right .business .cord-list .cord-table .cord-detail .key-list > li {
+        .p-content .content-right .business .cord-list .cord-table .cord-detail .key-list > li, .p-content .content-right .operatin .cord-list .cord-table .cord-detail .key-list > li {
           float: left;
           padding: 0px 5px;
           height: 15px;
@@ -1282,15 +1284,15 @@ aside.aside .menu {
           border: 1px solid #d9e2e7;
           color: #667788;
           margin: 0 5px 5px 0; }
-      .p-content .content-right .business .cord-list .cord-table .cord-detail .dec {
+      .p-content .content-right .business .cord-list .cord-table .cord-detail .dec, .p-content .content-right .operatin .cord-list .cord-table .cord-detail .dec {
         font-size: 12px;
         color: #99aabb;
         margin: 0 0 10px 0; }
-      .p-content .content-right .business .cord-list .cord-table .cord-detail .plan {
+      .p-content .content-right .business .cord-list .cord-table .cord-detail .plan, .p-content .content-right .operatin .cord-list .cord-table .cord-detail .plan {
         font-size: 12px; }
-        .p-content .content-right .business .cord-list .cord-table .cord-detail .plan .title {
+        .p-content .content-right .business .cord-list .cord-table .cord-detail .plan .title, .p-content .content-right .operatin .cord-list .cord-table .cord-detail .plan .title {
           color: #667788; }
-        .p-content .content-right .business .cord-list .cord-table .cord-detail .plan .paper {
+        .p-content .content-right .business .cord-list .cord-table .cord-detail .plan .paper, .p-content .content-right .operatin .cord-list .cord-table .cord-detail .plan .paper {
           margin: 3px 0 0 0;
           color: #99aabb; }
 
