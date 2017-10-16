@@ -411,11 +411,11 @@
         </div>
         <div class="right content-right">
             <div class="buttons clear">
-                <a class="left current">商务进度</a>
-                <a class="left">运营进度(暂不做)</a>
+                <a class="left current record-tab" data-tab="commerce-data">商务进度</a>
+                <a class="left record-tab" data-tab="business-data">运营进度</a>
             </div>
-            <div class="business">
-                <div class="add-cord">
+            <div class="business record-list commerce-data">
+                <div class="add-cord add-progress-form" style="display: block">
                     <input type="button" value="添加记录" id="addcordbtn" />
                     <table class="add-input" id="addcordcontent" style="display: none;">
                         <tr>
@@ -483,13 +483,79 @@
                         </tr>
                     </table> 
                 </div>
-                <div class="cord-list">
+                <div class="cord-list ">
                     <table class="cord-table" id="busCordTable">
                     </table>
                 </div>
             </div>
-            <div class="operating">
-                
+            <div class="operatin record-list business-data" style="display: none">
+                <div class="add-operatin add-progress-form">
+                    <input type="button" value="添加记录" id="addBusinessbtn" />
+                    <table class="add-input" id="businessTable" style="display: none;">
+                        <tr>
+                            <td width="21%"><span style="color: red;padding: 0 3px 0 0;">*</span>运营阶段</td>
+                            <td><select id="businessStage">
+                                <option value="已开户">已开户</option>
+                                <option value="待实施">待实施</option>
+                                <option value="待培训">待培训</option>
+                                <option value="已培训">已培训</option>
+                                <option value="交互报告">交互报告</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td><span style="color: red;padding: 0 3px 0 0;">*</span>开始日期</td>
+                            <td><input type="" name="" id="startDate"></td>
+                        </tr>
+                        <tr>
+                            <td><span style="color: red;padding: 0 3px 0 0;">*</span>相关负责人</td>
+                            <td>
+                                <!--<ul class="visitors left" id="addPeopleList">-->
+                                <!--<li>小花</li>-->
+                                <!--<li>小黄</li>-->
+                                <!--</ul>-->
+                                <ul class="clear tag-list" id="addChargePeopleList">
+                                    <!--<li>白骨精<input type="hidden" value="白骨精"><span>×</span></li>-->
+                                </ul>
+                                <div style="position: relative;float: left;">
+                                    <div class="add-tag" id="addChargePeopleBtn">+成员</div>
+                                    <div class="add-tag-exist-con" id="addChargePeopleSelect">
+                                        <a href="javascript:" class="close" id="addChargePeopleClose">关闭</a>
+                                        <ul class="tag-out-list" id="addChargePeopleUl">
+                                            <!--<li>我是牛逼的小林<input type="hidden" value="我是牛逼的小林"><i></i></li>-->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>合同进度</td>
+                            <td><select id="bargainProgress">
+                                <option value="试用签约">试用签约</option>
+                                <option value="正式签约">正式签约</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>合同时长</td>
+                            <td>
+                                <input type="" name="" id="bargainTime">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>备注</td>
+                            <td><textarea id="buinessRemark"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <button id="businessAdd">添加</button><button id="businessCancle">取消</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="cord-list">
+                    <table class="cord-table" id="operatinTable">
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -556,11 +622,17 @@ function getHeadProName() {
 
 var nowTemp = new Date();
 var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+$('#startDate').fdatepicker({
+  format: 'yyyy-mm-dd',
+  onRender: function (date) {
+    return date.valueOf() < now.valueOf() ? 'disabled' : '';
+  }
+});
 $('#nextFocus').fdatepicker({
-    format: 'yyyy-mm-dd',
-    onRender: function (date) {
-        return date.valueOf() < now.valueOf() ? 'disabled' : '';
-    }
+  format: 'yyyy-mm-dd',
+  onRender: function (date) {
+    return date.valueOf() < now.valueOf() ? 'disabled' : '';
+  }
 });
 $('#carry_out_time').fdatepicker({
     format: 'yyyy-mm-dd',
