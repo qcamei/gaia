@@ -1473,7 +1473,7 @@ operationProgress.prototype = {
         for(var m=0; m < json.length; m++){
           var record = json[m];
           h += '<thead><tr class="status"><td width="20"><span class="s-2"></span></td><td><div class="status-head clear">';
-          h += '<p class="left">'+record.level+'</p>';
+          h += '<p class="left">'+record.level+'('+record.name+')</p>';
           h += '<p class="right">'+record.createTime+'</p></div></td></tr></thead>';
           h += '<tbody>';;
           h += '<tr><td><span class="line"></span><span class="circle"></span></td>';
