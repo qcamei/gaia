@@ -443,7 +443,7 @@ _api.prototype = {
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'fun']);
         return this;
     },
-    getTypeList: function(id, defaultId,isSelect){ // 5. 获取需求类别 get
+    getTypeList: function(id, defaultId,isSelect){ // 5. 获取类别 get
         var url = _ip+'/common/getRequireTypeList';
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'type']);
         return this;

@@ -1287,7 +1287,13 @@ operationProgress.prototype = {
   businessCancle: $('#businessCancle'),
   businessAdd: $('#businessAdd'),
   operatinTable: $('#operatinTable'),
+  operationBtnShow: false,
   init: function() {
+  	var usrrole = parseInt($.cookie('userrole'))
+    if (usrrole === 3 || usrrole === 9) {
+      this.operationBtnShow = true
+    }
+  	this.addBusinessbtn.css('display', this.operationBtnShow ? '' : 'none')
     var that = this;
     this.addChargePeople()
 		this.getChargeList()
@@ -1361,6 +1367,7 @@ operationProgress.prototype = {
           // that.getBusCordList();
           that.showEdite(that);
           that.getChargeList()
+					that.clearForm()
           // _API.getPBussTypeList('bussTypeList',false,false,globleProjectId)
           //   .getVisitStatusList('visitStatusList',false,false,globleProjectId);
         }else{
@@ -1369,6 +1376,14 @@ operationProgress.prototype = {
       }
     })
     return this;
+  },
+	clearForm: function () {
+    $('#businessStage').find('option:first').attr('selected', true)
+    $('#startDate').val('')
+		$('#addChargePeopleList').find('li').remove()
+		$('#bargainProgress').find('option:first').attr('selected', true)
+		$('#bargainTime').val('')
+		$('#buinessRemark').val('')
   },
   addChargePeople: function () {
     var that = this;
@@ -1394,7 +1409,7 @@ operationProgress.prototype = {
 
         var len = that.addChargePeopleList.find('li').length;
         if(len >=3){
-          alert('只能添加两个!');
+          alert('只能添加三个!');
           return;
         }
         var h = '<li>'+v+'<input type="hidden" value="'+v+'"><span>×</span></li>';
@@ -1441,7 +1456,6 @@ operationProgress.prototype = {
   getChargeList: function(id){
     var url = _ip + '/opering/proid?proid='+globleProjectId;
     var that = this;
-    console.log(url)
     $.ajax({
       url:url,
       type: 'GET',
@@ -1458,7 +1472,6 @@ operationProgress.prototype = {
         var arr = [];
         for(var m=0; m < json.length; m++){
           var record = json[m];
-          console.log(record)
           h += '<thead><tr class="status"><td width="20"><span class="s-2"></span></td><td><div class="status-head clear">';
           h += '<p class="left">'+record.level+'</p>';
           h += '<p class="right">'+record.createTime+'</p></div></td></tr></thead>';

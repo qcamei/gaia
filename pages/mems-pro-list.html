@@ -68,6 +68,7 @@
                             <th>segmentation</th>
                             <th>级别</th>
                             <th>商务阶段</th>
+                            <th>运营阶段</th>
                             <th>操作</th>
                             <th>导出PDF</th>
                         </tr>
@@ -181,6 +182,7 @@
                     _data.push('<td>'+(msg.segmentation || '')+'</td>');
                     _data.push('<td>'+(msg.level || '')+'</td>');
                     _data.push('<td>'+(msg.businessType || '')+'</td>');
+                    _data.push('<td>'+(msg.oper || '')+'</td>');
 
                     if(roleid==9 || roleid==3){
                         _data.push('<td><a class="link" href="javascript:" onclick="deleteList('+msg.id+')">删除</a></td>');

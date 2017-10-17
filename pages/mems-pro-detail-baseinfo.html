@@ -490,7 +490,7 @@
             </div>
             <div class="operatin record-list business-data" style="display: none">
                 <div class="add-operatin add-progress-form">
-                    <input type="button" value="添加记录" id="addBusinessbtn" />
+                    <input type="button" value="添加记录" id="addBusinessbtn"  style="display: none"/>
                     <table class="add-input" id="businessTable" style="display: none;">
                         <tr>
                             <td width="21%"><span style="color: red;padding: 0 3px 0 0;">*</span>运营阶段</td>
@@ -499,7 +499,7 @@
                                 <option value="待实施">待实施</option>
                                 <option value="待培训">待培训</option>
                                 <option value="已培训">已培训</option>
-                                <option value="交互报告">交互报告</option>
+                                <option value="交付报告">交付报告</option>
                             </select></td>
                         </tr>
                         <tr>
@@ -530,6 +530,7 @@
                         <tr>
                             <td>合同进度</td>
                             <td><select id="bargainProgress">
+                                <option value="未签约">未签约</option>
                                 <option value="试用签约">试用签约</option>
                                 <option value="正式签约">正式签约</option>
                             </select></td>
@@ -1001,6 +1002,7 @@ forbidenOpe.prototype = {
         $('#tag-dec-3').prop({'disabled':true});
         $('#tag-dec-4').prop({'disabled':true});
         $('#addcordbtn').remove();
+        $('#addBusinessbtn').remove();
         $('#editeSaleType').remove();
     }
 }
