@@ -49,6 +49,14 @@
 
             <tbody id="more-search" >
                 <tr>
+                    <td>运营阶段：<select id="operType">
+                        <option value="">请选择</option>
+                        <option value="已开户">已开户</option>
+                        <option value="待实施">待实施</option>
+                        <option value="待培训">待培训</option>
+                        <option value="已培训">已培训</option>
+                        <option value="交付报告">交付报告</option>
+                    </select></td>
                     <td colspan="5">区域：<select id="district"><option>请选择</option></select>&emsp;<select style="width: 200px" id="privence"><option>请选择</option></select>&emsp;<select id="city"><option>请选择</option></select></td>
                 </tr>
             </tbody>
@@ -126,6 +134,7 @@
                 "segmentation": $('#Segmentation').val() || null,
                 "level": $('#level').val() || null,
                 "businessType": $('#bussType').val() || null,
+                "oper": $('#operType').val() || null,
                 "area": $('#district').find('option:selected').text()=='请选择'?null:$('#district').val(),
                 "province": $('#privence').find('option:selected').text()=='请选择'?null : $('#privence').val(),
                 "city": $('#city').find('option:selected').text()=='请选择'?null : $('#city').val()
