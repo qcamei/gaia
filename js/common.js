@@ -100,6 +100,11 @@ function creatAsideDom() {
                         id:'prolit',
                         name:'项目列表',
                         src:'mems-pro-list'
+                    },
+                    {
+                      id:'templateconfig',
+                      name:'模板配置',
+                      src:'config-index.html#/'
                     }
                   ]
         },
@@ -150,23 +155,24 @@ function creatAsideDom() {
                         src:'doc-manage'
                     }
                  ]
-        },
-        runReport:{
-            name:'运营报告',
-            iconClass:'report',
-            data:[
-              {
-                id:'keydata',
-                name:'数据概览',
-                src:'key-data'
-              },
-              {
-                id:'dataexport',
-                name:'数据导出',
-                src:'data-export'
-              }
-            ]
         }
+        // ,
+        // runReport:{
+        //     name:'运营报告',
+        //     iconClass:'report',
+        //     data:[
+        //       {
+        //         id:'keydata',
+        //         name:'数据概览',
+        //         src:'key-data'
+        //       },
+        //       {
+        //         id:'dataexport',
+        //         name:'数据导出',
+        //         src:'data-export'
+        //       }
+        //     ]
+        // }
     }
     var h = ''
     for(var k in obj){
