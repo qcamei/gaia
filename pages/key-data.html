@@ -77,7 +77,15 @@
         </div>
         <!--开户-->
         <div class="clear chart-open-account">
-            <div class="charts-title">开户</div>
+            <div class="charts-title">
+                <div class="left title-middle">
+                    <div class="left">开户</div>
+                    <div class="center left-center">当期</div>
+                </div>
+                <div class="left title-middle">
+                    <div class="center right-center">累计</div>
+                </div>
+            </div>
             <div class="account-box left" id="accountBox">
                 <div class="left open-account" id="open-account-1"></div>
                 <canvas id="lineTop_1" class="line-turn"></canvas>
@@ -106,13 +114,22 @@
         <!--当期和累计-->
         <div class="currentAndAdd clear">
             <div class="current-add-box left">
-                <div class="charts-title">当期</div>
+                <div class="charts-title">
+                    <div class="left title-middle all">
+                        <div class="left">大区开户</div>
+                        <div class="center left-center">当期</div>
+                    </div>
+                </div>
                 <div class="current-add-container left" id="openAccountPre">
 
                 </div>
             </div>
             <div class="current-add-box left">
-                <div class="charts-title">累计</div>
+                <div class="charts-title">
+                    <div class="left title-middle all">
+                        <div class="center right-center">累计</div>
+                    </div>
+                </div>
                 <div class="current-add-container left" id="openAccountTotal">
 
                 </div>
@@ -199,7 +216,7 @@
             </div>
             <div class="use-mark left">
                 <div id="use-chart" style="width: 100%;height: 95%;"></div>
-                <p style="position: absolute;bottom: 10px;text-align: center;width: 100%">当期各功能使用（次）</p>
+                <p style="position: absolute;bottom: 20px;text-align: center;width: 100%">当期各功能使用（次）</p>
             </div>
         </div>
         </div>
@@ -211,6 +228,7 @@
 <script src="../js/common.js"></script>
 <script src="../js/html2canvas.js"></script>
 <script src="../js/foundation-datepicker.min.js"></script>
+<script src="../js/moment.js"></script>
 <script src="../js/echarts.min.js"></script>
 <script src="../js/export_image.js"></script>
 <script src="../js/user-tree.js"></script>
@@ -226,16 +244,17 @@ var today = new Date();
 var year = today.getFullYear();    //年
 var month = today.getMonth() + 1;  //月
 var day = today.getDate();         //日
-
+var dateMax = moment().subtract(1,'d').format('YYYY-MM-DD')
 var str = year +'-'+( month>=10?month:'0'+month ) + '-'+( day>=10?day:'0'+day )
-$('#dpd1,#dpd2').val(str)
-
+$('#dpd2').val(str)
+$('#dpd1').val(dateMax)
 var nowTemp = new Date();
 var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 var checkin = $('#dpd1').fdatepicker({
 //    onRender: function (date) {
 //        return date.valueOf() < now.valueOf() ? 'disabled' : '';
 //    },
+    endDate: dateMax,
     format: 'yyyy-mm-dd'
 }).on('changeDate', function (ev) {
     if (ev.date.valueOf() > checkout.date.valueOf()) {
@@ -250,6 +269,7 @@ var checkout = $('#dpd2').fdatepicker({
     onRender: function (date) {
         return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
     },
+    endDate: str,
     format: 'yyyy-mm-dd'
 }).on('changeDate', function (ev) {
     checkout.hide();

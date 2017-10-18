@@ -4,12 +4,28 @@
   height: 28px; }
 
 .charts-title {
-  font-weight: bold;
-  font-size: 13px;
   height: 40px;
   line-height: 40px;
   padding-left: 20px;
-  color: #005777; }
+  color: #2e637d;
+  font-size: 18px;
+  padding-top: 10px; }
+  .charts-title .title-middle {
+    width: 50%;
+    position: relative; }
+    .charts-title .title-middle.all {
+      width: 100%; }
+    .charts-title .title-middle .center {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      font-size: 16px;
+      text-align: center; }
+      .charts-title .title-middle .center.left-center {
+        color: #5a90dc; }
+      .charts-title .title-middle .center.right-center {
+        color: #7ce0c3; }
 
 /*拜访*/
 .visit-chart-box {

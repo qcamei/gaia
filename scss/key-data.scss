@@ -3,12 +3,33 @@
   height: 28px;
 }
 .charts-title{
-  font-weight: bold;
-  font-size: 13px;
   height: 40px;
   line-height: 40px;
   padding-left: 20px;
-  color: #005777;
+  color: #2e637d;
+  font-size: 18px;
+  padding-top: 10px;
+  .title-middle {
+    width: 50%;
+    position: relative;
+    &.all {
+      width: 100%;
+    }
+    .center {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      font-size: 16px;
+      text-align: center;
+      &.left-center {
+        color: #5a90dc;
+      }
+      &.right-center {
+        color: #7ce0c3;
+      }
+    }
+  }
 }
 /*拜访*/
 .visit-chart-box{

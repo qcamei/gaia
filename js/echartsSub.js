@@ -116,12 +116,13 @@ function threeBar(element, optionData, echartObject, parameter) {
     data: []
   }
   if (optionData.half) {
-    option.grid.top = 50
+    option.grid.bottom = 70
     option.grid.right = '6%'
     option.grid.left = '10%'
-    option.grid.bottom = 35
+    option.grid.top = 15
     option.legend.orient = 'horizontal'
-    option.legend.top = 'top'
+    option.legend.top = 'auto'
+    option.legend.bottom = '25px'
     option.legend.left = 'center'
     bar_json.barWidth = '15%'
   }
