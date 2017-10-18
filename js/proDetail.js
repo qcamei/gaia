@@ -1024,9 +1024,11 @@ progressSwitch.prototype = {
 		console.log(dataTabDom)
 		$('.' + dataTabDom).css('display', 'block').siblings().not('.buttons').css('display', 'none')
 		this.recordTab.click(function (e) {
-			$(this).addClass('current').siblings().removeClass('current')
-      dataTabDom = $(this).data('tab')
-      $('.' + dataTabDom).css('display', 'block').siblings().not('.buttons').css('display', 'none')
+			if (!$(this).hasClass('disabled')) {
+        $(this).addClass('current').siblings().removeClass('current')
+        dataTabDom = $(this).data('tab')
+        $('.' + dataTabDom).css('display', 'block').siblings().not('.buttons').css('display', 'none')
+			}
     })
   }
 }
