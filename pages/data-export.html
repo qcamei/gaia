@@ -85,6 +85,7 @@
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.cookie.js"></script>
 <script src="../js/foundation-datepicker.min.js"></script>
+<script src="../js/moment.js"></script>
 <script src="../js/common.js"></script>
 <script>
     var roleid = $.cookie('userrole');
@@ -327,13 +328,14 @@
         }
     };
 
-
+    var dateMax = moment().subtract(1,'d').format('YYYY-MM-DD')
     var nowTemp = new Date();
     var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
     var checkin = $('#dpd1').fdatepicker({
         onRender: function (date) {
             return date.valueOf() < now.valueOf() ? '' : '';
         },
+        endDate: dateMax,
         // pickTime: true,
         format: 'yyyy-mm-dd'
     }).on('changeDate', function (ev) {
@@ -350,6 +352,7 @@
             return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
         },
         // pickTime: true,
+        endDate: new Date(),
         format: 'yyyy-mm-dd'
     }).on('changeDate', function (ev) {
         checkout.hide();
