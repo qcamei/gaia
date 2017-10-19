@@ -213,12 +213,17 @@ const form_2 = new Vue({
       var reg = /^\+?[1-9][0-9]*$/
       var office_count = $('#office_count').val();
       var equipment_count = $('#equipment_count').val();
+      var equipment_total_count = $('#equipment_total_count').val()
       if(!reg.test(office_count)){
         alert('实施科室数要填写正整数！')
         return
       }
       if(!reg.test(equipment_count)){
         alert('实施设备数要填写正整数！')
+        return
+      }
+      if(!reg.test(equipment_total_count)){
+        alert('设备总数要填写正整数！')
         return
       }
       var url = _ip + '/implement/insertApplyImplement';
@@ -229,6 +234,7 @@ const form_2 = new Vue({
         remarkManager:$('#remark_manage').val(),
         officeCount:$('#office_count').val(),
         equipmentCount:$('#equipment_count').val(),
+        total:$('#equipment_total_count').val(),
         time:$('#expectTime').val(),
         remarkComplete:$('#remark_complete').val(),
         filea:$('#addAttachmentList').find('li').eq(0).attr('rel') || '',
@@ -283,6 +289,7 @@ const form_2 = new Vue({
         $('#remark_manage').val(json.data.remarkManager);
         $('#office_count').val(json.data.officeCount);
         $('#equipment_count').val(json.data.equipmentCount);
+        $('#equipment_total_count').val(json.data.total);
         $('#expectTime').val(json.data.time);
         $('#remark_complete').val(json.data.remarkComplete);
         json.data.filea && attachment1.getAttachmentList(json.data.filea.split(','),json.data.createTime)

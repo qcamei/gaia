@@ -69,10 +69,14 @@ function threeBar(element, optionData, echartObject, parameter) {
     },
     series: []
   };
+  if (optionData.color) {
+    option.color = optionData.color
+  }
   var series_data = []
   var bar_json = {
     name: '销量',
     type: 'bar',
+    barGap: '80%',
     label: {
       normal: {
         show: true,
@@ -112,12 +116,13 @@ function threeBar(element, optionData, echartObject, parameter) {
     data: []
   }
   if (optionData.half) {
-    option.grid.top = 50
+    option.grid.bottom = 70
     option.grid.right = '6%'
     option.grid.left = '10%'
-    option.grid.bottom = 35
+    option.grid.top = 15
     option.legend.orient = 'horizontal'
-    option.legend.top = 'top'
+    option.legend.top = 'auto'
+    option.legend.bottom = '25px'
     option.legend.left = 'center'
     bar_json.barWidth = '15%'
   }
@@ -128,6 +133,10 @@ function threeBar(element, optionData, echartObject, parameter) {
       barJson.type = yData.type;
       barJson.data = yData.data;
       barJson.itemStyle.normal.color = yData.color;
+      if (optionData.barGap) {
+
+        bar_json.barGap = optionData.barGap
+      }
       series_data.push(barJson)
     }
     else if (yData.type === 'line') {

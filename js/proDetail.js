@@ -1008,6 +1008,32 @@ presell.prototype = {
 var presell = new presell();
 presell.init().getInfo('sellBuget');
 
+/*----------
+ * 进度切换
+ *-----------------------------*/
+function progressSwitch() {
+	
+}
+
+progressSwitch.prototype = {
+  recordTab: $('.record-tab'),
+	init: function () {
+  	var recordCurrentTab = this.recordTab.first()
+  	var dataTabDom = recordCurrentTab.data('tab')
+    recordCurrentTab.addClass('current').siblings().removeClass('current')
+		console.log(dataTabDom)
+		$('.' + dataTabDom).css('display', 'block').siblings().not('.buttons').css('display', 'none')
+		this.recordTab.click(function (e) {
+			if (!$(this).hasClass('disabled')) {
+        $(this).addClass('current').siblings().removeClass('current')
+        dataTabDom = $(this).data('tab')
+        $('.' + dataTabDom).css('display', 'block').siblings().not('.buttons').css('display', 'none')
+			}
+    })
+  }
+}
+var progressSwitch = new progressSwitch()
+progressSwitch.init()
 
 /*----------
  * 商务进度
@@ -1019,8 +1045,9 @@ businessProgress.prototype = {
 	surecord:$('#surecord'),
 	canclecord:$('#canclecord'),
 	busCordTable:$('#busCordTable'),
-    addPeopleUl:$('#addPeopleUl'),
-    addPeopleList:$('#addPeopleList'),
+  addPeopleUl:$('#addPeopleUl'),
+  addPeopleList:$('#addPeopleList'),
+  isClick:false,
 	init:function(){
 		this.addPeople();
 		this.getBusCordList();
@@ -1032,9 +1059,11 @@ businessProgress.prototype = {
 			that.showEdite(that);
 		})
 		this.surecord.click(function(){
-			that.insertBusInfo();
+		  if(!that.isClick){
+        that.insertBusInfo();
+      }
 		})
-        that.getExistPeople();
+    that.getExistPeople();
 		return this;
 	},
 	showInfo:function(that){
@@ -1147,6 +1176,7 @@ businessProgress.prototype = {
 		      "modifyTime": null
     	};
     	var that = this;
+
     	$.ajax({
             url:url,
             type : "POST",
@@ -1163,11 +1193,13 @@ businessProgress.prototype = {
                     return false;
                 }
                 if(data.success){
+                  that.isClick = false;
                 	that.getBusCordList();
                 	that.showEdite(that);
 					_API.getPBussTypeList('bussTypeList',false,false,globleProjectId)
 						.getVisitStatusList('visitStatusList',false,false,globleProjectId);
                 }else{
+                    that.isClick = false;
                     alert('添加失败, 请稍后重试！');
                 }
             }
@@ -1243,6 +1275,244 @@ businessProgress.prototype = {
 }
 businessProgress = new businessProgress();
 businessProgress.init();
+
+/*----------
+ * 运营进度
+ *-----------------------------*/
+
+function operationProgress() {}
+operationProgress.prototype = {
+  addBusinessbtn: $('#addBusinessbtn'),
+  businessTable: $('#businessTable'),
+  addChargePeopleList: $('#addChargePeopleList'),
+  addChargePeopleUl: $('#addChargePeopleUl'),
+  businessCancle: $('#businessCancle'),
+  businessAdd: $('#businessAdd'),
+  operatinTable: $('#operatinTable'),
+  operationBtnShow: false,
+  init: function() {
+  	var usrrole = parseInt($.cookie('userrole'))
+    if (usrrole === 3 || usrrole === 9) {
+      this.operationBtnShow = true
+    }
+  	this.addBusinessbtn.css('display', this.operationBtnShow ? '' : 'none')
+    var that = this;
+    this.addChargePeople()
+		this.getChargeList()
+		this.addBusinessbtn.click(function () {
+      that.showForm()
+    })
+    this.businessCancle.click(function(){
+      that.showEdite(that);
+    })
+    this.businessAdd.click(function(){
+      if(!that.isClick){
+        that.insertChargeInfo();
+      }
+    })
+  },
+	showForm: function () {
+		this.addBusinessbtn.css('display', 'none')
+		this.businessTable.css('display', '')
+  },
+  showEdite:function(that){
+    that.businessTable.css({'display':'none'});
+    that.addBusinessbtn.css({'display':'inline-block'});
+  },
+  insertChargeInfo:function(){
+    var url = _ip + '/opering/insert';
+    var arr = [];
+    this.addChargePeopleList.find('li').each(function () {
+      arr.push($(this).find('input').val());
+    })
+    if(arr.length <= 0){
+      alert('请添加相关负责人！');
+      return;
+    }
+    var remark = $('#startDate').val() || null;
+    if(remark == null || !remark){
+      alert('请选择开始时间！');
+      return;
+    }
+
+    var data = {
+      "id": null,
+      "proId": parseInt(globleProjectId),
+      "level": $('#businessStage').val(),
+			"time": $('#startDate').val(),
+      "person": arr.join(','),
+      "type": $('#bargainProgress').val(),
+      "duration": $('#bargainTime').val(),
+      "remark": $('#buinessRemark').val(),
+      "creater": $.cookie('userid'),
+      "createTime": null,
+      "modifyTime": null
+    };
+    var that = this;
+    $.ajax({
+      url:url,
+      type : "POST",
+      xhrFields: {
+        withCredentials: true
+      },
+      crossDomain: true,
+      dataType: 'json',
+      contentType:'application/json',
+      data:JSON.stringify(data),
+      success: function(data) {
+        if(data.message === 'LOGIN') {
+          window.location.href = 'user-login.html';
+          return false;
+        }
+        if(data.success){
+          that.isClick = false;
+          // that.getBusCordList();
+          that.showEdite(that);
+          that.getChargeList()
+					that.clearForm()
+          // _API.getPBussTypeList('bussTypeList',false,false,globleProjectId)
+          //   .getVisitStatusList('visitStatusList',false,false,globleProjectId);
+        }else{
+          alert('添加失败, 请稍后重试！');
+        }
+      }
+    })
+    return this;
+  },
+	clearForm: function () {
+    $('#businessStage').find('option:first').attr('selected', true)
+    $('#startDate').val('')
+		$('#addChargePeopleList').find('li').remove()
+		$('#bargainProgress').find('option:first').attr('selected', true)
+		$('#bargainTime').val('')
+		$('#buinessRemark').val('')
+  },
+  addChargePeople: function () {
+    var that = this;
+    $('#addChargePeopleBtn').on('click',function(){
+      $('#addChargePeopleSelect').css({'display':'block'})
+      that.getChargeExistPeople()
+
+    })
+    $('#addChargePeopleClose').on('click',function(){
+      $('#addChargePeopleSelect').css({'display':'none'})
+    })
+    that.addChargePeopleUl.on('click','li',function(){
+      var v = $(this).find('input').val();
+      var arr = [];
+      that.addChargePeopleList.find('li').each(function () {
+        var ev = $(this).find('input').val();
+        arr.push(ev)
+      })
+
+      var str = arr.join(',');
+
+      if(str.indexOf(v) == -1){
+
+        var len = that.addChargePeopleList.find('li').length;
+        if(len >=3){
+          alert('只能添加三个!');
+          return;
+        }
+        var h = '<li>'+v+'<input type="hidden" value="'+v+'"><span>×</span></li>';
+        $(this).find('i').css('display','block')
+        that.addChargePeopleList.append(h);
+      }else{
+        $(this).find('i').css('display','none')
+      }
+    })
+    that.addChargePeopleList.on('click','li>span',function () {
+      $(this).parent('li').remove();
+    })
+  },
+  getChargeExistPeople:function(){
+    var that = this;
+    var len = that.addChargePeopleList.find('li').length;
+    if(len >= 1){
+      var first = that.addChargePeopleList.find('li').eq(0).find('input').val();
+    }
+    if(len >= 2){
+      var second = that.addChargePeopleList.find('li').eq(1).find('input').val();
+
+    }
+    if(len >= 3){
+      var three = that.addChargePeopleList.find('li').eq(2).find('input').val();
+    }
+    var url = _ip + '/user/name?first='+first+'&second='+second+ '&three=' + three;
+    $.ajax({
+      url:url,
+      type: 'GET',
+      dataType: 'jsonp',
+      contentType:'application/json',
+      jsonpCallback: 'namename',
+      success: function(json) {
+        var json = json.data;
+        var h = '';
+        for(var k = 0 , kk = json.length; k < kk; k++){
+          h += '<li>'+json[k]+'<input type="hidden" value="'+json[k]+'"><i></i></li>';
+        }
+        that.addChargePeopleUl.html(h);
+      }
+    })
+  },
+  getChargeList: function(id){
+    var url = _ip + '/opering/proid?proid='+globleProjectId;
+    var that = this;
+    $.ajax({
+      url:url,
+      type: 'GET',
+      xhrFields: {
+        withCredentials: true
+      },
+      crossDomain: true,
+      dataType: 'json',
+      contentType:'application/json',
+      success: function(json) {
+        var json = json.data;
+        if(!json || json.length <= 0) return;
+        var h = '';
+        var arr = [];
+        for(var m=0; m < json.length; m++){
+          var record = json[m];
+          h += '<thead><tr class="status"><td width="20"><span class="s-2"></span></td><td><div class="status-head clear">';
+          h += '<p class="left">'+record.level+'('+record.name+')</p>';
+          h += '<p class="right">'+record.createTime+'</p></div></td></tr></thead>';
+          h += '<tbody>';;
+          h += '<tr><td><span class="line"></span><span class="circle"></span></td>';
+          h += '<td><div class="cord-detail">';
+          h += '<div class="t"><i></i>';
+          var v = record.person.split(',');
+          for(var j = 0; j < v.length; j++){
+            h += '<span>'+v[j]+'</span>';
+          }
+          h += '<span>'+record.time+'</span></div>';
+          // h += '<ul class="clear key-list"><li>'+data.type+'</li><li>'+data.level+'</li><li>'+data.visitResult+'</li><li>'+data.emergency+'</li>';
+          h += '<ul class="clear key-list">'+(record.level?'<li>'+record.level+'</li>':'')+(record.type?'<li>'+record.type+'</li>':'')+'</ul>';
+
+          h += '<p class="dec">'+(record.duration ? record.duration : '')+'</p>';
+          h += '<p class="dec">'+(record.remark ? record.remark : '')+'</p>';
+          // h += '<div class="plan"><span class="title">下次计划</span>';
+
+          h += '</div></td></tr>';
+          h += '</tbody>'
+        }
+        if(arr.length){
+          $('#bussProNameTile').html(arr[0]).css({'display':'inline-block'});
+
+        }else{
+          $('#bussProNameTile').css({'display':'none'});
+
+        }
+
+
+        that.operatinTable.html(h);
+      }
+    })
+    return this;
+  }
+}
+var operationProgress = new operationProgress();
+operationProgress.init();
 
 
 /*----------

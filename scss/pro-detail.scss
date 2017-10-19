@@ -369,14 +369,16 @@
           line-height: 35px;
           text-align: center;
           border-bottom: 1px solid rgb(255,255,255);
+          cursor: pointer;
+
           &:hover,&.current{
             color: #03a1f2;
             border-bottom: 1px solid rgb(0,159,242);
           }
         }
     }
-    .business{
-      .add-cord{
+    .business, .operatin{
+      .add-progress-form{
         padding:22px 0;
         border-bottom: 1px solid rgb(217,226,231);
         text-align: center;
@@ -422,6 +424,7 @@
                     background:rgb(0,159,242);
                     border:0px;
                     border-radius:5px;
+                    outline: none;
                     &:nth-child(2n){
                       background:#FFF;
                       border:1px solid #d9e2e7;

@@ -12,7 +12,7 @@
 
 <!--header-->
 <header id="header" class="header">
-    <div class="header-info left"><i></i><a href="pm-need-list.html">趋势统计</a></div>
+    <div class="header-info left"><i></i><a href="trend-count.html">趋势统计</a></div>
     <div class="right-user right">
          <div class="clear t" >             <div id="headusername" class="role"></div>             <div class="icon"></div>         </div>
         <div class="head-down">
@@ -42,7 +42,7 @@
                         <option value="week">周</option>
                         <option value="month">月</option>
                         <option value="halfYear">半年</option>
-                        <option value="year">年</option>
+                        <!--<option value="year">年</option>-->
                     </select>
                     <div class="endDate_box">
                         <input type="text" id="endDate" name="endDate" class="calendar-input">
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="right">
-                <div class="commit-new-item"><a class="btn" style="width: 120px" id="export_trend">导出&nbsp;<b>+</b></a></div>
+                <div class="commit-new-item"><a class="btn" style="width: 120px;visibility: hidden;" id="export_trend">导出&nbsp;<b>+</b></a></div>
             </div>
         </div>
         <div class="item-content trendCount-content">
@@ -149,14 +149,22 @@
 
 </div>
 <script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/common.js"></script>
 <script src="../js/html2canvas.js"></script>
 <script src="../js/foundation-datepicker.min.js"></script>
 <script src="../js/moment.js"></script>
 <script src="../js/echarts.min.js"></script>
-<script src="../js/jquery.cookie.js"></script>
-<script src="../js/common.js"></script>
+
+<script src="../js/user-tree.js"></script>
 <script src="../js/echartsSub.js"></script>
 <script src="../js/export_image.js"></script>
 <script src="../js/trendCount.js"></script>
+<script>
+    var roleid = $.cookie('userrole');
+    if(roleid ==3 || roleid == 9){
+        $('#export_trend').css({'visibility':'visible'})
+    }
+</script>
 </body>
 </html>

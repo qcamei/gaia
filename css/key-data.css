@@ -1,0 +1,167 @@
+@charset "UTF-8";
+.calendar-input {
+  width: 200px;
+  height: 28px; }
+
+.charts-title {
+  height: 40px;
+  line-height: 40px;
+  padding-left: 20px;
+  color: #2e637d;
+  font-size: 18px;
+  padding-top: 10px; }
+  .charts-title .title-middle {
+    width: 50%;
+    position: relative; }
+    .charts-title .title-middle.all {
+      width: 100%; }
+    .charts-title .title-middle .center {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      font-size: 16px;
+      text-align: center; }
+      .charts-title .title-middle .center.left-center {
+        color: #5a90dc; }
+      .charts-title .title-middle .center.right-center {
+        color: #7ce0c3; }
+
+/*拜访*/
+.visit-chart-box {
+  background: #FFF;
+  width: 100%;
+  height: 300px;
+  margin-bottom: 20px; }
+  .visit-chart-box .visit-title {
+    width: 15%; }
+    .visit-chart-box .visit-title > table {
+      width: 100%;
+      height: 100px;
+      margin: 80px 0 0 0; }
+      .visit-chart-box .visit-title > table > tbody > tr > td {
+        text-align: center;
+        color: #6d6d6d; }
+  .visit-chart-box .visit-chart-container .visit-chart {
+    width: 28%;
+    height: 260px; }
+
+.use-chart-box {
+  background: #FFF;
+  border: 1px solid #e1e1e1;
+  width: 100%;
+  margin-bottom: 20px;
+  height: 300px; }
+  .use-chart-box .use-chart {
+    width: 20%;
+    height: 260px;
+    margin: 0 0 0 5%; }
+    .use-chart-box .use-chart > table {
+      width: 80%;
+      height: 210px;
+      margin: 25px 0 0 5%; }
+      .use-chart-box .use-chart > table > tbody > tr > td {
+        height: 70px;
+        text-align: center;
+        color: #6d6d6d; }
+  .use-chart-box .use-mark {
+    width: 65%;
+    height: 260px;
+    margin-left: 5%;
+    position: relative; }
+
+.chart-open-account {
+  background: #FFF;
+  border: 1px solid #e1e1e1;
+  width: 100%;
+  margin-bottom: 20px;
+  height: 300px; }
+  .chart-open-account .account-box {
+    width: 48%;
+    height: 260px;
+    position: relative; }
+    .chart-open-account .account-box .open-account {
+      width: 60%;
+      height: 260px; }
+    .chart-open-account .account-box .line-turn {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 1; }
+    .chart-open-account .account-box .columnar {
+      width: 200px;
+      height: 200px;
+      margin: 30px 0 0 0;
+      opacity: 1; }
+      .chart-open-account .account-box .columnar .columnar-img {
+        width: 20%;
+        height: 100%; }
+        .chart-open-account .account-box .columnar .columnar-img .col-area {
+          width: 100%; }
+          .chart-open-account .account-box .columnar .columnar-img .col-area.col-1 {
+            background: #5aa3e8; }
+          .chart-open-account .account-box .columnar .columnar-img .col-area.col-2 {
+            background: #75b2eb; }
+          .chart-open-account .account-box .columnar .columnar-img .col-area.col-3 {
+            background: #a6cdf2; }
+          .chart-open-account .account-box .columnar .columnar-img .col-area.col-4 {
+            background: #c4def7; }
+          .chart-open-account .account-box .columnar .columnar-img .col-area.col-5 {
+            background: #d7e8f9; }
+      .chart-open-account .account-box .columnar .columnar-text {
+        width: 80%;
+        height: 100%; }
+        .chart-open-account .account-box .columnar .columnar-text .name {
+          margin: 0 auto 0 5px;
+          line-height: 20px;
+          height: auto; }
+          .chart-open-account .account-box .columnar .columnar-text .name.text-1 {
+            color: #5aa3e8; }
+          .chart-open-account .account-box .columnar .columnar-text .name.text-2 {
+            color: #75b2eb; }
+          .chart-open-account .account-box .columnar .columnar-text .name.text-3 {
+            color: #a6cdf2; }
+          .chart-open-account .account-box .columnar .columnar-text .name.text-4 {
+            color: #c4def7; }
+          .chart-open-account .account-box .columnar .columnar-text .name.text-5 {
+            color: #d7e8f9; }
+
+@keyframes lineTurn {
+  to {
+    opacity: 1; } }
+
+.entryAndPerfecting {
+  width: 100%;
+  margin-bottom: 20px; }
+  .entryAndPerfecting .entry-perfecting-box {
+    background: #FFF;
+    border: 1px solid #e1e1e1;
+    height: 300px;
+    width: 48%; }
+    .entryAndPerfecting .entry-perfecting-box .entry-perfecting-container {
+      width: 100%; }
+    .entryAndPerfecting .entry-perfecting-box .entry-perfecting-title {
+      width: 30%; }
+      .entryAndPerfecting .entry-perfecting-box .entry-perfecting-title > table {
+        width: 100%;
+        height: 100px;
+        margin: 80px 0 0 0; }
+        .entryAndPerfecting .entry-perfecting-box .entry-perfecting-title > table > tbody > tr > td {
+          text-align: center;
+          color: #6d6d6d; }
+    .entryAndPerfecting .entry-perfecting-box .entry-perfecting-chart {
+      width: 70%;
+      height: 260px; }
+
+.currentAndAdd {
+  width: 100%;
+  margin-bottom: 20px;
+  height: 300px;
+  border: 1px solid #e1e1e1;
+  background: #FFF; }
+  .currentAndAdd .current-add-box {
+    width: 50%;
+    height: 100%; }
+    .currentAndAdd .current-add-box .current-add-container {
+      width: 100%;
+      height: calc(100% - 40px); }

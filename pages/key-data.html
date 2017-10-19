@@ -4,15 +4,16 @@
         <meta charset="UTF-8">
         <title>运营报告-数据概览-关键数据</title>
         <link href="../css/mems-index.css" type="text/css" rel="stylesheet"/>
-        <link href="../css/asDatepicker.css" type="text/css" rel="stylesheet"/>
         <link href="../css/key-data.css" type="text/css" rel="stylesheet"/>
+        <link rel="stylesheet" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+        <link href="../css/foundation-datepicker.css" rel="stylesheet"/>
     </head>
 <body>
 
 
 <!--header-->
 <header id="header" class="header">
-    <div class="header-info left"><i></i><a href="pm-need-list.html">关键数据</a></div>
+    <div class="header-info left"><i></i><a href="key-data.html">关键数据</a></div>
     <div class="right-user right">
          <div class="clear t" >             <div id="headusername" class="role"></div>             <div class="icon"></div>         </div>
         <div class="head-down">
@@ -33,18 +34,22 @@
     <div class="page-inner" style="padding-top: 13px">
         <ul class="item-tab clear">
             <li><a class="current" href="key-data.html">关键数据</a></li>
-            <li><a href="trend-count.html">趋势统计</a></li>
+            <li><a class="trendTo" href="trend-count.html">趋势统计</a></li>
         </ul>
-        <div class="clear">
+        <div class="clear" style="margin: 0 0 35px 0">
+            <div class="left" style="margin: 0 10px 0 0 ">
+                <input id="dpd1" style="height: 25px; margin: 20px 0 0;"/>～<input id="dpd2" style="height: 25px; margin: 20px 0 0;"/>
+            </div>
             <div class="left">
-                <input type="text" id="calendar2" class="calendar-input">
+                <div class="commit-new-item"><a class="btn" style="width: 120px" id="date_checkout">查询&nbsp;</a></div>
             </div>
             <div class="right">
-                <div class="commit-new-item"><a class="btn" style="width: 120px">导出&nbsp;<b>+</b></a></div>
+                <div class="commit-new-item"><a class="btn" style="width: 120px;visibility: hidden" id="export_key" >导出&nbsp;<b>+</b></a></div>
             </div>
         </div>
 
         <!--拜访-->
+        <div id="key-data-export-images">
         <div class="visit-chart-box clear">
             <div class="charts-title">拜访</div>
             <div class="visit-chart-container">
@@ -52,14 +57,14 @@
                     <table>
                         <tr>
                             <td>
-                                <p>当期使用用户</p>
-                                <p><b>55</b>人</p>
+                                <p>拜访医院</p>
+                                <p><b id="visitHospital"></b>家</p>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <p>累计使用用户</p>
-                                <p><b>55</b>人</p>
+                                <p>拜访次数</p>
+                                <p><b id="visitNum"></b>次</p>
                             </td>
                         </tr>
                     </table>
@@ -72,57 +77,36 @@
         </div>
         <!--开户-->
         <div class="clear chart-open-account">
-            <div class="charts-title">开户</div>
+            <div class="charts-title">
+                <div class="left title-middle">
+                    <div class="left">开户</div>
+                    <div class="center left-center">当期</div>
+                </div>
+                <div class="left title-middle">
+                    <div class="center right-center">累计</div>
+                </div>
+            </div>
             <div class="account-box left" id="accountBox">
                 <div class="left open-account" id="open-account-1"></div>
                 <canvas id="lineTop_1" class="line-turn"></canvas>
-                <div class="left columnar">
-                    <div class="col col-1 clear">
-                        <div class="col-area left"></div>
-                        <div class="name left">三甲 120家</div>
-                    </div>
-                    <div class="col col-2 clear">
-                        <div class="col-area left"></div>
-                        <div class="name left">三级 120家</div>
-                    </div>
-                    <div class="col col-3 clear">
-                        <div class="col-area left"></div>
-                        <div class="name left">二级 120家</div>
-                    </div>
-                    <div class="col col-4 clear">
-                        <div class="col-area left"></div>
-                        <div class="name left">二级以下 120家</div>
-                    </div>
-                    <div class="col col-5 clear">
-                        <div class="col-area left"></div>
-                        <div class="name left">民营及其他 120家</div>
-                    </div>
+                <div class="left columnar" id="account_columnar_1">
+                    <!--<div class="columnar-img left">-->
+                        <!--<div class="col-area col-1 left" style="height: 50%"></div>-->
+                        <!--<div class="col-area col-2 left" style="height: 2%"></div>-->
+                        <!--<div class="col-area col-3 left" style="height: 48%"></div>-->
+                    <!--</div>-->
+                    <!--<div class="columnar-text left">-->
+                        <!--<div class="name text-1 left" style="min-height: 50%">二级 10家</div>-->
+                        <!--<div class="name text-2 left" style="min-height: 2%">二级 10家</div>-->
+                        <!--<div class="name text-3 left" style="min-height: 48%">二级 10家</div>-->
+                    <!--</div>-->
+
                 </div>
             </div>
             <div class="account-box left">
                 <div class="left open-account" id="open-account-2"></div>
                 <canvas id="lineTop_2" class="line-turn"></canvas>
-                <div class="left columnar">
-                    <div class="col col-1 clear">
-                        <div class="col-area left"></div>
-                        <div class="name left">三甲 120家</div>
-                    </div>
-                    <div class="col col-2 clear">
-                        <div class="col-area left"></div>
-                        <div class="name left">三级 120家</div>
-                    </div>
-                    <div class="col col-3 clear">
-                        <div class="col-area left"></div>
-                        <div class="name left">二级 120家</div>
-                    </div>
-                    <div class="col col-4 clear">
-                        <div class="col-area left"></div>
-                        <div class="name left">二级以下 120家</div>
-                    </div>
-                    <div class="col col-5 clear">
-                        <div class="col-area left"></div>
-                        <div class="name left">民营及其他 120家</div>
-                    </div>
+                <div class="left columnar" id="account_columnar_2">
                 </div>
             </div>
         </div>
@@ -130,13 +114,22 @@
         <!--当期和累计-->
         <div class="currentAndAdd clear">
             <div class="current-add-box left">
-                <div class="charts-title">当期</div>
+                <div class="charts-title">
+                    <div class="left title-middle all">
+                        <div class="left">大区开户</div>
+                        <div class="center left-center">当期</div>
+                    </div>
+                </div>
                 <div class="current-add-container left" id="openAccountPre">
 
                 </div>
             </div>
             <div class="current-add-box left">
-                <div class="charts-title">累计</div>
+                <div class="charts-title">
+                    <div class="left title-middle all">
+                        <div class="center right-center">累计</div>
+                    </div>
+                </div>
                 <div class="current-add-container left" id="openAccountTotal">
 
                 </div>
@@ -151,14 +144,14 @@
                         <table>
                             <tr>
                                 <td>
-                                    <p>当期使用用户</p>
-                                    <p><b>55</b>人</p>
+                                    <p>当期录入设备</p>
+                                    <p><b id="entryCurrent"></b>台</p>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <p>累计使用用户</p>
-                                    <p><b>55</b>人</p>
+                                    <p>累计录入设备</p>
+                                    <p><b id="entryTotal"></b>台</p>
                                 </td>
                             </tr>
                         </table>
@@ -173,8 +166,8 @@
                         <table>
                             <tr>
                                 <td>
-                                    <p>当期使用用户</p>
-                                    <p><b>55</b>人</p>
+                                    <p>当期完善设备</p>
+                                    <p><b id="perfectingCurrent"></b>台</p>
                                 </td>
                             </tr>
                         </table>
@@ -192,53 +185,95 @@
                     <tr>
                         <td>
                             <p>当期使用用户</p>
-                            <p><b>55</b>人</p>
+                            <p><b id="currentUser"></b>人</p>
                         </td>
                         <td>
                             <p>累计使用用户</p>
-                            <p><b>55</b>人</p>
+                            <p><b id="totalUser"></b>人</p>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <p>当期使用功能</p>
-                            <p><b>55</b>人</p>
+                            <p><b id="currentFunction"></b>次</p>
                         </td>
                         <td>
                             <p>累计使用功能</p>
-                            <p><b>55</b>人</p>
+                            <p><b id="totaltFunction"></b>次</p>
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td colspan="2">
                             <p>当期医院活跃率</p>
-                            <p><b>55</b>人</p>
+                            <p><b id="currentPersent"></b></p>
                         </td>
-                        <td>
-                            <p>累计医院活跃率</p>
-                            <p><b>55</b>人</p>
-                        </td>
+                        <!--<td>-->
+                            <!--<p>累计医院活跃率</p>-->
+                            <!--<p><b id="totaltPersent"></b></p>-->
+                        <!--</td>-->
                     </tr>
                 </table>
             </div>
-            <div class="use-mark left" id="use-chart"></div>
+            <div class="use-mark left">
+                <div id="use-chart" style="width: 100%;height: 95%;"></div>
+                <p style="position: absolute;bottom: 20px;text-align: center;width: 100%">当期各功能使用（次）</p>
+            </div>
         </div>
-
+        </div>
     </div>
 
 </div>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.cookie.js"></script>
 <script src="../js/common.js"></script>
-<script src="../js/jquery-asDatepicker.js"></script>
+<script src="../js/html2canvas.js"></script>
+<script src="../js/foundation-datepicker.min.js"></script>
+<script src="../js/moment.js"></script>
 <script src="../js/echarts.min.js"></script>
+<script src="../js/export_image.js"></script>
+<script src="../js/user-tree.js"></script>
 <script src="../js/echartsSub.js"></script>
 <script src="../js/keyData_openAccount.js"></script>
 <script src="../js/key-data.js"></script>
 <script>
-    $(document).ready(function(){
-        $("#calendar2").asDatepicker({mode: 'range'});
-    });
+var roleid = $.cookie('userrole');
+if(roleid ==3 || roleid == 9){
+    $('#export_key').css({'visibility':'visible'})
+}
+var today = new Date();
+var year = today.getFullYear();    //年
+var month = today.getMonth() + 1;  //月
+var day = today.getDate();         //日
+var dateMax = moment().subtract(1,'d').format('YYYY-MM-DD')
+var str = year +'-'+( month>=10?month:'0'+month ) + '-'+( day>=10?day:'0'+day )
+$('#dpd2').val(str)
+$('#dpd1').val(dateMax)
+var nowTemp = new Date();
+var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+var checkin = $('#dpd1').fdatepicker({
+//    onRender: function (date) {
+//        return date.valueOf() < now.valueOf() ? 'disabled' : '';
+//    },
+    endDate: dateMax,
+    format: 'yyyy-mm-dd'
+}).on('changeDate', function (ev) {
+    if (ev.date.valueOf() > checkout.date.valueOf()) {
+        var newDate = new Date(ev.date)
+        newDate.setDate(newDate.getDate() + 1);
+        checkout.update(newDate);
+    }
+    checkin.hide();
+    $('#dpd2')[0].focus();
+}).data('datepicker');
+var checkout = $('#dpd2').fdatepicker({
+    onRender: function (date) {
+        return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+    },
+    endDate: str,
+    format: 'yyyy-mm-dd'
+}).on('changeDate', function (ev) {
+    checkout.hide();
+}).data('datepicker');
 </script>
 
 </body>

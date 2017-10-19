@@ -4,9 +4,11 @@ if(_ip.indexOf('localhost') != -1){
     _ip = 'http://121.42.187.170'; //本地
     // _ip = 'http://192.168.8.31:8080'  //展播
     // _ip = 'http://10.0.2.14:8080/operation-web'; //广播
+    // _ip = 'http://10.0.1.81:8888';
 }else{
     //will remove after project complete
-  _ip = 'http://121.42.252.26/';
+  _ip = 'http://121.42.187.170'; //本地
+  // _ip = 'http://121.42.252.26/';
 }
 
 /*----------
@@ -98,6 +100,11 @@ function creatAsideDom() {
                         id:'prolit',
                         name:'项目列表',
                         src:'mems-pro-list'
+                    },
+                    {
+                      id:'templateconfig',
+                      name:'模板配置',
+                      src:'config-index.html#/'
                     }
                   ]
         },
@@ -149,22 +156,23 @@ function creatAsideDom() {
                     }
                  ]
         }
-        // runReport:{
-        //     name:'运营报告',
-        //     iconClass:'report',
-        //     data:[
-        //       {
-        //         id:'keydata',
-        //         name:'数据概览',
-        //         src:'key-data'
-        //       },
-        //       {
-        //         id:'dataexport',
-        //         name:'数据导出',
-        //         src:'data-export'
-        //       }
-        //     ]
-        // }
+        ,
+        runReport:{
+            name:'运营报告',
+            iconClass:'report',
+            data:[
+              {
+                id:'keydata',
+                name:'数据概览',
+                src:'key-data'
+              },
+              {
+                id:'dataexport',
+                name:'数据导出',
+                src:'data-export'
+              }
+            ]
+        }
     }
     var h = ''
     for(var k in obj){
@@ -207,11 +215,11 @@ function modityAsideCurrent(){
         },      //系统配置文件列表
         documentmanage:{
             docmanage:['doc-manage']
-        }   //文档管理文件列表
-        // runReport:{
-        //     keydata:['key-data','tend-count'],
-        //     dataexport:['data-export']
-        // } //运营报告列表
+        },   //文档管理文件列表
+        runReport:{
+            keydata:['key-data','trend-count'],
+            dataexport:['data-export']
+        } //运营报告列表
 
     }
 
@@ -384,7 +392,7 @@ var _api = function(){
             jsonpCallback: callback,
             success: function(json) {
                 var json = json.data;
-
+                if(!json || !json.length) return
                 var h = '';
                 if (isSelect) {
                     h += '<option value="">请选择</option>';
@@ -406,6 +414,7 @@ var _api = function(){
             jsonpCallback: callback,
             success: function(json) {
                 var json = json.data;
+                if(!json || !json.length) return
                 var h = '';
                 if (isSelect) {
                     h += '<option value="">请选择</option>';
@@ -440,7 +449,7 @@ _api.prototype = {
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'fun']);
         return this;
     },
-    getTypeList: function(id, defaultId,isSelect){ // 5. 获取需求类别 get
+    getTypeList: function(id, defaultId,isSelect){ // 5. 获取类别 get
         var url = _ip+'/common/getRequireTypeList';
         this.getListSecond.apply(this,[url,id,defaultId,isSelect,'type']);
         return this;
@@ -549,6 +558,16 @@ _api.prototype = {
         var url = _ip+'/project/name?name='+name;
         this.getListFirst.apply(this,[url,id,defaultId,isSelect,'checkname']);
         return this;
+    },
+    getExcelTheme: function(id, defaultId,isSelect) { // 22. 数据导出：获取内容
+      var url = _ip+'/excel/theme';
+      this.getListSecond.apply(this,[url,id,defaultId,isSelect,'theme']);
+      return this;
+    },
+    getExcelDimen: function(id, defaultId,isSelect) { // 23. 数据导出：获取维度
+      var url = _ip+'/excel/dimen';
+      this.getListSecond.apply(this,[url,id,defaultId,isSelect,'dimen']);
+      return this;
     },
     getDistrict: function(id, defaultId,isSelect){ //获取大区
         var url = _ip+'/common/getDistrict';
