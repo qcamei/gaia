@@ -49,14 +49,14 @@
 
             <tbody id="more-search" >
                 <tr>
-                    <!--<td>运营阶段：<select id="operType">-->
-                        <!--<option value="">请选择</option>-->
-                        <!--<option value="已开户">已开户</option>-->
-                        <!--<option value="待实施">待实施</option>-->
-                        <!--<option value="待培训">待培训</option>-->
-                        <!--<option value="已培训">已培训</option>-->
-                        <!--<option value="交付报告">交付报告</option>-->
-                    <!--</select></td>-->
+                    <td>运营阶段：<select id="operType">
+                        <option value="">请选择</option>
+                        <option value="已开户">已开户</option>
+                        <option value="待实施">待实施</option>
+                        <option value="待培训">待培训</option>
+                        <option value="已培训">已培训</option>
+                        <option value="交付报告">交付报告</option>
+                    </select></td>
                     <td colspan="5">区域：<select id="district"><option>请选择</option></select>&emsp;<select style="width: 200px" id="privence"><option>请选择</option></select>&emsp;<select id="city"><option>请选择</option></select></td>
                 </tr>
             </tbody>
@@ -76,7 +76,7 @@
                             <th>segmentation</th>
                             <th>级别</th>
                             <th>商务阶段</th>
-                            <!--<th>运营阶段</th>-->
+                            <th>运营阶段</th>
                             <th>操作</th>
                             <th>导出PDF</th>
                         </tr>
@@ -191,7 +191,7 @@
                     _data.push('<td>'+(msg.segmentation || '')+'</td>');
                     _data.push('<td>'+(msg.level || '')+'</td>');
                     _data.push('<td>'+(msg.businessType || '')+'</td>');
-//                    _data.push('<td>'+(msg.oper || '')+'</td>');
+                    _data.push('<td>'+(msg.oper || '')+'</td>');
 
                     if(roleid==9 || roleid==3){
                         _data.push('<td><a class="link" href="javascript:" onclick="deleteList('+msg.id+')">删除</a></td>');
