@@ -277,7 +277,7 @@
 
         if(typeof hospitalID === 'number' && hospitalName.length !== 0){
           //request templates
-          $.get("http://121.42.187.170/template/all",{hospitalID:hospitalID, hospitalName:hospitalName}).then(function(data){
+          $.get("http://121.42.252.26/template/all",{hospitalID:hospitalID, hospitalName:hospitalName}).then(function(data){
             data.hospitalName = hospitalName
             $.get("../template_for_alert/choose_template_id.html",function(str){
               var render = template.compile(str);
@@ -422,7 +422,7 @@
       var templateID = $("#chooseTemplate select").val()
       var hosid = $("#chooseTemplate button").data("hosid");
 //      var url ="http://121.42.187.170:3001/"+hosid+"?template="+templateID
-      var url ="http://121.42.187.170:3001/"+hosid
+      var url ="http://121.42.252.26:3001/"+hosid+"?template="+templateID
       window.open(url)
     })
 </script>
