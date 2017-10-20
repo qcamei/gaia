@@ -101,12 +101,13 @@ function creatAsideDom() {
                         id:'prolit',
                         name:'项目列表',
                         src:'mems-pro-list'
-                    },
-                    {
-                      id:'templateconfig',
-                      name:'模板配置',
-                      src:'config-index.html#/'
                     }
+                    // ,
+                    // {
+                    //   id:'templateconfig',
+                    //   name:'模板配置',
+                    //   src:'config-index.html#/'
+                    // }
                   ]
         },
         needmange:{
