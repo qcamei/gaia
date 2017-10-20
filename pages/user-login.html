@@ -44,14 +44,15 @@
 
     var _ip = location.origin;
     if(_ip.indexOf('localhost') != -1){
-         _ip = 'http://121.42.187.170'; //本地
+//         _ip = 'http://121.42.187.170'; //本地
         // _ip = 'http://192.168.8.31:8080'  //展播
         // _ip = 'http://10.0.2.14:8080/operation-web'; //广播
 //        _ip = 'http://10.0.1.81:8888';
+        _ip = 'http://121.42.252.26';
     }else{
         //will remove after project complete
-//        _ip = 'http://121.42.187.170'; //本地
-         _ip = 'http://121.42.252.26/';
+        _ip = 'http://121.42.187.170'; //本地
+//         _ip = 'http://121.42.252.26';
     }
     function Login(firstUrl) {
         $('.error-msg').remove();
@@ -70,20 +71,20 @@
             $('#password').closest('.user-input').addClass('error').after('<p class="error-msg">请输入密码</p>');
             return false;
         }
-//        alert(3333)
         organizeAjaxPost(url, data, function(json) {
-            if (json.success) {
-                $.cookie('userid',json.data.id);
-                $.cookie('userrole',json.data.role);
-                sessionStorage.removeItem("bug");
-                sessionStorage.removeItem("allPro");
-                sessionStorage.removeItem("memsNeed");
-                sessionStorage.removeItem("pmNeed");
-                window.location.href = firstUrl || 'mems-pro-list.html';
-            }
-            else {
-                $('#userName').closest('.user-input').addClass('error').after('<p class="error-msg">'+ json.message +'</p>');
-            }
+            console.log(json)
+//            if (json.success) {
+//                $.cookie('userid',json.data.id);
+//                $.cookie('userrole',json.data.role);
+//                sessionStorage.removeItem("bug");
+//                sessionStorage.removeItem("allPro");
+//                sessionStorage.removeItem("memsNeed");
+//                sessionStorage.removeItem("pmNeed");
+//                window.location.href = firstUrl || 'mems-pro-list.html';
+//            }
+//            else {
+//                $('#userName').closest('.user-input').addClass('error').after('<p class="error-msg">'+ json.message +'</p>');
+//            }
         });
     }
     function Login_1(){
