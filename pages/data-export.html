@@ -125,6 +125,7 @@
             contentType:'application/json',
             data:JSON.stringify(data),
             success: function(json) {
+                globalTotalIds.splice(0,globalTotalIds.length)
                 if(json.message === 'LOGIN') {
                     window.location.href = 'user-login.html';
                     return false;
@@ -150,7 +151,6 @@
                 for(var k = 0, kk = json.data.length; k < kk; k++){
                     var msg = json.data[k];
 
-                    console.log(globalTotalIds.indexOf(msg.id)==-1)
                     _data.push('<tr>');
                     _data.push('<td><input type="checkbox" value="'+msg.id+'"  '+(globalTotalIds.indexOf(msg.id)==-1?'':'checked') +'/></td>');
                     _data.push('<td>'+msg.id+'</td>');
