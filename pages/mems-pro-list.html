@@ -77,9 +77,9 @@
                             <th>级别</th>
                             <th>商务阶段</th>
                             <th>运营阶段</th>
-                            <th>配置模版</th>
+                            <!--<th>配置模版</th>-->
                             <th>操作</th>
-                            <th>导出PDF</th>
+                            <!--<th>导出PDF</th>-->
                         </tr>
                     </thead>
                     <tbody id="bodyList">
@@ -193,7 +193,7 @@
                     _data.push('<td>'+(msg.level || '')+'</td>');
                     _data.push('<td>'+(msg.businessType || '')+'</td>');
                     _data.push('<td>'+(msg.oper || '')+'</td>');
-                    _data.push('<td></td>');
+//                    _data.push('<td></td>');
 //                    _data.push('<td><a class="link" href="/operation/pages/config-index.html#/hospital/'+msg.id+'">配置模版</a></td>');
                     if(roleid==9 || roleid==3){
                         _data.push('<td><a class="link" href="javascript:" onclick="deleteList('+msg.id+')">删除</a></td>');
@@ -201,7 +201,7 @@
 //                        _data.push('<td><a class="link" href="javascript:" onclick="exportPDF('+msg.id+',\''+msg.name.toString()+'\')">导出</a></td>)');
                     }else{
                         _data.push('<td></td>');
-                        _data.push('<td></td>');
+//                        _data.push('<td></td>');
                     }
                 }
                 _pager.push('<span>共：'+ totalPage +'页</span>');
