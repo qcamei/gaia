@@ -35,7 +35,7 @@ if(_ip.indexOf('localhost') != -1){
          success: function(json) {
              if(!json.success){
                  console.log(json)
-                 // location.href = 'user-login.html';
+                 location.href = 'user-login.html';
              }
              else {
                  $.cookie('username',json.data.userName);
