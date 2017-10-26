@@ -417,7 +417,7 @@ function initDrawChart (){
   if(beginDate && endDate && beginDate != 'false' && endDate != 'false'){
     var initDate = {
       beginDate:beginDate || '',
-      endDate: beginDate || ''
+      endDate: endDate || ''
     }
     doDrawChart(initDate)
   }else{
