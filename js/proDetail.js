@@ -1290,6 +1290,7 @@ operationProgress.prototype = {
   businessAdd: $('#businessAdd'),
   operatinTable: $('#operatinTable'),
   operationBtnShow: false,
+  isClick: false,
   init: function() {
   	var usrrole = parseInt($.cookie('userrole'))
     if (usrrole === 3 || usrrole === 9) {
@@ -1320,6 +1321,7 @@ operationProgress.prototype = {
     that.addBusinessbtn.css({'display':'inline-block'});
   },
   insertChargeInfo:function(){
+    this.isClick = true
     var url = _ip + '/opering/insert';
     var arr = [];
     this.addChargePeopleList.find('li').each(function () {
@@ -1349,6 +1351,7 @@ operationProgress.prototype = {
       "modifyTime": null
     };
     var that = this;
+
     $.ajax({
       url:url,
       type : "POST",
@@ -1365,7 +1368,6 @@ operationProgress.prototype = {
           return false;
         }
         if(data.success){
-          that.isClick = false;
           // that.getBusCordList();
           that.showEdite(that);
           that.getChargeList()
@@ -1375,6 +1377,10 @@ operationProgress.prototype = {
         }else{
           alert('添加失败, 请稍后重试！');
         }
+        that.isClick = false;
+      },
+			error: function () {
+        that.isClick = false;
       }
     })
     return this;
