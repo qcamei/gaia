@@ -69,7 +69,8 @@ const form_1 = new Vue({
   el: '#example-1',
   data: {
     isEdit_1: false,
-    isShowEditBtn_1:false
+    isShowEditBtn_1:false,
+    isCommit:false
   },
   methods: {
     init:function () {
@@ -92,6 +93,7 @@ const form_1 = new Vue({
       formCommon.showDisabled('account-check-body')
     },
     commitEdit_1:function () {
+      if(this.isCommit) return
       var that = this;
       var arr = [];
       $('#account-check-body').find('input[type=checkbox]').each(function () {
@@ -107,6 +109,7 @@ const form_1 = new Vue({
         projectId:getUrlId(),
         time:$('#carry_out_time').val()
       }
+      that.isCommit = true
       $.ajax({
         url:url,
         type : "POST",
@@ -118,6 +121,7 @@ const form_1 = new Vue({
         contentType:'application/json',
         data:JSON.stringify(data),
         success: function(data) {
+          that.isCommit = false
           // debugger
           // if(data.message === 'LOGIN') {
           //   location.href = 'user-login.html';
@@ -164,7 +168,8 @@ const form_2 = new Vue({
   el: '#example-2',
   data: {
     isEdit_2: false,
-    isShowEditBtn_2:false
+    isShowEditBtn_2:false,
+    isCommit:false
   },
   methods: {
     init:function () {
@@ -196,6 +201,7 @@ const form_2 = new Vue({
       $('#account-check-body-2').find('span.delete').css({'display':'none'})
     },
     commitEdit_2:function () {
+      if(this.isCommit) return
       var that = this;
       var arr = [];
       $('#account-check-body-2').find('input[type=checkbox]').each(function () {
@@ -227,6 +233,7 @@ const form_2 = new Vue({
         return
       }
       var url = _ip + '/implement/insertApplyImplement';
+      that.isCommit = true
       var data = {
         field:arr.join(','),
         projectId:getUrlId(),
@@ -253,6 +260,7 @@ const form_2 = new Vue({
         contentType:'application/json',
         data:JSON.stringify(data),
         success: function(data) {
+          that.isCommit = false
           // debugger
           // if(data.message === 'LOGIN') {
           //   location.href = 'user-login.html';
@@ -320,7 +328,8 @@ const form_3 = new Vue({
   el: '#example-3',
   data: {
     isEdit_3: false,
-    isShowEditBtn_3: true
+    isShowEditBtn_3: true,
+    isCommit:false
   },
   methods: {
     init:function () {
@@ -340,6 +349,7 @@ const form_3 = new Vue({
       formCommon.showDisabled('account-check-body-3')
     },
     commitEdit_3:function () {
+      if(this.isCommit) return
       var that = this;
       var arr = [];
       $('#account-check-body-3').find('input[type=checkbox]').each(function () {
@@ -354,6 +364,7 @@ const form_3 = new Vue({
         field:arr.join(','),
         projectId:getUrlId(),
       }
+      that.isCommit = true
       $.ajax({
         url:url,
         type : "POST",
@@ -365,6 +376,7 @@ const form_3 = new Vue({
         contentType:'application/json',
         data:JSON.stringify(data),
         success: function(data) {
+          that.isCommit = false
           // debugger
           // if(data.message === 'LOGIN') {
           //   location.href = 'user-login.html';

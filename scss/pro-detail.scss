@@ -1080,6 +1080,10 @@
     tbody.account-btn-body{
       >tr{
         height:58px;
+        .commit-now-btn{
+          background: #d5d7d8;
+          border: 1px solid #d5d7d8;
+        }
         &:nth-child(1){
           >td{
             text-align: center;
@@ -1099,6 +1103,7 @@
         }
       }
     }
+
   }
 }
 .addAttachmentList > li > div > .delete{

@@ -1769,6 +1769,9 @@ aside.aside .menu {
         width: 100%; }
   .accountInfo .accountTable tbody.account-btn-body > tr {
     height: 58px; }
+    .accountInfo .accountTable tbody.account-btn-body > tr .commit-now-btn {
+      background: #d5d7d8;
+      border: 1px solid #d5d7d8; }
     .accountInfo .accountTable tbody.account-btn-body > tr:nth-child(1) > td {
       text-align: center; }
     .accountInfo .accountTable tbody.account-btn-body > tr:nth-child(2) > td:nth-child(1) {

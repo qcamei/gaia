@@ -238,7 +238,7 @@
                             <td colspan="4"><a class="btn" v-on:click="showEdit_1">编辑</a></td>
                         </tr>
                         <tr v-show="isEdit_1" style="display: none;">
-                            <td colspan="2" ><a class="btn" v-on:click="cancelEdit_1">取消</a></td><td colspan="2"><a class="btn" v-on:click="commitEdit_1">提交</a></td>
+                            <td colspan="2" ><a class="btn" v-on:click="cancelEdit_1">取消</a></td><td colspan="2"><a :class="isCommit?'btn commit-now-btn':'btn '" v-on:click="commitEdit_1">提交</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -337,7 +337,7 @@
                             <td colspan="4"><a class="btn" v-on:click="showEdit_2">编辑</a></td>
                         </tr>
                         <tr v-show="isEdit_2" style="display: none;">
-                            <td colspan="2" ><a class="btn" v-on:click="cancelEdit_2">取消</a></td><td colspan="2"><a class="btn" v-on:click="commitEdit_2">提交</a></td>
+                            <td colspan="2" ><a class="btn" v-on:click="cancelEdit_2">取消</a></td><td colspan="2"><a :class="isCommit?'btn commit-now-btn':'btn '" v-on:click="commitEdit_2">提交</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -369,7 +369,7 @@
                             <td colspan="4"><a class="btn" v-on:click="showEdit_3">编辑</a></td>
                         </tr>
                         <tr v-show="isEdit_3" style="display: none;">
-                            <td colspan="2" ><a class="btn" v-on:click="cancelEdit_3">取消</a></td><td colspan="2"><a class="btn" v-on:click="commitEdit_3">提交</a></td>
+                            <td colspan="2" ><a class="btn" v-on:click="cancelEdit_3">取消</a></td><td colspan="2"><a :class="isCommit?'btn commit-now-btn':'btn '" v-on:click="commitEdit_3">提交</a></td>
                         </tr>
                     </tbody>
                 </table>
