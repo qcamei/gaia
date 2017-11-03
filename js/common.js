@@ -161,13 +161,12 @@ function creatAsideDom() {
                 id:'keydata',
                 name:'数据概览',
                 src:'key-data'
+              },
+              {
+                id:'dataexport',
+                name:'数据导出',
+                src:'data-export'
               }
-              // ,
-              // {
-              //   id:'dataexport',
-              //   name:'数据导出',
-              //   src:'data-export'
-              // }
             ]
         }
     }

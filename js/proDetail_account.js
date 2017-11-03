@@ -328,7 +328,7 @@ const form_3 = new Vue({
   el: '#example-3',
   data: {
     isEdit_3: false,
-    isShowEditBtn_3: true,
+    isShowEditBtn_3: false,
     isCommit:false
   },
   methods: {
@@ -450,7 +450,7 @@ const formCommon = {
             }
           }
         }
-        var roleid = $.cookie('userrole');
+        var roleid = parseInt($.cookie('userrole'));
         if(roleid == 1 || roleid == 3 || roleid == 9 ||  that.isProMember == true){
           that.hasPermissions = true;
         }
