@@ -581,6 +581,7 @@ clientDataCard.prototype = {
  				h += '</div></li>';
  		}
  		//此处的权限没有加
+    debugger
 		if(mark){
 			h += '<li class="li-add-card"><a class="card-btn" onclick="clientInfoCard.clientCardDom()">添加客户</a></li>';
 		}
